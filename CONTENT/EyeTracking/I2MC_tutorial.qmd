@@ -1,0 +1,480 @@
+---
+title: "Using I2MC for robust fixation extraction"
+date: "07/19/2024"
+execute:
+  eval: false
+jupyter:
+  kernel: "python3"
+pagetitle: "Using I2MC for robust fixation extraction"
+author-meta: "Tommaso Ghilardi"
+description-meta: "Learn how to use I2MC for robust fixation extraction in eye-tracking data analysis."
+keywords: "eye-tracking, I2MC, fixation detection, data analysis, tutorial, python, DevStart, developmental science, tutorial, eye fixations"
+categories:
+  - Eye-tracking
+  - Python
+---
+
+# What we are going to do
+
+When it comes to eye-tracking data, a fundamental role is played by fixations. A fixation indicates that a person's eyes are looking at a particular point of interest for a given amount of time. More specifically, a fixation is a cluster of consecutive data points in an eye-tracking dataset for which a person's gaze remains relatively still and focused on a particular area or object.
+
+Typically, eye-tracking programs come with their own fixation detection algorithms that give us a rough idea of what the person was looking at. But here's the problem: these tools aren't always very good when it comes to data from infants and children. Why? Because infants and children can be all over the place! They move their heads, put their hands (or even feet) in front of their faces, close their eyes, or just look away. All of this makes the data a big mess that's hard to make sense of with regular fixation detection algorithms. Because the data is so messy, it is difficult to tell which data points are part of the same fixation or different fixations.
+
+**But don't worry! We've got a solution: I2MC.**
+
+I2MC stands for *"Identification by Two-Means Clustering"*, and it was designed specifically for this kind of problem. It's designed to deal with all kinds of noise, and even periods of data loss. In this tutorial, we'll show you how to use I2MC to find fixations. We won't get into the nerdy stuff about how it works - this is all about the practical side. If you're curious about the science, you can read the original [article](https://link.springer.com/article/10.3758/s13428-016-0822-1).
+
+Now that we've introduced I2MC, let's get our hands dirty and see how to use it!
+
+# Install I2MC
+
+Installing I2MC in Python is extremely easy. As explained in the tutorial to install Python, just open the miniconda terminal, activate the environment you want to install I2MC in, and type `pip install I2MC`. After a few seconds, you should be ready to go!!
+
+You may need
+
+::: callout-note
+I2MC has been originally written for Matlab. So for you crazy people who would prefer to use Matlab you can find instructions to download and use I2MC here: [I2MC Matlab!](https://github.com/royhessels/I2MC)
+:::
+
+# Use I2MC
+
+Let's start with importing the libraries that we will need
+
+```{python}
+import I2MC                         # I2MC
+import pandas as pd                 # panda help us read csv
+import numpy as np                  # to handle arrays
+import matplotlib.pyplot  as plt    # to make plots
+```
+
+This was too easy now, let's start to really get into it.
+
+## Import data
+
+Now we will write a simple function to import our data. This step unfortunately will have to be adapted depending on the system you used to collect the data and the data structure you will have in the end. For this tutorial, you can use your data-set (probably you will have to adapt the importing function) or use our data that you can download from [here](/resources/I2mc/DATA.zip).
+
+Let's create step by step our function to import the data
+
+```{python}
+# Load data
+raw_df = pd.read_csv(PATH_TO_DATA, delimiter=',')
+```
+
+After reading the data we will create a new data-frame that we will fill with the information needed from our raw_df. this is the point that would change depending on you eye-tracked and data format. you will probably have to change the columns names to be sure to have the 5 relevant ones.
+
+```{python}
+# Create empty dataframe
+df = pd.DataFrame()
+    
+# Extract required data
+df['time'] = raw_df['time']
+df['L_X'] = raw_df['L_X']
+df['L_Y'] = raw_df['L_Y']
+df['R_X'] = raw_df['R_X']
+df['R_Y'] = raw_df['R_Y']
+```
+
+After selecting the relevant data we will perform some very basic processing. Sometimes there could be weird peaks where one sample is (very) far outside the monitor. Here, we will count as missing any data that is more than one monitor distance outside the monitor. Tobii gives us the validity index of the measured eye, here when the validity is too low (\>1) we will consider the sample as missing
+
+```{python}
+###
+# Sometimes we have weird peaks where one sample is (very) far outside the
+# monitor. Here, count as missing any data that is more than one monitor
+# distance outside the monitor.
+
+# Left eye
+lMiss1 = (df['L_X'] < -res[0]) | (df['L_X']>2*res[0])
+lMiss2 = (df['L_Y'] < -res[1]) | (df['L_Y']>2*res[1])
+lMiss  = lMiss1 | lMiss2 | (raw_df['L_V'] == False)
+df.loc[lMiss,'L_X'] = np.nan
+df.loc[lMiss,'L_Y'] = np.nan
+
+# Right eye
+rMiss1 = (df['R_X'] < -res[0]) | (df['R_X']>2*res[0])
+rMiss2 = (df['R_Y'] < -res[1]) | (df['R_Y']>2*res[1])
+rMiss  = rMiss1 | rMiss2 | (raw_df['R_V'] == False)
+df.loc[rMiss,'R_X'] = np.nan
+df.loc[rMiss,'R_Y'] = np.nan
+```
+
+**Perfect!!!**
+
+### Everything into a function
+
+We have read the data, extracted the relevant information and done some extremely basic processing rejecting data that had to be considered non valid. Now we will wrap this code in a function to make it easier to use with I2MC:
+
+```{python}
+# ===================================================================
+# Import data from Tobii TX300
+# ===================================================================
+
+def tobii_TX300(fname, res=[1920,1080]):
+
+    # Load all data
+    raw_df = pd.read_csv(fname, delimiter=',')
+    df = pd.DataFrame()
+    
+    # Extract required data
+    df['time'] = raw_df['time']
+    df['L_X'] = raw_df['L_X']
+    df['L_Y'] = raw_df['L_Y']
+    df['R_X'] = raw_df['R_X']
+    df['R_Y'] = raw_df['R_Y']
+    
+    
+    ###
+    # Sometimes we have weird peaks where one sample is (very) far outside the
+    # monitor. Here, count as missing any data that is more than one monitor
+    # distance outside the monitor.
+    
+    # Left eye
+    lMiss1 = (df['L_X'] < -res[0]) | (df['L_X']>2*res[0])
+    lMiss2 = (df['L_Y'] < -res[1]) | (df['L_Y']>2*res[1])
+    lMiss  = lMiss1 | lMiss2 | (raw_df['L_V'] == False)
+    df.loc[lMiss,'L_X'] = np.nan
+    df.loc[lMiss,'L_Y'] = np.nan
+    
+    # Right eye
+    rMiss1 = (df['R_X'] < -res[0]) | (df['R_X']>2*res[0])
+    rMiss2 = (df['R_Y'] < -res[1]) | (df['R_Y']>2*res[1])
+    rMiss  = rMiss1 | rMiss2 | (raw_df['R_V'] == False)
+    df.loc[rMiss,'R_X'] = np.nan
+    df.loc[rMiss,'R_Y'] = np.nan
+    
+    return(df)
+```
+
+### Find our data
+
+Nice!! we have our import function that we will use to read our data. Now, let's find our data! To do this, we will use the glob library, which is a handy tool for finding files in Python. Before that let's set our working directory. The working directory is the folder where we have all our scripts and data. We can set it using the `os` library:
+
+```{python}
+import os
+os.chdir(r'C:\Users\tomma\OneDrive - Birkbeck, University of London\TomassoGhilardi\PersonalProj\BCCCD\Workshop')
+```
+
+This is my directory, you will have something different, you need to change it to where your data are. Once you are done with that we can use glob to find our data files. In the code below, we are telling Python to look for files with a *.csv* extension in a specific folder on our computer:
+
+```{python}
+from pathlib import Path
+data_files = list(Path().glob('DATA/RAW/**/*.csv'))
+```
+
+-   `DATA\\RAW\\`: This is the path where we want to start our search.
+
+-   `**`: This special symbol tells Python to search in all the subfolders (folders within folders) under our starting path.
+
+-   `*.csv`: We're asking Python to look for files with names ending in ".csv".
+
+So, when we run this code, Python will find and give us a list of all the ".csv" files located in any subfolder within our specified path. This makes it really convenient to find and work with lots of files at once.
+
+### Define the output folder
+
+Before doing anything else, I would suggest creating a folder where we will save the output of I2MC. We will create a folder called *i2mc_output*. Using `pathlib`, we can create this directory in a single elegant step:
+
+```{python}
+from pathlib import Path
+
+# define the output folder
+output_folder = Path('DATA') / 'i2mc_output'  # define folder path\name
+
+# Create the folder (will do nothing if it already exists)
+output_folder.mkdir(parents=True, exist_ok=True)
+```
+
+The `mkdir()` method creates the directory, with two helpful parameters: `parents=True` ensures that any parent directories are created if they don't exist yet, and `exist_ok=True` means the function won't raise an error if the directory already exists - it will simply do nothing in that case. This approach eliminates the need to check if the directory exists before creating it.
+
+### I2MC settings
+
+Now that we've got our data, know how to import it using glob and we have out output folder, we're all set to run I2MC. But wait, before we dive in, we need to set up a few things. These settings are like the instructions we give to I2MC before it does its magic. The default settings usually work just fine for most situations. You can keep them as they are and proceed. If you're curious about what each of these settings does, you can explore the original [I2MC article](https://link.springer.com/article/10.3758/s13428-016-0822-1) for a detailed understanding. Here I've added a general explanation about what each setting does. Once you've read through the instructions and have a clear understanding, you can customize the settings to match your specific requirements.
+
+Let's define these settings:
+
+```{python}
+# =============================================================================
+# NECESSARY VARIABLES
+
+opt = {}
+# General variables for eye-tracking data
+opt['xres']         = 1920.0                # maximum value of horizontal resolution in pixels
+opt['yres']         = 1080.0                # maximum value of vertical resolution in pixels
+opt['missingx']     = np.nan          # missing value for horizontal position in eye-tracking data (example data uses -xres). used throughout the algorithm as signal for data loss
+opt['missingy']     = np.nan          # missing value for vertical position in eye-tracking data (example data uses -yres). used throughout algorithm as signal for data loss
+opt['freq']         = 300.0                 # sampling frequency of data (check that this value matches with values actually obtained from measurement!)
+
+# Variables for the calculation of visual angle
+# These values are used to calculate noise measures (RMS and BCEA) of
+# fixations. The may be left as is, but don't use the noise measures then.
+# If either or both are empty, the noise measures are provided in pixels
+# instead of degrees.
+opt['scrSz']        = [50.9174, 28.6411]    # screen size in cm
+opt['disttoscreen'] = 65.0                  # distance to screen in cm.
+
+# Options of example script
+do_plot_data = True # if set to True, plot of fixation detection for each trial will be saved as a png file in the output folder.
+# the figures works best for short trials (up to around 20 seconds)
+
+# =============================================================================
+# OPTIONAL VARIABLES
+# The settings below may be used to adopt the default settings of the
+# algorithm. Do this only if you know what you're doing.
+
+# # STEFFEN INTERPOLATION
+opt['windowtimeInterp']     = 0.1                           # max duration (s) of missing values for interpolation to occur
+opt['edgeSampInterp']       = 2                             # amount of data (number of samples) at edges needed for interpolation
+opt['maxdisp']              = opt['xres']*0.2*np.sqrt(2)    # maximum displacement during missing for interpolation to be possible
+
+# # K-MEANS CLUSTERING
+opt['windowtime']           = 0.2                           # time window (s) over which to calculate 2-means clustering (choose value so that max. 1 saccade can occur)
+opt['steptime']             = 0.02                          # time window shift (s) for each iteration. Use zero for sample by sample processing
+opt['maxerrors']            = 100                           # maximum number of errors allowed in k-means clustering procedure before proceeding to next file
+opt['downsamples']          = [2, 5, 10]
+opt['downsampFilter']       = False                         # use chebychev filter when downsampling? Its what matlab's downsampling functions do, but could cause trouble (ringing) with the hard edges in eye-movement data
+
+# # FIXATION DETERMINATION
+opt['cutoffstd']            = 2.0                           # number of standard deviations above mean k-means weights will be used as fixation cutoff
+opt['onoffsetThresh']       = 3.0                           # number of MAD away from median fixation duration. Will be used to walk forward at fixation starts and backward at fixation ends to refine their placement and stop the algorithm from eating into saccades
+opt['maxMergeDist']         = 30.0                          # maximum Euclidean distance in pixels between fixations for merging
+opt['maxMergeTime']         = 30.0                          # maximum time in ms between fixations for merging
+opt['minFixDur']            = 40.0                          # minimum fixation duration after merging, fixations with shorter duration are removed from output
+```
+
+### Run I2MC
+
+Now we can finally run I2MC on all our files. To do so we will make for loop that will iterate between all the files and: - create a folder for each subject - import the data with the function created before - run I2MC on the file - save the output file and the plot.
+
+```{python}
+#%% Run I2MC
+for file_idx, file in enumerate(data_files):
+    print('Processing file {} of {}'.format(file_idx + 1, len(data_files)))
+    
+    # Extract the name from the file path
+    name = file.stem
+    
+    # Create the folder for the specific subject
+    subj_folder = output_folder / name
+    subj_folder.mkdir(exist_ok=True)
+       
+    # Import data
+    data = tobii_TX300(file, [opt['xres'], opt['yres']])
+    
+    # Run I2MC on the data
+    fix,_,_ = I2MC.I2MC(data,opt)
+    
+    ## Create a plot of the result and save them
+    if do_plot_data:
+        # pre-allocate name for saving file
+        save_plot = subj_folder / f"{name}.png"
+        f = I2MC.plot.data_and_fixations(data, fix, fix_as_line=True, res=[opt['xres'], opt['yres']])
+        # save figure and close
+        f.savefig(save_plot)
+        plt.close(f)
+        
+    # Write data to file after make it a dataframe
+    fix['participant'] = name
+    fix_df = pd.DataFrame(fix)
+    save_file = subj_folder / f"{name}.csv"
+    fix_df.to_csv(save_file)
+```
+
+## WE ARE DONE!!!!!
+
+Congratulations on reaching this point! By now, you should have new files containing valuable information from I2MC.
+
+But what exactly does I2MC tell us?
+
+I2MC provides us with a data frame that contains various pieces of information:
+
+**What I2MC Returns:**
+
+-   `cutoff`: A number representing the cutoff used for fixation detection.
+
+-   `start`: An array holding the indices where fixations start.
+
+-   `end`: An array holding the indices where fixations end.
+
+-   `startT`: An array containing the times when fixations start.
+
+-   `endT`: An array containing the times when fixations end.
+
+-   `dur`: An array storing the durations of fixations.
+
+-   `xpos`: An array representing the median horizontal position for each fixation in the trial.
+
+-   `ypos`: An array representing the median vertical position for each fixation in the trial.
+
+-   `flankdataloss`: A boolean value (1 or 0) indicating whether a fixation is flanked by data loss (1) or not (0).
+
+-   `fracinterped`: A fraction that tells us the amount of data loss or interpolated data in the fixation data.
+
+In simple terms, I2MC helps us understand where and for how long a person's gaze remains fixed during an eye-tracking experiment. This is just the first step. Now that we have our fixations, we'll need to use them to extract the information we're interested in. Typically, this involves using the raw data to understand what was happening at each specific time point and using the data from I2MC to determine where the participant was looking at that time. This will be covered in a new tutorial. For now, you've successfully completed the preprocessing of your eye-tracking data, extracting a robust estimation of participants' fixations!!
+
+::: callout-warning
+Caution: This tutorial is simplified and assumes the following:
+
+-   Each participant has only one file (1 trial).
+
+-   All files contain data.
+
+-   The data is relatively clean (I2MC won't throw any errors).
+
+-   And so on.
+
+**If your data doesn't match these assumptions, you may need to modify the script to handle any discrepancies.**
+
+For a more comprehensive example and in-depth usage, check out the [I2MC repository](https://github.com/dcnieho/I2MC_Python/tree/master/example). It provides a more complete example with data checks for missing data and potential errors. Now that you've understood the basics here, interpreting that example should be much easier. If you encounter any issues while running the script, you can give that example a try or reach out to us via email!!!
+:::
+
+## Entire script
+
+To make it simple here is the entire script that we wrote together!!!
+
+```{python}
+import os
+from pathlib import Path
+
+import I2MC
+import pandas as pd
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+# =============================================================================
+# Import data from Tobii TX300
+# =============================================================================
+
+def tobii_TX300(fname, res=[1920,1080]):
+
+    # Load all data
+    raw_df = pd.read_csv(fname, delimiter=',')
+    df = pd.DataFrame()
+    
+    # Extract required data
+    df['time'] = raw_df['time']
+    df['L_X'] = raw_df['L_X']
+    df['L_Y'] = raw_df['L_Y']
+    df['R_X'] = raw_df['R_X']
+    df['R_Y'] = raw_df['R_Y']
+    
+    
+    ###
+    # Sometimes we have weird peaks where one sample is (very) far outside the
+    # monitor. Here, count as missing any data that is more than one monitor
+    # distance outside the monitor.
+    
+    # Left eye
+    lMiss1 = (df['L_X'] < -res[0]) | (df['L_X']>2*res[0])
+    lMiss2 = (df['L_Y'] < -res[1]) | (df['L_Y']>2*res[1])
+    lMiss  = lMiss1 | lMiss2 | (raw_df['L_V'] == False)
+    df.loc[lMiss,'L_X'] = np.nan
+    df.loc[lMiss,'L_Y'] = np.nan
+    
+    # Right eye
+    rMiss1 = (df['R_X'] < -res[0]) | (df['R_X']>2*res[0])
+    rMiss2 = (df['R_Y'] < -res[1]) | (df['R_Y']>2*res[1])
+    rMiss  = rMiss1 | rMiss2 | (raw_df['R_V'] == False)
+    df.loc[rMiss,'R_X'] = np.nan
+    df.loc[rMiss,'R_Y'] = np.nan
+
+    return(df)
+
+
+
+#%% Preparation
+
+# Settign the working directory
+os.chdir(r'C:\Users\tomma\OneDrive - Birkbeck, University of London\TomassoGhilardi\PersonalProj\BCCCD\Workshop')
+
+# Find the files
+data_files = list(Path().glob('DATA/RAW/**/*.csv'))
+
+# define the output folder
+output_folder = Path('DATA') / 'i2mc_output'  # define folder path\name
+
+# Create the folder (will do nothing if it already exists)
+output_folder.mkdir(parents=True, exist_ok=True)
+
+
+# =============================================================================
+# NECESSARY VARIABLES
+
+opt = {}
+# General variables for eye-tracking data
+opt['xres']         = 1920.0                # maximum value of horizontal resolution in pixels
+opt['yres']         = 1080.0                # maximum value of vertical resolution in pixels
+opt['missingx']     = np.nan                # missing value for horizontal position in eye-tracking data (example data uses -xres). used throughout the algorithm as signal for data loss
+opt['missingy']     = np.nan                # missing value for vertical position in eye-tracking data (example data uses -yres). used throughout algorithm as signal for data loss
+opt['freq']         = 300.0                 # sampling frequency of data (check that this value matches with values actually obtained from measurement!)
+
+# Variables for the calculation of visual angle
+# These values are used to calculate noise measures (RMS and BCEA) of
+# fixations. The may be left as is, but don't use the noise measures then.
+# If either or both are empty, the noise measures are provided in pixels
+# instead of degrees.
+opt['scrSz']        = [50.9174, 28.6411]    # screen size in cm
+opt['disttoscreen'] = 65.0                  # distance to screen in cm.
+
+# Options of example script
+do_plot_data = True # if set to True, plot of fixation detection for each trial will be saved as png-file in output folder.
+# the figures works best for short trials (up to around 20 seconds)
+
+# =============================================================================
+# OPTIONAL VARIABLES
+# The settings below may be used to adopt the default settings of the
+# algorithm. Do this only if you know what you're doing.
+
+# # STEFFEN INTERPOLATION
+opt['windowtimeInterp']     = 0.1                           # max duration (s) of missing values for interpolation to occur
+opt['edgeSampInterp']       = 2                             # amount of data (number of samples) at edges needed for interpolation
+opt['maxdisp']              = opt['xres']*0.2*np.sqrt(2)    # maximum displacement during missing for interpolation to be possible
+
+# # K-MEANS CLUSTERING
+opt['windowtime']           = 0.2                           # time window (s) over which to calculate 2-means clustering (choose value so that max. 1 saccade can occur)
+opt['steptime']             = 0.02                          # time window shift (s) for each iteration. Use zero for sample by sample processing
+opt['maxerrors']            = 100                           # maximum number of errors allowed in k-means clustering procedure before proceeding to next file
+opt['downsamples']          = [2, 5, 10]
+opt['downsampFilter']       = False                         # use chebychev filter when downsampling? Its what matlab's downsampling functions do, but could cause trouble (ringing) with the hard edges in eye-movement data
+
+# # FIXATION DETERMINATION
+opt['cutoffstd']            = 2.0                           # number of standard deviations above mean k-means weights will be used as fixation cutoff
+opt['onoffsetThresh']       = 3.0                           # number of MAD away from median fixation duration. Will be used to walk forward at fixation starts and backward at fixation ends to refine their placement and stop algorithm from eating into saccades
+opt['maxMergeDist']         = 30.0                          # maximum Euclidean distance in pixels between fixations for merging
+opt['maxMergeTime']         = 30.0                          # maximum time in ms between fixations for merging
+opt['minFixDur']            = 40.0                          # minimum fixation duration after merging, fixations with shorter duration are removed from output
+
+
+
+#%% Run I2MC
+
+for file_idx, file in enumerate(data_files):
+    print('Processing file {} of {}'.format(file_idx + 1, len(data_files)))
+
+    # Extract the name form the file path
+    name = file.stem    
+    
+    # Create the folder for the specific subject
+    subj_folder = output_folder / name
+    subj_folder.mkdir(exist_ok=True)
+       
+    # Import data
+    data = tobii_TX300(file, [opt['xres'], opt['yres']])
+
+    # Run I2MC on the data
+    fix,_,_ = I2MC.I2MC(data,opt)
+
+    ## Create a plot of the result and save them
+    if do_plot_data:
+        # pre-allocate name for saving file
+        save_plot = subj_folder / f"{name}.png"
+        f = I2MC.plot.data_and_fixations(data, fix, fix_as_line=True, res=[opt['xres'], opt['yres']])
+        # save figure and close
+        f.savefig(save_plot)
+        plt.close(f)
+
+    # Write data to file after make it a dataframe
+    fix['participant'] = name
+    fix_df = pd.DataFrame(fix)
+    save_file = subj_folder / f"{name}.csv"
+    fix_df.to_csv(save_file)
+```

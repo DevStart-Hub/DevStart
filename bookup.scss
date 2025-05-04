@@ -1,0 +1,302 @@
+/*------------------------------------*/
+/* 🌐 SCSS Defaults (Variables)       */
+/*------------------------------------*/
+/*-- scss:defaults --*/
+
+
+
+// Font Families
+$font-family-sans-serif: "Roboto", "Segoe UI", "Helvetica Neue", Helvetica, sans-serif;
+$font-family-monospace: "Fira Mono", "Menlo", "Andale Mono", monospace;
+
+// Base font size and heading sizes
+$font-size-root: 16px;
+$h1-font-size: 2.2em;
+$h2-font-size: 1.75em;
+$h3-font-size: 1.5em;
+$h4-font-size: 1.25em;
+
+// Layout grid settings
+$grid-sidebar-width: 320px;
+$grid-body-width: 950px;
+$grid-margin-width: 300px;
+$grid-column-gutter-width: 1.5rem;
+
+// Default theme colors and styles
+:root {
+    --bs-body-font-weight: 300;
+    
+    /* Sidebar Colors */
+    --sidebar-fg: #495057;
+    --sidebar-bg-docked: #f8f9fa;
+    --sidebar-border: #dee2e6;
+    --sidebar-active-color: #008080;
+    --sidebar-part-color: #0056b3;
+    --sidebar-input-border: #ced4da;
+    --sidebar-form-bg: transparent;
+
+    /* TOC */
+    --toc-border-color: #dee2e6;
+    --bs-link-color-rgb: 0, 112, 112;
+    --bs-link-hover-color-rgb: 0, 168, 168;
+
+    /* Figures and Images */
+    --figure-img-border: 1px solid #dee2e6;
+    --figure-img-shadow: 1px 1px 10px #dee2e6;
+
+    /* Code Colors */
+    --bs-code-color: #7d12ba;
+    --bs-code-bg: #DFE2E2;
+    --hl-code-comments: #6c757d;
+
+    /* Header/Footer */
+    --header-footer-border: #dee2e6;
+
+    /* Tables */
+    --table-tr-border: #dee2e6;
+    --table-out-borders: #adb5bd;
+    --table-tr-hover: rgba(0, 123, 255, 0.1);
+
+    /* Reader Toggle */
+    --reader-toggle-bg: #f8f9fa;
+    --reader-toggle-border: #ced4da;
+
+    /* Callouts */
+    --callout-color: #495057;
+    --callout-warning-bg: #fff3cd;
+    --callout-warning-title: #856404;
+    --callout-note-bg: #cce5ff;
+    --callout-note-title: #004085;
+    --callout-important-bg: #f8d7da;
+    --callout-important-title: #721c24;
+    --callout-caution-bg: #fff3cd;
+    --callout-caution-title: #856404;
+    --callout-tip-bg: #d4edda;
+    --callout-tip-title: #155724;
+
+    /* Cards */
+    --listing-card-border: #ced4da;
+    --listing-card-shadow: rgba(0, 0, 0, 0.05);
+    --listing-card-shadow-hover: rgba(0, 0, 0, 0.1);
+}
+
+
+/*------------------------------------*/
+/* 🛠️ SCSS Rules (Custom CSS)         */
+/*------------------------------------*/
+/*-- scss:rules --*/
+
+// Global link styling
+a {
+  color: #007777;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #00b3b3;
+}
+
+
+// Ensure <strong> and <b> render as bold
+strong, b {
+    font-weight: bold !important;
+}
+
+
+/*------------------------------------*/
+/* 📚 Sidebar and Navigation Styling  */
+/*------------------------------------*/
+
+#quarto-sidebar,
+#quarto-content .sidebar-navigation {
+    .sidebar-item-container {
+        margin-bottom: 0.9em;
+
+        a {
+            color: var(--sidebar-fg);
+            transition: color 0.3s;
+        }
+
+        a.active,
+        a:hover {
+            font-family: var(--toc-font-family);
+            color: var(--sidebar-active-color);
+            border-left: 3px solid var(--sidebar-active-color);
+            padding-left: 15px;
+        }
+
+        .sidebar-item {
+            font-weight: bold;
+        }
+    }
+}
+
+// Sidebar Section Headers Bold
+#quarto-sidebar .sidebar-item.sidebar-item-section > .sidebar-item-container > a {
+    font-weight: bold;
+}
+
+// Sidebar Logo Styling
+.sidebar-logo {
+    max-width: 12em;
+    padding-bottom: .5em;
+}
+
+// Sidebar Tools Icon Size
+.sidebar-navigation .quarto-navigation-tool {
+    font-size: 1.1em;
+}
+
+
+/*------------------------------------*/
+/* 📖 Table of Contents (TOC)         */
+/*------------------------------------*/
+
+#quarto-margin-sidebar,
+#quarto-content .margin-sidebar,
+#quarto-sidebar #TOC {
+    ul {
+        li a {
+            color: var(--sidebar-fg);
+            transition: color 0.3s;
+        }
+
+        li a.active,
+        li a:hover {
+            /* Original styling:
+            color: var(--sidebar-active-color);
+            border-left: 3px solid var(--sidebar-active-color);
+            padding-left: 15px;
+            */
+            /* Override for active/hover TOC links: */
+            color: #027a7a;
+            border-left: 3px solid #027a7a;
+            padding-left: 15px;
+        }
+    }
+}
+
+/*------------------------------------*/
+/* 💻 Code Block and Output Styling   */
+/*------------------------------------*/
+
+// Inline Code Styling
+p code:not(.sourceCode), 
+li code:not(.sourceCode), 
+td code:not(.sourceCode) {
+    background-color: var(--bs-code-bg);
+    color: var(--bs-code-color);
+    padding: .2em;
+    border-radius: 3px;
+}
+
+// Code Output Block Styling
+.cell-output.cell-output-stdout {
+    background-color: #f0f2f4;
+    color: #2d2d2d;
+    padding: 1px 4px;
+    margin-bottom: 5px;
+    border-left: 2px solid #A9C3C6;
+    border-radius: 1px;
+    overflow: auto;
+}
+
+
+// Preformatted Text Styling
+pre {
+    border: none;
+    background: transparent;
+    padding: 0;
+}
+
+pre code {
+    border: none;
+    background: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+
+/*------------------------------------*/
+/* 🧩 Custom Components (Cards, Tabs) */
+/*------------------------------------*/
+
+// Custom Card Styling
+.custom-card {
+    background-color: #008080;
+    color: white;
+    border: none;
+    margin: 2px 0;
+}
+
+.custom-card-header {
+    background-color: #00a2a2;
+    padding: 0.5rem;
+}
+
+.card-body {
+    padding: 0.5rem;
+}
+
+.card-title {
+    margin-top: 0;
+    margin-bottom: 0.25rem;
+}
+
+.card-text {
+    margin-bottom: 0;
+    margin-top: 0.25rem;
+}
+
+// Tab Pane Styling
+.tabset_cool .tabbed-pane .nav-tabs .nav-link {
+    width: 100%;
+    text-align: left;
+    padding: 12px;
+    font-weight: bold !important;
+}
+
+.tabset_cool .tabbed-pane .nav-tabs {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+
+.tabset_cool .tabbed-pane .nav-tabs .nav-item {
+    margin-bottom: 10px;
+}
+
+.tabset_cool .tabbed-pane .tab-content {
+    display: flex;
+}
+
+
+/*------------------------------------*/
+/* 🚫 Hide Keywords Section           */
+/*------------------------------------*/
+
+body main > header div.keywords {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+/* Override TOC active/hover styles */
+#quarto-margin-sidebar ul li a.active,
+#quarto-margin-sidebar ul li a:hover,
+#quarto-content .margin-sidebar ul li a.active,
+#quarto-content .margin-sidebar ul li a:hover,
+#quarto-sidebar #TOC ul li a.active,
+#quarto-sidebar #TOC ul li a:hover,
+.sidebar nav[role="doc-toc"] ul > li > a.active,
+.sidebar nav[role="doc-toc"] ul > li > ul > li > a.active {
+  color: #027a7a !important;
+  border-left: 3px solid #027a7a !important;
+  padding-left: 15px !important;
+}

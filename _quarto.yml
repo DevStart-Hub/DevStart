@@ -1,0 +1,152 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+  - resources/
+
+execute:
+  freeze: auto
+
+website:
+  # drafts:
+  #   - CONTENT/Stats/LinearModels.qmd
+  draft-mode: visible
+
+  cookie-consent:
+    type: implied
+    style: simple 
+    palette: dark
+  google-analytics:
+    tracking-id: "G-G5XSH1GLW7"
+
+  favicon: resources/ICON.png
+  title: "DevStart"
+  description: "DevStart is an online hands-on manual for anyone who is approaching developmental psychology and developmental cognitive neuroscience for the first time, from master's students and PhDs to postdocs."
+  site-url: "https://tommasoghilardi.github.io/DevStart/"
+  repo-url: "https://github.com/TommasoGhilardi/DevStart"
+  image: resources/LOGO.png
+
+  
+  # Cards
+  open-graph:
+    title: "DevStart"
+    description: "Getting started with developmental science"
+    image: "images/ICON.png"
+  
+  twitter-card: 
+    title: "DevStart"
+    card-style: summary
+    description: "DevStart, getting started with developmental science"
+    site: "@DevSciStart"
+    image: "images/ICON.png"
+  
+  # Utilities
+  back-to-top-navigation: true
+  page-navigation: true
+  reader-mode: false
+
+  search:
+    location: sidebar
+    type: textbox
+  
+  ## Sidebar settings
+  sidebar:
+    title: " "
+    style: "floating"
+    border: true
+    align: center
+    logo: "images/LOGO.png"
+
+    tools:
+      - icon: twitter
+        href: https://x.com/DevSciStart
+      - icon: github
+        menu:
+          - text: Source Code
+            url:  https://github.com/TommasoGhilardi/DevStart
+          - text: Report a Bug
+            url:  https://github.com/TommasoGhilardi/DevStart/issues
+      - icon: menu-up
+        href: CONTENT/ContentList.qmd
+    
+    contents:
+      - index.qmd
+      - section: "Getting started:"
+        contents:
+          - CONTENT/GettingStarted/GettingStartedWithPython.qmd
+          - CONTENT/GettingStarted/GettingStartedWithPsychopy.qmd
+
+      - section: "Creating an experiment:"
+        href: CONTENT/GettingStarted/CreateYourFirstParadigm.qmd
+        contents:
+          - CONTENT/GettingStarted/CreateYourFirstParadigm.qmd
+      - section: "Eye-tracking"
+        href: CONTENT/EyeTracking/Intro_eyetracking.qmd
+        contents: 
+          - CONTENT/EyeTracking/Intro_eyetracking.qmd
+          - CONTENT/EyeTracking/CreateAnEyetrackingExperiment.qmd
+          - CONTENT/EyeTracking/EyetrackingCalibration.qmd
+          - CONTENT/EyeTracking/I2MC_tutorial.qmd
+          - CONTENT/EyeTracking/FromFixationsToData.qmd
+          - CONTENT/EyeTracking/PupilPreprocessing.qmd
+          - CONTENT/EyeTracking/PupilDataAnalysis.qmd
+      - section: "Stats"
+        contents:
+          - CONTENT/Stats/LinearModels.qmd
+          - CONTENT/Stats/LinearMixedModels.qmd
+          - CONTENT/Stats/ModelEstimates.qmd
+          - CONTENT/Stats/GeneralisedModels.qmd
+      - section: "Workshops"
+        href: https://tommasoghilardi.github.io/DevStart/Workshops/
+        contents:
+          - text: "Eye-Tracking Workshop for Developmental Scientists"
+            href: https://tommasoghilardi.github.io/DevStart/Workshops/
+          - text: "BTG 2024"
+            href: https://tommasoghilardi.github.io/DevStart/Workshops/PreviousWokshops/BTG2024.html
+      #   contents:
+      #     #- CONTENT/Workshops/BCCCD2024.qmd
+      #     - CONTENT/Workshops/GAP_2024.qmd
+      #     - CONTENT/Workshops/DevStartN1.qmd
+
+
+
+
+
+  ## Footer
+  page-footer:
+    center:  
+      - href: https://github.com/TommasoGhilardi/DevStart
+        icon: github
+        aria-label: GitHub
+      - href: https://x.com/DevSciStart
+        icon: twitter
+        aria-label: Twitter
+
+##### Format #####
+format:
+  html:
+
+    toc: true
+    toc-expand: 4    
+    
+    theme:
+      light: bookup.scss
+      # dark:  bookup_dark.scss
+
+    mainfont: 'Arial'
+
+    
+    # Code variables
+    code-fold: false
+    code-copy: true
+    code-link: true
+    code-overflow: scroll
+    code-tools:
+      source: true
+      toggle: true
+      caption: none
+    highlight-style: zenburn
+    code-block-background: true
+    code-block-border-left: "#00B3B3"
+editor: visual
+
