@@ -3,6 +3,14 @@
 [![DOI](https://zenodo.org/badge/501816247.svg)](https://zenodo.org/doi/10.5281/zenodo.13361295)
 
 
+> **⚠️ Warning**  
+> This repository began as a fork of the original [DevStart](https://github.com/TommasoGhilardi/DevStart) project.  
+> As the scope has grown, we’ve created a dedicated GitHub **organization** to host multiple related projects.  
+> Development will now continue **here**.  
+> Once we’re ready to deploy, we’ll redirect the old website to the new one and make this repo the official home of DevStart.
+
+
+
 # DEVSTART <a href="[https://dplyr.tidyverse.org](https://tommasoghilardi.github.io/DevStart/)"><img src='images/LOGO.png' width='200' align="right" /></a>
 
 **Getting Started with Developmental Cognitive Science**
@@ -16,4 +24,3 @@ This website comes from the shared effort of: [Francesco](https://www.ru.nl/en/p
 > [!CAUTION]
 > We tried our best to offer the best and most accurate solutions. However, do always check the code and if the outputs make sense. Please get in touch if you spot any errors.
 > We apologize in advance for our poor coding skills. Our scripts are not perfect, and they don’t mean to be. But, as Francesco always says, they work! And we hope they will support you during your PhD.
-
