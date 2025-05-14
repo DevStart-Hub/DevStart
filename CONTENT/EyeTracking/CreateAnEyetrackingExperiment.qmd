@@ -62,87 +62,97 @@ We are now ready to use our eye-tracker to collect some data... but how?
 
 Tobii_research has a cool way of telling us what data we are collecting at each time point. It uses a callback function. What is a callback function, you ask? It is a function that tobii runs each time it has a new data point. Let's say we have an eye tracker that collects data at 300Hz (300 samples per second): the function will be called every time the tobii has one of those 300 samples.
 
-This callback function will give us a `gaze_data` object. This object contains multiple information of that collected sample and we can simply select the information we care about. In our case we want:
-
--   the `system_time_stamp`, our time variable
-
--   the `left_eye.gaze_point.position_on_display_area`, it contains the coordinates on the screen of the left eye (both x and y)
-
--   the `right_eye.gaze_point.position_on_display_area`, it contains the coordinates on the screen of the right eye (both x and y)
-
--   the `left_eye.pupil.diameter`, is the pupil diameter of the left eye
-
--   the `right_eye.pupil.diameter`, is the pupil diameter of the right eye
-
--   the `left_eye.gaze_point.validity`, this is a value that tells us whether we think the recognition is ok or not
+This callback function will give us a `gaze_data` dictionary. This dictionary contains multiple information of that collected sample
 
 Here is our callback function:
 
 ```{python}
+# callback function
 def gaze_data_callback(gaze_data):
-
-    # Extract the data we are interested in
-    t  = gaze_data.system_time_stamp
-    lx = gaze_data.left_eye.gaze_point.position_on_display_area[0]
-    ly = gaze_data.left_eye.gaze_point.position_on_display_area[1]
-    lp = gaze_data.left_eye.pupil.diameter
-    lv = gaze_data.left_eye.gaze_point.validity
-    rx = gaze_data.right_eye.gaze_point.position_on_display_area[0]
-    ry = gaze_data.right_eye.gaze_point.position_on_display_area[1]
-    rp = gaze_data.right_eye.pupil.diameter
-    rv = gaze_data.right_eye.gaze_point.validity
+    print(gaze_data)
 ```
 
-How we said, this function will be called every time tobii has a new data-point. COOL!! Now we need to tell tobii to run this function we have created. This is very simple, we can just do the following:
+This will print the entire dictionary to your console. Here's what you'll see:
+
+``` python
+{'device_time_stamp': 467525500,
+ 'system_time_stamp': 6405415231,
+ 'left_gaze_point_on_display_area': (0.4633694291, 0.4872185290),
+ 'left_gaze_point_in_user_coordinate_system': (-10.15791702, 128.29026794, 40.876254),
+ 'left_gaze_point_validity': 1,
+ 'left_pupil_diameter': 5.655228,
+ 'left_pupil_validity': 1,
+ 'left_gaze_origin_in_user_coordinate_system': (-25.86829758, 1.41938722, 644.839478),
+ 'left_gaze_origin_in_trackbox_coordinate_system': (0.561557, 0.481128, 0.489121),
+ 'left_gaze_origin_validity': 1,
+ 'right_gaze_point_on_display_area': (0.4944303632, 0.4498708546),
+ 'right_gaze_point_in_user_coordinate_system': (0.7905667424, 135.2486572266, 43.373546),
+ 'right_gaze_point_validity': 1,
+ 'right_pupil_diameter': 5.307220,
+ 'right_pupil_validity': 1,
+ 'right_gaze_origin_in_user_coordinate_system': (32.52792358398, -2.97285223007, 640.345520),
+ 'right_gaze_origin_in_trackbox_coordinate_system': (0.431783, 0.495703, 0.483452),
+ 'right_gaze_origin_validity': 1}
+```
+
+Wow! Look at all that data from just one sample!
+
+Now we need to tell the eye tracker to actually use our callback function. This part is super easy:
 
 ```{python}
 # Start the callback function
 Eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)
 ```
 
-We are telling tobii that we are interested in the `EYETRACKER_GAZE_DATA` and that we want it to pass it to our function `gaze_data_callback`.
+What we're doing here is subscribing to the `EYETRACKER_GAZE_DATA` stream and telling it to send all that data to our `gaze_data_callback` function. Once this runs, your console will start flooding with data!
+
+### Global to save
+
+Nice! You've set up a callback function that taps into your eye tracker's data stream! But hold up - right now we're just printing everything to the console. At 300 times per second, that's going to be a blur of text that nobody can read.
+
+While watching all that data scroll by is interesting for about 3 seconds, it's not helpful for actual analysis. We need to save this data somewhere!
+
+Let's create a list to store all this information:
+
+```{python}
+# Create an empty list we will append our data to
+gaze_data_buffer = []
+```
+
+Perfect! We've got our list. But there's a catch with Python functions - variables created outside a function aren't automatically accessible inside that function. We need a little trick!
+
+We can use the `global` keyword inside our callback function. This tells Python that we're referring to the list we created in the main script, not creating a new variable:
+
+```{python}
+# callback function
+def gaze_data_callback(gaze_data):
+    global gaze_data_buffer # look for gaze_data_buffer globally
+
+    gaze_data_buffer.append(gaze_data)
+
+# Create an empty list we will append our data to
+gaze_data_buffer = []
+
+# Start the callback function
+Eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)
+```
+
+And there we go! Now instead of just printing data, we're actually saving every sample in our list for later analysis. Much more useful!
 
 ## Triggers/Events
 
 As we have seen, our callback function can access the tobii data and tell us what it is for each sample. Just one little piece missing... We want to know what we presented and when. In most studies, we present stimuli that can be pictures, sounds or even videos. For the following analysis, it is important to know at what exact point in time we presented these stimuli.
 
-Luckily there is a simple way we can achieve this. We can set a text string that our callback function can access and include in our data. To make sure that our callback function can access this variable we will use the `global` keyword. This makes sure that we can read/modify a variable that exists outside of the function.
+The Tobii SDK provides an elegant solution through the `tr.get_system_time_stamp()` function. This function returns the current time from the eye-tracker's internal clock—the same clock used for the eye-tracking samples.
 
-In this way, each time the callback function runs, it has access to the trigger variable. At the end of the function, we reset the trigger to an empty string. This ensures that each trigger event appears exactly once in our data, precisely at the time it occurs, rather than being duplicated across multiple samples.
-
-This means that we can set the trigger to whatever string we want and when we set it it will be picked up by the callback function.
+We can create a simple event-logging system by storing timestamps along with descriptive event labels. We first create an empty list called Events and we append the event and the trigger every time we need. just like so:
 
 ```{python}
-def gaze_data_callback(gaze_data):
-    global trigger
+Events = [] # create empty list
 
-    # Extract the data we are interested in
-    t  = gaze_data.system_time_stamp
-    lx = gaze_data.left_eye.gaze_point.position_on_display_area[0]
-    ly = gaze_data.left_eye.gaze_point.position_on_display_area[1]
-    lp = gaze_data.left_eye.pupil.diameter
-    lv = gaze_data.left_eye.gaze_point.validity
-    rx = gaze_data.right_eye.gaze_point.position_on_display_area[0]
-    ry = gaze_data.right_eye.gaze_point.position_on_display_area[1]
-    rp = gaze_data.right_eye.pupil.diameter
-    rv = gaze_data.right_eye.gaze_point.validity
-    
-    trigger = '' # empty trigger
-    
-    
-trigger = ''
-
-# Time passes
-# when you present a stimulus you can set trigger to a string that will be captured by the callabck function
-
-trigger = 'Presented Stimulus'
+# Get the current time from the eye-tracker's clock
+Events.append([tr.get_system_time_stamp(), 'Our First event!!'])
 ```
-
-Perfect! Now we have
-
-1.  a way to access the data from the eye-tracker and
-
-2.  know exactly what stimuli we are presenting the participant and when.
 
 ## Correct the data
 
