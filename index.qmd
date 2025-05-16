@@ -14,11 +14,21 @@ DevStart is an online hands-on manual for anyone who is approaching developmenta
 
 Assuming no a priori knowledge, this website will guide you through your first steps as a developmental researcher. You'll find many examples and guidelines on how to grasp the basic principles of developmental psychology research, design and set up a study with different research methods, analyse data, and start programming.
 
+## Core principles
+
+DevStart is built on three guiding principles that reflect our approach to developmental research.
+
+We're committed to open source tools and aim to only use software that is freely available to everyone. Academia is already difficult enough without financial barriers - we want to reduce the impact of money on research and ensure that good science isn't limited by budget constraints.
+
+Our resources are completely free to use because we believe knowledge should be accessible to all researchers regardless of their funding situation.
+
+Most importantly, we see ourselves as a knowledge hub rather than the authority on "best practices." We don't have all the answers, just hard-earned solutions from our own research journeys. What worked for us might need tweaking for you, and we welcome those contributions. After all, developmental research is as much about collaboration as it is about discovery.
+
 ## Why did we create it?
 
 There are many resources on the web to learn how to program, build experiments, and analyse data. However, they often assume basic skills in programming, and they don't tackle the challenges that we encounter when testing babies and young children. This knowledge is often handed down from Professors and Postdocs to PhD students, or it is acquired through hours and hours of despair. 
 
-We tried to summarize all the struggles that we encountered during our PhDs and the solutions we came up with. With this website, we aim to offer you a solution to overcome these problems, and we invite anyone to help us and contribute to this open science framework! 
+We tried to summarize all the struggles that we encountered during our PhDs and the solutions we came up with. With this website, we aim to offer you a solution to overcome these problems, and we invite anyone to help us and contribute to this open science framework!
 
 ## How to contribute?
 
@@ -27,54 +37,44 @@ If you're an expert on a specific topic and you want to change something or add 
 You can find us at:
 
 -   {{< fa envelope >}} [t.ghilardi\@bbk.ac.uk](mailto:t.ghilardi@bbk.ac.uk)\
--   {{< fa envelope >}} [francesco.poli\@donders.ru.nl](mailto:francesco.poli@donders.ru.nl)\
+-   {{< fa envelope >}} [Francesco.Poli\@mrc-cbu.cam.ac.uk](mailto:Francesco.Poli@mrc-cbu.cam.ac.uk)\
 -   {{< fa envelope >}} [g.serino\@bbk.ac.uk](mailto:g.serino@bbk.ac.uk)\
 
 ## Who are we?
+
+```{=html}
+<div class="profile-container">
+  <a href="https://tommasoghilardi.github.io/" class="profile-link">
+    <div class="profile-card">
+      <img src="mages/welcome/Tommaso.jpg" class="profile-icon" alt="Tommaso Ghilardi">
+      <div class="profile-name">Tommaso Ghilardi</div>
+      <div class="profile-position">Postdoctoral researcher<br><i>Centre for Brain and Cognitive Development</i></div>
+    </div>
+  </a>
+  
+  <a href="https://cbcd.bbk.ac.uk/people/students/giulia-serino" class="profile-link">
+    <div class="profile-card">
+      <img src="images/welcome/Giulia.png" class="profile-icon" alt="Giulia Serino">
+      <div class="profile-name">Giulia Serino</div>
+      <div class="profile-position">Postdoctoral researcher<br><i>Centre for Brain and Cognitive Development</i></div>
+    </div>
+  </a>
+  
+  <a href="https://francescpoli.github.io/" class="profile-link">
+    <div class="profile-card">
+      <img src="mages/welcome/Francesco.jpeg"class="profile-icon" alt="Francesco Poli">
+      <div class="profile-name">Francesco Poli</div>
+      <div class="profile-position">Postdoctoral researcher<br><i>Cambridge University</i></div>
+    </div>
+  </a>
+</div>
+```
 
 This is a story of bullying and love started in 2018 at the Donders Institute in the Netherlands. Tommaso and Francesco were living their best PhD life when Giulia bumped into them, looking for data to write her master's thesis.
 
 United by a strong passion for research and a creepy attraction to complex and noisy datasets, they immediately got along well. We haven't stopped collaborating since then.
 
-### Tommaso Ghilardi: *the programmer*
 
-|  |  |
-|:----------------------------------:|------------------------------------|
-| ![Tommaso](images/welcome/Tommaso.jpg){alt="Tommaso"} | Tommaso Ghilardi is the programmer behind the scenes. He excels in Python and is known for his impeccably clean code. If you explore our website, you're likely to come across his contributions. Tommaso's skills aren't limited to programming—he's capable of setting up a lab in just an hour. He's equally comfortable with research methods and a variety of programming languages. However, be cautious about imperfect code; Tommaso has a short fuse for anything less than perfect. He plays a significant role in shaping this website, making it what it is today. Thank you, Tommaso! |
-
-Postdoc at the Centre for Brain and Cognitive Development, Birkbeck, University of London
-
-{{< fa circle-user >}} <https://tommasoghilardi.github.io>\
-{{< fa envelope >}} [t.ghilardi\@bbk.ac.uk](mailto:t.ghilardi@bbk.ac.uk)\
-{{< fa brands twitter >}} [\@TommasoGhi](https://twitter.com/tommasoghi)
-
-------------------------------------------------------------------------
-
-### Francesco Poli: *the deep thinker*
-
-|  |  |
-|:----------------------------------:|------------------------------------|
-| ![Francesco](images/welcome/Francesco.jpeg){alt="Francesco"} | Francesco Poli is the deep thinker among us. He's not just any ordinary thinker; he can build computational models to predict behavior and decipher your thoughts in the blink of an eye. Francesco's abilities extend to creating intricate mathematical theories to explain behavior patterns. He's adept at juggling multiple projects, though he might occasionally forget to reply to emails amidst his busy schedule. With Francesco, expect the extraordinary. |
-
-PostDoc at the Donders Centre for Cognition.
-
-{{< fa circle-user >}} <https://www.ru.nl/en/people/poli-f>\
-{{< fa envelope >}} [francesco.poli\@donders.ru.nl](mailto:francesco.poli@donders.ru.nl)\
-{{< fa brands twitter >}} [\@FrancescPoli](https://twitter.com/FrancescPoli)
-
-------------------------------------------------------------------------
-
-### Giulia Serino: *the immaginative*
-
-|  |  |
-|:----------------------------------:|------------------------------------|
-| ![Image](images/welcome/Giulia.png){alt="Image"} | Giulia Serino brings imagination to the table. Introduced to programming by Francesco and Tommaso, she has surpassed them to become a skilled programmer herself. Her experiments are a blend of art and science, often resembling graphic masterpieces. However, Giulia tends to get lost in the minutiae of her work. She has a reputation for disappearing, yet her curiosity leads her to explore every corner of Google and various repositories, piecing together her unique theories on attention development. |
-
-PhD student in Developmental Cognitive Neuroscience at the Centre for Brain and Cognitive Development, Birkbeck, University of London
-
-{{< fa circle-user >}} <https://cbcd.bbk.ac.uk/people/students/giulia-serino>\
-{{< fa envelope >}} [g.serino\@bbk.ac.uk](mailto:g.serino@bbk.ac.uk)\
-{{< fa brands twitter >}} [\@GiSerino](https://twitter.com/GiSerino)
 
 ## Warnings!
 
