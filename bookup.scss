@@ -296,81 +296,93 @@ body main > header div.keywords {
 }
 
 
-
-
 /*--------------------------------------*/
-/*    👤 PROFILE CARD                 */
-/*------------------------------------*/
+/*    👤 PROFILE CARD                  */
+/*--------------------------------------*/
 
 .profile-container {
-    display: grid;  /* Use CSS Grid for better layout control */
-    grid-template-columns: repeat(3, 1fr);  /* Create 3 equal columns */
-    gap: 20px;  /* Add gap to space out the cards */
-    margin: 20px;  /* Add some margin for spacing around the container */
-    align-items: stretch;  /* Ensure all cards are stretched to the tallest */
-}
-
-.profile-card {
+    display: grid;
+    /* allow columns to shrink below their min-content width */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    /* centered within your main content area */
+    margin: 20px auto;
+    max-width: 100%;
+    box-sizing: border-box;
+    align-items: stretch;
+  }
+  
+  .profile-card {
     background: #fff;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;  /* Spread content evenly for uniform height */
+    justify-content: space-between;
     border-radius: 4px;
-    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);  /* Add shadow for visual depth */
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
-    height: 100%; /* Make sure cards take up full height of their container */
-}
-
-.profile-link {
-    text-decoration: none;  /* Remove underline from links */
-    color: inherit;  /* Inherit text color so that it doesn't change */
-    display: block;  /* Make the link cover the entire card */
-    height: 100%;  /* Ensure the link covers the full height of the card */
-    width: 100%;  /* Ensure the link covers the full width of the card */
-}
-
-.profile-card:hover {
+    height: 100%;
+  }
+  
+  .profile-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .profile-card:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 30px -5px rgba(0, 0, 0, 0.3);  /* Stronger shadow on hover */
-}
-
-.profile-icon {
+    box-shadow: 0 0 30px -5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .profile-icon {
     height: 100px;
     width: 100px;
     object-fit: cover;
     border-radius: 50%;
-}
-
-.profile-name {
+  }
+  
+  .profile-name {
     font-size: 24px;
     font-weight: bold;
-    margin: 25px 0 10px 0;
-    white-space: nowrap;  /* Prevent wrapping */
+    margin: 25px 0 10px;
+    /* allow wrapping by default */
+    white-space: normal;
     text-align: center;
-}
-
-.profile-position {
+  }
+  
+  .profile-position {
     font-size: 14px;
     color: #777;
-    text-align: center;  /* Align text in the center for consistency */
-    width: 100%;  /* Use full width */
-    margin-top: 10px;  /* Add some margin to control spacing */
-    align-self: flex-start; /* Align the position text to the top */
-}
-
-
-/* Media query for tablets and small screens */
-@media screen and (max-width: 768px) {
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+    align-self: flex-start;
+  }
+  
+  /*--------------------------------------*/
+  /*    Responsive tweaks                 */
+  /*--------------------------------------*/
+  
+  /* tablets / small desktops */
+  @media screen and (max-width: 768px) {
     .profile-container {
-        grid-template-columns: repeat(2, 1fr);  /* Show 2 columns on medium screens */
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-}
-
-/* Media query for mobile screens */
-@media screen and (max-width: 480px) {
+  }
+  
+  /* phones */
+  @media screen and (max-width: 480px) {
     .profile-container {
-        grid-template-columns: 1fr;  /* Show 1 column on small screens */
+      grid-template-columns: minmax(0, 1fr);
     }
-}
+    .profile-name {
+      /* ensure really long names break onto multiple lines */
+      white-space: normal;
+      word-break: break-word;
+    }
+  }
+  

@@ -42,11 +42,15 @@ You can find us at:
 
 ## Who are we?
 
+This is a story of bullying and love started in 2018 at the Donders Institute in the Netherlands. Tommaso and Francesco were living their best PhD life when Giulia bumped into them, looking for data to write her master's thesis.
+
+United by a strong passion for research and a creepy attraction to complex and noisy datasets, they immediately got along well. We haven't stopped collaborating since then.
+
 ```{=html}
 <div class="profile-container">
   <a href="https://tommasoghilardi.github.io/" class="profile-link">
     <div class="profile-card">
-      <img src="mages/welcome/Tommaso.jpg" class="profile-icon" alt="Tommaso Ghilardi">
+      <img src="images/welcome/Tommaso.jpg" class="profile-icon" alt="Tommaso Ghilardi">
       <div class="profile-name">Tommaso Ghilardi</div>
       <div class="profile-position">Postdoctoral researcher<br><i>Centre for Brain and Cognitive Development</i></div>
     </div>
@@ -62,19 +66,13 @@ You can find us at:
   
   <a href="https://francescpoli.github.io/" class="profile-link">
     <div class="profile-card">
-      <img src="mages/welcome/Francesco.jpeg"class="profile-icon" alt="Francesco Poli">
+      <img src="images/welcome/Francesco.jpeg"class="profile-icon" alt="Francesco Poli">
       <div class="profile-name">Francesco Poli</div>
       <div class="profile-position">Postdoctoral researcher<br><i>Cambridge University</i></div>
     </div>
   </a>
 </div>
 ```
-
-This is a story of bullying and love started in 2018 at the Donders Institute in the Netherlands. Tommaso and Francesco were living their best PhD life when Giulia bumped into them, looking for data to write her master's thesis.
-
-United by a strong passion for research and a creepy attraction to complex and noisy datasets, they immediately got along well. We haven't stopped collaborating since then.
-
-
 
 ## Warnings!
 
