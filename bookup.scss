@@ -281,12 +281,6 @@ body main > header div.keywords {
 
 
 
-
-
-
-
-
-
 /* Override TOC active/hover styles */
 #quarto-margin-sidebar ul li a.active,
 #quarto-margin-sidebar ul li a:hover,
@@ -300,3 +294,95 @@ body main > header div.keywords {
   border-left: 3px solid #027a7a !important;
   padding-left: 15px !important;
 }
+
+
+/*--------------------------------------*/
+/*    👤 PROFILE CARD                  */
+/*--------------------------------------*/
+
+.profile-container {
+    display: grid;
+    /* allow columns to shrink below their min-content width */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    /* centered within your main content area */
+    margin: 20px auto;
+    max-width: 100%;
+    box-sizing: border-box;
+    align-items: stretch;
+  }
+  
+  .profile-card {
+    background: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 4px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%;
+  }
+  
+  .profile-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .profile-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px -5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .profile-icon {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .profile-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 25px 0 10px;
+    /* allow wrapping by default */
+    white-space: normal;
+    text-align: center;
+  }
+  
+  .profile-position {
+    font-size: 14px;
+    color: #777;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+    align-self: flex-start;
+  }
+  
+  /*--------------------------------------*/
+  /*    Responsive tweaks                 */
+  /*--------------------------------------*/
+  
+  /* tablets / small desktops */
+  @media screen and (max-width: 768px) {
+    .profile-container {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  
+  /* phones */
+  @media screen and (max-width: 480px) {
+    .profile-container {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .profile-name {
+      /* ensure really long names break onto multiple lines */
+      white-space: normal;
+      word-break: break-word;
+    }
+  }
+  
