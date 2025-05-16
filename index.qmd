@@ -42,9 +42,12 @@ You can find us at:
 
 ## Who are we?
 
-This is a story of bullying and love started in 2018 at the Donders Institute in the Netherlands. Tommaso and Francesco were living their best PhD life when Giulia bumped into them, looking for data to write her master's thesis.
+Our story began in 2018 at the Donders Institute in the Netherlands. Tommaso and Francesco were in the midst of their PhDs when Giulia joined them, seeking data for her master's thesis. What started as a research collaboration quickly grew into a lasting partnership.
+We share a passion for developmental science and each bring our own approach to the table.
 
-United by a strong passion for research and a creepy attraction to complex and noisy datasets, they immediately got along well. We haven't stopped collaborating since then.
+**Tommaso** is our programmer in love with R, Python and anything methodological. **Francesco** is our deep thinker, focused on theory development and creating computational models to explain behavioral patterns. **Giulia** brings creativity to our experiments, blending scientific rigor with visual design. Over the years, we've continued collaborating across institutions, finding that our different strengths complement each other.
+
+*DevStart emerged from our research journeys - the challenges we faced and the solutions we discovered along the way*
 
 ```{=html}
 <div class="profile-container">
