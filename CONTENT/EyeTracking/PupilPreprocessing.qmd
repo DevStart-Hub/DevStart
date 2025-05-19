@@ -83,7 +83,7 @@ csv_files = list.files(
 )
 ```
 
-`csv_files` is now a list containing all the `.csv` files we’ve identified. To better understand our dataset, let’s start by focusing on the first file, representing the first subject, and inspect its structure. This will give us a clear overview before we proceed further.
+`csv_files` is now a list containing all the `.csv` files we’ve identified. To better understand our dataset, **let’s start by focusing on the first file**, representing the first subject, and inspect its structure. This will give us a clear overview before we proceed further.
 
 ```{r ReadData}
 Raw_data = read.csv(csv_files[1])
@@ -124,11 +124,12 @@ Nice!! Now we have some sense of our data!! And....you’ve probably noticed two
 
 2.  **Single-sample events!** Like in most studies, events are marked at a single time point (when the stimulus is presented). But PupilometryR needs a different structure — it expects the event value to be repeated for every row while the event is happening.
 
-So, how do we fix this? First, let’s isolate the rows in our dataframe where the events are **Circle** or **Square**. We start by creating a list of the events we care about, then use it to filter our dataframe and keep only the rows related to those events in a new dataframe called Events
+So, how do we fix this? First, let’s isolate the rows in our dataframe where the events are **Circle** or **Square**. We start by creating a list of the events we care about, then use it to filter our dataframe and keep only the rows related to those events in a new dataframe called Events. In the process we will also create a new column called **TrialN**. In this column we will store the passing of time as trial. This will help us identify different trials of the same Event.
 
 ```{r FindEvents}
 Events_to_keep = c('Circle','Square')
-Events = filter(Raw_data, Event %in% Events_to_keep) # filter data
+Events = Raw_data %>% filter(Event %in% Events_to_keep) %>% # filter data
+  mutate(TrialN = seq(n()))
 head(Events) # database peak
 ```
 
@@ -237,8 +238,8 @@ List_of_subject_dataframes = list() # Empty list to be filled with dataframes
 for (sub in 1:length(csv_files)) {
   
   Raw_data = read.csv(csv_files[sub]) # Raw data
-  Events = filter(Raw_data, Event %in% Events_to_keep) # Events
-  
+  Events = Raw_data %>% filter(Event %in% Events_to_keep) %>% # filter data
+  mutate(TrialN = seq(n()))
   
   # Loop for each event 
   for (trial in 1:nrow(Events)){
@@ -745,8 +746,8 @@ List_of_subject_dataframes = list() # Empty list to be filled with dataframes
 for (sub in 1:length(csv_files)) {
   
   Raw_data = read.csv(csv_files[sub]) # Raw data
-  Events = filter(Raw_data, Event %in% Events_to_keep) # Events
-
+  Events = Raw_data %>% filter(Event %in% Events_to_keep) %>% # filter data
+  mutate(TrialN = seq(n()))
   
   # Loop for each event 
   for (trial in 1:nrow(Events)){
