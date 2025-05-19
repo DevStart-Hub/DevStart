@@ -185,7 +185,7 @@ generate_pupil_data <- function(
     sy <- datawizard::change_scale(sy, scale_signal)
   }
 
-  data.frame(Time_ms=time, pupil=sy, Event=event_column)
+  data.frame(time=time, pupil=sy, Event=event_column)
 }
 
 

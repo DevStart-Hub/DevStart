@@ -11,7 +11,12 @@ source("Simulations/PupilSimulationFunctions.R")
 
 # Read original data -------------------------------------------------------------------
 
-pup = vroom::vroom("resources/FromFixationToData/DATA/RAW/Adult1.csv") |> 
+pup = vroom::vroom("resources/FromFixationToData/DATA/RAW/Adult1.csv")
+
+InitialT = min(pup$time) # Initial time
+
+# Clean data
+pup = pup |>  
   mutate(time = (time - min(time))+1) |> 
   rowwise() |>
   mutate(pupil = mean(c(R_P, L_P), rm.na = TRUE),
@@ -26,18 +31,18 @@ Event = pup |>
   select(time, indexes, Event)
 
 # Plot real data
-OriginalData = ggplot(pup, aes(x = time, y = R_P)) +
+OriginalData = ggplot(pup, aes(x = time + InitialT - 1, y = R_P)) +
   geom_line(color = 'red') +
   geom_line(aes(y = L_P), color = 'blue') +
   geom_vline(
     data = Event,
-    aes(xintercept = time, color = Event),
+    aes(xintercept = time + InitialT - 1, color = Event),
     linetype = 'dashed'
   ) +
-  labs(title = "Original Pupil Data", y= "Pupil") +
+  labs(title = "Original Pupil Data", y = "Pupil") +
   theme_classic(base_size = 20) +
-  ylim(0, 6)+
-  theme(legend.position = 'none' )
+  ylim(0, 6) +
+  theme(legend.position = 'none')
 
 
 
@@ -70,7 +75,6 @@ Event <- Event %>%
 # Simulate data ----------------------------------------------------------
 
 sim_data = list()
-sub=1
 
 for (sub in 1:6) {
   sim_data[[sub]] <- generate_pupil_data(
@@ -109,9 +113,6 @@ for (sub in 1:6) {
     min_gap = 400
   )
 
-  # Add subject info to the dataframe
-  sim_data[[sub]]$Subject <- paste('Subject', sub, sep = '_')
-
   ### Difference between Left and Right eyes
   sim_data[[sub]]$L_P = sim_data[[sub]]$pupilBlinks
   sim_data[[sub]]$R_P = sim_data[[sub]]$pupilBlinks
@@ -135,6 +136,11 @@ for (sub in 1:6) {
     min_duration = 1000,
     max_duration = 2500
   )
+
+  # general info -----------------------------------------------------------
+
+  # Add subject info to the dataframe
+  sim_data[[sub]]$Subject <- paste('Subject', sub, sep = '_')
   
   ## Add events column in the data ------------------------------------------
 
@@ -170,18 +176,35 @@ for (sub in 1:6) {
     ] = NA
   }
 
-  write.csv(sim_data[[sub]],
-            paste("/resources/Pupillometry/Raw/",
-            "Pupil_Subject", sub, ".csv", sep= ''))
-}
 
+  # Select and save --------------------------------------------------------
+  # Select columns
+  sim_data[[sub]] = sim_data[[sub]] |>
+    dplyr::select(Subject, time, L_P, R_P, Event)
+
+
+  # write data
+  write.csv(sim_data[[sub]],
+            paste("resources/Pupillometry/Raw/",
+            "Pupil_Subject", sub, ".csv", sep= ''), row.names = FALSE)
+}
 
 
 
 # Combine the data -------------------------------------------------------
 
 Pup = do.call(rbind, sim_data) |>
-  select(Subject, Time_ms, L_P, R_P, Event)
+  select(Subject, time, L_P, R_P, Event)
+
+Pup$time = Pup$time + InitialT-1
+
+# Extract events
+EventSim = Pup |>
+  dplyr::filter(
+    !is.na(Event)
+  ) |>
+  mutate(indexes = row_number()) |>
+  select(time, indexes, Event)
 
 
 # Final plot -------------------------------------------------------------
@@ -190,11 +213,11 @@ Pup = do.call(rbind, sim_data) |>
 SimulatedData1 =
   Pup |>
   dplyr::filter(Subject == 'Subject_1') |>
-  ggplot(aes(x = Time_ms, y = L_P, color = Subject)) +
+  ggplot(aes(x = time, y = L_P, color = Subject)) +
   geom_line(color = 'red') +
   geom_line(aes(y = R_P), color = 'blue') +
   geom_vline(
-    data = Event,
+    data = EventSim,
     aes(xintercept = time, color = Event),
     linetype = 'dashed'
   ) +
@@ -204,11 +227,11 @@ SimulatedData1 =
   theme(legend.position = 'none')
 
 
-SimulatedAll = ggplot(Pup, aes(x = Time_ms, y = L_P, color = Subject)) +
+SimulatedAll = ggplot(Pup, aes(x = time, y = L_P, color = Subject)) +
   geom_line(color = 'red') +
   geom_line(aes(y = R_P), color = 'blue') +
   geom_vline(
-    data = Event,
+    data = EventSim,
     aes(xintercept = time, color = Event),
     linetype = 'dashed'
   ) +
