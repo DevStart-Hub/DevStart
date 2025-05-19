@@ -176,7 +176,6 @@ for (sub in 1:6) {
     ] = NA
   }
 
-
   # Select and save --------------------------------------------------------
   # Select columns
   sim_data[[sub]] = sim_data[[sub]] |>
