@@ -52,9 +52,10 @@ OriginalData = ggplot(pup, aes(x = time + InitialT - 1, y = R_P)) +
 # Define parameter mappings for each event type
 param_map <- data.frame(
   EventType = c("Circle", "Square", "Reward", "NoReward", "Fixation"),
-  npar_mean = c(6, 2, 2, 2, 2),
-  tmax_mean = c(1300, 1300, 2300, 2300, 1000), 
-  reduction_mean = c(0.8, 0.02, 0.2, 0.1, 00.1),
+  npar_mean = c(6, 1, 2, 2, 2),
+  tmax_mean = c(1300, 2600, 2300, 2300, 1000), 
+  reduction_mean = c(0.8, 0.01, 0.2, 0.1, 0),
+  baseline_offset = c(0.2, -0.1, 0, 0, 0),
   stringsAsFactors = FALSE
 )
 
@@ -93,6 +94,11 @@ for (sub in 1:6) {
     # if you want your amplitude scaling to come from reduction. This sets the amplitude scaling factor per event.
     scale_evoked_means = Event$reduction_mean,
     scale_evoked_sds = Event$reduction_sd,
+
+    # Event-specific baseline offsets - key parameters
+    baseline_offsets = Event$baseline_offset,  # Different baselines per event
+    offset_pre_ms = 200,  # Start baseline difference 1.5s before event
+    offset_post_ms = 2500,  # Continue baseline difference 0.5s after event
 
     baseline_lowpass = 0.6,
     num_spurious_events = sample(3:6, 1),

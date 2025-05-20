@@ -39,18 +39,26 @@ pupil_kernel <- function(
 }
 
 
-#' Generate Simulated Pupil Data
+#' Generate Simulated Pupil Data with Event-Specific Baselines
 #'
-#' Creates realistic pupil time series data with:
+#' Creates realistic pupil time series data with customizable features:
 #'   - Baseline low-frequency fluctuations
+#'   - Event-specific baseline offsets that can be applied before and after events
 #'   - Event-related pupil responses with customizable parameters
 #'   - Optional spurious (non-event-related) pupil dilations
 #'   - Gaussian noise
+#'
+#' The function allows for different event types to have distinct baseline levels,
+#' with control over when these baseline differences begin (before events) and
+#' how long they persist after events.
 #'
 #' Special behavior:
 #'   - If for an event both `scale_evoked_means[i] == 0` and `scale_evoked_sds[i] == 0`,
 #'     that event is still marked in the `Event` column but elicits **no** evoked response
 #'     (its weight is forced to zero, avoiding NA propagation).
+#'   - If `baseline_offsets` are provided, each event can have its own baseline offset
+#'     applied during a window starting `offset_pre_ms` before the event and ending
+#'     `offset_post_ms` after the event.
 #'
 #' @param fs Sampling rate in Hz (default: 1000)
 #' @param segment_length Total duration of simulated data in milliseconds (default: 30000)
@@ -61,10 +69,10 @@ pupil_kernel <- function(
 #' @param baseline_lowpass Cutoff frequency for baseline fluctuations in Hz (default: 0.2)
 #' @param num_spurious_events Number of random non-event-related dilations (default: 0)
 #' @param scale_evoked_means Amplitude scaling factor(s); single value or vector matching events
-#'                          (default: 0.5).  A value of 0 with matching `scale_evoked_sds=0`
+#'                          (default: 0.5). A value of 0 with matching `scale_evoked_sds=0`
 #'                          produces no evoked response for that event.
 #' @param scale_evoked_sds Standard deviation(s) for amplitude; single value or vector matching events
-#'                        (default: 0.05).  Must be 0 to explicitly suppress response when mean=0.
+#'                        (default: 0.05). Must be 0 to explicitly suppress response when mean=0.
 #' @param prf_npar_means Shape parameter(s) for event(s); single value or vector matching events
 #'                     (default: 10.1)
 #' @param prf_npar_sds Standard deviation(s) for shape parameter(s); single value or vector matching events
@@ -73,6 +81,14 @@ pupil_kernel <- function(
 #'                     (default: 930)
 #' @param prf_tmax_sds Standard deviation(s) for time-to-peak; single value or vector matching events
 #'                   (default: 50)
+#' @param baseline_offsets Vector of baseline offset values for each event (default: NULL)
+#'                       When provided, these offsets are applied to windows around each event
+#'                       to create event-specific baseline levels. Positive values raise the
+#'                       baseline, negative values lower it.
+#' @param offset_pre_ms Duration in milliseconds before event onset where the baseline offset
+#'                    should be applied (default: 1000).
+#' @param offset_post_ms Duration in milliseconds after event onset where the baseline offset
+#'                     should continue to be applied (default: 500).
 #' @return Data frame with columns: Time_ms, pupil, Event
 generate_pupil_data <- function(
   fs = 300,
@@ -88,10 +104,17 @@ generate_pupil_data <- function(
   prf_npar_means = 10.1,
   prf_npar_sds = 0.5,
   prf_tmax_means = 930,
-  prf_tmax_sds = 50
+  prf_tmax_sds = 50,
+  baseline_offsets = NULL,
+  offset_pre_ms = 200,
+  offset_post_ms = 1500
 ) {
+  # Count the number of events
   nevents <- length(event_onsets)
-  # Validate lengths
+  
+  # Validate parameter vector lengths
+  # All parameter vectors must either be length 1 (to apply the same value to all events)
+  # or match the number of events (to specify a unique value for each event)
   if (
     !(length(prf_npar_means) %in% c(1, nevents)) ||
     !(length(prf_npar_sds)   %in% c(1, nevents)) ||
@@ -102,89 +125,174 @@ generate_pupil_data <- function(
     !(length(event_names) %in% c(1, nevents))
   ) stop("Lengths of parameter vectors must either be 1 or match number of events")
 
-  # Expand singletons
+  # Expand singleton parameters to match the number of events
+  # This allows users to specify one value that applies to all events
   if (length(prf_npar_means)==1) prf_npar_means <- rep(prf_npar_means, nevents)
   if (length(prf_npar_sds)==1)   prf_npar_sds   <- rep(prf_npar_sds, nevents)
   if (length(prf_tmax_means)==1) prf_tmax_means <- rep(prf_tmax_means, nevents)
   if (length(prf_tmax_sds)==1)   prf_tmax_sds   <- rep(prf_tmax_sds, nevents)
   if (length(scale_evoked_means)==1) scale_evoked_means <- rep(scale_evoked_means, nevents)
   if (length(scale_evoked_sds)==1)   scale_evoked_sds   <- rep(scale_evoked_sds, nevents)
+  
+  # If a single event name is provided, expand it to a numbered sequence
   if (length(event_names)==1) event_names <- paste0(event_names, "_", seq_len(nevents))
+  
+  # Also expand baseline_offsets if provided as a single value
+  if (!is.null(baseline_offsets) && length(baseline_offsets) == 1) {
+    baseline_offsets <- rep(baseline_offsets, nevents)
+  }
+  # Validate baseline_offsets length if provided
+  if (!is.null(baseline_offsets) && length(baseline_offsets) != nevents) {
+    stop("baseline_offsets must either be NULL, length 1, or match the number of events")
+  }
 
-  # Time vector
+  # Create time vector based on sampling rate and segment length
   n <- as.integer(segment_length/1000 * fs)
   time <- seq(1, segment_length, 1000/fs)[1:n]
 
-  # Baseline fluctuations
-  slack <- as.integer(0.5 * n)
-  base_noise <- runif(n + 2*slack)
-  bfilt <- butter(2, baseline_lowpass/(fs/2), type="low")
-  x0_full <- filtfilt(bfilt, base_noise)
-  x0 <- x0_full[(slack+1):(slack+n)]
-  x0 <- (x0 - mean(x0))/sd(x0)
+  # Generate low-frequency baseline fluctuations using a butterworth filter
+  # This creates realistic slow changes in pupil size unrelated to events
+  slack <- as.integer(0.5 * n)  # Extra padding to avoid edge effects
+  base_noise <- runif(n + 2*slack)  # Generate random noise
+  bfilt <- butter(2, baseline_lowpass/(fs/2), type="low")  # Create low-pass filter
+  x0_full <- filtfilt(bfilt, base_noise)  # Apply filter
+  
+  # Extract the central portion and normalize
+  x0 <- x0_full[(slack+1):(slack+n)]  # Remove padding
+  x0 <- (x0 - mean(x0))/sd(x0)  # Normalize to mean 0, sd 1
+  
+  # Apply event-specific baseline offsets if provided
+  if (!is.null(baseline_offsets)) {
+    # Convert window sizes from milliseconds to sample counts
+    pre_samples <- as.integer(offset_pre_ms/1000 * fs)
+    post_samples <- as.integer(offset_post_ms/1000 * fs)
+    
+    # Create a vector to track applied offsets for the entire time series
+    applied_offsets <- numeric(n)
+    
+    # Sort events chronologically to handle overlapping windows properly
+    sorted_indices <- order(event_onsets)
+    
+    # For each event, apply its baseline offset to the specified window
+    for (idx in sorted_indices) {
+      # Convert event onset time to sample index
+      onset_ix <- as.integer(event_onsets[idx]/1000 * fs) + 1
+      
+      # Only apply offset if the event is within our data and has a non-zero offset
+      if (onset_ix <= n && baseline_offsets[idx] != 0) {
+        # Define window boundaries based on pre/post parameters
+        window_start <- max(1, onset_ix - pre_samples)  # Ensure we don't go below 1
+        window_end <- min(n, onset_ix + post_samples)   # Ensure we don't exceed data length
+        
+        # Apply the offset to all samples in this window
+        applied_offsets[window_start:window_end] <- baseline_offsets[idx]
+      }
+    }
+    
+    # Add all calculated offsets to the baseline
+    x0 <- x0 + applied_offsets
+  }
 
-  # Sample shape & timing
+  # Sample pupil response shape parameters for each event
+  # These introduce realistic variability in the pupil response
   npars <- tmaxs <- numeric(nevents)
   for (i in seq_len(nevents)) {
+    # If SD is 0, use the mean exactly; otherwise sample from normal distribution
     npars[i] <- if (prf_npar_sds[i]==0) prf_npar_means[i] else rnorm(1, prf_npar_means[i], prf_npar_sds[i])
     tmaxs[i] <- if (prf_tmax_sds[i]==0) prf_tmax_means[i] else rnorm(1, prf_tmax_means[i], prf_tmax_sds[i])
   }
-  maxdur <- max(tmaxs)*5
+  # Calculate maximum duration needed for the response kernels
+  maxdur <- max(tmaxs)*5  # 5x max time-to-peak is usually sufficient
 
-  # Sample amplitudes with zero‐response guard
+  # Sample response amplitudes for each event
+  # Uses truncated normal distribution to ensure physiologically plausible values
   delta_weights <- numeric(nevents)
   for (i in seq_len(nevents)) {
     if (scale_evoked_means[i]==0 && scale_evoked_sds[i]==0) {
+      # Special case: forcing weight to 0 for events that should have no response
       delta_weights[i] <- 0
     } else {
+      # Calculate lower bound for truncated normal distribution to ensure positivity
       a <- (0 - scale_evoked_means[i]) / scale_evoked_sds[i]
+      # Sample amplitude from truncated normal distribution
       delta_weights[i] <- rtruncnorm(1, a=a, b=Inf,
-                                     mean=scale_evoked_means[i],
-                                     sd=scale_evoked_sds[i])
+                                   mean=scale_evoked_means[i],
+                                   sd=scale_evoked_sds[i])
     }
   }
 
-  sy <- numeric(n)
-  event_column <- rep(NA_character_, n)
+  # Initialize the event response signal and event markers
+  sy <- numeric(n)  # Signal for evoked responses
+  event_column <- rep(NA_character_, n)  # For marking event onsets in output
 
-  # Add evoked responses
+  # Add evoked responses for each event
   for (i in seq_along(event_onsets)) {
+    # Generate the pupil response kernel for this event
     kernel <- pupil_kernel(duration=maxdur, fs=fs,
-                           npar=npars[i], tmax=tmaxs[i])
+                         npar=npars[i], tmax=tmaxs[i])
+    
+    # Calculate onset index in samples
     onset_ix <- as.integer(event_onsets[i]/1000 * fs) + 1
+    
+    # Mark the event in the event column if it falls within our data
     if (onset_ix <= n) event_column[onset_ix] <- event_names[i]
+    
+    # Calculate the end index, ensuring we don't exceed data length
     end_ix <- min(n, onset_ix + length(kernel)-1)
+    
+    # Add the scaled kernel to the signal
     sy[onset_ix:end_ix] <- sy[onset_ix:end_ix] +
       kernel[1:(end_ix-onset_ix+1)] * delta_weights[i]
   }
 
-  # Spurious events if requested
+  # Add spurious events if requested
+  # These simulate random pupil dilations unrelated to task events
   if (num_spurious_events>0) {
+    # Randomly select onset times for spurious events
     sp_ix <- sample(seq_len(n-100), num_spurious_events)
+    
+    # Use average event parameters for spurious events
     mean_npar <- mean(prf_npar_means)
     mean_tmax <- mean(prf_tmax_means)
+    
+    # Sample parameters from normal distributions
     sp_npars <- rnorm(num_spurious_events, mean_npar, mean(prf_npar_sds))
     sp_tmaxs <- rnorm(num_spurious_events, mean_tmax, mean(prf_tmax_sds))
+    
+    # Sample amplitudes from truncated normal distribution
     sp_weights <- rtruncnorm(num_spurious_events,
-                              a=(0-mean(scale_evoked_means))/mean(scale_evoked_sds),
-                              b=Inf,
-                              mean=mean(scale_evoked_means),
-                              sd=mean(scale_evoked_sds))
+                            a=(0-mean(scale_evoked_means))/mean(scale_evoked_sds),
+                            b=Inf,
+                            mean=mean(scale_evoked_means),
+                            sd=mean(scale_evoked_sds))
+    
+    # Add each spurious event to the signal
     for (j in seq_along(sp_ix)) {
+      # Generate kernel
       k_sp <- pupil_kernel(duration=maxdur, fs=fs,
-                           npar=sp_npars[j], tmax=sp_tmaxs[j])
+                         npar=sp_npars[j], tmax=sp_tmaxs[j])
+      
+      # Calculate start and end indices
       st <- sp_ix[j]
       en <- min(n, st+length(k_sp)-1)
+      
+      # Add scaled kernel to signal
       sy[st:en] <- sy[st:en] + k_sp[1:(en-st+1)] * sp_weights[j]
     }
   }
 
-  # Combine, noise, optional scaling
+  # Combine all signal components:
+  # 1. Baseline fluctuations (x0)
+  # 2. Event-related responses (sy)
+  # 3. Random noise
   sy <- x0 + sy + rnorm(n, 0, noise_amp)
+  
+  # Apply global signal scaling if requested
   if (!is.null(scale_signal) && length(scale_signal)==2) {
     sy <- datawizard::change_scale(sy, scale_signal)
   }
 
+  # Return data frame with time, pupil signal, and event markers
   data.frame(time=time, pupil=sy, Event=event_column)
 }
 
