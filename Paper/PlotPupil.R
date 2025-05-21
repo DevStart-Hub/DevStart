@@ -36,57 +36,54 @@ Events_to_keep = c('Circle', 'Square')
 
 
 
-# Plot raw ---------------------------------------------------------------
-Raw_plot = read.csv(csv_files[1])
-P0 = ggplot(Raw_plot, aes(x = time, y = R_P)) +
-      geom_line(aes(y = R_P, color = 'Pupil Right'), lwd = 1.2) +
-      geom_line(aes(y = L_P, color = 'Pupil Left'), lwd = 1.2) +
-      geom_vline(data = Raw_plot |> dplyr::filter(Event %in% Events_to_keep ), aes(xintercept = time, linetype = Event), lwd = 1.3) +
-      
-      theme_bw(base_size = 35) +
-      ylim(1, 6) +
-      labs(color= 'Signal', y='Pupil size')+
-      scale_color_manual(
-        values = c('Pupil Right' = '#4A6274', 'Pupil Left' = '#E2725A') )  +
-      theme(
-        legend.position = 'bottom'  ) +
-      guides(
-        color = guide_legend(override.aes = list(lwd = 20)),
-        linetype = guide_legend(override.aes = list(lwd = 1.2))
-      )
-
-P0
-
-
-
-
-
-# rawplot all ------------------------------------------------------------
+# Rawplot all ------------------------------------------------------------
 
 Raw_plot = vroom::vroom(csv_files) |> 
   filter(time<78000)
 
-P0 = ggplot(Raw_plot, aes(x = time, y = R_P)) +
-      geom_line(aes(y = R_P, color = 'Right'), lwd = 1.2) +
-      geom_line(aes(y = L_P, color = 'Left'), lwd = 1.2) +
-      geom_vline(data = Raw_plot |> dplyr::filter(Event %in% Events_to_keep ), aes(xintercept = time, linetype = Event), lwd = 1.3) +
-      
-      theme_classic(base_size = 35) +
-      ylim(2, 4.8) +
-      labs(color= 'Eye', y ="", linetype = 'Events', x = 'Time (ms)')+
-      scale_color_manual(
-        values = c('Right' = '#4A6274', 'Left' = '#E2725A') )  +
-      theme(
-        legend.position = 'bottom',
-        strip.text = element_text(size = 11)) +
-      guides(
-        color = guide_legend(override.aes = list(lwd = 10)),
-        linetype = guide_legend(override.aes = list(lwd = 2))
-      )+
-      facet_grid(rows = vars(Subject)) 
-      # facet_wrap(~Subject, ncol = 1)
+
+# 1) build a little data.frame of your event windows
+event_windows <- Raw_plot %>%
+  filter(Event %in% Events_to_keep) %>%
+  mutate(
+    xmin = time - 100,
+    xmax = time + 2000
+  )
+
+P0 =  ggplot() +
+  # shaded windows
+  geom_rect( data = event_windows, inherit.aes = FALSE,
+    aes(xmin = xmin, xmax = xmax, ymin = -Inf, ymax = Inf, fill = Event),
+    alpha = 0.5
+  ) +
+  # then your original lines and vlines
+  geom_line(data = Raw_plot, aes(x = time, y = R_P,   color = 'Right'), size = 1.1 ) +
+  geom_line(data = Raw_plot, aes(x = time, y = L_P,   color = 'Left'), size = 1.1 ) +
+  geom_vline(data = event_windows, aes(xintercept = time), size = 1.3 , linetype = 'dashed') +
+
+  theme_classic(base_size = 35) +
+  ylim(2, 4.8) +
+  labs(color = 'Eye', fill = 'Event',
+       linetype = 'Events', x = 'Time (ms)', y = 'Pupil size') +
+  scale_color_manual(values = c(Right = '#4A6274', Left = '#E2725A')) +
+  theme(legend.position = 'top') +
+  guides(
+    color = guide_legend(override.aes = list(lwd = 20)),
+    fill     = guide_legend(override.aes = list(size = 16, alpha = 1))
+  ) +
+  facet_grid(
+    rows = vars(Subject),
+    labeller = labeller(Subject = as_labeller(function(x) {
+      paste0("S", sub("^Subject_", "", x))
+    }))
+  )
+
+
 
 P0
+ggsave("Paper/1_Raw.svg", P0,
+        width = 28, height = 12, dpi = 300)
+
 
 
 
@@ -156,7 +153,7 @@ PupilR_data = make_pupillometryr_data(
 
 ### Plot ------------------------------------------------------------------
 plot(PupilR_data, pupil = L_P, group = 'condition', geom = 'line') +
-  theme_classic(base_size = 45) +
+  theme_classic(base_size = 40) +
   theme(
     legend.position = 'bottom',
     legend.title = element_blank()
@@ -180,7 +177,7 @@ Mean_data = calculate_mean_pupil_size(
 ### Plot --------------------------------------------------------------------
 
 P1 = plot(Mean_data, pupil = mean_pupil, group = 'condition', geom = 'line') +
-  theme_classic(base_size = 45) +
+  theme_classic(base_size = 40) +
   theme(
     legend.position = 'none',
     axis.title.x = element_blank(), # remove x-axis title
@@ -202,7 +199,7 @@ filtered_data = filter_data(
 ### Plot --------------------------------------------------------------------
 
 plot(filtered_data, pupil = mean_pupil, group = 'condition', geom = 'line') +
-  theme_bw(base_size = 45) +
+  theme_bw(base_size = 40) +
   theme(
     legend.position = 'none') +
   guides(color = guide_legend(override.aes = list(lwd = 20)))
@@ -229,13 +226,14 @@ P2 = plot(
   group = 'condition',
   geom = 'line'
 ) +
-  theme_classic(base_size = 45) +
+  labs(y = 'Pupil size')+
+  theme_classic(base_size = 40) +
   theme(
     legend.position = 'none',
     axis.title.x = element_blank(), # remove x-axis title
     axis.text.x = element_blank(), # remove x-axis labels
-    axis.ticks.x = element_blank(), # remove x-axis ticks
-    axis.title.y = element_blank())
+    axis.ticks.x = element_blank()
+  )
 
   ## Calculate Missing Data -----------------------------------------------------------------
 
@@ -282,7 +280,7 @@ Base_data = baseline_data(
 )
 
 P3 = plot(Base_data, pupil = mean_pupil, group = 'condition', geom = 'line') +
-  theme_classic(base_size = 45) +
+  theme_classic(base_size = 40) +
   theme(
     legend.position = 'none',
     axis.title.x = element_blank(),
@@ -301,11 +299,11 @@ Final_data = subset_data(Base_data, start = 0)
 P4 = plot(Final_data, pupil = mean_pupil, group = 'condition',geom = 'line') +
   xlim(-100, 2000) +
   labs(x = 'Time (ms)') +
-  theme_classic(base_size = 45) +
+  theme_classic(base_size = 40) +
   theme(legend.position = 'bottom',
     legend.title = element_blank(),
     axis.title.y = element_blank())+
-  guides(color = guide_legend(override.aes = list(lwd = 10)))
+  guides(color = guide_legend(override.aes = list(lwd = 20)))
 
 P4
 
@@ -313,24 +311,14 @@ P4
 
 # Plot toal ---------------------------------------------------------------
 
-# P1 /  P2 /  P3 /  P4 +
-#   plot_annotation(
-#     tag_levels = c("Mean\nPupil Size","Smoothed\nPupil Size", "Windowed\nPupil Size", "Baseline Corrected\nPupil Size"),
-#     theme = theme(
-#       plot.tag = element_text(size = 18, face = "italic"),
-#       plot.tag.position = c(0, 1)
-#     )
-#   )
 
 
-var_titles <- c("Raw\nPupil Size",
-  '',
-  "Mean\nPupil Size",
+
+var_titles <- c("Mean\nPupil Size",
   "Smoothed\nPupil Size",
   "Baseline Corrected\nPupil Size")
 
-(P0 / (P1 / P2  / P4)) +
-  plot_layout(height = c(1, 1.5))+
+(P1 / P2  / P4) +
   plot_annotation(
     tag_levels = list(var_titles),
     tag_prefix = "",
@@ -340,38 +328,89 @@ var_titles <- c("Raw\nPupil Size",
       plot.tag = element_text(
         family = "Times",                   # font family
         face   = "bold.italic",             # bold + italic
-        size   = 21,                        # visible size
+        size   = 30,                        # visible size
         hjust  = 0,                         # left-align tags
         vjust  = 1                          # nudge them down a bit
       )
     )
 
-
-# make a separator plot
-sep <- ggplot() +
-  geom_hline(yintercept = 0, size = 1, linetype = 'dashed') +   # adjust size for thickness
-  theme_void()                              # no axes, no background
-
-# now stitch P0, sep, and the rest together
-layout <- (P0 / sep / (P1 / P2 / P4)) +
-  plot_layout(heights = c(1, .1, 1.5)) +  # sep is only 2% of total height
-  plot_annotation(
-    tag_levels = list(var_titles),
-    tag_prefix = "",
-    tag_suffix = "",
-    tag_sep    = " "
-  ) & theme(
-    plot.tag = element_text(
-      family = "Times",
-      face   = "bold.italic",
-      size   = 21,
-      hjust  = 0,
-      vjust  = 1
-    )
-  )
-
-ggsave("Paper/PlotPupil.png", layout,
-       width = 20, height = 28, dpi = 300)
+ggsave("Paper/PlotPupil.svg", 
+       width = 28, height = 31, dpi = 300)
 
 
+
+
+
+
+# MGCV Plot -------------------------------------------------------------------
+
+library("mgcv")
+library(easystats)
+
+
+Final_data$Subject = as.factor(Final_data$Subject)
+Final_data$Event = as.factor(Final_data$Event)
+
+data_avg_time = Final_data %>%
+  group_by(Event, time) %>%
+  summarise(mean_pupil = mean(mean_pupil, na.rm=TRUE))
+
+
+
+
+# Additive model
+additive_model = bam(mean_pupil ~ Event
+                     + s(time, by=Event, k=20)
+                     + s(time, Subject, bs='fs', m=1),
+                     data=Final_data)
+
+
+
+# Data grid
+datagrid = get_datagrid(additive_model, length = 100, include_random = T)
+
+# Estimate expectation and uncertainty (Predicted and SE)
+Est = estimate_expectation(additive_model, datagrid, exclude=c("s(time,Subject)"))
+
+
+# Plot predictions with confidence intervals and the observed data
+P5 = ggplot() +
+  # Real data line
+  geom_line(data = data_avg_time, aes(x=time, y=mean_pupil, color=Event), size=1.5) +
+  
+  # Predicted ribbons
+  geom_ribbon(data = Est, aes(x=time, ymin = CI_low, ymax = CI_high,
+                              fill = Event), alpha = 0.2) +
+  
+  # Predicted lines
+  geom_line(data = Est, aes(x=time, y=Predicted, color=Event), lwd=4, linetype = "dashed") +
+  
+  labs(y = "Pupil Size", x = "Time (ms)") +
+  theme_classic(base_size = 40) +
+  theme(legend.position = 'bottom',
+    legend.title = element_blank())+
+  guides(color = guide_legend(override.aes = list(lwd = 20))) 
+
+ggsave("Paper/MGCV.svg", P5,
+       width = 28, height = 18, dpi = 300)
+
+
+
+
+# TtoalPlot --------------------------------------------------------------
+
+
+PP4 = P4+
+  theme(legend.position = 'none')
+
+PP5 =  P5 + 
+  theme(plot.margin = unit(c(1, 1, 1, 8), "cm"),
+  legend.position = 'none')
+
+
+
+(P1 / P2 / PP4) | PP5
+
+ggsave("Paper/PlotPupilFinal.svg", 
+       width = 28, height = 12, dpi = 300)
 
