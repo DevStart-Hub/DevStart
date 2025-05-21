@@ -404,7 +404,7 @@ PP4 = P4+
   theme(legend.position = 'none')
 
 PP5 =  P5 + 
-  theme(plot.margin = unit(c(1, 1, 1, 8), "cm"),
+  theme(plot.margin = unit(c(1, 1, 1, 6), "cm"),
   legend.position = 'none')
 
 
