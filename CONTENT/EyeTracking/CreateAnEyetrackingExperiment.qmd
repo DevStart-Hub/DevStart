@@ -350,16 +350,16 @@ win = visual.Window(size = winsize,fullscr=True, units="pix", pos =(0,30), scree
 fixation = visual.ImageStim(win, image=str(stimuli_dir / 'fixation.png'), size=(200, 200))
 circle = visual.ImageStim(win, image=str(stimuli_dir / 'circle.png'), size=(200, 200))
 square = visual.ImageStim(win, image=str(stimuli_dir / 'square.png'), size=(200, 200))
-winning = visual.ImageStim(win, image=str(stimuli_dir / 'winning.png'), size=(200, 200), pos=(250, 0))
-losing = visual.ImageStim(win, image=str(stimuli_dir / 'loosing.png'), size=(200, 200), pos=(-250, 0))
+complex = visual.ImageStim(win, image=str(stimuli_dir / 'complex.png'), size=(200, 200), pos=(250, 0))
+simple = visual.ImageStim(win, image=str(stimuli_dir / 'simple.png'), size=(200, 200), pos=(-250, 0))
 
 # Load sound 
 winning_sound = sound.Sound(str(stimuli_dir / 'winning.wav'))
-losing_sound = sound.Sound(str(stimuli_dir / 'loosing.wav'))
+losing_sound = sound.Sound(str(stimuli_dir / 'losing.wav'))
 
 # List of stimuli
 cues = [circle, square] # put both cues in a list
-rewards = [winning, losing] # put both rewards in a list
+targets = [complex, simple] # put both targets in a list
 sounds = [winning_sound,losing_sound] # put both sounds in a list
 
 # Create list of trials in which 0 means winning and 1 means losing
@@ -424,13 +424,13 @@ for trial in Trials:
     ### Wait for saccadic latencty
     core.wait(0.75)
 
-    ### Present the reward
-    rewards[trial].draw()
+    ### Present the target
+    targets[trial].draw()
     win.flip()
     if trial ==0:
-        trigger = 'Reward'
+        trigger = 'Complex'
     else:
-        trigger = 'NoReward'
+        trigger = 'Simple'
     core.wait(2)  # wait for 1 second
     win.flip()    # we re-flip at the end to clean the window
     
@@ -553,16 +553,16 @@ win = visual.Window(size = winsize,fullscr=True, units="pix", pos =(0,30), scree
 fixation = visual.ImageStim(win, image=str(stimuli_dir / 'fixation.png'), size=(200, 200))
 circle = visual.ImageStim(win, image=str(stimuli_dir / 'circle.png'), size=(200, 200))
 square = visual.ImageStim(win, image=str(stimuli_dir / 'square.png'), size=(200, 200))
-winning = visual.ImageStim(win, image=str(stimuli_dir / 'winning.png'), size=(200, 200), pos=(250, 0))
-losing = visual.ImageStim(win, image=str(stimuli_dir / 'loosing.png'), size=(200, 200), pos=(-250, 0))
+complex = visual.ImageStim(win, image=str(stimuli_dir / 'complex.png'), size=(200, 200), pos=(250, 0))
+simple = visual.ImageStim(win, image=str(stimuli_dir / 'simple.png'), size=(200, 200), pos=(-250, 0))
 
 # Load sound 
 winning_sound = sound.Sound(str(stimuli_dir / 'winning.wav'))
-losing_sound = sound.Sound(str(stimuli_dir / 'loosing.wav'))
+losing_sound = sound.Sound(str(stimuli_dir / 'losing.wav'))
 
 # List of stimuli
 cues = [circle, square] # put both cues in a list
-rewards = [winning, losing] # put both rewards in a list
+targets = [complex, simple] # put both targets in a list
 sounds = [winning_sound,losing_sound] # put both sounds in a list
 
 # Create list of trials in which 0 means winning and 1 means losing
@@ -615,14 +615,14 @@ for trial in Trials:
     win.flip()
     core.wait(0.75)
 
-    ### Present the reward
+    ### Present the targets
     rewards[trial].draw()
     win.flip()
 
     if trial ==0:
-        trigger = 'Reward'
+        trigger = 'Complex'
     else:
-        trigger = 'NoReward'
+        trigger = 'Simple'
     sounds[trial].play()
     core.wait(2)  # wait for 2 second
 

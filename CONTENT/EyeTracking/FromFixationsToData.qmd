@@ -187,7 +187,7 @@ Let's start by finding the moment in which the target appeared:
 
 ```{python}
 # Let's find the time we presented a reward or no reward
-Targets = Raw_data.loc[(Raw_data['Event'] == 'Reward') | (Raw_data['Event'] == 'NoReward'), ['time', 'Event']].values
+Targets = Raw_data.loc[(Raw_data['Event'] == 'Complex') | (Raw_data['Event'] == 'Simple'), ['time', 'Event']].values
 ```
 
 Having identified the moments when the targets were presented, we can now establish a time window around each of these instances. To accomplish this, we will iterate over the identified times and select all the fixations that occur within the defined window. To make things clearer, we're going to add two new columns to our fixation dataframe: `Event` and `TrialN`. These will help us know which event each fixation is linked to, and which specific trial it belongs to. Plus, we're going to add another column called `Onset` to the fixations dataframe. This will let us store the onset times of specific events, making our analysis down the line a whole lot simpler.
@@ -266,8 +266,8 @@ In our paradigm, the non-rewarding stimulus was always presented on the left (th
 #| warning: false
 #| message: false
 # We define which is the correct AOI that the participant should have looked at.
-Target_fixations.loc[Target_fixations['Event'] == 'NoReward', 'Correct_Aoi'] = 0
-Target_fixations.loc[Target_fixations['Event'] == 'Reward'  , 'Correct_Aoi'] = 1
+Target_fixations.loc[Target_fixations['Event'] == 'Simple', 'Correct_Aoi'] = 0
+Target_fixations.loc[Target_fixations['Event'] == 'Complex'  , 'Correct_Aoi'] = 1
 
 # We select only the correct fixations
 Correct_Target_fixations = Target_fixations.loc[Target_fixations['Correct_Aoi'] == Target_fixations['Looked_AOI'],]
@@ -413,7 +413,7 @@ AOIs = [AOI1, AOI2]
 #%% Time of interest
 
 # Let's find the time we presented a reward or no reward
-Targets = Raw_data.loc[(Raw_data['Event'] == 'Reward') | (Raw_data['Event'] == 'NoReward'), ['time', 'Event']].values
+Targets = Raw_data.loc[(Raw_data['Event'] == 'Complex') | (Raw_data['Event'] == 'Simple'), ['time', 'Event']].values
 
 # Find the fixations that we care about
 pre  = -750
@@ -457,8 +457,8 @@ Target_fixations = Target_fixations[Target_fixations['Looked_AOI'] != -1]
 #%% Saccadic Latency
 
 # We define which is the correct AOI that the participant should have looked at.
-Target_fixations.loc[Target_fixations['Event'] == 'NoReward', 'Correct_Aoi'] = 0
-Target_fixations.loc[Target_fixations['Event'] == 'Reward'  , 'Correct_Aoi'] = 1
+Target_fixations.loc[Target_fixations['Event'] == 'Simple', 'Correct_Aoi'] = 0
+Target_fixations.loc[Target_fixations['Event'] == 'Complex'  , 'Correct_Aoi'] = 1
 
 # We select only the correct fixations
 Correct_Target_fixations = Target_fixations[Target_fixations['Correct_Aoi'] == Target_fixations['Looked_AOI']]
