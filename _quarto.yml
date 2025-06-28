@@ -1,5 +1,6 @@
 project:
   type: website
+  execute-dir: project
   output-dir: docs
   resources:
   - resources/
@@ -8,8 +9,6 @@ execute:
   freeze: auto
 
 website:
-  # drafts:
-  #   - CONTENT/Stats/LinearModels.qmd
   draft-mode: visible
 
   cookie-consent:

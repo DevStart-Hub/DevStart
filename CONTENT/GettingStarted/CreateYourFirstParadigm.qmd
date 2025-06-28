@@ -362,7 +362,7 @@ from psychopy import core, event, visual, sound
 #%% Load and prepare stimuli
 
 # Setting the directory of our experiment
-os.chdir(r'C:\Users\tomma\OneDrive - Birkbeck, University of London\TomassoGhilardi\PersonalProj\BCCCD')
+os.chdir(r'<<< YOUR PATH >>>>')
 
 # Now create a Path object for the stimuli directory
 stimuli_dir = Path('EXP') / 'Stimuli'
