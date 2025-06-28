@@ -38,7 +38,7 @@ Now that you have the data, let's import it along with the necessary libraries. 
 library(tidyverse)  # Data manipulation and visualization
 library(easystats)  # Easy statistical modeling
 
-data = read.csv("..\\..\\resources\\Pupillometry\\Processed\\Processed_PupilData.csv")
+data = read.csv("resources/Pupillometry/Processed/Processed_PupilData.csv")
 
 # Make sure Event and Subject are factors
 data$Event = as.factor(data$Event)

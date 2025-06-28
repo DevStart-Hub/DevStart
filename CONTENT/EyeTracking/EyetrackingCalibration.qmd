@@ -80,7 +80,7 @@ We'll now import the required libraries and custom functions. First, we'll set t
 import os
 from psychopy import visual, sound
 
-os.chdir(r"C:\Users\tomma\Desktop\EyeTracking\Files\Calibration")
+os.chdir(r"<<< YOUR PATH >>>>")
 
 # import Psychopy tobii infant
 from psychopy_tobii_infant import TobiiInfantController
@@ -222,7 +222,7 @@ import os
 from psychopy import visual, sound
 
 # import Psychopy tobii infant
-os.chdir(r"C:\Users\tomma\Desktop\EyeTracking\Files\Calibration")
+os.chdir(r"<<< YOUR PATH >>>>")
 from psychopy_tobii_infant import TobiiInfantController
 
 
