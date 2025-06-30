@@ -119,9 +119,9 @@ Let's create a list to store all this information:
 gaze_data_buffer = []
 ```
 
-Perfect! We've got our list. But there's a catch with Python functions - variables created outside a function aren't automatically accessible inside that function. We need a little trick!
+Perfect! We've got our list to which we can append the incoming data. Hoever, just to not have problems using the functions in and out of the function we need a little trick!
 
-We can use the `global` keyword inside our callback function. This tells Python that we're referring to the list we created in the main script, not creating a new variable:
+We use the `global` keyword inside our callback function. This tells Python that we're referring to the list we created in the main script, not creating a new variable:
 
 ```{python}
 # callback function
