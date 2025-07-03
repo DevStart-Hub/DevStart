@@ -45,7 +45,7 @@ parameters(mod)
 
 # Beyond p-values: Understanding Your Effects
 
-Now that we have our model up and running, let's ask ourselves a seemingly simple question that will guide our entire tutorial: What are the expected looking times for Rewarding versus NoRewarding events according to our model?
+Now that we have our model up and running, let's ask ourselves a seemingly simple question that will guide our entire tutorial: What are the expected looking times for Complex versus Simple events according to our model?
 
 Looking at the model output above, you might be scratching your head. With all those coefficients, interactions, and reference levels, calculating these values manually would require adding up multiple estimates correctly - a tedious and error-prone process. You'd need to carefully sum the intercept with various coefficient estimates, accounting for interactions and reference levels.
 
@@ -117,7 +117,7 @@ This is cool indeed... but how can this help me?? Let's remember our question ab
 
 ## Predictions for reference values
 
-These predictions are fascinating, but how do they help us answer our original question about Event types? Let's pull ourselves back to our main goal - understanding the difference in looking times between Rewarding and NoRewarding events.
+These predictions are fascinating, but how do they help us answer our original question about Event types? Let's pull ourselves back to our main goal - understanding the difference in looking times between Complex and Simple events.
 
 With our prediction tools in hand, we can now directly extract the specific information we need without getting lost in coefficient calculations or being overwhelmed by the full dataset. The beauty of predictions is that they transform complex statistical relationships into concrete, interpretable values that directly address our research questions.
 
@@ -144,7 +144,7 @@ In these examples (and the next ones), we explored a very simple case. We just p
 
 ```{r}
 #| message: false
-estimate_expectation(mod, by = c("Event = 'NoReward'", "SES"))
+estimate_expectation(mod, by = c("Event = 'Simple'", "SES"))
 ```
 
 Remember to learn more at the [modelbased website](https://easystats.github.io/modelbased/articles/estimate_slopes.html) !!
@@ -205,7 +205,7 @@ In this plot the predictions are extracted with the SES (socioeconomic status) b
 
 OK, I hope by this point you have a solid grasp of predictions and how to extract them at specific predictor levels! But wait - did you notice something interesting in the messages that `modelbased` has been giving us?
 
-The values we've extracted for the Event variable are always referenced to one specific level of SES. For example, when we look at the effect of Reward vs. NoReward events, we're seeing this effect specifically when SES is at its high level
+The values we've extracted for the Event variable are always referenced to one specific level of SES. For example, when we look at the effect of Complex vs. Simple events, we're seeing this effect specifically when SES is at its high level
 
 **But what if that's not what we want?** What if we want to know the effect of Event **overall**, not just at a specific level of SES? What if we want to understand the "main effect" of Event, averaging across all SES levels? Is it even possible to average a categorical predictor??
 
@@ -270,7 +270,7 @@ estimate_means(mod, by = 'StandardTrialN', length=6)
 
 We've successfully extracted the estimated means for our predictors - awesome job! 🎉
 
-**But there's something important missing**. While we now know the estimated looking times for each level, we don't yet have formal statistical comparisons between these levels. For example, is the difference between mean values in Reward condition and NoReward condition statistically significant?
+**But there's something important missing**. While we now know the estimated looking times for each level, we don't yet have formal statistical comparisons between these levels. For example, is the difference between mean values in Complex condition and Simple condition statistically significant?
 
 This is where `estimate_contrasts()` comes to the rescue! Let's see it in action:
 
@@ -289,10 +289,10 @@ What we're doing here is simple but powerful:
 
 3.  The function returns the difference between the means of the predictors with statistical tests
 
-The results show us that the difference between Reward and NoReward is positive (meaning looking time is higher for Reward) and the p-value indicates this difference is statistically significant! All of this in just one line of code - how convenient!
+The results show us that the difference between Complex and Simple is positive (meaning looking time is higher for Complex) and the p-value indicates this difference is statistically significant! All of this in just one line of code - how convenient!
 
 ::: callout-note
-In this example, Event has only 2 levels (Reward and NoReward), so we already knew these levels differed significantly from examining our model summary. However, `estimate_contrast()` gives us something more valuable: the **pairwise** difference between all the levels of the selected predictors with their
+In this example, Event has only 2 levels (Complex and Simple), so we already knew these levels differed significantly from examining our model summary. However, `estimate_contrast()` gives us something more valuable: the **pairwise** difference between all the levels of the selected predictors with their
 
 This function becomes particularly powerful when dealing with predictors that have multiple levels. With a predictor like **SES** (3 levels) - `estimate_contrast()` would automatically calculate all possible pairwise comparisons between these levels.
 
@@ -344,7 +344,7 @@ While we've been using `contrast` to specify one predictor and `by` for another,
 **The word is your contrast!**
 :::
 
-This gives us the contrast between the levels of Event for a set of values of StandardTrialN. So we can check whether the difference between Reward and NoReward actually changes over the course of trials!! I'll plot it to make it simpler to understand:
+This gives us the contrast between the levels of Event for a set of values of StandardTrialN. So we can check whether the difference between Complex and Simple actually changes over the course of trials!! I'll plot it to make it simpler to understand:
 
 ```{r}
 #| label: PlotContrastInteraction
@@ -358,12 +358,12 @@ ContrastbyTrial |>
   ggplot(aes(x = StandardTrialN , y = Difference, color = Contrast))+
   geom_hline(yintercept = 0, linetype = 'dashed')+
   geom_pointrange(aes(ymin = CI_low, ymax = CI_high))+
-  labs(y = 'Difference: Reward - NoReward')+
+  labs(y = 'Difference: Complex - Simple')+
   theme_classic(base_size = 20)+
   theme(legend.position = 'bottom')
 ```
 
-This plot shows that the two levels are always significantly different from each other (the confidence intervals never touch the dashed zero line) and that the difference is always positive - looking time for Reward is consistently higher than for NoReward across all trial numbers. SUUPER COOL EH!!! I agree!!
+This plot shows that the two levels are always significantly different from each other (the confidence intervals never touch the dashed zero line) and that the difference is always positive - looking time for Complex is consistently higher than for Simple across all trial numbers. SUUPER COOL EH!!! I agree!!
 
 ## Contrast of slopes
 
@@ -397,9 +397,9 @@ This tells us that the average effect of StandardTrialN is -50.46 (negative) and
 ::: callout-important
 You may be thinking... "Wait, isn't this information already in the model summary? Why do I need `estimate_slopes()`?" If you are asking yourself this question, think back to the [Linear models](LinearModels.qmd) tutorial!!
 
-**What the model summary shows:** The coefficient for StandardTrialN in the summary (-67.118) represents the slope specifically for the NoReward condition. This is because in linear models, coefficients are in relation to the intercept, which is where all predictors are 0. For categorical variables, 0 means the reference level (NoReward in this case).
+**What the model summary shows:** The coefficient for StandardTrialN in the summary (-67.118) represents the slope specifically for the Simple condition. This is because in linear models, coefficients are in relation to the intercept, which is where all predictors are 0. For categorical variables, 0 means the reference level (Simple in this case).
 
-**What estimate_slopes() shows:** The value from `estimate_slopes()` (-50.46) gives us the average slope across both Event types (Reward and NoReward).
+**What estimate_slopes() shows:** The value from `estimate_slopes()` (-50.46) gives us the average slope across both Event types (Complex and Simple).
 
 This is why the two values don't match! One is the slope for a specific condition, while the other is the average slope across all conditions. Super COOL right??
 :::
@@ -430,7 +430,7 @@ plot(Slopes)+
   theme(legend.position = 'bottom')
 ```
 
-Here we see that the slopes for both Event types are negative (below zero) and statistically significant (confidence intervals don't cross the dashed zero line). This confirms that looking time reliably decreases as trials progress, regardless of whether it's a Reward or NoReward event.
+Here we see that the slopes for both Event types are negative (below zero) and statistically significant (confidence intervals don't cross the dashed zero line). This confirms that looking time reliably decreases as trials progress, regardless of whether it's a Complex or Simple event.
 
 # Complex plotting
 
@@ -452,7 +452,7 @@ Let's extract a reference grid for our StandardTrialN \* Event interaction:
 get_datagrid(mod, by = c('Event', 'StandardTrialN'))
 ```
 
-Looking at the output, you'll see we get both levels of Event (Reward and NoReward) and a range of values for StandardTrialN (10 values by default spanning the range of our data). Notice that the Id column is set to 0. This is how the function indicates that random effects aren't included—we're focusing on the fixed effects that represent the "average response" across all subjects.
+Looking at the output, you'll see we get both levels of Event (Complex and Simple) and a range of values for StandardTrialN (10 values by default spanning the range of our data). Notice that the Id column is set to 0. This is how the function indicates that random effects aren't included—we're focusing on the fixed effects that represent the "average response" across all subjects.
 
 ::: callout-caution
 Different models declare non-level for the random effects in different ways, but datagrid will adapt to the specific model you are running. Just do not be scared if the values are not 0.

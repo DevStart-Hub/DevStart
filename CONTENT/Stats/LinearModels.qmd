@@ -92,20 +92,20 @@ library(tidyverse)
 # Create a small eyetracking dataset in long format
 long_data <- tibble(
   Id = rep(c("1", "2", "3"), each = 6),
-  Event = rep(rep(c("Reward", "NoReward"), each = 3), 3),
+  Event = rep(rep(c("Complex", "Simple"), each = 3), 3),
   TrialN = rep(1:3, 6),
   LookingTime = c(
-    # P01 - Reward condition
+    # P01 - Complex condition
     1450, 1420, 1390,
-    # P01 - NoReward condition
+    # P01 - Simple condition
     1380, 1350, 1320,
-    # P02 - Reward condition
+    # P02 - Complex condition
     1480, 1460, 1410,
-    # P02 - NoReward condition
+    # P02 - Simple condition
     1390, 1370, 1340,
-    # P03 - Reward condition
+    # P03 - Complex condition
     1520, 1490, 1450,
-    # P03 - NoReward condition
+    # P03 - Simple condition
     1410, 1380, 1350
   )
 )
@@ -245,18 +245,18 @@ The intercept often confuses people who approach linear models for the first tim
 
 The (Intercept) represents the reference levels where all our predictors (`TrialN` and `Event`) are **0**. While `TrialN` is easy to understand when it's 0 (`TrialN` 0 in our case would be the first trial), you may be scratching your head thinking...how can `Event` be 0? It's a categorical variable, it can't be 0!!!! `TrialN == 0`...sure....but `Event`??
 
-You are absolutely right! When a model encounters a categorical variable, it cleverly selects the first level of such variable as the reference level. If you take another look at our model summary, you can see that there's information for the **Reward** level of the `Event` variable but nothing about the **NoReward** level. This is because the **NoReward** level has been selected by the model as the reference level and is thus represented in the intercept value! 💡
+You are absolutely right! When a model encounters a categorical variable, it cleverly selects the first level of such variable as the reference level. If you take another look at our model summary, you can see that there's information for the **Complex Stimulus** level of the `Event` variable but nothing about the **Simple Stimulus** level. This is because the **Simple Stimulus** level has been selected by the model as the reference level and is thus represented in the intercept value! 💡
 
 So our intercept (1390.1) actually represents the predicted **LookingTime** when:
 
 1.  We're on the first trial (`TrialN` = 0)
 
-2.  We're in the **NoReward** condition
+2.  We're in the **Simple Stimulus** condition
 
 The Standard Error of the estimate (29.1) tells us the precision of the estimate.
 
 ::: callout-tip
-Since the intercept has a significant p-value, it means that the estimate for the **NoReward** condition at trial 0 is actually significantly different from 0. In other words, our participants are definitely looking at something during the **NoReward** condition in the first trial – their **LookingTime** isn't zero! This might seem obvious (of course they're looking!), but statistically confirming this baseline is actually meaningful.
+Since the intercept has a significant p-value, it means that the estimate for the **Simple** condition at trial 0 is actually significantly different from 0. In other words, our participants are definitely looking at something during the **Simple** condition in the first trial – their **LookingTime** isn't zero! This might seem obvious (of course they're looking!), but statistically confirming this baseline is actually meaningful.
 :::
 
 Ok, all this explanation is great...but it's much easier to visualize these Estimates!
@@ -279,7 +279,7 @@ intercept_brush_se <- model_p[1,3]
 
 
 # Create a named vector for colors
-color_map <- c("NoReward" = "darkred")
+color_map <- c("Simple" = "darkred")
 
 ggplot() +
   geom_vline(xintercept = 0, lwd = 0.4, linetype = 'dashed') +
@@ -287,7 +287,7 @@ ggplot() +
     aes(x = -0.15, y = intercept_brush,
         ymin = intercept_brush - intercept_brush_se,
         ymax = intercept_brush + intercept_brush_se,
-        color = "NoReward"),
+        color = "Simple"),
     lwd = 1.3
   ) +
   geom_segment(
@@ -321,19 +321,19 @@ ggplot() +
   ylim(0, 1550)
 ```
 
-As you can see, the intercept is pretty straightforward—it gives us the estimate when everything is set to 0, both for continuous and categorical variables. The intercept is the foundation of your model, where all the predictors are at their baseline value (in this case, **NoReward** was cleverly selected as the reference or 0 level for the categorical variable).
+As you can see, the intercept is pretty straightforward—it gives us the estimate when everything is set to 0, both for continuous and categorical variables. The intercept is the foundation of your model, where all the predictors are at their baseline value (in this case, **Simple** was cleverly selected as the reference or 0 level for the categorical variable).
 
 ### Event
 
 Awesome! Now that we've got the intercept down, let's take a look at the rest of the model output. We'll skip over the **TrialN** variable for now and focus on what's happening with the **Event**.
 
-At first, the results for `Event [Reward]` might look like they're giving us the value of looking time for the **Reward**. Super easy, right?!?
+At first, the results for `Event [Complex]` might look like they're giving us the value of looking time for the **Complex Stimulus**. Super easy, right?!?
 
 Well... not exactly! 🤔
 
-**In linear models, each coefficient shows the difference in relation to the intercept (the 0 or the reference level), not the exact value of the Reward condition.**
+**In linear models, each coefficient shows the difference in relation to the intercept (the 0 or the reference level), not the exact value of the Complex condition.**
 
-It sounds a bit confusing, but let's break it down. If we want to understand what is the estimate for a **Rewarding** event we need to take the **Intercept** (1390.1) –as we mentioned that is actually the event **NoReward** – and then just simply add to it the Estimate for the `Event [Reward]` (99.8). So the model is telling us that a Rewarding event should be 1390.1 + 99.8 = 1489.9.
+It sounds a bit confusing, but let's break it down. If we want to understand what is the estimate for a **Complex** event we need to take the **Intercept** (1390.1) –as we mentioned that is actually the **Simple** event – and then just simply add to it the Estimate for the `Event [Complex]` (99.8). So the model is telling us that a **Complex** event should be 1390.1 + 99.8 = 1489.9.
 
 See? Not too bad! Let's visualize it and make it even clearer!
 
@@ -344,22 +344,22 @@ See? Not too bad! Let's visualize it and make it even clearer!
 #| fig-dpi: 300
 #| fig-height: 8
 #| fig-width: 10
-# Define intercept and slope for the NoReward
-intercept_NoReward <- model_p[1,2]
-intercept_NoReward_se <- model_p[1,3]
+# Define intercept and slope for the Simple
+intercept_Simple <- model_p[1,2]
+intercept_Simple_se <- model_p[1,3]
 
-intercept_Reward <- model_p[3,2] + intercept_NoReward
-intercept_Reward_se <- model_p[3,3]
+intercept_Complex <- model_p[3,2] + intercept_Simple
+intercept_Complex_se <- model_p[3,3]
 
-color_map <- c("NoReward" = "darkred", "Reward" = 'darkblue')
+color_map <- c("Simple" = "darkred", "Complex" = 'darkblue')
 
 ggplot() +
   geom_vline(xintercept = 0, lwd = 0.4, linetype = 'dashed') +
 
-  geom_pointrange(aes(x=-.15, y=intercept_NoReward, ymin= intercept_NoReward-intercept_NoReward_se, ymax= intercept_brush+intercept_NoReward_se, color = 'NoReward'), lwd=1.3)+
-  geom_pointrange(aes(x=.15, y=intercept_Reward, ymin= intercept_Reward-intercept_Reward_se, ymax= intercept_Reward+intercept_Reward_se, color = 'Reward'), lwd=1.3)+
+  geom_pointrange(aes(x=-.15, y=intercept_Simple, ymin= intercept_Simple-intercept_Simple_se, ymax= intercept_brush+intercept_Simple_se, color = 'Simple'), lwd=1.3)+
+  geom_pointrange(aes(x=.15, y=intercept_Complex, ymin= intercept_Complex-intercept_Complex_se, ymax= intercept_Complex+intercept_Complex_se, color = 'Complex'), lwd=1.3)+
   
-  geom_segment(aes(x = 0, xend = 0, y = intercept_NoReward, yend = intercept_Reward), 
+  geom_segment(aes(x = 0, xend = 0, y = intercept_Simple, yend = intercept_Complex), 
                color = "black", lwd = 1.2,
                arrow = arrow( length = unit(0.1, "inches"), ends = "both")) +
   annotate("text", x = -0.05, y = 1450, label = expression(beta), size = 4) +
@@ -388,7 +388,7 @@ No worries, it's actually pretty straightforward! The coefficient for a continuo
 In simpler terms, it shows how much the outcome (in this case, `LookingTime`) changes for each unit increase in the continuous variable (`TrialN`). So, in our case the coefficient for `TrialN` is -7.5, this means that for each unit increase in `TrialN`, the LookingTime is expected to decrease by 7.5 units (assuming all other variables stay the same).
 
 ::: callout-important
-Remember!! This coefficient represents the effect of `TrialN` specifically when `Event` is at its reference level (**NoReward**). In other words, this -7.5 decrease in LookingTime per trial applies specifically to the **NoReward** condition!
+Remember!! This coefficient represents the effect of `TrialN` specifically when `Event` is at its reference level (**Simple**). In other words, this -7.5 decrease in LookingTime per trial applies specifically to the **Simple** condition!
 :::
 
 Even easier..let's plot again!
@@ -405,27 +405,27 @@ slope_EventTrial <- model_p[2,2]
 # Some hypothetical TrialN values
 time_values <- seq(-1, 20, by = 2)
 
-# Create a small data frame for the main (NoReward) line
+# Create a small data frame for the main (Simple) line
 df_p <- data.frame(
   time  = time_values,
-  est_performance_EventTrial = intercept_NoReward + slope_EventTrial * time_values
+  est_performance_EventTrial = intercept_Simple + slope_EventTrial * time_values
 )
 
 
-color_map <- c("NoReward" = "darkred", "Reward" = 'darkblue', "EventTrial" = '#e04d01')
+color_map <- c("Simple" = "darkred", "Complex" = 'darkblue', "EventTrial" = '#e04d01')
 
 
 ggplot() +
   geom_vline(xintercept = 0, lwd =0.4,linetype = "dashed") +
 
   geom_line(data = df_p, aes(x = time, y = est_performance_EventTrial), color = 'darkred', size  = 1) +
-  # geom_pointrange(aes(x  =0, y = intercept_brush, ymin = intercept_brush - intercept_brush_se,ymax = intercept_brush + intercept_brush_se, fill = 'NoReward' ),
+  # geom_pointrange(aes(x  =0, y = intercept_brush, ymin = intercept_brush - intercept_brush_se,ymax = intercept_brush + intercept_brush_se, fill = 'Simple' ),
   #                 color = 'black', shape = 21, 
   #                 lwd = 1.3,fatten = 8) +
   
   
     
-  geom_pointrange(aes(x=0, y=intercept_brush, ymin= intercept_brush-intercept_brush_se, ymax= intercept_brush+intercept_brush_se, color = 'NoReward'), lwd=1.3)+
+  geom_pointrange(aes(x=0, y=intercept_brush, ymin= intercept_brush-intercept_brush_se, ymax= intercept_brush+intercept_brush_se, color = 'Simple'), lwd=1.3)+
   
   annotate("text", x = 4.4, y = 1315, label = expression(beta), size = 4) +
   geom_path(aes(x = c(4, 4, 10), y = c(1350, 1300, 1300)), 
@@ -452,23 +452,23 @@ ggplot() +
 
 Alright, now we're getting to the final step! Let's talk about the interaction between `TrialN` and `Event`! Now, we're not just dealing with a single factor or continuous variable, but looking at how they interact with each other. Don't worry—if you understood the previous steps, this will be a breeze!
 
-We'll take it step by step and look at the interaction in our model parameters. The interaction term between `TrialN` and `Event [Reward]` tells us how the relationship between `TrialN` and `LookingTime` changes when we switch from the reference Event (**NoReward**) to the **Reward** condition.
+We'll take it step by step and look at the interaction in our model parameters. The interaction term between `TrialN` and `Event [Complex]` tells us how the relationship between `TrialN` and `LookingTime` changes when we switch from the reference Event (**Simple**) to the **Complex** condition.
 
 To put it simply:
 
--   For **NoReward** events, **LookingTime** decreases by 7.5 units per trial (that's our main `TrialN` coefficient)
+-   For **Simple** events, **LookingTime** decreases by 7.5 units per trial (that's our main `TrialN` coefficient)
 
--   The interaction coefficient (0.13) tells us how this slope changes for **Reward** events
+-   The interaction coefficient (0.13) tells us how this slope changes for **Complex** events
 
-So for **Reward** events, the slope would be: -7.5 + 0.13 = -7.37 units per trial.
+So for **Complex** events, the slope would be: -7.5 + 0.13 = -7.37 units per trial.
 
-What does this mean in real terms? If the interaction coefficient is positive (like in our example), it means participants' looking time decreases more slowly during **Reward** trials compared to **NoReward** trials – the estimate is slightly less negative.
+What does this mean in real terms? If the interaction coefficient is positive (like in our example), it means participants' looking time decreases more slowly during **Complex** trials compared to **Simple** trials – the estimate is slightly less negative.
 
 ::: callout-important
-In this model the interaction effect is extremely small and not significant. This means that there is actually no difference in how the TrialN predicted Looking time in either NoReward or Reward! Looking time decreases at basically the same rate regardless of which event type we're looking at!!!
+In this model the interaction effect is extremely small and not significant. This means that there is actually no difference in how the TrialN predicted Looking time in either Simple or Complex! Looking time decreases at basically the same rate regardless of which event type we're looking at!!!
 :::
 
-While there is no significant difference, let's plot the estimated effects for **TrialN** for both Reward and **NoReward** conditions to visualize this relationship!
+While there is no significant difference, let's plot the estimated effects for **TrialN** for both **Complex** and **Simple** conditions to visualize this relationship!
 
 ```{r}
 #| echo: false
@@ -477,13 +477,13 @@ While there is no significant difference, let's plot the estimated effects for *
 #| fig-dpi: 300
 #| fig-height: 8
 #| fig-width: 10
-# Define intercept and slope for the NoReward condition
-intercept_NoReward <- model_p[1,2]  # Intercept for NoReward
-intercept_NoReward_se <- model_p[1,3]
+# Define intercept and slope for the Simple condition
+intercept_Simple <- model_p[1,2]  # Intercept for Simple
+intercept_Simple_se <- model_p[1,3]
 
-# Define intercept for Reward condition (Intercept + Reward Effect)
-intercept_Reward <- model_p[3,2] + intercept_NoReward
-intercept_Reward_se <- model_p[3,3]
+# Define intercept for Complex condition (Intercept + Complex Effect)
+intercept_Complex <- model_p[3,2] + intercept_Simple
+intercept_Complex_se <- model_p[3,3]
 
 # Define slopes
 slope_EventTrial <- model_p[2,2]  # Slope for Event Trial
@@ -496,14 +496,14 @@ time_values <- seq(-1, 20, by = .05)
 # Create a small data frame for plotting
 df_p <- data.frame(
   time  = time_values,
-  est_performance_EventTrial = intercept_NoReward + slope_EventTrial * time_values,
-  est_performance_Interaction = intercept_Reward + (slope_EventTrial + slope_Interaction) * time_values
+  est_performance_EventTrial = intercept_Simple + slope_EventTrial * time_values,
+  est_performance_Interaction = intercept_Complex + (slope_EventTrial + slope_Interaction) * time_values
 )
 
 df_p[df_p$time == -0.15,]
 
 
-color_map <- c("NoReward" = "darkred", "Reward" = 'darkblue')
+color_map <- c("Simple" = "darkred", "Complex" = 'darkblue')
 
 
 
@@ -513,9 +513,9 @@ ggplot()+
   geom_line(data = df_p, aes(x = time, y = est_performance_EventTrial), color = "darkred", lwd  = 1) +
   geom_line(data = df_p, aes(x = time, y = est_performance_Interaction), color = "darkblue", lwd  = 1)+
   
-  geom_pointrange(aes(x =-.15, y = intercept_brush, ymin = intercept_brush - intercept_brush_se,ymax = intercept_brush + intercept_brush_se, color = 'NoReward' ),
+  geom_pointrange(aes(x =-.15, y = intercept_brush, ymin = intercept_brush - intercept_brush_se,ymax = intercept_brush + intercept_brush_se, color = 'Simple' ),
                   lwd  = 1.3) +
-  geom_pointrange(aes(x=.15, y=intercept_Reward, ymin= intercept_Reward-intercept_Reward_se, ymax= intercept_Reward+intercept_Reward_se, color = 'Reward'),
+  geom_pointrange(aes(x=.15, y=intercept_Complex, ymin= intercept_Complex-intercept_Complex_se, ymax= intercept_Complex+intercept_Complex_se, color = 'Complex'),
                   lwd  = 1.3)+
 
 
@@ -545,7 +545,7 @@ ggplot()+
 ::: callout-important
 Do you notice any difference in how the slopes between the two conditions? Probably not! If you examine the model summary, you'll see the interaction effect is very small and not statistically significant.
 
-This tells us that TrialN predicts Looking time similarly in both **NoReward** and Reward conditions. In other words, looking time decreases at essentially the same rate regardless of which event type participants observed.
+This tells us that TrialN predicts Looking time similarly in both **Simple** and **Complex** conditions. In other words, looking time decreases at essentially the same rate regardless of which event type participants observed.
 :::
 
 I hope that by now you got a decent understanding on how to interpret what a linear model is telling you!! Different kinds of models will add small pieces of information here and there, but the main information will still be there. Thus, if you got here, you are a step closer to becoming a stats genius!!! 🧠📊
@@ -600,7 +600,7 @@ mod_lm = lm(LookingTime ~ StandardTrialN*Event, data = df)
 summary(mod_lm)
 ```
 
-As you can see the estimates are different!!! Because as we mentioned the reference level and the scale are different now. However do not panic, even if some values are different the relations are the same, we still have negative estimate for the time variable (here StandardTrialN and before TrialN) and positive for the Reward condition. Also the p-values are the same!
+As you can see the estimates are different!!! Because as we mentioned the reference level and the scale are different now. However do not panic, even if some values are different the relations are the same, we still have negative estimate for the time variable (here StandardTrialN and before TrialN) and positive for the **Complex** condition. Also the p-values are the same!
 
 So there you have it - standardizing your predictors makes your model both more interpretable and more robust, all while keeping the fundamental relationships in your data intact. It's one of those simple steps that can make a big difference in your statistical journey! 🌟
 

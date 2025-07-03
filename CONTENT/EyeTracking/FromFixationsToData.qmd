@@ -50,9 +50,9 @@ What can we do with just the raw data and the fixations? Not much I am afraid. B
 
 In this tutorial, we will look at how to extract two variables from our paradigm:
 
--   **Saccadic latency:** how quickly our participant looked at the correct location. This includes checking whether the participant could anticipate the stimulus appearance. In our paradigm, we will look at how fast our participant looked at the target location (left: NoReward, right: Reward).
+-   **Saccadic latency:** how quickly our participant looked at the correct location. This includes checking whether the participant could anticipate the stimulus appearance. In our paradigm, we will look at how fast our participant looked at the target location (left: Simple stimulus, right: Complex stimulus).
 
--   **Looking time:** how long our participant looked at certain locations on the screen. In our case, we will look at how long our participant looked at either target location (left: NoReward, right: Reward) on each trial.
+-   **Looking time:** how long our participant looked at certain locations on the screen. In our case, we will look at how long our participant looked at either target location (left: Simple stimulus, right: Complex stimulus) on each trial.
 
 So what do these two measures have in common? *pregnant pause for you to answer* EXACTLY!!! They are both clearly related to the position of our stimuli. For this reason, it is important to define Areas Of Interest (AOIs) on the screen (for example, the locations of the targets). Defining AOIs will allow us to check, for each single fixation, whether it happened in an area that we are interested in.
 
@@ -175,13 +175,13 @@ Now we have a cool function to check whether a point falls into any of our AOIs.
 
 # Time Of Interest
 
-Now that we've figured out how to select fixations that fall within our areas of interest, it's time to consider another important factor: Time. Our experiment involves presenting a variety of stimuli, including fixation crosses, cues, and rewards. , we're not interested in analyzing the entire experiment. Instead, we focus on specific events.
+Now that we've figured out how to select fixations that fall within our areas of interest, it's time to consider another important factor: Time. Our experiment involves presenting a variety of stimuli, including fixation crosses, cues, and target stimuli. , we're not interested in analyzing the entire experiment. Instead, we focus on specific events.
 
-Let's take a look at the design image. What we are interest in is the last part of the target presentation.
+Let's take a look at the design image. What we are interest in is the last part, the target presentation.
 
 ![](/images/FromDataToMeasures/DesignSelection.jpg){fig-align="center" width="495"}
 
-In this case, our attention is on the target window. We're going to establish a time window that begins 750ms before the target appears and continues for 2000ms after its pentation. Indeed, both **Saccadic latency** and **Lookign time** occur within this time window, while we don't really care about where the participant is looking during other phases of the task.
+In this case, our attention is on the target window. We're going to establish a time window that begins 750ms before the target appears and continues for 2000ms after its presentation. Indeed, both **Saccadic latency** and **Lookign time** occur within this time window, while we don't really care about where the participant is looking during other phases of the task.
 
 Let's start by finding the moment in which the target appeared:
 
@@ -326,7 +326,7 @@ We have already extracted all the information we need, we just need to do the fi
 LookingTime = Target_fixations.groupby(['Event', 'TrialN', 'Looked_AOI'], as_index=False)['dur'].sum()
 ```
 
-Again, we can now visualize the data. For example, we can plot whether looking time to rewarding vs. non-rewarding stimuli:
+Again, we can now visualize the data. For example, we can plot whether looking time to complex vs simple stimulus:
 
 ```{python}
 #| fig-align: "center"
