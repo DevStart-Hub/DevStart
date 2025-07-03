@@ -12,11 +12,35 @@ categories:
 
 Eye tracking is a great tool to study cognition. It is especially suitable for developmental studies, as infants and young children might have advanced cognitive abilities, but little chances to show them (they cannot talk!).
 
-This tutorial will teach you all you need to navigate the huge and often confusing eye-tracking world. First, we will introduce how an experiment can (and should) be built, explaining how to easily record eye-tracking data from Python. Then, it will focus on how to analyse the data, reducing the seemingly overwhelming amount of rows and columns in a few variables of interest (such as saccadic latency, looking time, or pupil dilation).
+Across the following tutorials, we will go through you all you need to navigate the huge and often confusing eye-tracking world. First, we will introduce how an experimental design can (and should) be built. Then, we will explain how to implement the design in Python, connect it to an eye-tracker, and record eye-tracking data. Once the data is collected, we will focus on how to analyse the data, reducing the seemingly overwhelming amount of rows and columns in a few variables of interest (such as saccadic latency, looking time, or pupil dilation).
 
 # How to build an eye-tracking experiment
 
+Before even staring to think about how our experimental paradigm will look, we must think about theories and hypotheses: What do we want to test? Only once the answer to this question is clear, we can think of the experimental paradigm to test our hypotheses.
+
+Let’s imagine we would want to investigate the mechanisms underlying infants’ curiosity. Current theories of curiosity argue that more attention is allocated towards stimuli that offer greater learning opportunities (Gottlieb & Oudeyer, 2018; Poli et al., 2024). We might want to test whether this is indeed the case starting from infancy. More specifically, our hypothesis could be that infants should be more motivated to predict when and where a target stimulus will appear if such stimulus offers a greater learning opportunity.
+
+To test this, we devised a very simple paradigm in which two cue stimuli (either a circle or a square) reliably predict the location of the following target stimulus (either on the right or on the left, respectively). Crucially, we will manipulate how much they can learn from these two target stimuli. The stimulus associated with the circle will be visually complex, and it will thus offer many components which infants can slowly unpack and learn about. The stimulus associated with the square will be visually simple, and it will thus offer very little to learn. The exact paradigm is illustrated below. Please not that we generated a very simple paradigm for educational purposes, and this is thus not fit for a robust, fully-fledged experimental inquiry.
+
+![](/images/Introduction_eyetracking/DesignBasics.png){fig-align="center"}
+
+It is much easier to start an eye-tracking project if you have a clear idea of what is your measure of interest. At the same time, what measure of interest you choose really depends on what cognitive process you are trying to study. Here we review some eye-tracking variables which have been key in the field of (developmental) cognitive science, and what cognitive processes they might relate to. However, it is very important to notice that ultimately, no measure is perfectly related to any cognitive function. The same measure can be related to many different cognitive processes depending on the specific experimental paradigm we are using.
+
 ## What do you want to measure?
+
+Great, we have a theory (Curiosity is a drive to learn) and a specific hypothesis to test it (When stimuli offer a learning opportunity, infants should be more motivated to predict where they will appear). Now we need specific metrics which will allow us to test our hypotheses.
+
+First of all, we should have some measure that actually checks whether infants spend more time engaging with a complex stimulus vs a simple one. For this, we might use the **looking time** to the stimuli.
+
+If this "background check" is passed, and infants actually engage more with the complex stimuli, we might then try to find a more direct answer to our hypothesis: Will they be more motivated to predict where the complex stimulus will appear? This hypothesis can be broken into two components: We have a learning component (predict where the stimulus will appear) and a motivational component (more motivated to do so). For these two components, we might need different measures.
+
+For the learning component, we can rely on saccadic latency. Saccadic Latency measures the speed at which infants look at the target stimulus once it is presented. When infants learn the location of a stimulus, they become faster and faster at predicting it. Sometimes, they might even look at its location before the stimulus appears! This would be a correct prediction, which is indicative of successful learning.
+
+For the motivational component, we could use pupil size. Pupil size measures many different things, including arousal. If a stimulus is more engaging, arousal should increase. In this specific case, we might observe greater pupil size in trials with complex stimuli. Pupil size is a complicated measure to use, so for now we will not get into more details. Let's just agree that pupil is great to understanding not only learning, but also motivation.
+
+This example paradigm allows us to understand how to start from general theories, make testable hypotheses, and finally narrow down how these hypotheses can be tested empirically. In our case, given our hypotheses and what kind of measures might allow us to test them, eye-tracking seems to be perfect for us! It would allow us to simply collect gaze and pupil data, which underlie all the metrics we mentioned above. Remember, usually we start from the theory and hypotheses, and then we pick the method (for example eye-tracking, EEG, fNIRS, and so on) that would be the most helpful in testing our hypotheses, and not the other way around!
+
+\~\~\~ work in progress
 
 ### Looking time
 
