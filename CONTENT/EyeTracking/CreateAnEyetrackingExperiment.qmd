@@ -34,9 +34,10 @@ pip install tobii_research
 ```
 
 :::: {.info-box .info-box-large}
-::: {.info-box-title}
+::: info-box-title
 Compatibility older eye-trackers
 :::
+
 If you're using an older Tobii eye-tracker, check the compatibility page to see which version of tobii_research you need for your specific model. Check it [here](https://developer.tobiipro.com/tobiiprosdk/eyetrackercompatibility.html).
 ::::
 
@@ -126,23 +127,21 @@ Let's create a list to store all this information:
 gaze_data_buffer = []
 ```
 
-Perfect! We've got our list to which we can append the incoming data. We can simply have this list inside of our callback function so every time an new sample appears it will be added there.
+Perfect! We've got our list to which we can append the incoming data. We can simply have this list inside of our callback function so every time an new sample appears it will be added there. This is how our script could look now:
 
 ```{python}
 # callback function
 def gaze_data_callback(gaze_data):
-    global gaze_data_buffer # look for gaze_data_buffer globally
 
     gaze_data_buffer.append(gaze_data)
+
 
 # Create an empty list we will append our data to
 gaze_data_buffer = []
 
 # Start the callback function
-Eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)
+Eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback, as_dictionary=True)
 ```
-
-And there we go! Plese note that we use the `global` keyword inside our callback function. This tells Python that we're referring to the list we created in the main script ( outside the function ). It is just to be precautios and be sure that python knows what variable we are talking about
 
 Now instead of just printing data, we're actually saving every sample in our list for later analysis. Much more useful!
 
@@ -150,30 +149,214 @@ Now instead of just printing data, we're actually saving every sample in our lis
 
 As we have seen, our callback function can access the tobii data and tell us what it is for each sample. Just one little piece missing... We want to know what we presented and when. In most studies, we present stimuli that can be pictures, sounds or even videos. For the following analysis, it is important to know at what exact point in time we presented these stimuli.
 
-The Tobii SDK provides an elegant solution through the `tr.get_system_time_stamp()` function. This function returns the current time from the eye-tracker's internal clock—the same clock used for the eye-tracking samples.
+The Tobii SDK provides an elegant solution through the `tr.get_system_time_stamp()` function. This function returns the current time from the system clock. And if you paid attention between the information the eyetrcker is passing us one of them is the `system_time_stamp`. So we can create a simple event-logging system by storing timestamps along with descriptive event labels.
 
-We can create a simple event-logging system by storing timestamps along with descriptive event labels. We first create an empty list called Events and we append the event and the trigger every time we need. just like so:
+We first create an empty list called Events and we append the time from the system and a description of what is happening every time we need. Just like so:
 
 ```{python}
 Events = [] # create empty list
 
 # Get the current time from the eye-tracker's clock
-Events.append([tr.get_system_time_stamp(), 'Our First event!!'])
+Events.append({
+    'system_time_stamp':  tr.get_system_time_stamp(),
+    'label': 'Our First event!!'
+})
 ```
+
+## Save the data
+
+Perfect we have two lists with all our information. They get bigger and bigger (especially the gaze_data_buffer) and we need a way to save them. There are two approaches we can use:
+
+1.  We could have a saving function inside our callback that could append the new data to a .csv each time the callback is called.
+
+2.  We could append the data to the list we have created for the entire duration of the study. Once the experiment is finished we could save our data.
+
+However, both approaches have their drawbacks. The first option might slow down our callback function if our computer isn't performing well or if we're sampling at very high rates. The second approach won't create any bottlenecks for the callback, but if something goes wrong during the study and Python crashes (and trust me, it can happen!), we'd lose all our precious data. So what's the solution? We prefer a hybrid approach! We can store our data in lists and save them during the quieter moments of our study - like during the Inter-Stimulus Interval (ISI), which is the pause between trials. This time is typically just meant to give participants a brief rest between trials, making it perfect for our data-saving operations.
+
+Let's write a function to handle this smartly. We'll create a copy of our current list, then clear (empty) the original list. This way, we preserve our collected data while keeping the original list empty and ready to collect new incoming data.
+
+```{python}
+# Save current data to a copy, then empty the buffer for continued collection
+buffer_data_copy = gaze_data_buffer[:]
+gaze_data_buffer.clear()
+```
+
+After creating a copy, we use `pandas` to transform the list of dictionariesinto a data frame and save it to a csv file.
+
+```{python}
+# Create a dataframe from our data
+Data_df = pd.DataFrame(buffer_data_copy)
+```
+
+Before actually saving this nice dataframe there is a small thing we may want to do. We may want to add our events to the dataframe!!! So we will have only one dataframe with all our data and events. Sounds amazing right? Let's do it!!
+
+We fist create a dataframe from our events and then for each event we find the closest index in our dataframe. We are essentially aligning the events to the data. After we create a new column called events and add the event labels to the dataframe at the correct index we just found.
+
+```{python}
+# Create a dataframe from our events
+buffer_events_copy = Events[:]
+Events.clear()
+Events_df = pd.DataFrame(buffer_events_copy)
+
+# Find the index for each event in the dataframe
+idx = np.searchsorted(Data_df['system_time_stamp'].values,
+                      Events_df['system_time_stamp'].values,
+                      side='left')
+
+# Add the events to the dataframe
+Data_df['events'] = ''
+Data_df.loc[idx, 'events'] = Events_df['label'].values                    
+```
+
+Perfect!!! This wasn't so hard, was it?
+
+But i wound suggest to wrap this in a function so you can call it whenever you want to save the data.
+
+```{python}
+def write_buffer_to_file(buffer, events_to_save, filename):
+
+    # Save current data to a copy, then empty the buffer for continued collection
+    buffer_data_copy = buffer[:]
+    buffer.clear()
+
+    buffer_events_copy = events_to_save[:]
+    events_to_save.clear()
+
+    # Create data and event dataframes
+    Data_df = pd.DataFrame(buffer_data_copy)
+    Events_df = pd.DataFrame(buffer_events_copy)
+
+    # Find where each event is in the dataframe
+    idx = np.searchsorted(Data_df['system_time_stamp'].values,
+                          Events_df['system_time_stamp'].values,
+                          side='left')
+
+    # Add the events to the dataframe
+    Data_df['events'] = ''
+    Data_df.loc[idx, 'events'] = Events_df['label'].values
+
+    # Write the DataFrame to a csv file
+    Data_df.to_csv(filename, mode='a', index =False, header = not os.path.isfile(filename))
+```
+
+This function takes three inputs: our collected gaze data (gaze_data_buffer), our recorded events (Events), and the desired filename for our output CSV file. When saving our DataFrame, we use `mode = 'a'` to tell pandas to append the new data to the existing CSV file. This is perfect for our incremental saving approach - if the CSV file already exists, pandas will simply add our new data to the end. If this is the first time we're saving data and no CSV file exists yet, pandas will automatically create a new file for us.
+
+::: callout-note
+You can also choose to add the events to the same dataframe after the study is complete. In that approach, you would save the two dataframes independently during data collection, then align and merge them during your analysis phase.
+
+We prefer to combine them right away so we don't have to worry about it later, and it also makes things simpler for the upcoming tutorials. However, the choice is entirely yours - both approaches work well depending on your workflow preferences.
+:::
 
 ## Correct the data
 
-Tobii presents gaze data in a variety of formats. The one we're most interested in is the Active Display Coordinate System (ADCS). This system maps all gaze data onto a 2D coordinate system that aligns with the Active Display Area. When an eye tracker is used with a monitor, the Active Display Area refers to the display area that doesn't include the monitor frame. In the ADCS system, the point (0, 0) represents the upper left corner of the screen, and (1, 1) represents the lower right corner.
+Great! Now you know how to collect eye tracking data and save it to a file with events in the same dataframe. Let's add a few optional steps that will make your data much easier to analyze and give you a better idea of what we are working with.
 
-While this coordinate system is perfectly acceptable, it might cause some confusion when we come to analyze and plot the data. This is because in most systems, the data's origin is located in the lower left corner, not the upper left. It might seem a bit complicated, but the image below will make everything clear.
+### Divide gaze in two columns
+
+The eye tracker provides extensive data, but we're primarily interested in the Active Display Coordinate System (ADCS) - the 2D coordinates showing where someone is looking on the screen. These coordinates are given as (x, y) pairs. For example, `'left_gaze_point_on_display_area': (0.4633694291, 0.4872185290)` tells us the left eye is looking at position x=0.46, y=0.49 on the display. When we convert this data to a pandas DataFrame, each coordinate pair becomes a single column containing tuples. This creates analysis headaches - you can't easily filter, plot, or perform calculations on x and y values when they're bundled together. Instead, we want separate columns for x and y coordinates for both eyes.
+
+to accomplish that we can add these lines to our save function
+
+```{python}
+def write_buffer_to_file(buffer, events_to_save, filename):
+
+    # Save current data to a copy, then empty the buffer for continued collection
+    buffer_data_copy = buffer[:]
+    buffer.clear()
+
+    buffer_events_copy = events_to_save[:]
+    events_to_save.clear()
+
+    # Create data and event dataframes
+    Data_df = pd.DataFrame(buffer_data_copy)
+    Events_df = pd.DataFrame(buffer_events_copy)
+
+    # Find where each event is in the dataframe
+    idx = np.searchsorted(Data_df['system_time_stamp'].values,
+                          Events_df['system_time_stamp'].values,
+                          side='left')
+
+    # Add the events to the dataframe
+    Data_df['events'] = ''
+    Data_df.loc[idx, 'events'] = Events_df['label'].values
+
+    #### Fix the 2D data
+    Data_df[['left_x', 'left_y']] = Data_df['left_gaze_point_on_display_area'].tolist()
+    Data_df[['right_x', 'right_y']] = Data_df['right_gaze_point_on_display_area'].tolist()
+
+    # Write the DataFrame to a csv file
+    Data_df.to_csv(filename, mode='a', index =False, header = not os.path.isfile(filename))
+```
+
+Perfect!! Well done!! Now we have two columns for x and y coordinates for both eyes
+
+### Adjust the data
+
+The Active Display Coordinate System (ADCS) maps all gaze data onto a 2D coordinate system where (0, 0) represents the upper left corner of the screen, and (1, 1) represents the lower right corner.
+
+While this coordinate system works perfectly, it might cause confusion during analysis and plotting. This is because most plotting systems expect the origin in the lower left corner, not the upper left. The image below illustrates this difference:m
 
 ![](/images/CreateAnEyetrackingExperiment/Origins.png){fig-align="center" width="419"}
 
-For this reason, we typically adjust the data to position the origin in the bottom left corner. This can be achieved by subtracting the gaze coordinates from the maximum window height size.
+For this reason, we typically adjust the data to position the origin in the bottom left corner. This can be achieved by subtracting the y-coordinates from 1 (since coordinates range from 0 to 1).
 
-In addition to the origin point issue, the gaze coordinates are reported between 0 and 1. It's often more convenient to handle data in pixels, so we can transform our data into pixels. This is done by multiplying the obtained coordinates by the pixel dimensions of our screen.
+Additionally, we'll make several other adjustments to improve data usability:
+- Convert to pixels: Gaze coordinates are reported between 0 and 1, but it's often more convenient to work with pixel coordinates. We can transform our data by multiplying coordinates by the pixel dimensions of our screen.
+- Simplify timestamps: Tobii provides data in microseconds, but this precision isn't necessary for most analyses. We'll convert to milliseconds by dividing by 1000.
+- Clean up columns: For clarity, we'll rename some columns to something simpler and more intuitive. We'll also keep only the most relevant columns for easier analysis.
+All of this can be done directly in our saving function. Let's see how it works:
 
-Lastly, we also modify the time column. Tobii provides data in microseconds, but such precision isn't necessary for our purposes, so we convert it to milliseconds by dividing by 1000.
+```{python}
+def write_buffer_to_file(data_to_save, events_to_save, filename):
+
+    # Save current data to a copy, then empty the buffer for continued collection
+    buffer_data_copy = data_to_save[:]
+    data_to_save.clear()
+
+    buffer_events_copy = events_to_save[:]
+    events_to_save.clear()
+
+    # Create data and event dataframes
+    Data_df = pd.DataFrame(buffer_data_copy)
+    Events_df = pd.DataFrame(buffer_events_copy)
+    
+    # Find where each event is in the dataframe
+    idx = np.searchsorted(Data_df['system_time_stamp'].values,
+                          Events_df['system_time_stamp'].values,
+                          side='left')
+    
+    # Add the events to the dataframe
+    Data_df['events'] = ''
+    Data_df.loc[idx, 'events'] = Events_df['label'].values
+    
+    #### Fix the 2D data
+    Data_df[['left_x', 'left_y']] = Data_df['left_gaze_point_on_display_area'].tolist()
+    Data_df[['right_x', 'right_y']] = Data_df['right_gaze_point_on_display_area'].tolist()
+    
+    #### Conversion
+    Data_df['time'] = Data_df['system_time_stamp'] / 1000.0
+    Data_df['left_x'] = Data_df['left_x'] * winsize[0]
+    Data_df['left_y'] = winsize[1] - Data_df['left_y'] * winsize[1]
+    Data_df['right_x'] = Data_df['right_x'] * winsize[0]
+    Data_df['right_y'] = winsize[1] - Data_df['right_y'] * winsize[1]
+    
+    #### Clean up - rename to intuitive names
+    Data_df = Data_df.rename(columns={
+        'left_gaze_point_validity': 'left_valid',
+        'right_gaze_point_validity': 'right_valid',
+        'left_pupil_diameter': 'left_pupil',
+        'right_pupil_diameter': 'right_pupil',
+        'left_pupil_validity': 'left_pupil_valid',
+        'right_pupil_validity': 'right_pupil_valid'
+    })
+    
+    # Keep only essential columns
+    Data_df = Data_df[['time', 'left_x', 'left_y', 'left_valid', 'left_pupil', 'left_pupil_valid',
+                       'right_x', 'right_y', 'right_valid', 'right_pupil', 'right_pupil_valid', 'events']]
+    
+    # Write the DataFrame to a csv file
+    Data_df.to_csv(filename, mode='a', index=False, header=not os.path.isfile(filename))
+```
 
 ```{python}
 def gaze_data_callback(gaze_data):
