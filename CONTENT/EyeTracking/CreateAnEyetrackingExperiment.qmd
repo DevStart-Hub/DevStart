@@ -35,6 +35,14 @@ pip install tobii_research
 
 Great! We have installed the Tobii SDK.
 
+::: {.info-box .info-box-large}
+::: {.info-box-title}
+Compatibility older models
+:::
+If you're using an older Tobii eye-tracker, check the compatibility page to see which version of tobii_research you need for your specific model. Check it [here](https://developer.tobiipro.com/tobiiprosdk/eyetrackercompatibility.html).
+:::
+
+
 ## Connect to the eye-tracker
 
 So how does this library work, how do we connect to the eye-tracker and collect our data? Very good questions!
@@ -119,9 +127,7 @@ Let's create a list to store all this information:
 gaze_data_buffer = []
 ```
 
-Perfect! We've got our list to which we can append the incoming data. Hoever, just to not have problems using the functions in and out of the function we need a little trick!
-
-We use the `global` keyword inside our callback function. This tells Python that we're referring to the list we created in the main script, not creating a new variable:
+Perfect! We've got our list to which we can append the incoming data. We can simply have this list inside of our callback function so every time an new sample appears it will be added there.
 
 ```{python}
 # callback function
@@ -137,7 +143,9 @@ gaze_data_buffer = []
 Eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)
 ```
 
-And there we go! Now instead of just printing data, we're actually saving every sample in our list for later analysis. Much more useful!
+And there we go! Plese note that we use the `global` keyword inside our callback function. This tells Python that we're referring to the list we created in the main script ( outside the function ). It is just to be precautios and be sure that python knows what variable we are talking about
+
+Now instead of just printing data, we're actually saving every sample in our list for later analysis. Much more useful!
 
 ## Triggers/Events
 
