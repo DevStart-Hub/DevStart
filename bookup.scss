@@ -392,8 +392,8 @@ body main > header div.keywords {
  INFO BOX
  Small floating box for supplementary information
  ================================================= */
-/* Basic Information Box */
 
+/* Basic Information Box */
 .info-box {
   background-color: #f5fefe;
   border: 1px solid #00b3b3;
@@ -409,11 +409,11 @@ body main > header div.keywords {
   line-height: 1.4;
   color: #495057;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-  
+ 
   p:last-child {
     margin-bottom: 0;
   }
-  
+ 
   @media (max-width: 768px) {
     float: none;
     width: 100%;
@@ -425,7 +425,7 @@ body main > header div.keywords {
 /* Info box title */
 .info-box-title {
   font-weight: 700;
-  font-size: .82rem;
+  font-size: 0.82rem;
   margin-bottom: 0.01rem;
   color: #212529;
 }
@@ -466,4 +466,25 @@ body main > header div.keywords {
     max-width: 100%;
     margin: 1rem 0;
   }
+}
+
+/* SELECTIVE Float clearing - only clear on headings */
+// Only clear floats on headings, NOT on paragraphs or other text
+h1, h2, h3, h4, h5, h6 {
+  clear: both;
+}
+
+// Allow paragraphs and other content to flow around the info box
+p, div:not(.info-box), ul, ol, blockquote {
+  clear: none !important;
+}
+
+// Clear only when a heading immediately follows an info box
+.info-box + h1,
+.info-box + h2,
+.info-box + h3,
+.info-box + h4,
+.info-box + h5,
+.info-box + h6 {
+  clear: both !important;
 }

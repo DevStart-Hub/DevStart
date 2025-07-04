@@ -33,15 +33,14 @@ To install the Python Tobii SDK, we can simply run this command in our conda ter
 pip install tobii_research
 ```
 
-Great! We have installed the Tobii SDK.
-
-::: {.info-box .info-box-large}
+:::: {.info-box .info-box-large}
 ::: {.info-box-title}
-Compatibility older models
+Compatibility older eye-trackers
 :::
 If you're using an older Tobii eye-tracker, check the compatibility page to see which version of tobii_research you need for your specific model. Check it [here](https://developer.tobiipro.com/tobiiprosdk/eyetrackercompatibility.html).
-:::
+::::
 
+Great! We have installed the Tobii SDK.
 
 ## Connect to the eye-tracker
 
