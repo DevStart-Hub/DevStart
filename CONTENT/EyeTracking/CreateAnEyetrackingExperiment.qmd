@@ -116,11 +116,9 @@ What we're doing here is subscribing to the `EYETRACKER_GAZE_DATA` stream and te
 
 ### Global to save
 
-Nice! You've set up a callback function that taps into your eye tracker's data stream! But hold up - right now we're just printing everything to the console. At 300 times per second, that's going to be a blur of text that nobody can read.
+Great! You've set up a callback function that receives eye tracking data from your device. However, printing 300 data points per second to the console creates an unreadable stream of text that's not useful for analysis. We need to store this data properly.
 
-While watching all that data scroll by is interesting for about 3 seconds, it's not helpful for actual analysis. We need to save this data somewhere!
-
-Let's create a list to store all this information:
+Let's create a list to collect all the gaze data:
 
 ```{python}
 # Create an empty list we will append our data to
@@ -132,7 +130,7 @@ Perfect! We've got our list to which we can append the incoming data. We can sim
 ```{python}
 # callback function
 def gaze_data_callback(gaze_data):
-
+    global gaze_data_buffer
     gaze_data_buffer.append(gaze_data)
 
 
@@ -143,7 +141,9 @@ gaze_data_buffer = []
 Eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback, as_dictionary=True)
 ```
 
-Now instead of just printing data, we're actually saving every sample in our list for later analysis. Much more useful!
+Notice the `global` keyword in the callback function. This tells Python that we want to use the `gaze_data_buffer` variable that was created outside the function. Without this keyword, Python may create a new local variable instead of using our existing list.
+
+Now instead of flooding the console, every new sample gets stored in our list for later analysis!
 
 ## Triggers/Events
 
