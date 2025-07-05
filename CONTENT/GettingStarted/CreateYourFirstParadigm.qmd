@@ -296,11 +296,9 @@ To implement this ISI, we'll create a PsychoPy `core.Clock()`. Once initiated, t
 
 ```{python}
 ### ISI
-clock = core.Clock()  # start the clock
-
-print('Here we can do other stuff')
-
-core.wait(1 - clock.getTime()) # wait for remaining time
+remaining_time = 1 - clock.getTime()
+if remaining_time > 0:
+    core.wait(remaining_time)
 ```
 
 Perfect—this method essentially waits for 1 second just like a simple `core.wait(1)`. But here's the cool part: since we're using the clock, we can run other code in the meantime without stopping everything entirely. This flexibility will be super handy in future tutorials—you'll see!
