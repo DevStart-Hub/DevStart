@@ -52,7 +52,7 @@ In the example above, we can conclude that infants can distinguish dogs from cat
 
 Another common paradigm using looking time is the Violation of Expectations paradigm. Here the underlying logic is a bit different from the Habituation paradigm: Infants might be presented with an expected event (a ball falling) or an unexpected event (a ball floating in mid air). If infants' expectations are violated, they will be surprised, which will lead to an increase in looking time.
 
-You can already see how changing the paradigm changes what looking time measures: Novelty detection in the first case, surprise in the second. However, more broadly, we (and infants) tend to look more at something if we care more about it. In more scientific terms, what we observe is the focus of our "overt" attention, and receives preferential cognitive processing. What exactly attracts our overt attention might then depend on the paradigm (a more novel item, a more surprising one, a scarier one even).
+You can already see how changing the paradigm changes what looking time measures: Novelty detection in the first case, surprise in the second. However, more broadly, we (and infants) tend to look more at something if we care more about it. In more scientific terms, what we observe is the focus of our "overt" attention, and receives preferential processing. What exactly attracts our overt attention might then depend on the paradigm (a more novel item, a more surprising one, a scarier one even).
 
 ::: callout-important
 With looking time, we can conclude that infants decided to allocate more attention at something, but not why! Was it because the stimulus newer? More surprising? Scarier? More soothing? Be careful about what kind of conclusions you draw when you observe a difference in looking times between different stimuli or conditions!
@@ -88,7 +88,7 @@ The fact that changes in pupil size due to cognitive processes are sublter than 
 
 So, what does pupil size measure? Again, it depends on the task. Generally speaking, we have to make the distinction between **tonic pupil size** and **phasic pupil dilation**, because they measure different things. Tonic pupil size is simply the size of the pupil at any moment in time - even better if measured when nothing much is happening on the screen. Phasic pupil dilation is a sudden change in pupil size due to the presentation of a certain stimulus or event.
 
-Greater tonic pupil size (has been associated with heightened arousal. Again, many things might impact arousal (how interesting, scary, difficult or uncertain a stimulus or situation is). In contrast, phasic or transient pupil responses to task-relevant unexpected events are more specifically linked to prediction-error processing and the subsequent updating of internal beliefs.
+Greater tonic pupil size has been associated with heightened arousal. Again, many things might impact arousal (how interesting, scary, difficult or uncertain a stimulus or situation is). In contrast, phasic or transient pupil responses to task-relevant unexpected events are more specifically linked to prediction-error processing and the subsequent updating of internal beliefs.
 
 ::: callout-note
 Tonic and phasic pupil signals map onto the tonic and phasic firing modes of the locus coeruleus, which are thought to regulate sustained arousal and vigilance (tonic mode) and rapid, event-driven shifts in attention or learning (phasic mode) through noradrenergic transmission. So the neural correlates of pupillometry are surprsingly clear!
