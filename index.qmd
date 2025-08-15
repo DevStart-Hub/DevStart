@@ -32,13 +32,15 @@ We tried to summarize all the struggles that we encountered during our PhDs and 
 
 ## How to contribute?
 
-If you're an expert on a specific topic and you want to change something or add something, if you don't agree with our pipeline, or you spot an error in our code, please get in touch! 
+If you're an expert on a specific topic and you want to change something or add something, if you don't agree with our pipeline, or you spot an error in our code, please let us know!
 
-You can find us at:
+There are different ways you can contribute:
 
--   {{< fa envelope >}} [T.ghilardi\@bbk.ac.uk](mailto:t.ghilardi@bbk.ac.uk)\
--   {{< fa envelope >}} [Francesco.Poli\@mrc-cbu.cam.ac.uk](mailto:Francesco.Poli@mrc-cbu.cam.ac.uk)\
--   {{< fa envelope >}} [G.serino\@bbk.ac.uk](mailto:g.serino@bbk.ac.uk)\
+-   **GitHub**: You can fork the [repository](https://github.com/DevStart-Hub/DevStart), make your changes, and submit a pull request. This is the best way to contribute code or documentation updates.
+
+-   **Forum Discussions**: We are starting a dedicated forum where you can ask questions, share ideas, and discuss topics related to developmental research. This is a great place to connect with other researchers and get feedback on your work. [Please join the forum](https://devstart.freeflarum.com/) and start a discussion if you have any questions or suggestions. We will be happy to help you!
+
+-   **Email**: If you prefer, you can email us with your suggestions or corrections. We welcome any feedback that can help improve DevStart. You can find us at: <br/> {{< fa envelope >}} [T.ghilardi\@bbk.ac.uk](mailto:t.ghilardi@bbk.ac.uk) , {{< fa envelope >}} [Francesco.Poli\@mrc-cbu.cam.ac.uk](mailto:Francesco.Poli@mrc-cbu.cam.ac.uk), {{< fa envelope >}} [G.serino\@bbk.ac.uk](mailto:g.serino@bbk.ac.uk)\
 
 ## Who are we?
 
