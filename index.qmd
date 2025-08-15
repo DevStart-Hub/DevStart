@@ -36,9 +36,9 @@ If you're an expert on a specific topic and you want to change something or add 
 
 You can find us at:
 
--   {{< fa envelope >}} [t.ghilardi\@bbk.ac.uk](mailto:t.ghilardi@bbk.ac.uk)\
+-   {{< fa envelope >}} [T.ghilardi\@bbk.ac.uk](mailto:t.ghilardi@bbk.ac.uk)\
 -   {{< fa envelope >}} [Francesco.Poli\@mrc-cbu.cam.ac.uk](mailto:Francesco.Poli@mrc-cbu.cam.ac.uk)\
--   {{< fa envelope >}} [g.serino\@bbk.ac.uk](mailto:g.serino@bbk.ac.uk)\
+-   {{< fa envelope >}} [G.serino\@bbk.ac.uk](mailto:g.serino@bbk.ac.uk)\
 
 ## Who are we?
 
