@@ -48,6 +48,10 @@ In Habituation paradigms, infants are presented with the same stimulus (e.g. a c
 
 ::: callout-warning
 In the example above, we can conclude that infants can distinguish dogs from cats only if we control for many alternative explanations and chose the stimuli carefully. In reality, all we know with habituation paradigms is whether infants can spot any difference between the images. If for example the dog image is bigger, or it has different colors, it might be that infants are reacting to changes in size or color rather than animal category! Always chose your stimuli carefully.
+
+**Can you spot the problem here?😁**
+
+![](/images/Introduction_eyetracking\CatDog.jpg){fig-align="center" width="416"}
 :::
 
 Another common paradigm using looking time is the Violation of Expectations paradigm. Here the underlying logic is a bit different from the Habituation paradigm: Infants might be presented with an expected event (a ball falling) or an unexpected event (a ball floating in mid air). If infants' expectations are violated, they will be surprised, which will lead to an increase in looking time.
