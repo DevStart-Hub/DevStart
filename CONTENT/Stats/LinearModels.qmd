@@ -80,7 +80,7 @@ One important information that we need to keep in mind is that to run `lm()` (an
 In long format, each row represents a single observation. Variables are organized in columns, with one column for the variable names and another for the values. This means that the column you want to model (in the example `LookingTime`) has 1 row for observation but the other columns usually have repeated entries ( e.g. `Id` , `TrialN`, `Event`)
 
 Wide format, on the other hand, has each row representing a subject or group, with multiple columns for different variables or time-points. While this can be visually appealing for humans, it's not optimal for our linear modeling needs.
-
+ 
 Here a small comparison of the two formats:
 
 ```{r}

@@ -4852,7 +4852,7 @@ Note
 <p>So, if you notice something that doesn’t seem quite perfect at this stage, don’t worry! It’s all part of the plan. Our goal is to guide you step-by-step towards building the best model. Just remember, this process takes time!</p>
 <section id="import-data" class="level2"><h2 class="anchored" data-anchor-id="import-data">Import data</h2>
 <p>You can download the data that we will use in this tutorial from here:</p>
-<p><button class="btn btn-secondary downloadthis  " id="dnldts56799"><i class="bi bi-download"></i> Dataset.csv </button></p>
+<p><button class="btn btn-secondary downloadthis  " id="dnldts41284"><i class="bi bi-download"></i> Dataset.csv </button></p>
 <p>Once downloaded we need to import it in our R session. Here we read our csv and we print a small preview of it.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
@@ -4916,16 +4916,16 @@ Long format
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 4
-  Id    Event    TrialN LookingTime
-  &lt;chr&gt; &lt;chr&gt;     &lt;int&gt;       &lt;dbl&gt;
-1 1     Reward        1        1450
-2 1     Reward        2        1420
-3 1     Reward        3        1390
-4 1     NoReward      1        1380
-5 1     NoReward      2        1350
-6 1     NoReward      3        1320
-7 2     Reward        1        1480
-8 2     Reward        2        1460</code></pre>
+  Id    Event   TrialN LookingTime
+  &lt;chr&gt; &lt;chr&gt;    &lt;int&gt;       &lt;dbl&gt;
+1 1     Complex      1        1450
+2 1     Complex      2        1420
+3 1     Complex      3        1390
+4 1     Simple       1        1380
+5 1     Simple       2        1350
+6 1     Simple       3        1320
+7 2     Complex      1        1480
+8 2     Complex      2        1460</code></pre>
 </div>
 </div>
 </section>
@@ -4934,12 +4934,12 @@ Long format
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 7
-  Id    Reward_Trial1 Reward_Trial2 Reward_Trial3 NoReward_Trial1
-  &lt;chr&gt;         &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;
-1 1              1450          1420          1390            1380
-2 2              1480          1460          1410            1390
-3 3              1520          1490          1450            1410
-# ℹ 2 more variables: NoReward_Trial2 &lt;dbl&gt;, NoReward_Trial3 &lt;dbl&gt;</code></pre>
+  Id    Complex_Trial1 Complex_Trial2 Complex_Trial3 Simple_Trial1 Simple_Trial2
+  &lt;chr&gt;          &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
+1 1               1450           1420           1390          1380          1350
+2 2               1480           1460           1410          1390          1370
+3 3               1520           1490           1450          1410          1380
+# ℹ 1 more variable: Simple_Trial3 &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -5095,11 +5095,11 @@ Note
 <section id="intercept" class="level3"><h3 class="anchored" data-anchor-id="intercept">(Intercept)</h3>
 <p>The intercept often confuses people who approach linear models for the first time. What exactly is it? 🤔</p>
 <p>The (Intercept) represents the reference levels where all our predictors (<code>TrialN</code> and <code>Event</code>) are <strong>0</strong>. While <code>TrialN</code> is easy to understand when it’s 0 (<code>TrialN</code> 0 in our case would be the first trial), you may be scratching your head thinking…how can <code>Event</code> be 0? It’s a categorical variable, it can’t be 0!!!! <code>TrialN == 0</code>…sure….but <code>Event</code>??</p>
-<p>You are absolutely right! When a model encounters a categorical variable, it cleverly selects the first level of such variable as the reference level. If you take another look at our model summary, you can see that there’s information for the <strong>Reward</strong> level of the <code>Event</code> variable but nothing about the <strong>NoReward</strong> level. This is because the <strong>NoReward</strong> level has been selected by the model as the reference level and is thus represented in the intercept value! 💡</p>
+<p>You are absolutely right! When a model encounters a categorical variable, it cleverly selects the first level of such variable as the reference level. If you take another look at our model summary, you can see that there’s information for the <strong>Complex Stimulus</strong> level of the <code>Event</code> variable but nothing about the <strong>Simple Stimulus</strong> level. This is because the <strong>Simple Stimulus</strong> level has been selected by the model as the reference level and is thus represented in the intercept value! 💡</p>
 <p>So our intercept (1390.1) actually represents the predicted <strong>LookingTime</strong> when:</p>
 <ol type="1">
 <li><p>We’re on the first trial (<code>TrialN</code> = 0)</p></li>
-<li><p>We’re in the <strong>NoReward</strong> condition</p></li>
+<li><p>We’re in the <strong>Simple Stimulus</strong> condition</p></li>
 </ol>
 <p>The Standard Error of the estimate (29.1) tells us the precision of the estimate.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -5112,7 +5112,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Since the intercept has a significant p-value, it means that the estimate for the <strong>NoReward</strong> condition at trial 0 is actually significantly different from 0. In other words, our participants are definitely looking at something during the <strong>NoReward</strong> condition in the first trial – their <strong>LookingTime</strong> isn’t zero! This might seem obvious (of course they’re looking!), but statistically confirming this baseline is actually meaningful.</p>
+<p>Since the intercept has a significant p-value, it means that the estimate for the <strong>Simple</strong> condition at trial 0 is actually significantly different from 0. In other words, our participants are definitely looking at something during the <strong>Simple</strong> condition in the first trial – their <strong>LookingTime</strong> isn’t zero! This might seem obvious (of course they’re looking!), but statistically confirming this baseline is actually meaningful.</p>
 </div>
 </div>
 <p>Ok, all this explanation is great…but it’s much easier to visualize these Estimates!</p>
@@ -5124,13 +5124,13 @@ Tip
 </div>
 </div>
 </div>
-<p>As you can see, the intercept is pretty straightforward—it gives us the estimate when everything is set to 0, both for continuous and categorical variables. The intercept is the foundation of your model, where all the predictors are at their baseline value (in this case, <strong>NoReward</strong> was cleverly selected as the reference or 0 level for the categorical variable).</p>
+<p>As you can see, the intercept is pretty straightforward—it gives us the estimate when everything is set to 0, both for continuous and categorical variables. The intercept is the foundation of your model, where all the predictors are at their baseline value (in this case, <strong>Simple</strong> was cleverly selected as the reference or 0 level for the categorical variable).</p>
 </section><section id="event" class="level3"><h3 class="anchored" data-anchor-id="event">Event</h3>
 <p>Awesome! Now that we’ve got the intercept down, let’s take a look at the rest of the model output. We’ll skip over the <strong>TrialN</strong> variable for now and focus on what’s happening with the <strong>Event</strong>.</p>
-<p>At first, the results for <code>Event [Reward]</code> might look like they’re giving us the value of looking time for the <strong>Reward</strong>. Super easy, right?!?</p>
+<p>At first, the results for <code>Event [Complex]</code> might look like they’re giving us the value of looking time for the <strong>Complex Stimulus</strong>. Super easy, right?!?</p>
 <p>Well… not exactly! 🤔</p>
-<p><strong>In linear models, each coefficient shows the difference in relation to the intercept (the 0 or the reference level), not the exact value of the Reward condition.</strong></p>
-<p>It sounds a bit confusing, but let’s break it down. If we want to understand what is the estimate for a <strong>Rewarding</strong> event we need to take the <strong>Intercept</strong> (1390.1) –as we mentioned that is actually the event <strong>NoReward</strong> – and then just simply add to it the Estimate for the <code>Event [Reward]</code> (99.8). So the model is telling us that a Rewarding event should be 1390.1 + 99.8 = 1489.9.</p>
+<p><strong>In linear models, each coefficient shows the difference in relation to the intercept (the 0 or the reference level), not the exact value of the Complex condition.</strong></p>
+<p>It sounds a bit confusing, but let’s break it down. If we want to understand what is the estimate for a <strong>Complex</strong> event we need to take the <strong>Intercept</strong> (1390.1) –as we mentioned that is actually the <strong>Simple</strong> event – and then just simply add to it the Estimate for the <code>Event [Complex]</code> (99.8). So the model is telling us that a <strong>Complex</strong> event should be 1390.1 + 99.8 = 1489.9.</p>
 <p>See? Not too bad! Let’s visualize it and make it even clearer!</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -5154,7 +5154,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Remember!! This coefficient represents the effect of <code>TrialN</code> specifically when <code>Event</code> is at its reference level (<strong>NoReward</strong>). In other words, this -7.5 decrease in LookingTime per trial applies specifically to the <strong>NoReward</strong> condition!</p>
+<p>Remember!! This coefficient represents the effect of <code>TrialN</code> specifically when <code>Event</code> is at its reference level (<strong>Simple</strong>). In other words, this -7.5 decrease in LookingTime per trial applies specifically to the <strong>Simple</strong> condition!</p>
 </div>
 </div>
 <p>Even easier..let’s plot again!</p>
@@ -5168,14 +5168,14 @@ Important
 </div>
 </section><section id="interaction" class="level3"><h3 class="anchored" data-anchor-id="interaction">Interaction</h3>
 <p>Alright, now we’re getting to the final step! Let’s talk about the interaction between <code>TrialN</code> and <code>Event</code>! Now, we’re not just dealing with a single factor or continuous variable, but looking at how they interact with each other. Don’t worry—if you understood the previous steps, this will be a breeze!</p>
-<p>We’ll take it step by step and look at the interaction in our model parameters. The interaction term between <code>TrialN</code> and <code>Event [Reward]</code> tells us how the relationship between <code>TrialN</code> and <code>LookingTime</code> changes when we switch from the reference Event (<strong>NoReward</strong>) to the <strong>Reward</strong> condition.</p>
+<p>We’ll take it step by step and look at the interaction in our model parameters. The interaction term between <code>TrialN</code> and <code>Event [Complex]</code> tells us how the relationship between <code>TrialN</code> and <code>LookingTime</code> changes when we switch from the reference Event (<strong>Simple</strong>) to the <strong>Complex</strong> condition.</p>
 <p>To put it simply:</p>
 <ul>
-<li><p>For <strong>NoReward</strong> events, <strong>LookingTime</strong> decreases by 7.5 units per trial (that’s our main <code>TrialN</code> coefficient)</p></li>
-<li><p>The interaction coefficient (0.13) tells us how this slope changes for <strong>Reward</strong> events</p></li>
+<li><p>For <strong>Simple</strong> events, <strong>LookingTime</strong> decreases by 7.5 units per trial (that’s our main <code>TrialN</code> coefficient)</p></li>
+<li><p>The interaction coefficient (0.13) tells us how this slope changes for <strong>Complex</strong> events</p></li>
 </ul>
-<p>So for <strong>Reward</strong> events, the slope would be: -7.5 + 0.13 = -7.37 units per trial.</p>
-<p>What does this mean in real terms? If the interaction coefficient is positive (like in our example), it means participants’ looking time decreases more slowly during <strong>Reward</strong> trials compared to <strong>NoReward</strong> trials – the estimate is slightly less negative.</p>
+<p>So for <strong>Complex</strong> events, the slope would be: -7.5 + 0.13 = -7.37 units per trial.</p>
+<p>What does this mean in real terms? If the interaction coefficient is positive (like in our example), it means participants’ looking time decreases more slowly during <strong>Complex</strong> trials compared to <strong>Simple</strong> trials – the estimate is slightly less negative.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -5186,10 +5186,10 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In this model the interaction effect is extremely small and not significant. This means that there is actually no difference in how the TrialN predicted Looking time in either NoReward or Reward! Looking time decreases at basically the same rate regardless of which event type we’re looking at!!!</p>
+<p>In this model the interaction effect is extremely small and not significant. This means that there is actually no difference in how the TrialN predicted Looking time in either Simple or Complex! Looking time decreases at basically the same rate regardless of which event type we’re looking at!!!</p>
 </div>
 </div>
-<p>While there is no significant difference, let’s plot the estimated effects for <strong>TrialN</strong> for both Reward and <strong>NoReward</strong> conditions to visualize this relationship!</p>
+<p>While there is no significant difference, let’s plot the estimated effects for <strong>TrialN</strong> for both <strong>Complex</strong> and <strong>Simple</strong> conditions to visualize this relationship!</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] time                        est_performance_EventTrial 
@@ -5214,7 +5214,7 @@ Important
 </div>
 <div class="callout-body-container callout-body">
 <p>Do you notice any difference in how the slopes between the two conditions? Probably not! If you examine the model summary, you’ll see the interaction effect is very small and not statistically significant.</p>
-<p>This tells us that TrialN predicts Looking time similarly in both <strong>NoReward</strong> and Reward conditions. In other words, looking time decreases at essentially the same rate regardless of which event type participants observed.</p>
+<p>This tells us that TrialN predicts Looking time similarly in both <strong>Simple</strong> and <strong>Complex</strong> conditions. In other words, looking time decreases at essentially the same rate regardless of which event type participants observed.</p>
 </div>
 </div>
 <p>I hope that by now you got a decent understanding on how to interpret what a linear model is telling you!! Different kinds of models will add small pieces of information here and there, but the main information will still be there. Thus, if you got here, you are a step closer to becoming a stats genius!!! 🧠📊</p>
@@ -5358,7 +5358,7 @@ Multiple R-squared:  0.05147,   Adjusted R-squared:  0.04713
 F-statistic: 11.87 on 3 and 656 DF,  p-value: 1.417e-07</code></pre>
 </div>
 </div>
-<p>As you can see the estimates are different!!! Because as we mentioned the reference level and the scale are different now. However do not panic, even if some values are different the relations are the same, we still have negative estimate for the time variable (here StandardTrialN and before TrialN) and positive for the Reward condition. Also the p-values are the same!</p>
+<p>As you can see the estimates are different!!! Because as we mentioned the reference level and the scale are different now. However do not panic, even if some values are different the relations are the same, we still have negative estimate for the time variable (here StandardTrialN and before TrialN) and positive for the <strong>Complex</strong> condition. Also the p-values are the same!</p>
 <p>So there you have it - standardizing your predictors makes your model both more interpretable and more robust, all while keeping the fundamental relationships in your data intact. It’s one of those simple steps that can make a big difference in your statistical journey! 🌟</p>
 </section></section><section id="model-checks" class="level1"><h1>Model checks</h1>
 <p>So now we have run our model and seen the summary… That’s great but how can we know that our model actually is ok?? Linear models, like most statistical techniques require some data assumption to be run. These assumption need to be met otherwise even if our model could be showing amazing results it won’t be valid.</p>
@@ -5404,26 +5404,26 @@ font-style: inherit;">)</span></span></code></pre></div>
 <p>Perfect all done!! We have a plot of the model assumptions and we can check if they are met!! But what do these plot represent? Here below we created a table that mirrors each plot with it explanation in it. These are brief and simple explanations. If you want to understand more about the <a href="https://easystats.github.io/performance/reference/check_model.html"><code>check_model()</code></a> function we suggest you to read the documentation about it and also the <a href="https://easystats.github.io/performance/articles/check_model.html">very nice vignette</a> that the package provides.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fcfxydnhhy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="cqicvxbkmc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#fcfxydnhhy table {
+#cqicvxbkmc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fcfxydnhhy thead, #fcfxydnhhy tbody, #fcfxydnhhy tfoot, #fcfxydnhhy tr, #fcfxydnhhy td, #fcfxydnhhy th {
+#cqicvxbkmc thead, #cqicvxbkmc tbody, #cqicvxbkmc tfoot, #cqicvxbkmc tr, #cqicvxbkmc td, #cqicvxbkmc th {
   border-style: none;
 }
 
-#fcfxydnhhy p {
+#cqicvxbkmc p {
   margin: 0;
   padding: 0;
 }
 
-#fcfxydnhhy .gt_table {
+#cqicvxbkmc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -5449,12 +5449,12 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-left-color: #000000;
 }
 
-#fcfxydnhhy .gt_caption {
+#cqicvxbkmc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fcfxydnhhy .gt_title {
+#cqicvxbkmc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -5466,7 +5466,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-bottom-width: 0;
 }
 
-#fcfxydnhhy .gt_subtitle {
+#cqicvxbkmc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5478,7 +5478,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-top-width: 0;
 }
 
-#fcfxydnhhy .gt_heading {
+#cqicvxbkmc .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -5490,13 +5490,13 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#fcfxydnhhy .gt_bottom_border {
+#cqicvxbkmc .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fcfxydnhhy .gt_col_headings {
+#cqicvxbkmc .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5511,7 +5511,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#fcfxydnhhy .gt_col_heading {
+#cqicvxbkmc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 12px;
@@ -5531,7 +5531,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   overflow-x: hidden;
 }
 
-#fcfxydnhhy .gt_column_spanner_outer {
+#cqicvxbkmc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 12px;
@@ -5543,15 +5543,15 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 4px;
 }
 
-#fcfxydnhhy .gt_column_spanner_outer:first-child {
+#cqicvxbkmc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fcfxydnhhy .gt_column_spanner_outer:last-child {
+#cqicvxbkmc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fcfxydnhhy .gt_column_spanner {
+#cqicvxbkmc .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 1px;
   border-bottom-color: #334422;
@@ -5563,11 +5563,11 @@ font-style: inherit;">)</span></span></code></pre></div>
   width: 100%;
 }
 
-#fcfxydnhhy .gt_spanner_row {
+#cqicvxbkmc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fcfxydnhhy .gt_group_heading {
+#cqicvxbkmc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5593,7 +5593,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   text-align: left;
 }
 
-#fcfxydnhhy .gt_empty_group_heading {
+#cqicvxbkmc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5608,15 +5608,15 @@ font-style: inherit;">)</span></span></code></pre></div>
   vertical-align: middle;
 }
 
-#fcfxydnhhy .gt_from_md > :first-child {
+#cqicvxbkmc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fcfxydnhhy .gt_from_md > :last-child {
+#cqicvxbkmc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fcfxydnhhy .gt_row {
+#cqicvxbkmc .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -5635,7 +5635,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   overflow-x: hidden;
 }
 
-#fcfxydnhhy .gt_stub {
+#cqicvxbkmc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5648,7 +5648,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#fcfxydnhhy .gt_stub_row_group {
+#cqicvxbkmc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5662,15 +5662,15 @@ font-style: inherit;">)</span></span></code></pre></div>
   vertical-align: top;
 }
 
-#fcfxydnhhy .gt_row_group_first td {
+#cqicvxbkmc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fcfxydnhhy .gt_row_group_first th {
+#cqicvxbkmc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fcfxydnhhy .gt_summary_row {
+#cqicvxbkmc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5680,16 +5680,16 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#fcfxydnhhy .gt_first_summary_row {
+#cqicvxbkmc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fcfxydnhhy .gt_first_summary_row.thick {
+#cqicvxbkmc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fcfxydnhhy .gt_last_summary_row {
+#cqicvxbkmc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5699,7 +5699,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#fcfxydnhhy .gt_grand_summary_row {
+#cqicvxbkmc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5709,7 +5709,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#fcfxydnhhy .gt_first_grand_summary_row {
+#cqicvxbkmc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5719,7 +5719,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-top-color: #D3D3D3;
 }
 
-#fcfxydnhhy .gt_last_grand_summary_row_top {
+#cqicvxbkmc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5729,11 +5729,11 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#fcfxydnhhy .gt_striped {
+#cqicvxbkmc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fcfxydnhhy .gt_table_body {
+#cqicvxbkmc .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5742,7 +5742,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-bottom-color: #FFFFFF;
 }
 
-#fcfxydnhhy .gt_footnotes {
+#cqicvxbkmc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5756,7 +5756,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#fcfxydnhhy .gt_footnote {
+#cqicvxbkmc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5765,7 +5765,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#fcfxydnhhy .gt_sourcenotes {
+#cqicvxbkmc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5779,7 +5779,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#fcfxydnhhy .gt_sourcenote {
+#cqicvxbkmc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5787,72 +5787,72 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#fcfxydnhhy .gt_left {
+#cqicvxbkmc .gt_left {
   text-align: left;
 }
 
-#fcfxydnhhy .gt_center {
+#cqicvxbkmc .gt_center {
   text-align: center;
 }
 
-#fcfxydnhhy .gt_right {
+#cqicvxbkmc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fcfxydnhhy .gt_font_normal {
+#cqicvxbkmc .gt_font_normal {
   font-weight: normal;
 }
 
-#fcfxydnhhy .gt_font_bold {
+#cqicvxbkmc .gt_font_bold {
   font-weight: bold;
 }
 
-#fcfxydnhhy .gt_font_italic {
+#cqicvxbkmc .gt_font_italic {
   font-style: italic;
 }
 
-#fcfxydnhhy .gt_super {
+#cqicvxbkmc .gt_super {
   font-size: 65%;
 }
 
-#fcfxydnhhy .gt_footnote_marks {
+#cqicvxbkmc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fcfxydnhhy .gt_asterisk {
+#cqicvxbkmc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fcfxydnhhy .gt_indent_1 {
+#cqicvxbkmc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fcfxydnhhy .gt_indent_2 {
+#cqicvxbkmc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fcfxydnhhy .gt_indent_3 {
+#cqicvxbkmc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fcfxydnhhy .gt_indent_4 {
+#cqicvxbkmc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fcfxydnhhy .gt_indent_5 {
+#cqicvxbkmc .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fcfxydnhhy .katex-display {
+#cqicvxbkmc .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fcfxydnhhy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#cqicvxbkmc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
