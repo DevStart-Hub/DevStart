@@ -20,6 +20,10 @@ Before even staring to think about how our experimental paradigm will look, we m
 
 Let’s imagine we would want to investigate the mechanisms underlying infants’ curiosity. Current theories of curiosity argue that more attention is allocated towards stimuli that offer greater learning opportunities (Gottlieb & Oudeyer, 2018; Poli et al., 2024). We might want to test whether this is indeed the case starting from infancy. More specifically, our hypothesis could be that infants should be more motivated to predict when and where a target stimulus will appear if such stimulus offers a greater learning opportunity.
 
+::: callout-note
+This particular research question about curiosity and learning is what we are interested in, and thus why we chose it as our example throughout these tutorials. However, many other experimental designs and research ideas would work equally well for demonstrating eye-tracking principles!
+:::
+
 To test this, we devised a very simple paradigm in which two cue stimuli (either a circle or a square) reliably predict the location of the following target stimulus (either on the right or on the left, respectively). Crucially, we will manipulate how much they can learn from these two target stimuli. The stimulus associated with the circle will be visually complex, and it will thus offer many components which infants can slowly unpack and learn about. The stimulus associated with the square will be visually simple, and it will thus offer very little to learn. The exact paradigm is illustrated below. Please not that we generated a very simple paradigm for educational purposes, and this is thus not fit for a robust, fully-fledged experimental inquiry.
 
 ![](/images/Introduction_eyetracking/DesignBasics.png){fig-align="center"}
