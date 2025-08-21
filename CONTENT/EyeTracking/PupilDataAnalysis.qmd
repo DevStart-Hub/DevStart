@@ -55,13 +55,13 @@ For a detailed description of the data, you can have a look at the tutorial on [
 
 -   `TrialN` indicates the trial number
 
--   `Event` indicates whether the trial contained a circle (followed by a reward) or a square (not followed by a reward). This variable is not numerical, but categorical. We thus set it to factor with `as.factor()`.
+-   `Event` indicates whether the trial contained a circle (followed by a complex stimulus) or a square (not followed by a simple stimulus). This variable is not numerical, but categorical. We thus set it to factor with `as.factor()`.
 
 -   `Subject` contains a different ID number for each subject. This is also a categorical variable.
 
 ## Comparing means
 
-In many paradigms, you have two or more conditions and want to test whether your dependent variable (pupil size in this case!) is significantly different across conditions. In [our example paradigm](..\GettingStarted\CreateYourFirstParadigm.qmd), we may want to test whether, on average, pupil size while looking at the rewarding cue (the circle) is greater than pupil size while looking at the non-rewarding cue (the square). This would mean that even before the reward is presented, infants have learned that a reward will be coming and dilate their pupils in response to it! Pretty cool, uh?
+In many paradigms, you have two or more conditions and want to test whether your dependent variable (pupil size in this case!) is significantly different across conditions. In [our example paradigm](..\GettingStarted\CreateYourFirstParadigm.qmd), we may want to test whether, on average, pupil size while looking at the cue predicting the complex stimulus (the circle) is greater than pupil size while looking at the cue predicting the simple stimulus (the square). If we think of pupil as an index of how interesting or arousing a stimulus will be, this would mean that even before the complex stimulus is presented, infants will dilate their pupil in anticipation of it! Pretty cool, uh?
 
 If we want to test multiple groups, we can use a t-test, an ANOVA or... A linear model! Here, we'll be using a special type of linear model, a mixed-effect model - which is infinitely better for many many reasons \[add link\].
 
@@ -353,7 +353,7 @@ This looks so much better!!! The line fit so much better to the data!! We can al
 summary(additive_model) 
 ```
 
-The fixed effects (*Parametric coefficients*) show a strong negative effect for `Eventquare`, indicating that pupil size for Square is significantly lower than for Circle. This suggests that pupil size is greater when expecting a rewarding stimulus compared to a non-rewarding one.
+The fixed effects (*Parametric coefficients*) show a strong negative effect for `EventSquare`, indicating that pupil size for Square is significantly lower than for Circle. This suggests that pupil size is greater when expecting a complex stimulus compared to a simple one.
 
 The smooth terms indicate whether the non-linear relationships modeled by s() explain significant variance in the data. A significant smooth term confirms that the function captures meaningful, non-linear patterns beyond random noise or simpler terms. While fixed effects are typically more important for hypothesis testing, it’s crucial to ensure the model specification captures the data's fluctuations accurately.
 
