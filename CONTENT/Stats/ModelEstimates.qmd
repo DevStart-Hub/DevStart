@@ -32,7 +32,7 @@ library(lmerTest)
 library(easystats)
 library(tidyverse)
 
-df = read.csv("../../resources/Stats/Dataset.csv")
+df = read.csv("resources/Stats/Dataset.csv")
 df$Id = factor(df$Id) # make sure subject_id is a factor
 df$SES = factor(df$SES) # make sure subject_id is a factor
 df$Event = factor(df$Event) # make sure subject_id is a factor

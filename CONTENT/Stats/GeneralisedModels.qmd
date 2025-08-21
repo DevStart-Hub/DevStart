@@ -34,7 +34,7 @@ library(lme4)
 library(lmerTest)
 
 # Read the data
-df = read.csv("../../resources/Stats/Dataset.csv")
+df = read.csv("resources/Stats/Dataset.csv")
 
 df$Id = factor(df$Id) # make sure subject_id is a factor
 df$StandardTrialN = scale(df$TrialN) # standardize the continuous variable

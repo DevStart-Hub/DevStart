@@ -37,7 +37,7 @@ screensize = (1920, 1080)
 #%% Settings and reading data
 
 # Define paths using pathlib
-base_path = Path('../../resources/FromFixationToData/DATA')
+base_path = Path('resources/FromFixationToData/DATA')
 
 # The fixation data extracted from I2MC
 Fixations = pd.read_csv(base_path / 'i2mc_output' / 'Adult1' / 'Adult1.csv')
@@ -383,7 +383,7 @@ def find_area_for_point(point, areas):
 #%% Settings and reading data
 
 # Define paths using pathlib
-base_path = Path('../../resources/FromFixationToData/DATA')
+base_path = Path('resources/FromFixationToData/DATA')
 
 # The fixation data extracted from I2MC
 Fixations = pd.read_csv(base_path / 'i2mc_output' / 'Adult1' / 'Adult1.csv')

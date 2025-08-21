@@ -150,7 +150,7 @@ Nice!! we have our import function that we will use to read our data. Now, let's
 
 ```{python}
 import os
-os.chdir(r'C:\Users\tomma\OneDrive - Birkbeck, University of London\TomassoGhilardi\PersonalProj\BCCCD\Workshop')
+os.chdir(r'<<< YOUR PATH >>>>')
 ```
 
 This is my directory, you will have something different, you need to change it to where your data are. Once you are done with that we can use glob to find our data files. In the code below, we are telling Python to look for files with a *.csv* extension in a specific folder on our computer:
@@ -384,7 +384,7 @@ def tobii_TX300(fname, res=[1920,1080]):
 #%% Preparation
 
 # Settign the working directory
-os.chdir(r'C:\Users\tomma\OneDrive - Birkbeck, University of London\TomassoGhilardi\PersonalProj\BCCCD\Workshop')
+os.chdir(r'<<< YOUR PATH >>>>')
 
 # Find the files
 data_files = list(Path().glob('DATA/RAW/**/*.csv'))

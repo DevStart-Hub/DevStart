@@ -385,4 +385,85 @@ body main > header div.keywords {
       word-break: break-word;
     }
   }
+
   
+
+/* =================================================
+ INFO BOX
+ Small floating box for supplementary information
+ ================================================= */
+/* Basic Information Box */
+
+.info-box {
+  background-color: #f5fefe;
+  border: 1px solid #00b3b3;
+  border-left: 4px solid #018181;
+  border-radius: 6px;
+  padding: 0.75rem;
+  margin: 0.5rem 1rem 0.5rem 0;
+  width: 250px;
+  max-width: 35%;
+  float: right;
+  clear: right;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #495057;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  
+  p:last-child {
+    margin-bottom: 0;
+  }
+  
+  @media (max-width: 768px) {
+    float: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem 0;
+  }
+}
+
+/* Info box title */
+.info-box-title {
+  font-weight: 700;
+  font-size: .82rem;
+  margin-bottom: 0.01rem;
+  color: #212529;
+}
+
+/* Size variants */
+.info-box-small {
+  width: 200px;
+  max-width: 25%;
+}
+
+.info-box-medium {
+  width: 300px;
+  max-width: 40%;
+}
+
+.info-box-large {
+  width: 400px;
+  max-width: 50%;
+}
+
+/* Better responsive behavior */
+@media (max-width: 1024px) {
+  .info-box {
+    max-width: 45%;
+  }
+}
+
+@media (max-width: 900px) {
+  .info-box {
+    max-width: 60%;
+  }
+}
+
+@media (max-width: 600px) {
+  .info-box {
+    float: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem 0;
+  }
+}
