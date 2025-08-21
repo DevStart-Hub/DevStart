@@ -297,7 +297,7 @@ cookieconsent.run({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CONTENT/Stats/LinearMixedModels.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Linear mixed effect modesl</span></a>
+ <span class="menu-text">Linear mixed effect models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -412,7 +412,7 @@ Why distribution matters
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/runehaubo/lmerTestR">lmerTest</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Read the data</span></span>
-<span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"../../resources/Stats/Dataset.csv"</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"resources/Stats/Dataset.csv"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">Id</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Id</span><span class="op">)</span> <span class="co"># make sure subject_id is a factor</span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">StandardTrialN</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">TrialN</span><span class="op">)</span> <span class="co"># standardize the continuous variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -580,8 +580,8 @@ Important
 Formula: ReactionTime ~ StandardTrialN * Event + (1 + StandardTrialN |      Id)
    Data: df
 
-     AIC      BIC   logLik deviance df.resid 
-  6181.1   6217.0  -3082.5   6165.1      652 
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   6181.1    6217.0   -3082.5    6165.1       652 
 
 Scaled residuals: 
      Min       1Q   Median       3Q      Max 
@@ -640,18 +640,18 @@ StndrdTN:ER -0.032 -0.112  0.345</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Estimated Marginal Effects
 
-StandardTrialN | Comparison        |  Slope |    SE |           95% CI |     t |      p
----------------------------------------------------------------------------------------
--1.65          | Reward - NoReward |  46.99 |  5.41 | [ 36.39,  57.59] |  8.69 | &lt; .001
--1.28          | Reward - NoReward |  72.46 |  6.13 | [ 60.45,  84.47] | 11.83 | &lt; .001
--0.92          | Reward - NoReward |  95.17 |  7.03 | [ 81.39, 108.96] | 13.53 | &lt; .001
--0.55          | Reward - NoReward | 115.44 |  8.13 | [ 99.50, 131.38] | 14.19 | &lt; .001
--0.18          | Reward - NoReward | 133.60 |  9.53 | [114.92, 152.29] | 14.01 | &lt; .001
-0.18           | Reward - NoReward | 149.96 | 11.31 | [127.79, 172.14] | 13.25 | &lt; .001
-0.55           | Reward - NoReward | 164.78 | 13.50 | [138.31, 191.25] | 12.20 | &lt; .001
-0.92           | Reward - NoReward | 178.29 | 16.09 | [146.75, 209.82] | 11.08 | &lt; .001
-1.28           | Reward - NoReward | 190.68 | 19.04 | [153.36, 228.00] | 10.01 | &lt; .001
-1.65           | Reward - NoReward | 202.11 | 22.31 | [158.39, 245.83] |  9.06 | &lt; .001
+StandardTrialN | Comparison        |  Slope |    SE |           95% CI | t(652) |      p
+----------------------------------------------------------------------------------------
+-1.65          | Reward - NoReward |  46.99 |  5.41 | [ 36.37,  57.61] |   8.69 | &lt; .001
+-1.28          | Reward - NoReward |  72.46 |  6.13 | [ 60.43,  84.50] |  11.83 | &lt; .001
+-0.92          | Reward - NoReward |  95.17 |  7.03 | [ 81.36, 108.99] |  13.53 | &lt; .001
+-0.55          | Reward - NoReward | 115.44 |  8.13 | [ 99.47, 131.41] |  14.19 | &lt; .001
+-0.18          | Reward - NoReward | 133.60 |  9.53 | [114.88, 152.32] |  14.01 | &lt; .001
+0.18           | Reward - NoReward | 149.96 | 11.31 | [127.74, 172.18] |  13.25 | &lt; .001
+0.55           | Reward - NoReward | 164.78 | 13.50 | [138.26, 191.30] |  12.20 | &lt; .001
+0.92           | Reward - NoReward | 178.29 | 16.09 | [146.69, 209.88] |  11.08 | &lt; .001
+1.28           | Reward - NoReward | 190.68 | 19.04 | [153.29, 228.07] |  10.01 | &lt; .001
+1.65           | Reward - NoReward | 202.11 | 22.31 | [158.30, 245.91] |   9.06 | &lt; .001
 
 Marginal effects estimated for Event</code></pre>
 </div>
@@ -1197,7 +1197,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
 <span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the data</span></span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"../../resources/Stats/Dataset.csv"</span>)</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"resources/Stats/Dataset.csv"</span>)</span>
 <span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Id <span class="ot">=</span> <span class="fu">factor</span>(df<span class="sc">$</span>Id) <span class="co"># make sure subject_id is a factor</span></span>
 <span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>StandardTrialN <span class="ot">=</span> <span class="fu">scale</span>(df<span class="sc">$</span>TrialN) <span class="co"># standardize the continuous variable</span></span>

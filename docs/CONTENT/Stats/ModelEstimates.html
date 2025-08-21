@@ -439,7 +439,7 @@ cookieconsent.run({
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/easystats/">easystats</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"../../resources/Stats/Dataset.csv"</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"resources/Stats/Dataset.csv"</span><span class="op">)</span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">Id</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Id</span><span class="op">)</span> <span class="co"># make sure subject_id is a factor</span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">SES</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">SES</span><span class="op">)</span> <span class="co"># make sure subject_id is a factor</span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">Event</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Event</span><span class="op">)</span> <span class="co"># make sure subject_id is a factor</span></span>
@@ -980,9 +980,9 @@ Important
 <div class="cell-output cell-output-stdout">
 <pre><code>Marginal Contrasts Analysis
 
-Level1 | Level2   | Difference |   SE |         95% CI |    t |      p
-----------------------------------------------------------------------
-Reward | NoReward |      24.06 | 4.53 | [15.18, 32.94] | 5.31 | &lt; .001
+Level1 | Level2   | Difference |   SE |         95% CI | t(644) |      p
+------------------------------------------------------------------------
+Reward | NoReward |      24.06 | 4.53 | [15.16, 32.96] |   5.31 | &lt; .001
 
 Variable predicted: LookingTime
 Predictors contrasted: StandardTrialN
@@ -999,9 +999,9 @@ p-values are uncorrected.</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Estimated Marginal Effects
 
-Slope  |    SE |           95% CI |     t |     p
--------------------------------------------------
--50.37 | 15.34 | [-80.43, -20.30] | -3.28 | 0.001
+Slope  |    SE |           95% CI | t(644) |     p
+--------------------------------------------------
+-50.37 | 15.34 | [-80.49, -20.25] |  -3.28 | 0.001
 
 Marginal effects estimated for StandardTrialN
 Type of slope was dY/dX</code></pre>
@@ -1035,10 +1035,10 @@ Important
 <div class="cell-output cell-output-stdout">
 <pre><code>Estimated Marginal Effects
 
-Event    |  Slope |    SE |            95% CI |     t |      p
---------------------------------------------------------------
-NoReward | -63.64 | 18.86 | [-100.60, -26.68] | -3.38 | &lt; .001
-Reward   | -39.58 | 18.62 | [ -76.08,  -3.08] | -2.13 |  0.034
+Event    |  Slope |    SE |            95% CI | t(644) |      p
+---------------------------------------------------------------
+NoReward | -63.64 | 18.86 | [-100.67, -26.61] |  -3.38 | &lt; .001
+Reward   | -39.58 | 18.62 | [ -76.15,  -3.02] |  -2.13 |  0.034
 
 Marginal effects estimated for StandardTrialN
 Type of slope was dY/dX</code></pre>
@@ -1053,7 +1053,7 @@ Type of slope was dY/dX</code></pre>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">'bottom'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="ModelEstimates_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="ModelEstimates_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1714,7 +1714,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(easystats)</span>
 <span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-37"><a href="#cb49-37" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"../../resources/Stats/Dataset.csv"</span>)</span>
+<span id="cb49-37"><a href="#cb49-37" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"resources/Stats/Dataset.csv"</span>)</span>
 <span id="cb49-38"><a href="#cb49-38" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Id <span class="ot">=</span> <span class="fu">factor</span>(df<span class="sc">$</span>Id) <span class="co"># make sure subject_id is a factor</span></span>
 <span id="cb49-39"><a href="#cb49-39" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>SES <span class="ot">=</span> <span class="fu">factor</span>(df<span class="sc">$</span>SES) <span class="co"># make sure subject_id is a factor</span></span>
 <span id="cb49-40"><a href="#cb49-40" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Event <span class="ot">=</span> <span class="fu">factor</span>(df<span class="sc">$</span>Event) <span class="co"># make sure subject_id is a factor</span></span>
