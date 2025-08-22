@@ -144,7 +144,7 @@ In these examples (and the next ones), we explored a very simple case. We just p
 
 ```{r}
 #| message: false
-estimate_expectation(mod, by = c("Event = 'Simple'", "SES"))
+estimate_expectation(mod, by = c("Event == 'Simple'", "SES"))
 ```
 
 Remember to learn more at the [modelbased website](https://easystats.github.io/modelbased/articles/estimate_slopes.html) !!
@@ -152,7 +152,7 @@ Remember to learn more at the [modelbased website](https://easystats.github.io/m
 
 ### Continuous
 
-What we have done for the Event can also be done for a continuos vairable!! When we pass a continuous variable to the `by` argument, the function automatically extracts a range of values across that predictor. We can control how many values to sample using the `length` parameter. For example, setting `length=3` will give us predictions at just three points along the range of our continuous variable, while a larger value would provide a more detailed sampling.
+What we have done for the Event can also be done for a continuous variable!! When we pass a continuous variable to the `by` argument, the function automatically extracts a range of values across that predictor. We can control how many values to sample using the `length` parameter. For example, setting `length=3` will give us predictions at just three points along the range of our continuous variable, while a larger value would provide a more detailed sampling.
 
 ```{r}
 estimate_expectation(mod, by = 'StandardTrialN', length=3)
