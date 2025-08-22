@@ -75,7 +75,7 @@ You can see that the data is really simple! We have 4 columns:
 :::::: callout-important
 ## Long format
 
-One important information that we need to keep in mind is that to run `lm()` (and most models!!) in R we need the data in a long format and not a wide format.
+One important information that we need to keep in mind is that to run `lm()` (and most models!!) in R we need the data in a long format and not a wide format. 
 
 In long format, each row represents a single observation. Variables are organized in columns, with one column for the variable names and another for the values. This means that the column you want to model (in the example `LookingTime`) has 1 row for observation but the other columns usually have repeated entries ( e.g. `Id` , `TrialN`, `Event`)
 
