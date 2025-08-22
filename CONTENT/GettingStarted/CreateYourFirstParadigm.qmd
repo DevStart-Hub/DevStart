@@ -144,13 +144,11 @@ complex = visual.ImageStim(win, image=str(stimuli_dir / 'complex.png'), size=(20
 simple = visual.ImageStim(win, image=str(stimuli_dir / 'simple.png'), size=(200, 200), pos=(-250, 0))
 
 # Load sound 
-winning_sound = sound.Sound(str(stimuli_dir / 'winning.wav'))
-losing_sound = sound.Sound(str(stimuli_dir / 'losing.wav'))
+presentation_sound = sound.Sound(str(stimuli_dir / 'presentation.wav'))
 
 # List of stimuli
 cues = [circle, square] # put both cues in a list
 rewards = [complex, simple] # put both rewards in a list
-sounds = [winning_sound,losing_sound] # put both sounds in a list
 
 # Create a list of trials in which 0 means winning and 1 means losing
 Trials = [0, 1, 0, 0, 1, 0, 1, 1, 0, 1 ]
@@ -206,18 +204,17 @@ win.flip()    # we re-flip at the end to clean the window
 
 ## Play a sound:
 
-We have seen how to show a stimulus let's now play the sounds that we have imported. This is extremely simple, we can just `play()` them:
+We have seen how to show a stimulus let's now play the sound that we have imported. This is extremely simple, we can just `play()` it:
 
 ```{python}
-winning_sound.play()
+presentation_sound.play()
 core.wait(2)
-losing_sound.play()
 ```
 
-Great now we have played our two sounds!!
+Great now we have played our sond!!
 
 ::: callout-warning
-When playing a sound the script will continue and will not wait for the sound to have finished playing. So if you play two sounds one after without waiting the two sounds will play overlapping. That's why we have used `core.wait(2)`, this tells PsychoPy to wait 2 seconds after starting to play the sound.
+When playing a sound the script will continue and will not wait for the sound to have finished playing. So if you play two sounds one after without waiting the two sounds will play overlapping. That's why we have used `core.wait(2)` in this example, this tells PsychoPy to wait 2 seconds after starting to play the sound.
 :::
 
 ## Create a trial:
@@ -252,7 +249,7 @@ core.wait(3)  # wait for 3 seconds
 ### Present the complex stimulus 
 complex.draw()
 win.flip()
-winning_sound.play()
+presentation_sound.play()
 core.wait(2)  # wait for 1 second
 win.flip()    # we re-flip at the end to clean the window
 
@@ -273,7 +270,7 @@ core.wait(3)  # wait for 3 seconds
 ### Present the simple stimulus
 simple.draw()
 win.flip()
-losing_sound.play()
+presentation_sound.play()
 core.wait(2)  # wait for 2 second
 win.flip()    # we re-flip at the end to clean the window
 
@@ -341,7 +338,7 @@ Trials = [0, 1, 0, 0, 1, 0, 1, 1, 0, 1 ]
 # List of stimuli
 cues = [circle, square] # put both cues in a list
 targets = [complex, simple] # put both rewards in a list
-sounds = [winning_sound,losing_sound] # put both sounds in a list
+
 ```
 
 Perfect!! Now we can put all the pieces together and run our experiment.
@@ -382,13 +379,11 @@ complex = visual.ImageStim(win, image=str(stimuli_dir / 'complex.png'), size=(20
 simple = visual.ImageStim(win, image=str(stimuli_dir / 'simple.png'), size=(200, 200), pos=(-250, 0))
 
 # Load sound 
-winning_sound = sound.Sound(str(stimuli_dir / 'winning.wav'))
-losing_sound = sound.Sound(str(stimuli_dir / 'losing.wav'))
+presentation_sound = sound.Sound(str(stimuli_dir / 'presentation.wav'))
 
 # List of stimuli
 cues = [circle, square] # put both cues in a list
 targets = [complex, simple] # put both rewards in a list
-sounds = [winning_sound,losing_sound] # put both sounds in a list
 
 # Create a list of trials in which 0 means winning and 1 means losing
 Trials = [0, 1, 0, 0, 1, 0, 1, 1, 0, 1 ]
@@ -404,7 +399,7 @@ for trial in Trials:
 
     fixation.draw()
     win.flip()
-    core.wait(1)  # wait for 1 second
+    core.wait(1)  # wait for j,1 second
 
 
     ### Present the cue
@@ -416,7 +411,7 @@ for trial in Trials:
     ### Present the target stimulus
     targets[trial].draw()
     win.flip()
-    sounds[trial].play()
+    presentation_sound.play()
     core.wait(2)  # wait for 1 second
     win.flip()    # we re-flip at the end to clean the window
 
