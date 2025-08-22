@@ -453,8 +453,8 @@ cookieconsent.run({
 <p>What can we do with just the raw data and the fixations? Not much I am afraid. But we can use these fixations to extract some more meaningful indexes.</p>
 <p>In this tutorial, we will look at how to extract two variables from our paradigm:</p>
 <ul>
-<li><p><strong>Saccadic latency:</strong> how quickly our participant looked at the correct location. This includes checking whether the participant could anticipate the stimulus appearance. In our paradigm, we will look at how fast our participant looked at the target location (left: NoReward, right: Reward).</p></li>
-<li><p><strong>Looking time:</strong> how long our participant looked at certain locations on the screen. In our case, we will look at how long our participant looked at either target location (left: NoReward, right: Reward) on each trial.</p></li>
+<li><p><strong>Saccadic latency:</strong> how quickly our participant looked at the correct location. This includes checking whether the participant could anticipate the stimulus appearance. In our paradigm, we will look at how fast our participant looked at the target location (left: Simple stimulus, right: Complex stimulus).</p></li>
+<li><p><strong>Looking time:</strong> how long our participant looked at certain locations on the screen. In our case, we will look at how long our participant looked at either target location (left: Simple stimulus, right: Complex stimulus) on each trial.</p></li>
 </ul>
 <p>So what do these two measures have in common? <em>pregnant pause for you to answer</em> EXACTLY!!! They are both clearly related to the position of our stimuli. For this reason, it is important to define Areas Of Interest (AOIs) on the screen (for example, the locations of the targets). Defining AOIs will allow us to check, for each single fixation, whether it happened in an area that we are interested in.</p>
 <section id="areas-of-interest" class="level1">
@@ -468,7 +468,7 @@ cookieconsent.run({
 <li><p>Tobii reports data with its origin (0,0) in the lower left corner.</p></li>
 </ul>
 <p>This inconsistency is not a problem per se, but we need to take it into account when defining the AOIs. Let’s try to define the AOIs:</p>
-<div id="f70e9e7f" class="cell" data-execution_count="2">
+<div id="71a2d38f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Screen resolution</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>screensize <span class="op">=</span> (<span class="dv">1920</span>, <span class="dv">1080</span>) </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -484,7 +484,7 @@ cookieconsent.run({
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>AOIs <span class="op">=</span> [AOI1, AOI2]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nice!! This step is essential. We have created two AOIs. We will use them to define whether each fixation of our participant was within either of these two AOIs. Let’s get a better idea by just plotting these two AOIs and two random points <code>(600, 500)</code> and <code>(1400,1000)</code>.</p>
-<div id="19257bb8" class="cell" data-execution_count="3">
+<div id="72255f80" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -532,7 +532,7 @@ cookieconsent.run({
 </figure>
 </div>
 <p>So imagine we have a point: <code>point</code> and an area: <code>area</code>, we can check if the point falls inside the area by:</p>
-<div id="68ea99b1" class="cell" data-execution_count="4">
+<div id="0ba0fdd9" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract bottom left and top right points</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bottom_left, top_right <span class="op">=</span> area</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -548,7 +548,7 @@ cookieconsent.run({
 </div>
 <p>Perfect, this will return True if the point falls inside the area and False if it falls outside. Since we have two AOIs and not just one, we want to make things a bit fancier. We will create a function that checks if a point falls within a list of areas, and tells us which area it falls in.</p>
 <p>We will run the code above in a loop using <code>enumerate</code>. This extracts two elements to our loop: the index of the element and the element itself. In our case the index of the area and the area itself. This is very useful as we can then use both of these two pieces of information. We will use the actual area to check if our points fall into it. Then, if it does, we will return the index of that area. Conversely, if the point doesn’t fall in any area the function will return -1.</p>
-<div id="3188af10" class="cell" data-execution_count="5">
+<div id="68a7f613" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We define a function that simply takes the a point and a list of areas.</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This function checks in which area this point is and return the index</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of the area. If the point is in no area it returns -1</span></span>
@@ -575,21 +575,21 @@ cookieconsent.run({
 </section>
 <section id="time-of-interest" class="level1">
 <h1>Time Of Interest</h1>
-<p>Now that we’ve figured out how to select fixations that fall within our areas of interest, it’s time to consider another important factor: Time. Our experiment involves presenting a variety of stimuli, including fixation crosses, cues, and rewards. , we’re not interested in analyzing the entire experiment. Instead, we focus on specific events.</p>
-<p>Let’s take a look at the design image. What we are interest in is the last part of the target presentation.</p>
+<p>Now that we’ve figured out how to select fixations that fall within our areas of interest, it’s time to consider another important factor: Time. Our experiment involves presenting a variety of stimuli, including fixation crosses, cues, and target stimuli. , we’re not interested in analyzing the entire experiment. Instead, we focus on specific events.</p>
+<p>Let’s take a look at the design image. What we are interest in is the last part, the target presentation.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../..\images/FromDataToMeasures/DesignSelection.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="495"></p>
 </figure>
 </div>
-<p>In this case, our attention is on the target window. We’re going to establish a time window that begins 750ms before the target appears and continues for 2000ms after its pentation. Indeed, both <strong>Saccadic latency</strong> and <strong>Lookign time</strong> occur within this time window, while we don’t really care about where the participant is looking during other phases of the task.</p>
+<p>In this case, our attention is on the target window. We’re going to establish a time window that begins 750ms before the target appears and continues for 2000ms after its presentation. Indeed, both <strong>Saccadic latency</strong> and <strong>Lookign time</strong> occur within this time window, while we don’t really care about where the participant is looking during other phases of the task.</p>
 <p>Let’s start by finding the moment in which the target appeared:</p>
-<div id="be7fdae4" class="cell" data-execution_count="6">
+<div id="da805c03" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's find the time we presented a reward or no reward</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Targets <span class="op">=</span> Raw_data.loc[(Raw_data[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Reward'</span>) <span class="op">|</span> (Raw_data[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'NoReward'</span>), [<span class="st">'time'</span>, <span class="st">'Event'</span>]].values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Targets <span class="op">=</span> Raw_data.loc[(Raw_data[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Complex'</span>) <span class="op">|</span> (Raw_data[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Simple'</span>), [<span class="st">'time'</span>, <span class="st">'Event'</span>]].values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Having identified the moments when the targets were presented, we can now establish a time window around each of these instances. To accomplish this, we will iterate over the identified times and select all the fixations that occur within the defined window. To make things clearer, we’re going to add two new columns to our fixation dataframe: <code>Event</code> and <code>TrialN</code>. These will help us know which event each fixation is linked to, and which specific trial it belongs to. Plus, we’re going to add another column called <code>Onset</code> to the fixations dataframe. This will let us store the onset times of specific events, making our analysis down the line a whole lot simpler.</p>
-<div id="667d59d2" class="cell" data-execution_count="7">
+<div id="dbf9c70a" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the fixations that we care about</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>pre  <span class="op">=</span> <span class="op">-</span><span class="dv">750</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>post <span class="op">=</span> <span class="dv">2000</span></span>
@@ -611,7 +611,7 @@ cookieconsent.run({
 </figure>
 </div>
 <p>We can use this to our advantage and filter all the NANs out:</p>
-<div id="5edce423" class="cell" data-execution_count="8">
+<div id="5ecee74a" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We can drop the NANs to have only the fixations that interest us!!!!</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>Target_fixations <span class="op">=</span> Fixations[Fixations[<span class="st">'Event'</span>].notna()].reset_index(drop <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -633,12 +633,12 @@ Important
 <p>Just a heads up: our study design is pretty straightforward with only two stable Areas of Interest (AOIs). But if you’re dealing with multiple or moving AOIs, you’ve got options. You can add them to each row of the dataframe, depending on the event or trial. This way, you get more control over which area to inspect at any given moment of the study. It’s all about flexibility and precision!</p>
 </div>
 </div>
-<div id="92e9c658" class="cell" data-execution_count="9">
+<div id="5b5658d5" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Target_fixations[<span class="st">'AOIs'</span>] <span class="op">=</span> [AOIs]<span class="op">*</span> <span class="bu">len</span>(Target_fixations)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>Target_fixations[<span class="st">'Looked_AOI'</span>] <span class="op">=</span> np.nan</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now that we have a column with the AOIs in our Target_fixations dataframe, we can run our function <code>find_area_for_point()</code> to check in which AOI each fixation falls.</p>
-<div id="f2a53030" class="cell" data-execution_count="10">
+<div id="12fcd059" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We run the function  for each row. We pass each xpos and ypos to the function</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># toghether with the areas</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(Target_fixations)):</span>
@@ -649,7 +649,7 @@ Important
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    Target_fixations.loc[row, <span class="st">'Looked_AOI'</span>] <span class="op">=</span> find_area_for_point(Point, Areas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Perfect, we now have a dataframe that contains only the fixations of interest and tells us which AOI each fixation is in. Before we continue, let’s remove the fixations that didn’t fall in any AOI (if you remember or the function assigns -1 if the fixation is outside any AOI):</p>
-<div id="c3706699" class="cell" data-execution_count="11">
+<div id="49391691" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for AOI of interest</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>Target_fixations <span class="op">=</span> Target_fixations[Target_fixations[<span class="st">'Looked_AOI'</span>] <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -659,16 +659,16 @@ Important
 <p>As I mentioned at the beginning of this tutorial, one of the indices we want to extract is saccadic latency. Basically, this indicates how quickly our participants fixated on the correct target location.</p>
 <p>If we know where our participant was supposed to look, we can easily find the first fixation. Sounds simple, right?</p>
 <p>In our paradigm, the non-rewarding stimulus was always presented on the left (the first AOI we defined) and the rewarding stimulus was always presented on the right (the second AOI we defined). Thus we can add this information to our dataframe and then use it to filter out the wrong fixations:</p>
-<div id="626e3d5d" class="cell" data-message="false" data-execution_count="12">
+<div id="dbfe394c" class="cell" data-message="false" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We define which is the correct AOI that the participant should have looked at.</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>Target_fixations.loc[Target_fixations[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'NoReward'</span>, <span class="st">'Correct_Aoi'</span>] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>Target_fixations.loc[Target_fixations[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Reward'</span>  , <span class="st">'Correct_Aoi'</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>Target_fixations.loc[Target_fixations[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Simple'</span>, <span class="st">'Correct_Aoi'</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>Target_fixations.loc[Target_fixations[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Complex'</span>  , <span class="st">'Correct_Aoi'</span>] <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We select only the correct fixations</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>Correct_Target_fixations <span class="op">=</span> Target_fixations.loc[Target_fixations[<span class="st">'Correct_Aoi'</span>] <span class="op">==</span> Target_fixations[<span class="st">'Looked_AOI'</span>],]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can finally extract the saccadic latency by simply subtracting from the onset of the fixations (<code>startT</code>) the event <code>Onset</code>:</p>
-<div id="0b9e2c19" class="cell" data-execution_count="13">
+<div id="ac4d0e4d" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Correct_Target_fixations[<span class="st">'Latency'</span>] <span class="op">=</span> Correct_Target_fixations[<span class="st">'startT'</span>] <span class="op">-</span> Correct_Target_fixations[<span class="st">'Onset'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Voilá!! as simple as this!!! Now our <code>Latency</code> column will contain the onset of the fixations in relation to the target presentation.</p>
@@ -689,13 +689,13 @@ Note
 <h2 class="anchored" data-anchor-id="first-fixation">First fixation</h2>
 <p>We have all these latency values, but we only want the first/fastest of each trial. How can we extract this information easily? We will use groupby. Groupby allows us to perform specific functions/commands on grouped sections of a data frame.</p>
 <p>Here we will groupby by Events and TrialN and for each of these grouped pieces of dataframe we will extract the smallest (<code>min()</code>) value of latency.</p>
-<div id="b0836415" class="cell" data-execution_count="14">
+<div id="b1d414b1" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We extract the first fixation of our dataframe for each event</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>SaccadicLatency <span class="op">=</span> Correct_Target_fixations.groupby([<span class="st">'Event'</span>, <span class="st">'TrialN'</span>])[<span class="st">'Latency'</span>].<span class="bu">min</span>().reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here we have our <strong>Saccadic latency</strong>!!!</p>
 <p>Once our dataset is ready, we might want to visualise the data. For example, we can plot how saccadic latency changes across trials with seaborn:</p>
-<div id="e3cc64bf" class="cell" data-execution_count="15">
+<div id="94b1e969" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns <span class="co"># import seaborn</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -721,12 +721,12 @@ Note
 <h1>Looking time</h1>
 <p>While our paradigm was designed with saccadic latency in mind, for the purposes of this tutorial we will also be looking at the extraction of looking time. Looking time is a measure that tells us how much our participant was looking in either of the two AOIs at each trial.</p>
 <p>We have already extracted all the information we need, we just need to do the final steps. We will again use groupby to group our dataframe by <code>Event</code>, <code>TrialN</code> and <code>Looked_AOI</code>. For each of the grouped dataframes, we will extract the <code>sum()</code> of each fixation duration. This will tell us how much the participant looked at each of the two AOIs for each trial.</p>
-<div id="7f3d2ad2" class="cell" data-execution_count="16">
+<div id="6a72056f" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using groupby we can extract the sum of the duration of the fixation for each reward and trial</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>LookingTime <span class="op">=</span> Target_fixations.groupby([<span class="st">'Event'</span>, <span class="st">'TrialN'</span>, <span class="st">'Looked_AOI'</span>], as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">'dur'</span>].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Again, we can now visualize the data. For example, we can plot whether looking time to rewarding vs.&nbsp;non-rewarding stimuli:</p>
-<div id="abc50d00" class="cell" data-execution_count="17">
+<p>Again, we can now visualize the data. For example, we can plot whether looking time to complex vs simple stimulus:</p>
+<div id="9556057c" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Barplot</span></span>
@@ -816,7 +816,7 @@ Here below the entire script!!<br>
 <span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a><span class="co">#%% Time of interest</span></span>
 <span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's find the time we presented a reward or no reward</span></span>
-<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a>Targets <span class="op">=</span> Raw_data.loc[(Raw_data[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Reward'</span>) <span class="op">|</span> (Raw_data[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'NoReward'</span>), [<span class="st">'time'</span>, <span class="st">'Event'</span>]].values</span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a>Targets <span class="op">=</span> Raw_data.loc[(Raw_data[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Complex'</span>) <span class="op">|</span> (Raw_data[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Simple'</span>), [<span class="st">'time'</span>, <span class="st">'Event'</span>]].values</span>
 <span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the fixations that we care about</span></span>
 <span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a>pre  <span class="op">=</span> <span class="op">-</span><span class="dv">750</span></span>
@@ -860,8 +860,8 @@ Here below the entire script!!<br>
 <span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a><span class="co">#%% Saccadic Latency</span></span>
 <span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a><span class="co"># We define which is the correct AOI that the participant should have looked at.</span></span>
-<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a>Target_fixations.loc[Target_fixations[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'NoReward'</span>, <span class="st">'Correct_Aoi'</span>] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a>Target_fixations.loc[Target_fixations[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Reward'</span>  , <span class="st">'Correct_Aoi'</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a>Target_fixations.loc[Target_fixations[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Simple'</span>, <span class="st">'Correct_Aoi'</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a>Target_fixations.loc[Target_fixations[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Complex'</span>  , <span class="st">'Correct_Aoi'</span>] <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a><span class="co"># We select only the correct fixations</span></span>
 <span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a>Correct_Target_fixations <span class="op">=</span> Target_fixations[Target_fixations[<span class="st">'Correct_Aoi'</span>] <span class="op">==</span> Target_fixations[<span class="st">'Looked_AOI'</span>]]</span>
@@ -1444,9 +1444,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>In this tutorial, we will look at how to extract two variables from our paradigm:</span>
 <span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Saccadic latency:** how quickly our participant looked at the correct location. This includes checking whether the participant could anticipate the stimulus appearance. In our paradigm, we will look at how fast our participant looked at the target location (left: NoReward, right: Reward).</span>
+<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Saccadic latency:** how quickly our participant looked at the correct location. This includes checking whether the participant could anticipate the stimulus appearance. In our paradigm, we will look at how fast our participant looked at the target location (left: Simple stimulus, right: Complex stimulus).</span>
 <span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Looking time:** how long our participant looked at certain locations on the screen. In our case, we will look at how long our participant looked at either target location (left: NoReward, right: Reward) on each trial.</span>
+<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Looking time:** how long our participant looked at certain locations on the screen. In our case, we will look at how long our participant looked at either target location (left: Simple stimulus, right: Complex stimulus) on each trial.</span>
 <span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a>So what do these two measures have in common? *pregnant pause for you to answer* EXACTLY!!! They are both clearly related to the position of our stimuli. For this reason, it is important to define Areas Of Interest (AOIs) on the screen (for example, the locations of the targets). Defining AOIs will allow us to check, for each single fixation, whether it happened in an area that we are interested in.</span>
 <span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a></span>
@@ -1569,19 +1569,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb19-185"><a href="#cb19-185" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-186"><a href="#cb19-186" aria-hidden="true" tabindex="-1"></a><span class="fu"># Time Of Interest</span></span>
 <span id="cb19-187"><a href="#cb19-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-188"><a href="#cb19-188" aria-hidden="true" tabindex="-1"></a>Now that we've figured out how to select fixations that fall within our areas of interest, it's time to consider another important factor: Time. Our experiment involves presenting a variety of stimuli, including fixation crosses, cues, and rewards. , we're not interested in analyzing the entire experiment. Instead, we focus on specific events.</span>
+<span id="cb19-188"><a href="#cb19-188" aria-hidden="true" tabindex="-1"></a>Now that we've figured out how to select fixations that fall within our areas of interest, it's time to consider another important factor: Time. Our experiment involves presenting a variety of stimuli, including fixation crosses, cues, and target stimuli. , we're not interested in analyzing the entire experiment. Instead, we focus on specific events.</span>
 <span id="cb19-189"><a href="#cb19-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-190"><a href="#cb19-190" aria-hidden="true" tabindex="-1"></a>Let's take a look at the design image. What we are interest in is the last part of the target presentation.</span>
+<span id="cb19-190"><a href="#cb19-190" aria-hidden="true" tabindex="-1"></a>Let's take a look at the design image. What we are interest in is the last part, the target presentation.</span>
 <span id="cb19-191"><a href="#cb19-191" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-192"><a href="#cb19-192" aria-hidden="true" tabindex="-1"></a><span class="al">![](/images/FromDataToMeasures/DesignSelection.jpg)</span>{fig-align="center" width="495"}</span>
 <span id="cb19-193"><a href="#cb19-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-194"><a href="#cb19-194" aria-hidden="true" tabindex="-1"></a>In this case, our attention is on the target window. We're going to establish a time window that begins 750ms before the target appears and continues for 2000ms after its pentation. Indeed, both **Saccadic latency** and **Lookign time** occur within this time window, while we don't really care about where the participant is looking during other phases of the task.</span>
+<span id="cb19-194"><a href="#cb19-194" aria-hidden="true" tabindex="-1"></a>In this case, our attention is on the target window. We're going to establish a time window that begins 750ms before the target appears and continues for 2000ms after its presentation. Indeed, both **Saccadic latency** and **Lookign time** occur within this time window, while we don't really care about where the participant is looking during other phases of the task.</span>
 <span id="cb19-195"><a href="#cb19-195" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-196"><a href="#cb19-196" aria-hidden="true" tabindex="-1"></a>Let's start by finding the moment in which the target appeared:</span>
 <span id="cb19-197"><a href="#cb19-197" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-200"><a href="#cb19-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb19-201"><a href="#cb19-201" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's find the time we presented a reward or no reward</span></span>
-<span id="cb19-202"><a href="#cb19-202" aria-hidden="true" tabindex="-1"></a>Targets <span class="op">=</span> Raw_data.loc[(Raw_data[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Reward'</span>) <span class="op">|</span> (Raw_data[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'NoReward'</span>), [<span class="st">'time'</span>, <span class="st">'Event'</span>]].values</span>
+<span id="cb19-202"><a href="#cb19-202" aria-hidden="true" tabindex="-1"></a>Targets <span class="op">=</span> Raw_data.loc[(Raw_data[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Complex'</span>) <span class="op">|</span> (Raw_data[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Simple'</span>), [<span class="st">'time'</span>, <span class="st">'Event'</span>]].values</span>
 <span id="cb19-203"><a href="#cb19-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb19-204"><a href="#cb19-204" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-205"><a href="#cb19-205" aria-hidden="true" tabindex="-1"></a>Having identified the moments when the targets were presented, we can now establish a time window around each of these instances. To accomplish this, we will iterate over the identified times and select all the fixations that occur within the defined window. To make things clearer, we're going to add two new columns to our fixation dataframe: <span class="in">`Event`</span> and <span class="in">`TrialN`</span>. These will help us know which event each fixation is linked to, and which specific trial it belongs to. Plus, we're going to add another column called <span class="in">`Onset`</span> to the fixations dataframe. This will let us store the onset times of specific events, making our analysis down the line a whole lot simpler.</span>
@@ -1660,8 +1660,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb19-290"><a href="#cb19-290" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
 <span id="cb19-291"><a href="#cb19-291" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
 <span id="cb19-292"><a href="#cb19-292" aria-hidden="true" tabindex="-1"></a><span class="co"># We define which is the correct AOI that the participant should have looked at.</span></span>
-<span id="cb19-293"><a href="#cb19-293" aria-hidden="true" tabindex="-1"></a>Target_fixations.loc[Target_fixations[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'NoReward'</span>, <span class="st">'Correct_Aoi'</span>] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb19-294"><a href="#cb19-294" aria-hidden="true" tabindex="-1"></a>Target_fixations.loc[Target_fixations[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Reward'</span>  , <span class="st">'Correct_Aoi'</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb19-293"><a href="#cb19-293" aria-hidden="true" tabindex="-1"></a>Target_fixations.loc[Target_fixations[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Simple'</span>, <span class="st">'Correct_Aoi'</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb19-294"><a href="#cb19-294" aria-hidden="true" tabindex="-1"></a>Target_fixations.loc[Target_fixations[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Complex'</span>  , <span class="st">'Correct_Aoi'</span>] <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb19-295"><a href="#cb19-295" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-296"><a href="#cb19-296" aria-hidden="true" tabindex="-1"></a><span class="co"># We select only the correct fixations</span></span>
 <span id="cb19-297"><a href="#cb19-297" aria-hidden="true" tabindex="-1"></a>Correct_Target_fixations <span class="op">=</span> Target_fixations.loc[Target_fixations[<span class="st">'Correct_Aoi'</span>] <span class="op">==</span> Target_fixations[<span class="st">'Looked_AOI'</span>],]</span>
@@ -1720,7 +1720,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb19-358"><a href="#cb19-358" aria-hidden="true" tabindex="-1"></a>LookingTime <span class="op">=</span> Target_fixations.groupby([<span class="st">'Event'</span>, <span class="st">'TrialN'</span>, <span class="st">'Looked_AOI'</span>], as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">'dur'</span>].<span class="bu">sum</span>()</span>
 <span id="cb19-359"><a href="#cb19-359" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb19-360"><a href="#cb19-360" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-361"><a href="#cb19-361" aria-hidden="true" tabindex="-1"></a>Again, we can now visualize the data. For example, we can plot whether looking time to rewarding vs. non-rewarding stimuli:</span>
+<span id="cb19-361"><a href="#cb19-361" aria-hidden="true" tabindex="-1"></a>Again, we can now visualize the data. For example, we can plot whether looking time to complex vs simple stimulus:</span>
 <span id="cb19-362"><a href="#cb19-362" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-365"><a href="#cb19-365" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb19-366"><a href="#cb19-366" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-align: "center"</span></span>
@@ -1807,7 +1807,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb19-447"><a href="#cb19-447" aria-hidden="true" tabindex="-1"></a><span class="co">#%% Time of interest</span></span>
 <span id="cb19-448"><a href="#cb19-448" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-449"><a href="#cb19-449" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's find the time we presented a reward or no reward</span></span>
-<span id="cb19-450"><a href="#cb19-450" aria-hidden="true" tabindex="-1"></a>Targets <span class="op">=</span> Raw_data.loc[(Raw_data[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Reward'</span>) <span class="op">|</span> (Raw_data[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'NoReward'</span>), [<span class="st">'time'</span>, <span class="st">'Event'</span>]].values</span>
+<span id="cb19-450"><a href="#cb19-450" aria-hidden="true" tabindex="-1"></a>Targets <span class="op">=</span> Raw_data.loc[(Raw_data[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Complex'</span>) <span class="op">|</span> (Raw_data[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Simple'</span>), [<span class="st">'time'</span>, <span class="st">'Event'</span>]].values</span>
 <span id="cb19-451"><a href="#cb19-451" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-452"><a href="#cb19-452" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the fixations that we care about</span></span>
 <span id="cb19-453"><a href="#cb19-453" aria-hidden="true" tabindex="-1"></a>pre  <span class="op">=</span> <span class="op">-</span><span class="dv">750</span></span>
@@ -1851,8 +1851,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb19-491"><a href="#cb19-491" aria-hidden="true" tabindex="-1"></a><span class="co">#%% Saccadic Latency</span></span>
 <span id="cb19-492"><a href="#cb19-492" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-493"><a href="#cb19-493" aria-hidden="true" tabindex="-1"></a><span class="co"># We define which is the correct AOI that the participant should have looked at.</span></span>
-<span id="cb19-494"><a href="#cb19-494" aria-hidden="true" tabindex="-1"></a>Target_fixations.loc[Target_fixations[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'NoReward'</span>, <span class="st">'Correct_Aoi'</span>] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb19-495"><a href="#cb19-495" aria-hidden="true" tabindex="-1"></a>Target_fixations.loc[Target_fixations[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Reward'</span>  , <span class="st">'Correct_Aoi'</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb19-494"><a href="#cb19-494" aria-hidden="true" tabindex="-1"></a>Target_fixations.loc[Target_fixations[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Simple'</span>, <span class="st">'Correct_Aoi'</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb19-495"><a href="#cb19-495" aria-hidden="true" tabindex="-1"></a>Target_fixations.loc[Target_fixations[<span class="st">'Event'</span>] <span class="op">==</span> <span class="st">'Complex'</span>  , <span class="st">'Correct_Aoi'</span>] <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb19-496"><a href="#cb19-496" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-497"><a href="#cb19-497" aria-hidden="true" tabindex="-1"></a><span class="co"># We select only the correct fixations</span></span>
 <span id="cb19-498"><a href="#cb19-498" aria-hidden="true" tabindex="-1"></a>Correct_Target_fixations <span class="op">=</span> Target_fixations[Target_fixations[<span class="st">'Correct_Aoi'</span>] <span class="op">==</span> Target_fixations[<span class="st">'Looked_AOI'</span>]]</span>
