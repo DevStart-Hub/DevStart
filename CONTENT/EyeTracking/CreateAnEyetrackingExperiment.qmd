@@ -21,6 +21,14 @@ This page will show you how to collect eye-tracking data in a simple Psychopy pa
 Note that this tutorial is specific for using **Tobii eye-trackers**. The general steps and idea are obviously applicable to other eye-trackers, but the specific code and packages may vary.
 :::
 
+::: callout-note
+**Our Approach**
+
+The method we'll show you here is designed to be **simple and functional** rather than the most efficient or sophisticated approach possible. There are more advanced techniques for handling eye tracking data collection, buffer management, and event synchronization, but we've prioritized code that's easy to understand and modify.
+
+Our goal is to get you up and running with a working eye tracking experiment that you can build upon. Once you're comfortable with these basics, you can always optimize and refine your approach for more demanding applications.
+:::
+
 # Tobii_sdk
 
 To start, we will look into how to connect and talk to our Tobii eyetracker with the **SDK** that Tobii provides. An **SDK** is a collection of tools and programs for developing applications for a specific platform or device. We will use the **Python Tobii SDK** that lets us easily find and get data from our Tobii eye tracker.
@@ -406,7 +414,7 @@ Now we have two functions: one to collect eye tracking data and another to save 
 
 We'll use the experimental design from [Getting started with PsychoPy](/CONTENT/GettingStarted/GettingStartedWithPsychopy.qmd) and add eye tracking to it. If you need a refresher on the paradigm, take a quick look at that tutorial.
 
-Here's a brief summary: After a fixation cross, participants see either a circle or square. The circle predicts a reward will appear on the right side of the screen, while the square predicts an empty cloud will appear on the left.
+Here's a brief summary: After a fixation cross, participants see either a circle or square. The circle predicts a complex shape that will appear on the right side of the screen, while the square predicts a simple shape will on the left.
 
 ## Putting It All Together
 
@@ -495,7 +503,7 @@ Now let's set up our experiment window and load all the stimuli. This part is id
 #%% Load and prepare stimuli
 
 # Setting the directory of our experiment
-os.chdir(r'C:\Users\tomma\OneDrive - Birkbeck, University of London\TomassoGhilardi\PersonalProj\BCCCD')
+os.chdir(r'<<< YOUR PATH >>>>')
 
 # Now create a Path object for the stimuli directory
 stimuli_dir = Path('EXP') / 'Stimuli'
@@ -506,15 +514,13 @@ circle = visual.ImageStim(win, image=str(stimuli_dir / 'circle.png'), size=(200,
 square = visual.ImageStim(win, image=str(stimuli_dir / 'square.png'), size=(200, 200))
 complex = visual.ImageStim(win, image=str(stimuli_dir / 'complex.png'), size=(200, 200), pos=(250, 0))
 simple = visual.ImageStim(win, image=str(stimuli_dir / 'simple.png'), size=(200, 200), pos=(-250, 0))
-complex = visual.ImageStim(win, image=str(stimuli_dir / 'complex.png'), size=(200, 200), pos=(250, 0))
-simple = visual.ImageStim(win, image=str(stimuli_dir / 'simple.png'), size=(200, 200), pos=(-250, 0))
 
 # Load sound 
 presentation_sound = sound.Sound(str(stimuli_dir / 'presentation.wav'))
 
 # List of stimuli
 cues = [circle, square] # put both cues in a list
-rewards = [complex, simple] # put both rewards in a list
+targets = [complex, simple] # put both rewards in a list
 
 # Create a list of trials in which 0 means winning and 1 means losing
 Trials = [0, 1, 0, 0, 1, 0, 1, 1, 0, 1 ]
@@ -585,10 +591,9 @@ for trial in Trials:
     
     ### ISI and save data
     win.flip()
-    remaining_time = 1 - clock.getTime()
+    clock = core.Clock()  # start the clock
     write_buffer_to_file(gaze_data_buffer, Path('DATA') / 'RAW' / (Sub + '.csv'))
-    if remaining_time > 0:
-        core.wait(remaining_time)
+    core.wait(1 - clock.getTime()) # wait for remaining time
     
     ### Check for escape key to exit
     keys = event.getKeys()
@@ -603,11 +608,11 @@ As we said before in \[Save the data\], it's best to save data during our study 
 Our ISI starts the clock and saves the data immediately. After saving, we calculate how much time remains to reach the full 1-second duration and use core.wait() for any remaining time. This ensures we wait for exactly 1 second total, accounting for the time spent saving data.
 
 ```{python}
-### ISI
-remaining_time = 1 - clock.getTime()
+### ISI and save data
+win.flip()
+clock = core.Clock()  # start the clock
 write_buffer_to_file(gaze_data_buffer, Path('DATA') / 'RAW' / (Sub + '.csv'))
-if remaining_time > 0:
-    core.wait(remaining_time)
+core.wait(1 - clock.getTime()) # wait for remaining time
 ```
 
 ::: callout-warning
@@ -722,15 +727,13 @@ circle = visual.ImageStim(win, image=str(stimuli_dir / 'circle.png'), size=(200,
 square = visual.ImageStim(win, image=str(stimuli_dir / 'square.png'), size=(200, 200))
 complex = visual.ImageStim(win, image=str(stimuli_dir / 'complex.png'), size=(200, 200), pos=(250, 0))
 simple = visual.ImageStim(win, image=str(stimuli_dir / 'simple.png'), size=(200, 200), pos=(-250, 0))
-complex = visual.ImageStim(win, image=str(stimuli_dir / 'complex.png'), size=(200, 200), pos=(250, 0))
-simple = visual.ImageStim(win, image=str(stimuli_dir / 'simple.png'), size=(200, 200), pos=(-250, 0))
 
 # Load sound 
 presentation_sound = sound.Sound(str(stimuli_dir / 'presentation.wav'))
 
 # List of stimuli
 cues = [circle, square] # put both cues in a list
-rewards = [complex, simple] # put both rewards in a list
+targets = [complex, simple] # put both rewards in a list
 
 # Create a list of trials in which 0 means winning and 1 means losing
 Trials = [0, 1, 0, 0, 1, 0, 1, 1, 0, 1]
@@ -779,7 +782,7 @@ for trial in Trials:
     core.wait(0.75)
 
     ### Present the targets
-    rewards[trial].draw()
+    targets[trial].draw()
     win.flip()
     if trial == 0:
         Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Complex'})
@@ -789,10 +792,11 @@ for trial in Trials:
     presentation_sound.play()
     core.wait(2)  # wait for 2 seconds
     
-    ### ISI
-    win.flip()    # we re-flip at the end to clean the window
-    write_buffer_to_file(Path('DATA') / 'RAW' / (Sub + '.csv'))
-    core.wait(1)
+    ### ISI and save data
+    win.flip()
+    clock = core.Clock()  # start the clock
+    write_buffer_to_file(gaze_data_buffer, Path('DATA') / 'RAW' / (Sub + '.csv'))
+    core.wait(1 - clock.getTime()) # wait for remaining time
     
     ### Check for closing experiment
     keys = event.getKeys() # collect list of pressed keys
