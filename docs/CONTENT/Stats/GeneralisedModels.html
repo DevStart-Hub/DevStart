@@ -297,7 +297,7 @@ cookieconsent.run({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CONTENT/Stats/LinearMixedModels.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Linear mixed effect modesl</span></a>
+ <span class="menu-text">Linear mixed effect models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -412,7 +412,7 @@ Why distribution matters
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/runehaubo/lmerTestR">lmerTest</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Read the data</span></span>
-<span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"../../resources/Stats/Dataset.csv"</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"resources/Stats/Dataset.csv"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">Id</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Id</span><span class="op">)</span> <span class="co"># make sure subject_id is a factor</span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">StandardTrialN</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">TrialN</span><span class="op">)</span> <span class="co"># standardize the continuous variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -443,7 +443,7 @@ Why distribution matters
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Event</span>, y <span class="op">=</span> <span class="va">ReactionTime</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">Event</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">.5</span>, color <span class="op">=</span> <span class="st">'transparent'</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.8</span>, outlier.color <span class="op">=</span> <span class="st">"darkred"</span>, width <span class="op">=</span> <span class="fl">.2</span>, lwd <span class="op">=</span> <span class="fl">1.2</span>, outlier.size <span class="op">=</span><span class="fl">4</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'NoReward'</span> <span class="op">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Reward'</span> <span class="op">=</span> <span class="st">'#E2725A'</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Simple'</span> <span class="op">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Complex'</span> <span class="op">=</span> <span class="st">'#E2725A'</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">'bottom'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -580,8 +580,8 @@ Important
 Formula: ReactionTime ~ StandardTrialN * Event + (1 + StandardTrialN |      Id)
    Data: df
 
-     AIC      BIC   logLik deviance df.resid 
-  6181.1   6217.0  -3082.5   6165.1      652 
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   6181.1    6217.0   -3082.5    6165.1       652 
 
 Scaled residuals: 
      Min       1Q   Median       3Q      Max 
@@ -624,8 +624,8 @@ StndrdTN:ER -0.032 -0.112  0.345</code></pre>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_ribbon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">Predicted</span> <span class="op">-</span> <span class="va">SE</span>, ymax <span class="op">=</span> <span class="va">Predicted</span> <span class="op">+</span> <span class="va">SE</span>, fill <span class="op">=</span> <span class="va">Event</span><span class="op">)</span>,</span>
 <span>              alpha <span class="op">=</span> <span class="fl">0.2</span>, color <span class="op">=</span> <span class="st">"transparent"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Reaction Time (Predicted)"</span>, x <span class="op">=</span> <span class="st">"Scaled Trial #"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'NoReward'</span> <span class="op">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Reward'</span> <span class="op">=</span> <span class="st">'#E2725A'</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'NoReward'</span> <span class="op">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Reward'</span> <span class="op">=</span> <span class="st">'#E2725A'</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Simple'</span> <span class="op">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Complex'</span> <span class="op">=</span> <span class="st">'#E2725A'</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Simple'</span> <span class="op">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Complex'</span> <span class="op">=</span> <span class="st">'#E2725A'</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
@@ -634,24 +634,24 @@ StndrdTN:ER -0.032 -0.112  0.345</code></pre>
 </div>
 </div>
 </div>
-<p>Reaction times decrease much more across trials for the reward than for the no reward condition! However, we don’t have a complete picture yet. For example, we do not know whether the decrease in reaction times across trials is significant only for the reward condition or also for the no reward condition. To find out, we can estimate the slopes as we did in the previous tutorial: <a href="../../CONTENT/Stats/ModelEstimates.html">ModelEstimates.qmd</a></p>
+<p>Reaction times decrease much more across trials for the Complex than for the Simple condition! However, we don’t have a complete picture yet. For example, we do not know whether the decrease in reaction times across trials is significant only for the Complex condition or also for the Simple condition. To find out, we can estimate the slopes as we did in the previous tutorial: <a href="../../CONTENT/Stats/ModelEstimates.html">ModelEstimates.qmd</a></p>
 <div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">estimate_slopes</span><span class="op">(</span><span class="va">mod_gamma</span>, trend <span class="op">=</span> <span class="st">'Event'</span>, by <span class="op">=</span> <span class="st">'StandardTrialN'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Estimated Marginal Effects
 
-StandardTrialN | Comparison        |  Slope |    SE |           95% CI |     t |      p
----------------------------------------------------------------------------------------
--1.65          | Reward - NoReward |  46.99 |  5.41 | [ 36.39,  57.59] |  8.69 | &lt; .001
--1.28          | Reward - NoReward |  72.46 |  6.13 | [ 60.45,  84.47] | 11.83 | &lt; .001
--0.92          | Reward - NoReward |  95.17 |  7.03 | [ 81.39, 108.96] | 13.53 | &lt; .001
--0.55          | Reward - NoReward | 115.44 |  8.13 | [ 99.50, 131.38] | 14.19 | &lt; .001
--0.18          | Reward - NoReward | 133.60 |  9.53 | [114.92, 152.29] | 14.01 | &lt; .001
-0.18           | Reward - NoReward | 149.96 | 11.31 | [127.79, 172.14] | 13.25 | &lt; .001
-0.55           | Reward - NoReward | 164.78 | 13.50 | [138.31, 191.25] | 12.20 | &lt; .001
-0.92           | Reward - NoReward | 178.29 | 16.09 | [146.75, 209.82] | 11.08 | &lt; .001
-1.28           | Reward - NoReward | 190.68 | 19.04 | [153.36, 228.00] | 10.01 | &lt; .001
-1.65           | Reward - NoReward | 202.11 | 22.31 | [158.39, 245.83] |  9.06 | &lt; .001
+StandardTrialN | Comparison        |  Slope |    SE |           95% CI | t(652) |      p
+----------------------------------------------------------------------------------------
+-1.65          | Reward - NoReward |  46.99 |  5.41 | [ 36.37,  57.61] |   8.69 | &lt; .001
+-1.28          | Reward - NoReward |  72.46 |  6.13 | [ 60.43,  84.50] |  11.83 | &lt; .001
+-0.92          | Reward - NoReward |  95.17 |  7.03 | [ 81.36, 108.99] |  13.53 | &lt; .001
+-0.55          | Reward - NoReward | 115.44 |  8.13 | [ 99.47, 131.41] |  14.19 | &lt; .001
+-0.18          | Reward - NoReward | 133.60 |  9.53 | [114.88, 152.32] |  14.01 | &lt; .001
+0.18           | Reward - NoReward | 149.96 | 11.31 | [127.74, 172.18] |  13.25 | &lt; .001
+0.55           | Reward - NoReward | 164.78 | 13.50 | [138.26, 191.30] |  12.20 | &lt; .001
+0.92           | Reward - NoReward | 178.29 | 16.09 | [146.69, 209.88] |  11.08 | &lt; .001
+1.28           | Reward - NoReward | 190.68 | 19.04 | [153.29, 228.07] |  10.01 | &lt; .001
+1.65           | Reward - NoReward | 202.11 | 22.31 | [158.30, 245.91] |   9.06 | &lt; .001
 
 Marginal effects estimated for Event</code></pre>
 </div>
@@ -676,7 +676,7 @@ Marginal effects estimated for Event</code></pre>
 </div>
 </div>
 </div>
-<p>The variability is impressive! For example, looking at the no reward condition, we can see that Reaction times are getting slower over time for some infants, but they are getting faster for others! These participants are probably loosing interest in the no reward condition, because they learn across time that nothing interesting is going to appear on the screen after the cue! It’s also really interesting to see how, from the group level estimates, it seemed that the no reward effect was simply weaker than the reward effect, while there’s something more going on: there seem to be more variability in the no reward condition, with a subgroup of infants being especially uninterested in this specific condition only!</p>
+<p>The variability is impressive! For example, looking at the Simple condition, we can see that Reaction times are getting slower over time for some infants, but they are getting faster for others! These participants are probably loosing interest in the Simple condition, because they learn across time that nothing interesting is going to appear on the screen after the cue! It’s also really interesting to see how, from the group level estimates, it seemed that the Simple effect was simply weaker than the Complex effect, while there’s something more going on: there seem to be more variability in the Simpe condition, with a subgroup of infants being especially uninterested in this specific condition only!</p>
 <p>Aren’t generalised mixed-effect models pretty cool!?? We get to pick the distribution that better resembles the data and we get to model random effects, and these things really improve the fit of our model! We often get to have stronger main effects (which is very often the main thing we are interested in) and we get the insane bonus of looking at individual differences and unique patterns that we would otherwise completely miss!</p>
 <p>We hope you’ll get to use GLMMs a lot in your research, and that they will help you find super cool results just like we did here!!!!</p>
 
@@ -1197,7 +1197,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
 <span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the data</span></span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"../../resources/Stats/Dataset.csv"</span>)</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"resources/Stats/Dataset.csv"</span>)</span>
 <span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Id <span class="ot">=</span> <span class="fu">factor</span>(df<span class="sc">$</span>Id) <span class="co"># make sure subject_id is a factor</span></span>
 <span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>StandardTrialN <span class="ot">=</span> <span class="fu">scale</span>(df<span class="sc">$</span>TrialN) <span class="co"># standardize the continuous variable</span></span>
@@ -1237,7 +1237,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> Event, <span class="at">y =</span> ReactionTime)) <span class="sc">+</span></span>
 <span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Event), <span class="at">alpha =</span> .<span class="dv">5</span>, <span class="at">color =</span> <span class="st">'transparent'</span>) <span class="sc">+</span></span>
 <span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">outlier.color =</span> <span class="st">"darkred"</span>, <span class="at">width =</span> .<span class="dv">2</span>, <span class="at">lwd =</span> <span class="fl">1.2</span>, <span class="at">outlier.size =</span><span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'NoReward'</span> <span class="ot">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Reward'</span> <span class="ot">=</span> <span class="st">'#E2725A'</span>)) <span class="sc">+</span></span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'Simple'</span> <span class="ot">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Complex'</span> <span class="ot">=</span> <span class="st">'#E2725A'</span>)) <span class="sc">+</span></span>
 <span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">20</span>)<span class="sc">+</span></span>
 <span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'bottom'</span>)</span>
 <span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -1386,12 +1386,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-243"><a href="#cb16-243" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Predicted <span class="sc">-</span> SE, <span class="at">ymax =</span> Predicted <span class="sc">+</span> SE, <span class="at">fill =</span> Event),</span>
 <span id="cb16-244"><a href="#cb16-244" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"transparent"</span>) <span class="sc">+</span></span>
 <span id="cb16-245"><a href="#cb16-245" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Reaction Time (Predicted)"</span>, <span class="at">x =</span> <span class="st">"Scaled Trial #"</span>) <span class="sc">+</span></span>
-<span id="cb16-246"><a href="#cb16-246" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'NoReward'</span> <span class="ot">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Reward'</span> <span class="ot">=</span> <span class="st">'#E2725A'</span>)) <span class="sc">+</span></span>
-<span id="cb16-247"><a href="#cb16-247" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'NoReward'</span> <span class="ot">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Reward'</span> <span class="ot">=</span> <span class="st">'#E2725A'</span>))<span class="sc">+</span></span>
+<span id="cb16-246"><a href="#cb16-246" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'Simple'</span> <span class="ot">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Complex'</span> <span class="ot">=</span> <span class="st">'#E2725A'</span>)) <span class="sc">+</span></span>
+<span id="cb16-247"><a href="#cb16-247" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'Simple'</span> <span class="ot">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Complex'</span> <span class="ot">=</span> <span class="st">'#E2725A'</span>))<span class="sc">+</span></span>
 <span id="cb16-248"><a href="#cb16-248" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">16</span>)</span>
 <span id="cb16-249"><a href="#cb16-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-250"><a href="#cb16-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-251"><a href="#cb16-251" aria-hidden="true" tabindex="-1"></a>Reaction times decrease much more across trials for the reward than for the no reward condition! However, we don't have a complete picture yet. For example, we do not know whether the decrease in reaction times across trials is significant only for the reward condition or also for the no reward condition. To find out, we can estimate the slopes as we did in the previous tutorial: <span class="co">[</span><span class="ot">ModelEstimates.qmd</span><span class="co">](ModelEstimates.qmd)</span></span>
+<span id="cb16-251"><a href="#cb16-251" aria-hidden="true" tabindex="-1"></a>Reaction times decrease much more across trials for the Complex than for the Simple condition! However, we don't have a complete picture yet. For example, we do not know whether the decrease in reaction times across trials is significant only for the Complex condition or also for the Simple condition. To find out, we can estimate the slopes as we did in the previous tutorial: <span class="co">[</span><span class="ot">ModelEstimates.qmd</span><span class="co">](ModelEstimates.qmd)</span></span>
 <span id="cb16-252"><a href="#cb16-252" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-255"><a href="#cb16-255" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb16-256"><a href="#cb16-256" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: Estimate slopes</span></span>
@@ -1423,7 +1423,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-284"><a href="#cb16-284" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>Event)</span>
 <span id="cb16-285"><a href="#cb16-285" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-286"><a href="#cb16-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-287"><a href="#cb16-287" aria-hidden="true" tabindex="-1"></a>The variability is impressive! For example, looking at the no reward condition, we can see that Reaction times are getting slower over time for some infants, but they are getting faster for others! These participants are probably loosing interest in the no reward condition, because they learn across time that nothing interesting is going to appear on the screen after the cue! It's also really interesting to see how, from the group level estimates, it seemed that the no reward effect was simply weaker than the reward effect, while there's something more going on: there seem to be more variability in the no reward condition, with a subgroup of infants being especially uninterested in this specific condition only!</span>
+<span id="cb16-287"><a href="#cb16-287" aria-hidden="true" tabindex="-1"></a>The variability is impressive! For example, looking at the Simple condition, we can see that Reaction times are getting slower over time for some infants, but they are getting faster for others! These participants are probably loosing interest in the Simple condition, because they learn across time that nothing interesting is going to appear on the screen after the cue! It's also really interesting to see how, from the group level estimates, it seemed that the Simple effect was simply weaker than the Complex effect, while there's something more going on: there seem to be more variability in the Simpe condition, with a subgroup of infants being especially uninterested in this specific condition only!</span>
 <span id="cb16-288"><a href="#cb16-288" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-289"><a href="#cb16-289" aria-hidden="true" tabindex="-1"></a>Aren't generalised mixed-effect models pretty cool!?? We get to pick the distribution that better resembles the data and we get to model random effects, and these things really improve the fit of our model! We often get to have stronger main effects (which is very often the main thing we are interested in) and we get the insane bonus of looking at individual differences and unique patterns that we would otherwise completely miss!</span>
 <span id="cb16-290"><a href="#cb16-290" aria-hidden="true" tabindex="-1"></a></span>

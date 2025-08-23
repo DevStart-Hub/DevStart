@@ -74,7 +74,7 @@ Now that we've looked at the overall distribution, let's use violin plots and bo
 ggplot(df, aes(x = Event, y = ReactionTime)) +
   geom_violin(aes(fill = Event), alpha = .5, color = 'transparent') +
   geom_boxplot(alpha = 0.8, outlier.color = "darkred", width = .2, lwd = 1.2, outlier.size =4) +
-  scale_fill_manual(values = c('NoReward' = '#4A6274', 'Reward' = '#E2725A')) +
+  scale_fill_manual(values = c('Simple' = '#4A6274', 'Complex' = '#E2725A')) +
   theme_classic(base_size = 20)+
   theme(legend.position = 'bottom')
 ```
@@ -223,12 +223,12 @@ ggplot(is_pred, aes(x = StandardTrialN,
   geom_ribbon(aes(ymin = Predicted - SE, ymax = Predicted + SE, fill = Event),
               alpha = 0.2, color = "transparent") +
   labs(y = "Reaction Time (Predicted)", x = "Scaled Trial #") +
-  scale_color_manual(values = c('NoReward' = '#4A6274', 'Reward' = '#E2725A')) +
-  scale_fill_manual(values = c('NoReward' = '#4A6274', 'Reward' = '#E2725A'))+
+  scale_color_manual(values = c('Simple' = '#4A6274', 'Complex' = '#E2725A')) +
+  scale_fill_manual(values = c('Simple' = '#4A6274', 'Complex' = '#E2725A'))+
   theme_classic(base_size = 16)
 ```
 
-Reaction times decrease much more across trials for the reward than for the no reward condition! However, we don't have a complete picture yet. For example, we do not know whether the decrease in reaction times across trials is significant only for the reward condition or also for the no reward condition. To find out, we can estimate the slopes as we did in the previous tutorial: [ModelEstimates.qmd](ModelEstimates.qmd)
+Reaction times decrease much more across trials for the Complex than for the Simple condition! However, we don't have a complete picture yet. For example, we do not know whether the decrease in reaction times across trials is significant only for the Complex condition or also for the Simple condition. To find out, we can estimate the slopes as we did in the previous tutorial: [ModelEstimates.qmd](ModelEstimates.qmd)
 
 ```{r}
 #| label: Estimate slopes
@@ -260,7 +260,7 @@ ggplot(is_pred_random, aes(x= StandardTrialN, y= Predicted, color= Id, shape = E
     facet_wrap(~Event)
 ```
 
-The variability is impressive! For example, looking at the no reward condition, we can see that Reaction times are getting slower over time for some infants, but they are getting faster for others! These participants are probably loosing interest in the no reward condition, because they learn across time that nothing interesting is going to appear on the screen after the cue! It's also really interesting to see how, from the group level estimates, it seemed that the no reward effect was simply weaker than the reward effect, while there's something more going on: there seem to be more variability in the no reward condition, with a subgroup of infants being especially uninterested in this specific condition only!
+The variability is impressive! For example, looking at the Simple condition, we can see that Reaction times are getting slower over time for some infants, but they are getting faster for others! These participants are probably loosing interest in the Simple condition, because they learn across time that nothing interesting is going to appear on the screen after the cue! It's also really interesting to see how, from the group level estimates, it seemed that the Simple effect was simply weaker than the Complex effect, while there's something more going on: there seem to be more variability in the Simpe condition, with a subgroup of infants being especially uninterested in this specific condition only!
 
 Aren't generalised mixed-effect models pretty cool!?? We get to pick the distribution that better resembles the data and we get to model random effects, and these things really improve the fit of our model! We often get to have stronger main effects (which is very often the main thing we are interested in) and we get the insane bonus of looking at individual differences and unique patterns that we would otherwise completely miss!
 

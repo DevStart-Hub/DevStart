@@ -506,6 +506,8 @@ circle = visual.ImageStim(win, image=str(stimuli_dir / 'circle.png'), size=(200,
 square = visual.ImageStim(win, image=str(stimuli_dir / 'square.png'), size=(200, 200))
 complex = visual.ImageStim(win, image=str(stimuli_dir / 'complex.png'), size=(200, 200), pos=(250, 0))
 simple = visual.ImageStim(win, image=str(stimuli_dir / 'simple.png'), size=(200, 200), pos=(-250, 0))
+complex = visual.ImageStim(win, image=str(stimuli_dir / 'complex.png'), size=(200, 200), pos=(250, 0))
+simple = visual.ImageStim(win, image=str(stimuli_dir / 'simple.png'), size=(200, 200), pos=(-250, 0))
 
 # Load sound 
 presentation_sound = sound.Sound(str(stimuli_dir / 'presentation.wav'))
@@ -570,8 +572,8 @@ for trial in Trials:
     win.flip()
     core.wait(0.75)
 
-    ### Present the reward
-    rewards[trial].draw()
+    ### Present the target
+    targets[trial].draw()
     win.flip()
     if trial == 0:
         Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Complex'})
@@ -720,6 +722,8 @@ circle = visual.ImageStim(win, image=str(stimuli_dir / 'circle.png'), size=(200,
 square = visual.ImageStim(win, image=str(stimuli_dir / 'square.png'), size=(200, 200))
 complex = visual.ImageStim(win, image=str(stimuli_dir / 'complex.png'), size=(200, 200), pos=(250, 0))
 simple = visual.ImageStim(win, image=str(stimuli_dir / 'simple.png'), size=(200, 200), pos=(-250, 0))
+complex = visual.ImageStim(win, image=str(stimuli_dir / 'complex.png'), size=(200, 200), pos=(250, 0))
+simple = visual.ImageStim(win, image=str(stimuli_dir / 'simple.png'), size=(200, 200), pos=(-250, 0))
 
 # Load sound 
 presentation_sound = sound.Sound(str(stimuli_dir / 'presentation.wav'))
@@ -774,7 +778,7 @@ for trial in Trials:
     win.flip()
     core.wait(0.75)
 
-    ### Present the reward
+    ### Present the targets
     rewards[trial].draw()
     win.flip()
     if trial == 0:
