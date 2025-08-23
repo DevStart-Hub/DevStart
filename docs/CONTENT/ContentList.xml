@@ -18368,7 +18368,7 @@ font-style: inherit;">pip</span> install tobii_research</span></code></pre></div
 <p>So how does this library work, how do we connect to the eye-tracker and collect our data? Very good questions!</p>
 <p>The <code>tobii_research</code> documentation is quite extensive and describes in detail a lot of functions and data classes that are very useful. However, we don’t need much to start our experiment.</p>
 <p>First we need to identify all the eye trackers connected to our computer. Yes, plural, <code>tobii_research</code> will return a list of all the eye trackers connected to our computer. 99.99999999% of the time you will only have 1 eye tracker connected, so we can just select the first (and usually only) eye tracker found.</p>
-<div id="0fe3b063" class="cell" data-execution_count="1">
+<div id="301ba0d7" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Import tobii_research library</span></span>
@@ -18402,7 +18402,7 @@ font-style: inherit;">0</span>]</span></code></pre></div>
 <p>Tobii_research has a cool way of telling us what data we are collecting at each time point. It uses a callback function. What is a callback function, you ask? It is a function that tobii runs each time it has a new data point. Let’s say we have an eye tracker that collects data at 300Hz (300 samples per second): the function will be called every time the tobii has one of those 300 samples.</p>
 <p>This callback function will give us a <code>gaze_data</code> dictionary. This dictionary contains multiple information of that collected sample</p>
 <p>Here is our callback function:</p>
-<div id="36ac0935" class="cell" data-execution_count="2">
+<div id="26c54f41" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># callback function</span></span>
@@ -18541,7 +18541,7 @@ background-color: null;
 font-style: inherit;">1</span>}</span></code></pre></div>
 <p>Wow! Look at all that data from just one sample!</p>
 <p>Now we need to tell the eye tracker to actually use our callback function. This part is super easy:</p>
-<div id="3138e4f7" class="cell" data-execution_count="3">
+<div id="9e5166cb" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Start the callback function</span></span>
@@ -18552,7 +18552,7 @@ font-style: inherit;"># Start the callback function</span></span>
 <h3 class="anchored" data-anchor-id="global-to-save">Global to save</h3>
 <p>Great! You’ve set up a callback function that receives eye tracking data from your device. However, printing 300 data points per second to the console creates an unreadable stream of text that’s not useful for analysis. We need to store this data properly.</p>
 <p>Let’s create a list to collect all the gaze data:</p>
-<div id="87a716b9" class="cell" data-execution_count="4">
+<div id="af0679ad" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Create an empty list we will append our data to</span></span>
@@ -18561,7 +18561,7 @@ background-color: null;
 font-style: inherit;">=</span> []</span></code></pre></div>
 </div>
 <p>Perfect! We’ve got our list to which we can append the incoming data. We can simply have this list inside of our callback function so every time an new sample appears it will be added there. This is how our script could look now:</p>
-<div id="bd805436" class="cell" data-execution_count="5">
+<div id="5e5b0ee6" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># callback function</span></span>
@@ -18602,7 +18602,7 @@ font-style: inherit;">True</span>)</span></code></pre></div>
 <p>In most studies, we present various stimuli - pictures, sounds, or videos. For meaningful analysis, we must know the precise timing of when each stimulus appeared.</p>
 <p>The Tobii SDK provides an elegant solution through the <code>tr.get_system_time_stamp()</code> function. This function returns the current time using the same system clock that the eye tracker uses for its data timestamps. Remember that each gaze sample includes a <code>system_time_stamp</code> field? This means we can perfectly synchronize our events with the gaze data.</p>
 <p>We can create a simple event-logging system by storing timestamps alongside descriptive labels:</p>
-<div id="fc397a56" class="cell" data-execution_count="6">
+<div id="48937dad" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">Events <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> [] <span class="co" style="color: #5E5E5E;
@@ -18637,7 +18637,7 @@ font-style: inherit;">'Our First event!!'</span>})</span></code></pre></div>
 <p>Our solution uses a <strong>buffer swap</strong>:</p>
 <p>Now we need to save our data efficiently. The key challenge is avoiding duplicate data - we don’t want to save the same samples multiple times when we call our save function repeatedly.</p>
 <p>Our solution is simple: <strong>we can add our sample to a list and once we want to save we can switch it with a new e,pty one!!!</strong> Here, let me show how:</p>
-<div id="f432d785" class="cell" data-execution_count="7">
+<div id="9dfd8c06" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Swap buffers</span></span>
@@ -18660,7 +18660,7 @@ font-style: inherit;">=</span> Events, []</span></code></pre></div>
 <section id="align-events-and-data" class="level3">
 <h3 class="anchored" data-anchor-id="align-events-and-data">Align events and data</h3>
 <p>Next, we need to match up our events with the eye tracking data. First, let’s turn our lists into dataframes to make them easier to work with:</p>
-<div id="9ca8e426" class="cell" data-execution_count="8">
+<div id="301bf4e3" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Convert lists to dataframes</span></span>
@@ -18673,7 +18673,7 @@ font-style: inherit;">=</span> pd.DataFrame(saving_events)</span></code></pre></
 </div>
 <p>Now comes the tricky part: our events and eye tracking data have different timestamps, but we want to know what event was happening during each eye tracking sample.</p>
 <p>Think of it like this: imagine you have a timeline of eye tracking samples (every few milliseconds) and a few event markers (like “stimulus appeared”). We need to figure out which eye tracking samples happened during each event.</p>
-<div id="66e7c6be" class="cell" data-execution_count="9">
+<div id="4f91aa1e" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Find the closest eye tracking sample for each event</span></span>
@@ -18712,7 +18712,7 @@ font-style: inherit;">'label'</span>].values  </span></code></pre></div>
 <p>The <code>searchsorted</code> function looks at all our eye tracking timestamps and finds where each event timestamp would fit in. It’s like inserting event markers into our timeline of eye tracking data.</p>
 <p>Now each row of eye tracking data shows what was happening at that moment! This wasn’t so hard, was it?</p>
 <p>I’d recommend putting this whole process in a function so you can easily save your data whenever needed:ù</p>
-<div id="6e656b38" class="cell" data-execution_count="10">
+<div id="580bc451" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Saving function</span></span>
@@ -18839,7 +18839,7 @@ Note
 <h2 class="anchored" data-anchor-id="split-gaze-coordinates-into-separate-columns">Split Gaze Coordinates into Separate Columns</h2>
 <p>When we save gaze data, coordinate pairs like <code>'left_gaze_point_on_display_area': (0.463, 0.487)</code> become single columns containing tuples. This makes analysis difficult - you can’t easily plot or calculate with x and y values when they’re stuck together. We need separate columns for x and y coordinates for each eye.</p>
 <p>Let’s update our save function:</p>
-<div id="b6c33dc7" class="cell" data-execution_count="11">
+<div id="8f67de06" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Save function</span></span>
@@ -18977,7 +18977,7 @@ font-style: inherit;">not</span> os.path.isfile(filename))</span></code></pre></
 <li><p><strong>Clean up column names</strong>: Make them shorter and more intuitive</p></li>
 </ul>
 <p>Here’s our updated function:</p>
-<div id="35a331f0" class="cell" data-execution_count="12">
+<div id="8306472a" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Screen dimensions (replace with your actual screen size)</span></span>
@@ -19268,7 +19268,7 @@ font-style: inherit;">not</span> os.path.isfile(filename))</span></code></pre></
 <section id="import-libraries-and-define-functions" class="level3">
 <h3 class="anchored" data-anchor-id="import-libraries-and-define-functions">Import Libraries and Define Functions</h3>
 <p>First, let’s import our libraries and define the functions we created earlier:</p>
-<div id="1a7a115b" class="cell" data-execution_count="13">
+<div id="efa957e4" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> os</span>
@@ -19592,7 +19592,7 @@ font-style: inherit;">not</span> os.path.isfile(filename))</span></code></pre></
 <section id="load-the-stimuli" class="level3">
 <h3 class="anchored" data-anchor-id="load-the-stimuli">Load the Stimuli</h3>
 <p>Now let’s set up our experiment window and load all the stimuli. This part is identical to our previous PsychoPy tutorial:</p>
-<div id="76a7765b" class="cell" data-execution_count="14">
+<div id="989ef5c2" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#%% Load and prepare stimuli</span></span>
@@ -19782,7 +19782,7 @@ font-style: inherit;">1</span> ]</span></code></pre></div>
 <section id="start-recording" class="level3">
 <h3 class="anchored" data-anchor-id="start-recording">Start recording</h3>
 <p>Now we’re ready to find eye trackers connected to the computer and start collecting data. We’ll use the first eye tracker we find and launch our callback function to begin data collection.</p>
-<div id="edc58910" class="cell" data-execution_count="15">
+<div id="885ad028" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#%% Record the data</span></span>
@@ -19823,7 +19823,7 @@ font-style: inherit;"># Start recording</span></span>
 <h3 class="anchored" data-anchor-id="present-our-stimuli">Present Our Stimuli</h3>
 <p>The eye tracking is running! Let’s show our participant something!</p>
 <p>Notice that after each time we flip our window (which actually displays what we drew), we add an event to our Events list with a timestamp and label. This marks exactly when each stimulus appeared.</p>
-<div id="1db951d0" class="cell" data-execution_count="16">
+<div id="6d1f4f7f" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#%% Trials</span></span>
@@ -19992,7 +19992,7 @@ font-style: inherit;">in</span> keys:</span>
 </div>
 <p>As we said before in [Save the data], it’s best to save data during our study to avoid potential data loss. It’s better to do this when there are things of minor interest, such as during the ISI. If you remember from the previous tutorial <a href="../../CONTENT/GettingStarted/GettingStartedWithPsychopy.html">Getting started with Psychopy</a>, we created the ISI in a different way than just using <code>core.wait()</code>, and we said that this different method would come in handy later on. This is the moment!</p>
 <p>Our ISI starts the clock and saves the data immediately. After saving, we calculate how much time remains to reach the full 1-second duration and use core.wait() for any remaining time. This ensures we wait for exactly 1 second total, accounting for the time spent saving data.</p>
-<div id="9760902f" class="cell" data-execution_count="17">
+<div id="c0e5aadd" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">### ISI and save data</span></span>
@@ -20041,7 +20041,7 @@ If saving the data takes more than 1 second, your&nbsp;ISI&nbsp;will also be lon
 <section id="stop-recording" class="level3">
 <h3 class="anchored" data-anchor-id="stop-recording">Stop recording</h3>
 <p>Almost done! We’ve collected data, sent events, and saved everything. The final step is to stop data collection (otherwise Python will keep getting endless data from the eye tracker!). We simply unsubscribe from the eye tracker:</p>
-<div id="d2217f5e" class="cell" data-execution_count="18">
+<div id="219aa184" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Final save to catch any remaining data</span></span>
@@ -20076,7 +20076,7 @@ font-style: inherit;"># End the study</span></span></code></pre></div>
 <section id="end" class="level1">
 <h1>END!!</h1>
 <p>Great job getting to here!! it want easy but you did it. Here is all the code we made together.</p>
-<div id="1cdc8ed2" class="cell" data-execution_count="19">
+<div id="6fd6f9e4" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> os</span>
