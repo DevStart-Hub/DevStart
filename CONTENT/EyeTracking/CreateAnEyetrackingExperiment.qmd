@@ -147,11 +147,13 @@ Now instead of flooding the console, every new sample gets stored in our list fo
 
 ## Triggers/Events
 
-As we have seen, our callback function can access the tobii data and tell us what it is for each sample. Just one little piece missing... We want to know what we presented and when. In most studies, we present stimuli that can be pictures, sounds or even videos. For the following analysis, it is important to know at what exact point in time we presented these stimuli.
+As we've seen, our callback function can access Tobii data and process each sample. But there's one crucial piece missing: **we need to know exactly when we presented our stimuli**.
 
-The Tobii SDK provides an elegant solution through the `tr.get_system_time_stamp()` function. This function returns the current time from the system clock. And if you paid attention between the information the eyetrcker is passing us one of them is the `system_time_stamp`. So we can create a simple event-logging system by storing timestamps along with descriptive event labels.
+In most studies, we present various stimuli - pictures, sounds, or videos. For meaningful analysis, we must know the precise timing of when each stimulus appeared.
 
-We first create an empty list called Events and we append the time from the system and a description of what is happening every time we need. Just like so:
+The Tobii SDK provides an elegant solution through the `tr.get_system_time_stamp()` function. This function returns the current time using the same system clock that the eye tracker uses for its data timestamps. Remember that each gaze sample includes a `system_time_stamp` field? This means we can perfectly synchronize our events with the gaze data.
+
+We can create a simple event-logging system by storing timestamps alongside descriptive labels:
 
 ```{python}
 Events = [] # create empty list
@@ -162,114 +164,108 @@ Events.append({'system_time_stamp':  tr.get_system_time_stamp(), 'label': 'Our F
 
 ## Save the data
 
-Perfect! We have two lists with all our information. They grow bigger and bigger (especially the gaze_data_buffer) and we need a way to save them. There are two approaches we could use:
+Perfect! Now we have two lists containing all our information. They grow continuously (especially the `gaze_data_buffer`) and we need an efficient way to save them.
 
-1.  Save data inside our callback function, appending new data to a CSV each time the callback is called.
+There are two common approaches:
 
-2.  Collect all data in lists for the entire study duration, then save everything at the end.
+1.  **Save immediately**: Write data inside the callback function, appending to a CSV each time
 
-However, both approaches have drawbacks. The first option might slow down our callback function if our computer isn't performing well or if we're sampling at very high rates. The second approach won't create bottlenecks for the callback, but if something goes wrong during the study and Python crashes (and trust me, it can happen!!), we'd lose all our precious data.
+2.  **Save at the end**: Collect all data in memory for the entire study, then save everything once
 
-**The solution? A hybrid approach!** We store our data in lists and save them during quieter moments of our study - like during the Inter-Stimulus Interval (ISI), the pause between trials. This time is typically meant to give participants a brief rest, making it perfect for our data-saving operations.
+Both approaches have serious drawbacks. The first might slow down our callback function, potentially causing us to miss samples if the computer struggles with frequent file operations. The second approach avoids callback bottlenecks, but if Python crashes during the study (and trust me, it happens!), we'd lose **all** our precious data.
+
+**The solution? A hybrid approach!** We store data in memory but save it periodically during quieter moments - like the Inter-Stimulus Interval (ISI) between trials. This timing is perfect because participants are resting anyway.
+
+### The Buffer Swap Technique
+
+The key challenge is avoiding data duplication when we save repeatedly. We need a way to save current data without affecting ongoing data collection.
+
+Our solution uses a **buffer swap**:
 
 Now we need to save our data efficiently. The key challenge is avoiding duplicate data - we don't want to save the same samples multiple times when we call our save function repeatedly.
 
-Our solution is simple: **track how many samples we've already saved, then only process the new ones each time.**
-
-Here's how it works:
-
--   Keep a counter of samples already processed
-
--   Use list slicing to get only new data since last save
-
--   Process and save the new data
-
--   Update our counter
+Our solution is simple: **we can add our sample to a list and once we want to save we can switch it with a new e,pty one!!!** Here, let me show how:
 
 ```{python}
-# Initial data saved counter starting at 0
-data_saved_count = 0
-
-# Get only new data since last save
-new_data = gaze_data_buffer[data_saved_count:]
-
-# Create a dataframe from our data
-Data_df = pd.DataFrame(new_data)
-
-# update the data saved counter
-data_saved_count += len(new_data)
+# Swap buffers
+saving_data, gaze_data_buffer = gaze_data_buffer, []
+saving_events, Events = Events, []
 ```
 
-Before actually saving this dataframe, let's add our events to it! This way we'll have one unified dataframe with all our data and events. Sounds amazing, right?
+Here's what happens in this single line:
 
-We'll follow the same approach for events:
+-   `gaze_data_buffer` (full of samples) gets copied to `saving_data`
+
+-   `gaze_data_buffer` simultaneously becomes a fresh, empty list
+
+-   The same happens for our Events
+
+**Why this works**: This happens instantly in one step, so we don't lose any data. While we're saving the old samples, new samples keep getting collected in the fresh, empty list.
+
+Now we can safely process and save `saving_data` and `saving_events` while data collection continues uninterrupted in the background.
+
+### Align events and data
+
+Next, we need to match up our events with the eye tracking data. First, let's turn our lists into dataframes to make them easier to work with:
 
 ```{python}
-# Initial event saved counter starting at 0
-events_saved_count = 0
-
-# Create a dataframe from our events
-new_events = Events[events_saved_count:]
-
-Events_df = pd.DataFrame(new_events)     
-
-# update the data saved counter
-events_saved_count += len(new_events)
+# Convert lists to dataframes
+data_df = pd.DataFrame(saving_data)
+events_df = pd.DataFrame(saving_events)
 ```
 
-Perfect! Now we have two dataframes. Next, we need to align the events with the data. We'll use numpy's `searchsorted` function to find the closest timestamp in our data for each event, then add the event labels at the correct positions.
+Now comes the tricky part: our events and eye tracking data have different timestamps, but we want to know what event was happening during each eye tracking sample.
+
+Think of it like this: imagine you have a timeline of eye tracking samples (every few milliseconds) and a few event markers (like "stimulus appeared"). We need to figure out which eye tracking samples happened during each event.
 
 ```{python}
-# Find the index for each event in the dataframe
-idx = np.searchsorted(Data_df['system_time_stamp'].values,
-                      Events_df['system_time_stamp'].values,
+# Find the closest eye tracking sample for each event
+idx = np.searchsorted(data_df['system_time_stamp'].values,
+                      events_df['system_time_stamp'].values,
                       side='left')
 
-# Add the events to the dataframe
-Data_df['events'] = ''
-Data_df.loc[idx, 'events'] = Events_df['label'].values    
+# Add event labels to our eye tracking data
+data_df['events'] = ''
+data_df.loc[idx, 'events'] = events_df['label'].values  
 ```
 
-This wasn't so hard, was it?
+The `searchsorted` function looks at all our eye tracking timestamps and finds where each event timestamp would fit in. It's like inserting event markers into our timeline of eye tracking data.
 
-But I would suggest wrapping this in a function so you can call it whenever you want to save data:
+Now each row of eye tracking data shows what was happening at that moment! This wasn't so hard, was it?
+
+I'd recommend putting this whole process in a function so you can easily save your data whenever needed:ù
 
 ```{python}
-# Global counters
-# Track how many samples we've already saved
-data_saved_count = 0
-events_saved_count = 0
+# Saving function
+def write_buffer_to_file(filename):
+    global gaze_data_buffer, Events
 
-# Function to save data
-def write_buffer_to_file(data_to_save, events_to_save, filename):
-    global data_saved_count, events_saved_count
+    # Check if there are data
+    if not gaze_data_buffer:
+        return
+        
+    # Swap buffers - get current data and start fresh
+    saving_data, gaze_data_buffer = gaze_data_buffer, []
+    saving_events, Events = Events, []
    
-    # Get only new data since last save
-    new_data = data_to_save[data_saved_count:]
-    new_events = events_to_save[events_saved_count:]
+    # Convert lists to dataframes
+    data_df = pd.DataFrame(saving_data)
+    events_df = pd.DataFrame(saving_events)
    
-    # Create data and event dataframes
-    data_df = pd.DataFrame(new_data)
-    events_df = pd.DataFrame(new_events)
-   
-    # Find where each event is in the dataframe
+    # Match events with eye tracking data
     idx = np.searchsorted(data_df['system_time_stamp'].values,
                           events_df['system_time_stamp'].values,
                           side='left')
-    
-    # Add the events to the dataframe
+    # Add event labels to our eye tracking data
     data_df['events'] = ''
     data_df.loc[idx, 'events'] = events_df['label'].values
    
-    # Write the DataFrame to a csv file
-    data_df.to_csv(filename, mode='a', index=False, header=not os.path.isfile(filename))
-   
-    # Update counters
-    data_saved_count += len(new_data)
-    events_saved_count += len(new_events)
+    # Save to CSV file (append mode so we don't overwrite previous saves)
+    data_df.to_csv(filename, mode='a', index=False, 
+                   header=not os.path.isfile(filename))
 ```
 
-This function takes three inputs: your gaze data buffer, your events buffer, and the desired CSV filename. The `mode='a'` parameter tells pandas to append new data to the end of an existing file rather than overwriting it. This is perfect for our incremental saving approach since each time we save, we add new rows to our growing CSV file instead of losing previous data.
+This function automatically grabs all the current data, swaps it with fresh empty lists, and saves everything. The `mode='a'` parameter tells pandas to append new data to the end of an existing file rather than overwriting it. This is perfect for our incremental saving approach since each time we save, we add new rows to our growing CSV file instead of losing previous data.
 
 The `header=not os.path.isfile(filename)` part is a clever trick that writes column headers only when creating a new file. This prevents duplicate headers from appearing throughout your data file every time you save.
 
@@ -281,109 +277,107 @@ However, we prefer combining them immediately for two reasons: it eliminates an 
 
 ## Clean and Prepare Your Data
 
-Great! Now you know how to collect eye tracking data and save it to a file with events in the same dataframe. Let's add a few optional steps that will make your data much easier to analyze and give you better insights into what we're working with.
+Great! Now you know how to collect eye tracking data and save it with events. Let's add a few steps that will make your data much easier to work with and analyze.
 
-### Split Gaze Coordinates into Separate Columns
+## Split Gaze Coordinates into Separate Columns
 
-When we convert gaze data to a pandas DataFrame, coordinate pairs like `'left_gaze_point_on_display_area': (0.4633694291, 0.4872185290)` become single columns containing tuples. This creates analysis headaches - you can't easily filter, plot, or perform calculations on x and y values when they're bundled together. Instead, we want separate columns for x and y coordinates for both eyes.
+When we save gaze data, coordinate pairs like `'left_gaze_point_on_display_area': (0.463, 0.487)` become single columns containing tuples. This makes analysis difficult - you can't easily plot or calculate with x and y values when they're stuck together. We need separate columns for x and y coordinates for each eye.
 
-Let's add this to our save function:
+Let's update our save function:
 
 ```{python}
-# Global counters
-data_saved_count = 0
-events_saved_count = 0
+# Save function
+def write_buffer_to_file(filename):
+    global gaze_data_buffer, Events
 
-def write_buffer_to_file(data_to_save, events_to_save, filename):
-    global data_saved_count, events_saved_count
+    # Check if there are data
+    if not gaze_data_buffer:
+        return
    
-    # Get only new data since last save
-    new_data = data_to_save[data_saved_count:]
-    new_events = events_to_save[events_saved_count:]
+    # Swap buffers - get current data and start fresh
+    saving_data, gaze_data_buffer = gaze_data_buffer, []
+    saving_events, Events = Events, []
    
-    # Create dataframes
-    data_df = pd.DataFrame(new_data)
-    events_df = pd.DataFrame(new_events)
+    # Convert lists to dataframes
+    data_df = pd.DataFrame(saving_data)
+    events_df = pd.DataFrame(saving_events)
    
-    # Align events with data
+    # Match events with eye tracking data
     idx = np.searchsorted(data_df['system_time_stamp'].values,
                           events_df['system_time_stamp'].values,
                           side='left')
     data_df['events'] = ''
     data_df.loc[idx, 'events'] = events_df['label'].values
-    
-    #### Split coordinate tuples into separate columns
+   
+    # Split coordinate tuples into separate columns
     data_df[['left_x', 'left_y']] = data_df['left_gaze_point_on_display_area'].tolist()
     data_df[['right_x', 'right_y']] = data_df['right_gaze_point_on_display_area'].tolist()
-
-    # Save to CSV
-    data_df.to_csv(filename, mode='a', index=False, header=not os.path.isfile(filename))
    
-    # Update counters
-    data_saved_count += len(new_data)
-    events_saved_count += len(new_events)
+    # Save to CSV
+    data_df.to_csv(filename, mode='a', index=False, 
+                   header=not os.path.isfile(filename))
 ```
 
-Perfect!! Well done!! Now we have two columns for x and y coordinates for both eyes
+Perfect! Now we have separate x and y columns for both eyes, making analysis much easier.
 
-### Adjust the data
+### Adjust the Data
 
-The Active Display Coordinate System (ADCS) maps all gaze data onto a 2D coordinate system where (0, 0) represents the upper left corner of the screen, and (1, 1) represents the lower right corner.
+The Tobii eye tracker gives us coordinates from 0 to 1, where (0, 0) is the top-left corner of the screen and (1, 1) is the bottom-right corner.
 
-While this coordinate system works perfectly, it might cause confusion during analysis and plotting. This is because most plotting systems expect the origin in the lower left corner, not the upper left. The image below illustrates this difference:m
+While this works fine, it can be confusing during analysis because most plotting systems expect the origin in the bottom-left corner, not the top-left. The image below shows this difference:
 
 ![](/images/CreateAnEyetrackingExperiment/Origins.png){fig-align="center" width="419"}
 
-For this reason, we typically adjust the data to position the origin in the bottom left corner. This can be achieved by subtracting the y-coordinates from 1 (since coordinates range from 0 to 1).
+Let's adjust our data to make it more analysis-friendly:
 
-Additionally, we'll make several other useful adjustments:
+-   **Flip the y-axis**: Move the origin to bottom-left by flipping y coordinates
 
--   **Convert to pixels**: Gaze coordinates range from 0 to 1, but pixel coordinates are often more convenient for analysis. We multiply by screen dimensions to convert.
+-   **Convert to pixels**: Change from 0-1 coordinates to actual pixel positions
 
--   **Simplify timestamps**: Tobii provides microsecond precision, but milliseconds are usually sufficient. We divide by 1000 for easier handling.
+-   **Simplify timestamps**: Convert from microseconds to milliseconds
 
--   **Clean up columns**: We'll rename columns to be more intuitive and keep only the essential data.
+-   **Clean up column names**: Make them shorter and more intuitive
 
-Here's our enhanced function:
+Here's our updated function:
 
 ```{python}
-# Global counters  
-data_saved_count = 0
-events_saved_count = 0
-
 # Screen dimensions (replace with your actual screen size)
 winsize = [1920, 1080]  # width, height in pixels
 
-def write_buffer_to_file(data_to_save, events_to_save, filename):
-    global data_saved_count, events_saved_count, winsize
-   
-    # Get only new data since last save
-    new_data = data_to_save[data_saved_count:]
-    new_events = events_to_save[events_saved_count:]
+def write_buffer_to_file(filename):
+    global gaze_data_buffer, Events
 
-    # Create dataframes
-    data_df = pd.DataFrame(new_data)
-    events_df = pd.DataFrame(new_events)
+    # Check if there are data
+    if not gaze_data_buffer:
+        return
    
-    # Align events with data
+    # Swap buffers - get current data and start fresh
+    saving_data, gaze_data_buffer = gaze_data_buffer, []
+    saving_events, Events = Events, []
+   
+    # Convert lists to dataframes
+    data_df = pd.DataFrame(saving_data)
+    events_df = pd.DataFrame(saving_events)
+   
+    # Match events with eye tracking data
     idx = np.searchsorted(data_df['system_time_stamp'].values,
                           events_df['system_time_stamp'].values,
                           side='left')
     data_df['events'] = ''
     data_df.loc[idx, 'events'] = events_df['label'].values
-    
-    #### Split coordinate tuples into separate columns
+   
+    # Split coordinate tuples into separate columns
     data_df[['left_x', 'left_y']] = data_df['left_gaze_point_on_display_area'].tolist()
     data_df[['right_x', 'right_y']] = data_df['right_gaze_point_on_display_area'].tolist()
-    
-    #### Convert and adjust coordinates
+   
+    # Convert and adjust coordinates
     data_df['time'] = data_df['system_time_stamp'] / 1000.0
     data_df['left_x'] = data_df['left_x'] * winsize[0]
     data_df['left_y'] = winsize[1] - data_df['left_y'] * winsize[1]  # Flip y-axis
     data_df['right_x'] = data_df['right_x'] * winsize[0]
     data_df['right_y'] = winsize[1] - data_df['right_y'] * winsize[1]  # Flip y-axis
-    
-    #### Rename columns for clarity
+   
+    # Rename columns for clarity
     data_df = data_df.rename(columns={
         'left_gaze_point_validity': 'left_valid',
         'right_gaze_point_validity': 'right_valid',
@@ -392,36 +386,35 @@ def write_buffer_to_file(data_to_save, events_to_save, filename):
         'left_pupil_validity': 'left_pupil_valid',
         'right_pupil_validity': 'right_pupil_valid'
     })
-    
+   
     # Keep only essential columns
     data_df = data_df[['time', 'left_x', 'left_y', 'left_valid', 'left_pupil', 'left_pupil_valid',
                        'right_x', 'right_y', 'right_valid', 'right_pupil', 'right_pupil_valid', 'events']]
-    
-    # Save to CSV
-    data_df.to_csv(filename, mode='a', index=False, header=not os.path.isfile(filename))
    
-    # Update counters
-    data_saved_count += len(new_data)
-    events_saved_count += len(new_events)
+    # Save to CSV
+    data_df.to_csv(filename, mode='a', index=False, 
+                   header=not os.path.isfile(filename))
 ```
 
-# Create the actual experiment
+Now our data is in pixel coordinates with the origin at the bottom-left, making it much easier to analyze and visualize!
 
-Now we have two function, one to access and append the data to a list, and the second to save the data to a csv. Let's see now how to include these functions in our study.
+# Create the Actual Experiment
 
-## Short recap of the paradigm
+Now we have two functions: one to collect eye tracking data and another to save it to CSV. Let's see how to use these in our actual study.
 
-As we already mentioned, we will use the experimental design that we created in [Getting started with Psychopy](/CONTENT/GettingStarted/GettingStartedWithPsychopy.qmd) as a base and we will add things to it to make it an eye-tracking study. If you don't remember the paradigm please give it a rapid look as we will not go into much detail about each specific part of it.
+## Short Recap of the Paradigm
 
-Here a very short summary of what the design was: After a fixation cross, two shapes can be presented: a circle or a square. The circle indicates that a reward will appear on the right of the screen while the square predicts the appearance of an empty cloud on the left.
+We'll use the experimental design from [Getting started with PsychoPy](/CONTENT/GettingStarted/GettingStartedWithPsychopy.qmd) and add eye tracking to it. If you need a refresher on the paradigm, take a quick look at that tutorial.
 
-## Combine things
+Here's a brief summary: After a fixation cross, participants see either a circle or square. The circle predicts a reward will appear on the right side of the screen, while the square predicts an empty cloud will appear on the left.
 
-Let's try to build together the experiment then.
+## Putting It All Together
 
-### Import and functions
+Let's build the complete experiment step by step.
 
-To start, let's import the libraries and define the two functions that we create before
+### Import Libraries and Define Functions
+
+First, let's import our libraries and define the functions we created earlier:
 
 ```{python}
 import os
@@ -429,16 +422,12 @@ from pathlib import Path
 import pandas as pd
 import numpy as np
 
-# Import some libraries from PsychoPy
+# Import PsychoPy libraries
 from psychopy import core, event, visual, sound
 
 import tobii_research as tr
 
 #%% Functions
-
-# Global counters for tracking saved data
-data_saved_count = 0
-events_saved_count = 0
 
 # Screen dimensions
 winsize = [1920, 1080]  # width, height in pixels
@@ -448,40 +437,39 @@ def gaze_data_callback(gaze_data):
     global gaze_data_buffer
     gaze_data_buffer.append(gaze_data)
 
-def write_buffer_to_file(data_to_save, events_to_save, filename):
-    global data_saved_count, events_saved_count
+def write_buffer_to_file(filename):
+    global gaze_data_buffer, Events
    
-    # Get only new data since last save
-    new_data = data_to_save[data_saved_count:]
-    new_events = events_to_save[events_saved_count:]
-   
-    # Skip if nothing new
-    if not new_data:
+    if not gaze_data_buffer:
         return
    
-    # Create dataframes
-    data_df = pd.DataFrame(new_data)
-    events_df = pd.DataFrame(new_events)
+    # Swap buffers - get current data and start fresh
+    saving_data, gaze_data_buffer = gaze_data_buffer, []
+    saving_events, Events = Events, []
    
-    # Align events with data
+    # Convert lists to dataframes
+    data_df = pd.DataFrame(saving_data)
+    events_df = pd.DataFrame(saving_events)
+   
+    # Match events with eye tracking data
     idx = np.searchsorted(data_df['system_time_stamp'].values,
                           events_df['system_time_stamp'].values,
                           side='left')
     data_df['events'] = ''
     data_df.loc[idx, 'events'] = events_df['label'].values
     
-    #### Split coordinate tuples into separate columns
+    # Split coordinate tuples into separate columns
     data_df[['left_x', 'left_y']] = data_df['left_gaze_point_on_display_area'].tolist()
     data_df[['right_x', 'right_y']] = data_df['right_gaze_point_on_display_area'].tolist()
     
-    #### Convert and adjust coordinates
+    # Convert and adjust coordinates
     data_df['time'] = data_df['system_time_stamp'] / 1000.0
     data_df['left_x'] = data_df['left_x'] * winsize[0]
     data_df['left_y'] = winsize[1] - data_df['left_y'] * winsize[1]  # Flip y-axis
     data_df['right_x'] = data_df['right_x'] * winsize[0]
     data_df['right_y'] = winsize[1] - data_df['right_y'] * winsize[1]  # Flip y-axis
     
-    #### Rename columns for clarity
+    # Rename columns for clarity
     data_df = data_df.rename(columns={
         'left_gaze_point_validity': 'left_valid',
         'right_gaze_point_validity': 'right_valid',
@@ -497,51 +485,42 @@ def write_buffer_to_file(data_to_save, events_to_save, filename):
     
     # Save to CSV
     data_df.to_csv(filename, mode='a', index=False, header=not os.path.isfile(filename))
-   
-    # Update counters
-    data_saved_count += len(new_data)
-    events_saved_count += len(new_events)
 ```
 
-### Load the stimuli
+### Load the Stimuli
 
-Now we are going to set a few settings, such as the screen size, create a Psychopy window, load the stimuli and then prepare the trial definition. This is exactly the same as we did in the previous Psychopy tutorial.
+Now let's set up our experiment window and load all the stimuli. This part is identical to our previous PsychoPy tutorial:
 
 ```{python}
 #%% Load and prepare stimuli
 
 # Setting the directory of our experiment
-os.chdir(r'<<< YOUR PATH >>>>')
+os.chdir(r'C:\Users\tomma\OneDrive - Birkbeck, University of London\TomassoGhilardi\PersonalProj\BCCCD')
 
 # Now create a Path object for the stimuli directory
 stimuli_dir = Path('EXP') / 'Stimuli'
-
-# Create a window
-win = visual.Window(size=winsize, fullscr=True, units="pix", pos=(0,30), screen=1)
 
 # Load images 
 fixation = visual.ImageStim(win, image=str(stimuli_dir / 'fixation.png'), size=(200, 200))
 circle = visual.ImageStim(win, image=str(stimuli_dir / 'circle.png'), size=(200, 200))
 square = visual.ImageStim(win, image=str(stimuli_dir / 'square.png'), size=(200, 200))
-winning = visual.ImageStim(win, image=str(stimuli_dir / 'winning.png'), size=(200, 200), pos=(250, 0))
-losing = visual.ImageStim(win, image=str(stimuli_dir / 'loosing.png'), size=(200, 200), pos=(-250, 0))
+complex = visual.ImageStim(win, image=str(stimuli_dir / 'complex.png'), size=(200, 200), pos=(250, 0))
+simple = visual.ImageStim(win, image=str(stimuli_dir / 'simple.png'), size=(200, 200), pos=(-250, 0))
 
 # Load sound 
-winning_sound = sound.Sound(str(stimuli_dir / 'winning.wav'))
-losing_sound = sound.Sound(str(stimuli_dir / 'loosing.wav'))
+presentation_sound = sound.Sound(str(stimuli_dir / 'presentation.wav'))
 
 # List of stimuli
 cues = [circle, square] # put both cues in a list
-rewards = [winning, losing] # put both rewards in a list
-sounds = [winning_sound, losing_sound] # put both sounds in a list
+rewards = [complex, simple] # put both rewards in a list
 
-# Create list of trials in which 0 means winning and 1 means losing
-Trials = [0, 1, 0, 0, 1, 0, 1, 1, 0, 1]
+# Create a list of trials in which 0 means winning and 1 means losing
+Trials = [0, 1, 0, 0, 1, 0, 1, 1, 0, 1 ]
 ```
 
 ### Start recording
 
-Now we are ready to look for the eye-trackers connected to the computer and select the first one that we find. Once we have selected it, we will launch our callback function to start collecting data.
+Now we're ready to find eye trackers connected to the computer and start collecting data. We'll use the first eye tracker we find and launch our callback function to begin data collection.
 
 ```{python}
 #%% Record the data
@@ -560,23 +539,23 @@ Events = []
 Eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)
 ```
 
-### Present our stimuli
+### Present Our Stimuli
 
-The eye-tracking is running! Let's show our participant something!
+The eye tracking is running! Let's show our participant something!
 
-As you can see below, after each time we flip our window (remember: flipping means we actually show what we drew), we set the trigger variable to a string that identifies the specific stimulus we are presenting. This will be picked up our callback function.
+Notice that after each time we flip our window (which actually displays what we drew), we add an event to our Events list with a timestamp and label. This marks exactly when each stimulus appeared.
 
 ```{python}
 #%% Trials
 for trial in Trials:
 
     ### Present the fixation
-    win.flip() # we flip to clean the window
+    win.flip()  # Clear the window
     
     fixation.draw()
     win.flip()
     Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Fixation'})
-    core.wait(1)  # wait for 1 second
+    core.wait(1)  # Wait for 1 second
 
     ### Present the cue
     cues[trial].draw()
@@ -585,7 +564,7 @@ for trial in Trials:
         Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Circle'})
     else:
         Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Square'})
-    core.wait(3)  # wait for 3 seconds
+    core.wait(3)  # Wait for 3 seconds
 
     ### Wait for saccadic latency
     win.flip()
@@ -595,25 +574,26 @@ for trial in Trials:
     rewards[trial].draw()
     win.flip()
     if trial == 0:
-        Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Reward'})
+        Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Complex'})
     else:
-        Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'NoReward'})
-    sounds[trial].play()
-    core.wait(2)  # wait for 2 seconds
+        Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Simple'})
+
+    presentation_sound.play()
+    core.wait(2)  # Wait for 2 seconds
     
-    ### ISI
-    win.flip()    # we re-flip at the end to clean the window
-    clock = core.Clock()
-    write_buffer_to_file(gaze_data_buffer, Events, Path('DATA') / 'RAW' / (Sub + '.csv'))
-    while clock.getTime() < 1:
-        pass
+    ### ISI and save data
+    win.flip()
+    remaining_time = 1 - clock.getTime()
+    write_buffer_to_file(gaze_data_buffer, Path('DATA') / 'RAW' / (Sub + '.csv'))
+    if remaining_time > 0:
+        core.wait(remaining_time)
     
-    ### Check for closing experiment
-    keys = event.getKeys() # collect list of pressed keys
+    ### Check for escape key to exit
+    keys = event.getKeys()
     if 'escape' in keys:
-        win.close()  # close window
+        win.close()
         Eyetracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)
-        core.quit()  # stop study
+        core.quit()
 ```
 
 As we said before in \[Save the data\], it's best to save data during our study to avoid potential data loss. It's better to do this when there are things of minor interest, such as during the ISI. If you remember from the previous tutorial [Getting started with Psychopy](/CONTENT/GettingStarted/GettingStartedWithPsychopy.qmd), we created the ISI in a different way than just using `core.wait()`, and we said that this different method would come in handy later on. This is the moment!
@@ -635,11 +615,15 @@ If saving the data takes more than 1 second, your ISI will also be longer. How
 
 ### Stop recording
 
-We're almost there! We have imported our functions, started collecting data, sent the triggers, and saved the data. The last step will be stop data collection (or python will keep getting an endless amount of data from the eye tracker!). Do do that, We simply unsubscribe from the eye tracker to which we had subscribed to start of data collection:
+Almost done! We've collected data, sent events, and saved everything. The final step is to stop data collection (otherwise Python will keep getting endless data from the eye tracker!). We simply unsubscribe from the eye tracker:
 
 ```{python}
-win.close()
-Eyetracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)
+# Final save to catch any remaining data
+write_buffer_to_file(Path('DATA') / 'RAW' / (Sub + '.csv'))
+      
+win.close()  # Close the window
+Eyetracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)  # Stop eye tracking
+core.quit()  # End the study
 ```
 
 Note that we also closed the Psychopy window, so that the stimulus presentation is also officially over. Well done!!! Now go and get your data!!! We'll see you back when it's time to analyze it.
@@ -654,17 +638,12 @@ from pathlib import Path
 import pandas as pd
 import numpy as np
 
-# Import some libraries from PsychoPy
+# Import PsychoPy libraries
 from psychopy import core, event, visual, sound
 
 import tobii_research as tr
 
-
 #%% Functions
-
-# Global counters for tracking saved data
-data_saved_count = 0
-events_saved_count = 0
 
 # Screen dimensions
 winsize = [1920, 1080]  # width, height in pixels
@@ -674,36 +653,40 @@ def gaze_data_callback(gaze_data):
     global gaze_data_buffer
     gaze_data_buffer.append(gaze_data)
 
-def write_buffer_to_file(data_to_save, events_to_save, filename):
-    global data_saved_count, events_saved_count
+def write_buffer_to_file(filename):
+    global gaze_data_buffer, Events
+
+    # Check if there are data
+    if not gaze_data_buffer:
+        return
    
-    # Get only new data since last save
-    new_data = data_to_save[data_saved_count:]
-    new_events = events_to_save[events_saved_count:]
+    # Swap buffers - get current data and start fresh
+    saving_data, gaze_data_buffer = gaze_data_buffer, []
+    saving_events, Events = Events, []
    
-    # Create dataframes
-    data_df = pd.DataFrame(new_data)
-    events_df = pd.DataFrame(new_events)
+    # Convert lists to dataframes
+    data_df = pd.DataFrame(saving_data)
+    events_df = pd.DataFrame(saving_events)
    
-    # Align events with data
+    # Match events with eye tracking data
     idx = np.searchsorted(data_df['system_time_stamp'].values,
                           events_df['system_time_stamp'].values,
                           side='left')
     data_df['events'] = ''
     data_df.loc[idx, 'events'] = events_df['label'].values
     
-    #### Split coordinate tuples into separate columns
+    # Split coordinate tuples into separate columns
     data_df[['left_x', 'left_y']] = data_df['left_gaze_point_on_display_area'].tolist()
     data_df[['right_x', 'right_y']] = data_df['right_gaze_point_on_display_area'].tolist()
     
-    #### Convert and adjust coordinates
+    # Convert and adjust coordinates
     data_df['time'] = data_df['system_time_stamp'] / 1000.0
     data_df['left_x'] = data_df['left_x'] * winsize[0]
     data_df['left_y'] = winsize[1] - data_df['left_y'] * winsize[1]  # Flip y-axis
     data_df['right_x'] = data_df['right_x'] * winsize[0]
     data_df['right_y'] = winsize[1] - data_df['right_y'] * winsize[1]  # Flip y-axis
     
-    #### Rename columns for clarity
+    # Rename columns for clarity
     data_df = data_df.rename(columns={
         'left_gaze_point_validity': 'left_valid',
         'right_gaze_point_validity': 'right_valid',
@@ -719,11 +702,6 @@ def write_buffer_to_file(data_to_save, events_to_save, filename):
     
     # Save to CSV
     data_df.to_csv(filename, mode='a', index=False, header=not os.path.isfile(filename))
-   
-    # Update counters
-    data_saved_count += len(new_data)
-    events_saved_count += len(new_events)
-
 
 #%% Load and prepare stimuli
 
@@ -740,19 +718,17 @@ win = visual.Window(size=winsize, fullscr=True, units="pix", pos=(0,30), screen=
 fixation = visual.ImageStim(win, image=str(stimuli_dir / 'fixation.png'), size=(200, 200))
 circle = visual.ImageStim(win, image=str(stimuli_dir / 'circle.png'), size=(200, 200))
 square = visual.ImageStim(win, image=str(stimuli_dir / 'square.png'), size=(200, 200))
-winning = visual.ImageStim(win, image=str(stimuli_dir / 'winning.png'), size=(200, 200), pos=(250, 0))
-losing = visual.ImageStim(win, image=str(stimuli_dir / 'loosing.png'), size=(200, 200), pos=(-250, 0))
+complex = visual.ImageStim(win, image=str(stimuli_dir / 'complex.png'), size=(200, 200), pos=(250, 0))
+simple = visual.ImageStim(win, image=str(stimuli_dir / 'simple.png'), size=(200, 200), pos=(-250, 0))
 
 # Load sound 
-winning_sound = sound.Sound(str(stimuli_dir / 'winning.wav'))
-losing_sound = sound.Sound(str(stimuli_dir / 'loosing.wav'))
+presentation_sound = sound.Sound(str(stimuli_dir / 'presentation.wav'))
 
 # List of stimuli
 cues = [circle, square] # put both cues in a list
-rewards = [winning, losing] # put both rewards in a list
-sounds = [winning_sound, losing_sound] # put both sounds in a list
+rewards = [complex, simple] # put both rewards in a list
 
-# Create list of trials in which 0 means winning and 1 means losing
+# Create a list of trials in which 0 means winning and 1 means losing
 Trials = [0, 1, 0, 0, 1, 0, 1, 1, 0, 1]
 
 #%% Record the data
@@ -772,7 +748,6 @@ Events = []
 
 # Start recording
 Eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)
-
 
 #%% Trials
 
@@ -803,19 +778,17 @@ for trial in Trials:
     rewards[trial].draw()
     win.flip()
     if trial == 0:
-        Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Reward'})
+        Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Complex'})
     else:
-        Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'NoReward'})
+        Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Simple'})
 
-    sounds[trial].play()
+    presentation_sound.play()
     core.wait(2)  # wait for 2 seconds
     
     ### ISI
     win.flip()    # we re-flip at the end to clean the window
-    clock = core.Clock()
-    write_buffer_to_file(gaze_data_buffer, Events, Path('DATA') / 'RAW' / (Sub + '.csv'))
-    while clock.getTime() < 1:
-        pass
+    write_buffer_to_file(Path('DATA') / 'RAW' / (Sub + '.csv'))
+    core.wait(1)
     
     ### Check for closing experiment
     keys = event.getKeys() # collect list of pressed keys
@@ -823,6 +796,9 @@ for trial in Trials:
         win.close()  # close window
         Eyetracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)
         core.quit()  # stop study
+
+# Final save to catch any remaining data
+write_buffer_to_file(Path('DATA') / 'RAW' / (Sub + '.csv'))
       
 win.close() # close window
 Eyetracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA, gaze_data_callback) # unsubscribe eyetracking
