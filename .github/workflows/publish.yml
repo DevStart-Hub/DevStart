@@ -79,6 +79,8 @@ jobs:
             ! -name ".nojekyll" \
             ! -name ".github" \
             ! -name "README.md" \
+            ! -name "RenderHub.png" \
+
             -exec rm -rf {} +
           echo "After cleaning:"
           ls -la
