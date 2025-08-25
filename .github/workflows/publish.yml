@@ -1,0 +1,48 @@
+name: Deploy site via SSH Deploy Key
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'docs/**'   # or '_site/**' if that’s where you render
+  workflow_dispatch:
+
+env:
+  TARGET_SSH: git@github.com:DevStart-Hub/DevStart-Hub.github.io.git
+  TARGET_BRANCH: main
+  SOURCE_DIR: docs   # or _site if you render there
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PUBLISH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - name: Clone target repo
+        run: git clone --depth 1 "$TARGET_SSH" publish
+
+      - name: Clean target (preserve CNAME/.nojekyll)
+        run: |
+          find publish -mindepth 1 -maxdepth 1 \
+            ! -name ".git" ! -name "CNAME" ! -name ".nojekyll" -exec rm -rf {} +
+
+      - name: Copy site files
+        run: rsync -av --delete --exclude ".git" "${SOURCE_DIR}/" publish/
+
+      - name: Commit & push
+        working-directory: publish
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name  "github-actions[bot]"
+          git add -A
+          git diff --quiet && echo "No changes." && exit 0
+          git commit -m "Deploy from ${GITHUB_REPOSITORY}@${GITHUB_SHA::7}"
+          git push origin "$TARGET_BRANCH"
