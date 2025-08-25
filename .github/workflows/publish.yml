@@ -78,6 +78,7 @@ jobs:
             ! -name "CNAME" \
             ! -name ".nojekyll" \
             ! -name ".github" \
+            ! -name "README.md" \
             -exec rm -rf {} +
           echo "After cleaning:"
           ls -la
