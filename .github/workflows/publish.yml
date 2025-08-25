@@ -1,23 +1,32 @@
-name: Deploy via Deploy Key
+name: Deploy site to org root via SSH Deploy Key
 
 on:
   push:
     branches: [ main ]
+    # Run only when the built site changes (change to 'docs/**' if you commit docs instead)
     paths:
-      - 'docs/**'        # or '_site/**'
+      - '_site/**'
   workflow_dispatch:
 
+concurrency:
+  group: deploy-devstart
+  cancel-in-progress: true
+
 env:
+  # Where to read from in the source repo (your rendered site)
+  SOURCE_DIR: _site
+  # Where to publish (the org Pages repo, served at devstart.org)
   TARGET_SSH: git@github.com:DevStart-Hub/DevStart-Hub.github.io.git
   TARGET_BRANCH: main
-  SOURCE_DIR: docs       # or _site
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout source
+        uses: actions/checkout@v4
 
+      # Use the Deploy Key stored as secret PUBLISH_KEY (private key, no passphrase)
       - name: Setup SSH (use ONLY our key)
         run: |
           mkdir -p ~/.ssh
@@ -32,20 +41,26 @@ jobs:
             IdentitiesOnly yes
           CFG
 
+      # Optional: prints auth debug; won't fail the job
       - name: Debug SSH auth (non-fatal)
-        run: |
-          ssh -vvv -T git@github.com || true
+        run: ssh -vvv -T git@github.com || true
 
       - name: Clone target repo
         run: git clone --depth 1 "$TARGET_SSH" publish
 
+      # Clean repo ROOT but keep CNAME and .nojekyll
       - name: Clean target (preserve CNAME/.nojekyll)
         run: |
           find publish -mindepth 1 -maxdepth 1 \
             ! -name ".git" ! -name "CNAME" ! -name ".nojekyll" -exec rm -rf {} +
 
-      - name: Copy site files
+      # Copy rendered site into repo ROOT
+      - name: Copy site files to root
         run: rsync -av --delete --exclude ".git" "${SOURCE_DIR}/" publish/
+
+      # Quick listing for sanity
+      - name: List published files
+        run: ls -la publish | head -n 200
 
       - name: Commit & push
         working-directory: publish
@@ -55,4 +70,4 @@ jobs:
           git add -A
           git diff --quiet && echo "No changes." && exit 0
           git commit -m "Deploy from ${GITHUB_REPOSITORY}@${GITHUB_SHA::7}"
-          gi
+          git push origin "$TARGET_BRANCH"
