@@ -1,11 +1,13 @@
-name: Deploy site to org root via SSH Deploy Key
+name: Deploy site (docs → root)
 
 on:
   push:
     branches: [ main ]
-    # Run only when the built site changes (change to 'docs/**' if you commit docs instead)
     paths:
-      - '_site/**'
+      - 'docs/**'
+      # optional: uncomment to avoid deploys on README/license changes, etc.
+      # - '!README.md'
+      # - '!.github/**'
   workflow_dispatch:
 
 concurrency:
@@ -13,9 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  # Where to read from in the source repo (your rendered site)
-  SOURCE_DIR: _site
-  # Where to publish (the org Pages repo, served at devstart.org)
+  SOURCE_DIR: docs
   TARGET_SSH: git@github.com:DevStart-Hub/DevStart-Hub.github.io.git
   TARGET_BRANCH: main
 
@@ -25,49 +25,89 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      # Use the Deploy Key stored as secret PUBLISH_KEY (private key, no passphrase)
+      - name: Show repo tree (debug)
+        run: |
+          echo "Repository root contents:"
+          ls -la
+          echo "Checking ${SOURCE_DIR}:"
+          ls -la "${SOURCE_DIR}" || echo "No ${SOURCE_DIR} folder found"
+          echo "pwd: $(pwd)"
+
+      - name: Verify source dir exists
+        run: |
+          if [ ! -d "${SOURCE_DIR}" ]; then
+            echo "::error::${SOURCE_DIR} does not exist in this repo."
+            exit 1
+          fi
+          echo "Contents of ${SOURCE_DIR}:"
+          ls -la "${SOURCE_DIR}"
+
       - name: Setup SSH (use ONLY our key)
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.PUBLISH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan github.com >> ~/.ssh/known_hosts
-          cat > ~/.ssh/config <<'CFG'
+          cat > ~/.ssh/config <<'EOF'
           Host github.com
             HostName github.com
             User git
             IdentityFile ~/.ssh/id_ed25519
             IdentitiesOnly yes
-          CFG
+            StrictHostKeyChecking accept-new
+          EOF
+          chmod 600 ~/.ssh/config
 
-      # Optional: prints auth debug; won't fail the job
-      - name: Debug SSH auth (non-fatal)
-        run: ssh -vvv -T git@github.com || true
+      - name: Test SSH connection (non-fatal)
+        run: ssh -T git@github.com || true
 
       - name: Clone target repo
-        run: git clone --depth 1 "$TARGET_SSH" publish
-
-      # Clean repo ROOT but keep CNAME and .nojekyll
-      - name: Clean target (preserve CNAME/.nojekyll)
         run: |
-          find publish -mindepth 1 -maxdepth 1 \
-            ! -name ".git" ! -name "CNAME" ! -name ".nojekyll" -exec rm -rf {} +
+          git clone --depth 1 "$TARGET_SSH" publish
+          echo "Target repo contents before cleaning:"
+          ls -la publish
 
-      # Copy rendered site into repo ROOT
-      - name: Copy site files to root
-        run: rsync -av --delete --exclude ".git" "${SOURCE_DIR}/" publish/
+      - name: Clean target root (preserve CNAME/.nojekyll/.github)
+        run: |
+          cd publish
+          find . -mindepth 1 -maxdepth 1 \
+            ! -name ".git" \
+            ! -name "CNAME" \
+            ! -name ".nojekyll" \
+            ! -name ".github" \
+            -exec rm -rf {} +
+          echo "After cleaning:"
+          ls -la
 
-      # Quick listing for sanity
+      - name: Copy site files (docs → root)
+        run: |
+          echo "Copying ${SOURCE_DIR}/ → publish/"
+          rsync -av --delete --exclude ".git" "${SOURCE_DIR}/" publish/
+          echo "Copy completed"
+
       - name: List published files
-        run: ls -la publish | head -n 200
+        run: |
+          echo "Published files (first 50):"
+          ls -la publish | head -n 50
 
       - name: Commit & push
         working-directory: publish
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git config user.name  "github-actions[bot]"
+          git config user.name "github-actions[bot]"
           git add -A
-          git diff --quiet && echo "No changes." && exit 0
-          git commit -m "Deploy from ${GITHUB_REPOSITORY}@${GITHUB_SHA::7}"
+          
+          if git diff --quiet --staged; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          
+          echo "Committing changes..."
+          git commit -m "Deploy from ${GITHUB_REPOSITORY}@${GITHUB_SHA::7} [$(date -u '+%Y-%m-%d %H:%M:%S UTC')]"
+          
+          echo "Pushing to ${TARGET_BRANCH}..."
           git push origin "$TARGET_BRANCH"
+          echo "Deploy completed successfully!"
