@@ -1,30 +1,40 @@
-name: Deploy site via SSH Deploy Key
+name: Deploy via Deploy Key
 
 on:
   push:
     branches: [ main ]
     paths:
-      - 'docs/**'   # or '_site/**' if that’s where you render
+      - 'docs/**'        # or '_site/**'
   workflow_dispatch:
 
 env:
   TARGET_SSH: git@github.com:DevStart-Hub/DevStart-Hub.github.io.git
   TARGET_BRANCH: main
-  SOURCE_DIR: docs   # or _site if you render there
+  SOURCE_DIR: docs       # or _site
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup SSH
+      - name: Setup SSH (use ONLY our key)
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.PUBLISH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+          cat > ~/.ssh/config <<'CFG'
+          Host github.com
+            HostName github.com
+            User git
+            IdentityFile ~/.ssh/id_ed25519
+            IdentitiesOnly yes
+          CFG
+
+      - name: Debug SSH auth (non-fatal)
+        run: |
+          ssh -vvv -T git@github.com || true
 
       - name: Clone target repo
         run: git clone --depth 1 "$TARGET_SSH" publish
@@ -45,4 +55,4 @@ jobs:
           git add -A
           git diff --quiet && echo "No changes." && exit 0
           git commit -m "Deploy from ${GITHUB_REPOSITORY}@${GITHUB_SHA::7}"
-          git push origin "$TARGET_BRANCH"
+          gi
