@@ -121,6 +121,26 @@ website:
         icon: twitter
         aria-label: Twitter
 
+
+
+##### Filters #####
+filters:
+  - output-styling
+  - custom-callout
+
+## Filters settings  
+output-styling:
+  appearance: default  # Unfilled text boxes with borders
+
+custom-callout:
+  details:
+    title: "More details"
+    icon-symbol: "🔍"
+    color: "#8E44AD"
+    appearance: "default"
+    collapse: true
+
+
 ##### Format #####
 format:
   html:
