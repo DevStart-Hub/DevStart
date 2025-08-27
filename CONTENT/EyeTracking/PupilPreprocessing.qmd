@@ -208,7 +208,7 @@ Great job making it this far! Fixing the data to make it usable in **Pupillometr
 
 library(PupillometryR)  # Library to process pupil signal
 library(tidyverse)  # Library to wrangle dataframes
-library(patchwork)
+library(patchwork) 
 
 csv_files = list.files(
   path       = "resources/Pupillometry/RAW",
@@ -231,6 +231,9 @@ Post_stim_samples = Post_stim/Step  # post stimulus in samples
 Time = seq(from = -Pre_stim, by=Step, length.out = Pre_stim_samples+Post_stim_samples) # time vector
 
 # Event fixes --------------------------------------------------------------------
+
+# Events to keep
+Events_to_keep = c('Circle','Square')
 
 List_of_subject_dataframes = list() # Empty list to be filled with dataframes
 
