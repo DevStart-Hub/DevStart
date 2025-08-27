@@ -7994,7 +7994,7 @@ Warning
   <link>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/PupilPreprocessing.html</link>
   <description><![CDATA[ <p>Welcome to your first step into the world of pupillometry! In this tutorial, we’ll walk you through how to preprocess pupil data using a handy R package called <a href="http://samforbes.me/PupillometryR/index.html">PupillometryR</a>. This package makes it simple to clean and even analyze your pupil data with just a few lines of R code.</p>
 <p>To keep things straightforward, we’ll be working with a simulated dataset that you can download right here:</p>
-<p><button class="btn btn-secondary downloadthis  " id="dnldts34580"><i class="bi bi-download"></i> PupilData.zip </button></p>
+<p><button class="btn btn-secondary downloadthis  " id="dnldts55340"><i class="bi bi-download"></i> PupilData.zip </button></p>
 <p>Download and unzip this folder. This dataset is based on the experimental design we introduced earlier in our eye-tracking series. If you’re not familiar with it or need a quick refresher, we recommend checking out the “<a href="../../CONTENT/EyeTracking/Intro_eyetracking.html">Introduction to eye-tracking</a>” guide before diving in.</p>
 <p>This tutorial serves as a foundation for understanding how to preprocess pupil data. Once you’ve grasped the essentials, we encourage you to explore the full range of functions and features <a href="http://samforbes.me/PupillometryR">PupillometryR</a> has to offer.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -11475,7 +11475,7 @@ font-style: inherit;">)</span> </span></code></pre></div>
 </div>
 </div>
 </section><section id="baseline-correction" class="level3"><h3 class="anchored" data-anchor-id="baseline-correction">Baseline Correction</h3>
-<p>Good job getting this far!! We’re now at the final step of our pre-processing: baseline correction.</p>
+<p>Good job getting this far!!! We’re now at the final step of our pre-processing: baseline correction.</p>
 <p>Baseline correction helps remove variability between trials and participants, like differences in baseline pupil size caused by individual differences, fatigue, or random fluctuations. By doing this, we can focus only on the variability caused by our paradigm. This step ensures that any changes we see in pupil size are truly driven by the experimental conditions, not irrelevant noise. To further adjust the data, we’ll subtract the calculated baseline, ensuring the values start at <strong>0</strong> instead of <strong>-100</strong>. Finally, to make the next steps of analysis easier, we’ll select only the columns of interest, dropping any irrelevant ones.</p>
 <p>Let’s get it done!</p>
 <div class="cell">

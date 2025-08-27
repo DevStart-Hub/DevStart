@@ -633,7 +633,7 @@ plot(Downsampled_data, pupil = mean_pupil, group = 'condition', geom = 'line') +
 
 ### Baseline Correction
 
-Good job getting this far!! We’re now at the final step of our pre-processing: baseline correction.
+Good job getting this far!!! We’re now at the final step of our pre-processing: baseline correction.
 
 Baseline correction helps remove variability between trials and participants, like differences in baseline pupil size caused by individual differences, fatigue, or random fluctuations. By doing this, we can focus only on the variability caused by our paradigm. This step ensures that any changes we see in pupil size are truly driven by the experimental conditions, not irrelevant noise. To further adjust the data, we’ll subtract the calculated baseline, ensuring the values start at **0** instead of **-100**. Finally, to make the next steps of analysis easier, we’ll select only the columns of interest, dropping any irrelevant ones.
 
