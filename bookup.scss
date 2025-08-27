@@ -176,45 +176,41 @@ strong, b {
     }
 }
 
-/*------------------------------------*/
-/* 💻 Code Block and Output Styling   */
-/*------------------------------------*/
+// /*------------------------------------*/
+// /* 💻 Code Block and Output Styling   */
+// /*------------------------------------*/
 
-// Inline Code Styling
-p code:not(.sourceCode), 
-li code:not(.sourceCode), 
-td code:not(.sourceCode) {
-    background-color: var(--bs-code-bg);
-    color: var(--bs-code-color);
-    padding: .2em;
-    border-radius: 3px;
+/* Regular R + Python outputs */
+.cell-output.cell-output-stdout,
+.cell-output.cell-output-display {
+  background-color: #f9fafb !important;       /* lighter gray background */
+  border-left: 3px solid #c0c4c7 !important;  /* gray left border */
+  border-bottom: 2px solid #c0c4c7 !important; /* gray bottom border */
+  padding: 0.6em;
+  border-radius: 0 0 .3rem .3rem;             /* subtle rounding */
 }
 
-// Code Output Block Styling
-.cell-output.cell-output-stdout {
-    background-color: #f0f2f4;
-    color: #2d2d2d;
-    padding: 1px 4px;
-    margin-bottom: 5px;
-    border-left: 2px solid #A9C3C6;
-    border-radius: 1px;
-    overflow: auto;
+/* Errors */
+.cell-output.cell-output-error {
+  border-left: 3px solid var(--bs-danger-border-subtle) !important;
+  border-bottom: 2px solid var(--bs-danger-border-subtle) !important;
+  background-color: color-mix(in srgb, var(--bs-danger-bg-subtle) 15%, #fff);
 }
 
-
-// Preformatted Text Styling
-pre {
-    border: none;
-    background: transparent;
-    padding: 0;
+/* Warnings */
+.cell-output.cell-output-stderr.cell-output-warning {
+  border-left: 3px solid var(--bs-warning-border-subtle) !important;
+  border-bottom: 2px solid var(--bs-warning-border-subtle) !important;
+  background-color: color-mix(in srgb, var(--bs-warning-bg-subtle) 15%, #fff);
 }
 
-pre code {
-    border: none;
-    background: transparent;
-    padding: 0;
-    color: inherit;
+/* Messages */
+.cell-output.cell-output-stderr:not(.cell-output-warning) {
+  border-left: 3px solid var(--bs-primary-border-subtle) !important;
+  border-bottom: 2px solid var(--bs-primary-border-subtle) !important;
+  background-color: color-mix(in srgb, var(--bs-primary-bg-subtle) 15%, #fff);
 }
+
 
 
 /*------------------------------------*/
@@ -519,3 +515,6 @@ h3, h4, h5, h6 {
 p, div:not(.info-box), ul, ol, blockquote, pre, code {
   clear: none;
 }
+
+
+
