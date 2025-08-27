@@ -80,6 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/output-styling/output-styling-default.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -135,6 +136,19 @@ cookieconsent.run({
 });
 </script> 
   
+<style>
+div.callout-info.callout {
+  border-left-color: #8E44AD;
+}
+div.callout-info.callout-style-default > .callout-header {
+  background-color: rgba(142, 68, 173, 0.13);
+}
+div.callout-info .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-info.callout-style-default .callout-icon::before, div.callout-info.callout-titled .callout-icon::before {
+  content: '🔍';
+  background-image: none;
+}
+</style>
 
 
 <meta property="og:title" content="DevStart">
