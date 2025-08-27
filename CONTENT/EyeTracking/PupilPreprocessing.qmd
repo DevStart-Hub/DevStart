@@ -101,7 +101,7 @@ Let's plot the data! Visualizing it first is always a crucial step as it provide
 ggplot(Raw_data, aes(x = time, y = R_P)) +
   geom_line(aes(y = R_P, color = 'Pupil Right'), lwd = 1.2) +
   geom_line(aes(y = L_P, color = 'Pupil Left'), lwd = 1.2) +
-  geom_vline(data = Raw_data |> dplyr::filter(!is.na(Event)), aes(xintercept = time, linetype = Event), lwd = 1.3) +
+  geom_vline(data = Raw_data |> dplyr::filter(Event!= ""), aes(xintercept = time, linetype = Event), lwd = 1.3) +
   
   theme_bw(base_size = 35) +
   ylim(1, 6) +
