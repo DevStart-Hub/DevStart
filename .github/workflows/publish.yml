@@ -87,7 +87,7 @@ jobs:
       - name: Copy site files (docs → root)
         run: |
           echo "Copying ${SOURCE_DIR}/ → publish/"
-          rsync -av --delete --exclude ".git" "${SOURCE_DIR}/" publish/
+          rsync -av --delete --exclude ".git" --exclude "CNAME" --exclude ".nojekyll" --exclude ".github" --exclude "README.md" --exclude "RenderHub.png" source/ publish/
           echo "Copy completed"
 
       - name: List published files
