@@ -357,7 +357,7 @@ The fixed effects (*Parametric coefficients*) show a strong negative effect for 
 
 The smooth terms indicate whether the non-linear relationships modeled by s() explain significant variance in the data. A significant smooth term confirms that the function captures meaningful, non-linear patterns beyond random noise or simpler terms. While fixed effects are typically more important for hypothesis testing, it’s crucial to ensure the model specification captures the data's fluctuations accurately.
 
-You did it!!! You started from a simpler model and little by little you built a very complex Generalized Additive Model!! Amazing work!!!
+You did it!! You started from a simpler model and little by little you built a very complex Generalized Additive Model!! Amazing work!!!
 
 ::: callout-warning
 **This is just a very basic tutorial!**
