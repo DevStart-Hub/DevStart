@@ -1,0 +1,336 @@
+---
+title: "DevStart Setup Guide"
+
+author-meta: Tommaso Ghilardi, Franesco Poli
+description-meta: "Learn how to install python psychopy and R using a nice flowchart"
+keywords: "PsychoPy, Python, R, Rstudio, experimental psychology, tutorial, installation,flowchart, DevStart, developmental science, Spyder ide, Spyder"
+categories:
+  - Setup
+  - R
+  - Python
+---
+
+**Welcome to DevStart!!!**
+
+This is your starting point for an exciting journey with us! Together, we'll explore everything from creating experiments and collecting data to processing and analyzing your results. In this section, we'll prepare your computer with all the essential tools you'll need for our tutorials and ensure you have the best setup for your future research endeavors!
+
+## Getting started
+
+In DevStart, you'll learn to create psychological studies using **Python and PsychoPy**, then preprocess and analyze your data with a powerful combination of **Python and R**.
+
+We've chosen these tools because they're completely **free and open-source** – which we absolutely love! However, we'll be honest: they're not always the most straightforward to install (especially Python and PsychoPy). That's exactly why we've created detailed, step-by-step installation guides based on our own experience and best practices.
+
+*Please note: These aren't the only ways to set up these tools, but they represent what we use and have seen works reliably.*
+
+We've prepared comprehensive guides for:
+
+-   [Getting started with Python](GettingStartedWithPython.qmd)
+
+-   [Getting started with Psychopy](GettingStartedWithPsychopy.qmd)
+
+-   [Getting started with R](GettingStartedWithR.qmd)
+
+## HOWEVER....
+
+If you're new to these tools, we strongly recommend following our interactive flowcharts below. Simply click the buttons to navigate to the most relevant sections of our tutorials based on your experience level and goals.
+
+*The flowcharts will guide you through the setup process in the right order for your specific situation.*
+
+### Python and Psychopy
+
+Here the flwochart to install Python and Psychopy.
+
+::: callout-important
+```{=html}
+<br>
+<div style="display: inline-flex; align-items: center;">
+  <span>In case the flowchart is not rendering properly on your screen, please download it here:</span>
+  <a href='../../resources/GettingStartedWithDevStart/FlowchartPython.pdf' download="FlowchartPython.pdf" style="margin-left: 8px;">
+    <button type="button" class="btn btn-secondary btn-sm">FlowchartPython.pdf</button>
+  </a>
+</div>
+<br>
+```
+:::
+
+```{=html}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Responsive PDF with Clickable Links</title>
+  <!-- Load PDF.js from cdnjs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
+  <style>
+    /* Container for the PDF */
+    #pdf-container {
+      position: relative;
+      width: 100%;
+      border: 1px solid #ccc;
+      overflow: hidden;
+    }
+    /* Canvas styling */
+    canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    /* Annotation layer styling */
+    #annotation-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      /* The layer will be resized via JS to match the canvas */
+    }
+    /* Individual clickable link styling */
+    .annotation-layer a {
+      position: absolute;
+      text-decoration: none;
+      /* Uncomment below for debugging clickable areas */
+      /* background: rgba(0, 0, 255, 0.2); */
+      /* border: 1px solid rgba(0, 0, 255, 0.5); */
+    }
+  </style>
+</head>
+<body>
+  <div id="pdf-container">
+    <canvas id="pdf-canvas"></canvas>
+    <!-- This div will hold the clickable link overlays -->
+    <div id="annotation-layer" class="annotation-layer"></div>
+  </div>
+
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+    const url = '../../resources/GettingStartedWithDevStart/FlowchartPython.pdf';
+    const container = document.getElementById('pdf-container');
+    const canvas = document.getElementById('pdf-canvas');
+    const annotationLayer = document.getElementById('annotation-layer');
+    const context = canvas.getContext('2d');
+
+    let pdfDoc, page, viewport;
+
+    // Function to render the page with a computed scale that fits the container's width
+    function renderPage() {
+      // Clear previous annotation overlays
+      annotationLayer.innerHTML = '';
+
+      // Get container width
+      const containerWidth = container.clientWidth;
+
+      // First, get a viewport with scale=1 to know the intrinsic dimensions
+      const initialViewport = page.getViewport({ scale: 1 });
+      const scale = containerWidth / initialViewport.width;
+
+      // Compute a new viewport with this scale
+      viewport = page.getViewport({ scale: scale });
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+
+      // Resize the annotation layer to exactly overlay the canvas
+      annotationLayer.style.width = canvas.width + 'px';
+      annotationLayer.style.height = canvas.height + 'px';
+
+      // Render the page onto the canvas
+      const renderContext = {
+        canvasContext: context,
+        viewport: viewport
+      };
+
+      page.render(renderContext).promise.then(() => {
+        // After rendering, get annotations (links)
+        return page.getAnnotations();
+      }).then(function(annotationsData) {
+        annotationsData.forEach(function(annotation) {
+          if (annotation.subtype === 'Link' && annotation.url) {
+            // Normalize and convert annotation rectangle
+            const rect = pdfjsLib.Util.normalizeRect(annotation.rect);
+            const transform = viewport.convertToViewportRectangle(rect);
+            const x = Math.min(transform[0], transform[2]);
+            const y = Math.min(transform[1], transform[3]);
+            const width = Math.abs(transform[0] - transform[2]);
+            const height = Math.abs(transform[1] - transform[3]);
+
+            const linkEl = document.createElement('a');
+            linkEl.href = annotation.url;
+            linkEl.target = '_blank';
+            linkEl.style.left = x + 'px';
+            linkEl.style.top = y + 'px';
+            linkEl.style.width = width + 'px';
+            linkEl.style.height = height + 'px';
+
+            annotationLayer.appendChild(linkEl);
+          }
+        });
+      });
+    }
+
+    // Load the PDF document and the first page
+    pdfjsLib.getDocument(url).promise.then(function(pdf) {
+      pdfDoc = pdf;
+      return pdfDoc.getPage(1);
+    }).then(function(pg) {
+      page = pg;
+      renderPage();
+    }).catch(function(error) {
+      console.error('Error loading PDF: ', error);
+    });
+
+    // Listen to window resize events and re-render the page accordingly
+    window.addEventListener('resize', function() {
+      if (page) {
+        renderPage();
+      }
+    });
+  </script>
+</body>
+</html>
+```
+
+### R and Rstudio
+
+Here the flowchart to install R and Rstudio (*this is way more straightforward*).
+
+::: callout-important
+```{=html}
+<br>
+<div style="display: inline-flex; align-items: center;">
+  <span>In case the flowchart is not rendering properly on your screen, please download it here:</span>
+  <a href='../../resources/GettingStartedWithDevStart/FlowchartR.pdf' download="FlowchartR.pdf" style="margin-left: 8px;">
+    <button type="button" class="btn btn-secondary btn-sm">FlowchartR.pdf</button>
+  </a>
+</div>
+<br>
+```
+:::
+
+```{=html}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>R Flowchart PDF Viewer</title>
+  <style>
+    /* Container for the PDF */
+    #pdf-container-r {
+      position: relative;
+      width: 100%;
+      border: 1px solid #ccc;
+      overflow: hidden;
+    }
+    /* Canvas styling */
+    #pdf-canvas-r {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    /* Annotation layer styling */
+    #annotation-layer-r {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      /* The layer will be resized via JS to match the canvas */
+    }
+    /* Individual clickable link styling */
+    .annotation-layer a {
+      position: absolute;
+      text-decoration: none;
+      /* Uncomment below for debugging clickable areas */
+      /* background: rgba(0, 0, 255, 0.2); */
+      /* border: 1px solid rgba(0, 0, 255, 0.5); */
+    }
+  </style>
+</head>
+<body>
+  <div id="pdf-container-r">
+    <canvas id="pdf-canvas-r"></canvas>
+    <!-- This div will hold the clickable link overlays -->
+    <div id="annotation-layer-r" class="annotation-layer"></div>
+  </div>
+
+  <script>
+    const urlR = '../../resources/GettingStartedWithDevStart/FlowchartR.pdf';
+    const containerR = document.getElementById('pdf-container-r');
+    const canvasR = document.getElementById('pdf-canvas-r');
+    const annotationLayerR = document.getElementById('annotation-layer-r');
+    const contextR = canvasR.getContext('2d');
+
+    let pdfDocR, pageR, viewportR;
+
+    // Function to render the page with a computed scale that fits the container's width
+    function renderPageR() {
+      // Clear previous annotation overlays
+      annotationLayerR.innerHTML = '';
+
+      // Get container width
+      const containerWidthR = containerR.clientWidth;
+
+      // First, get a viewport with scale=1 to know the intrinsic dimensions
+      const initialViewportR = pageR.getViewport({ scale: 1 });
+      const scaleR = containerWidthR / initialViewportR.width;
+
+      // Compute a new viewport with this scale
+      viewportR = pageR.getViewport({ scale: scaleR });
+      canvasR.width = viewportR.width;
+      canvasR.height = viewportR.height;
+
+      // Resize the annotation layer to exactly overlay the canvas
+      annotationLayerR.style.width = canvasR.width + 'px';
+      annotationLayerR.style.height = canvasR.height + 'px';
+
+      // Render the page onto the canvas
+      const renderContextR = {
+        canvasContext: contextR,
+        viewport: viewportR
+      };
+
+      pageR.render(renderContextR).promise.then(() => {
+        // After rendering, get annotations (links)
+        return pageR.getAnnotations();
+      }).then(function(annotationsDataR) {
+        annotationsDataR.forEach(function(annotationR) {
+          if (annotationR.subtype === 'Link' && annotationR.url) {
+            // Normalize and convert annotation rectangle
+            const rectR = pdfjsLib.Util.normalizeRect(annotationR.rect);
+            const transformR = viewportR.convertToViewportRectangle(rectR);
+            const xR = Math.min(transformR[0], transformR[2]);
+            const yR = Math.min(transformR[1], transformR[3]);
+            const widthR = Math.abs(transformR[0] - transformR[2]);
+            const heightR = Math.abs(transformR[1] - transformR[3]);
+
+            const linkElR = document.createElement('a');
+            linkElR.href = annotationR.url;
+            linkElR.target = '_blank';
+            linkElR.style.left = xR + 'px';
+            linkElR.style.top = yR + 'px';
+            linkElR.style.width = widthR + 'px';
+            linkElR.style.height = heightR + 'px';
+
+            annotationLayerR.appendChild(linkElR);
+          }
+        });
+      });
+    }
+
+    // Load the PDF document and the first page
+    pdfjsLib.getDocument(urlR).promise.then(function(pdfR) {
+      pdfDocR = pdfR;
+      return pdfDocR.getPage(1);
+    }).then(function(pgR) {
+      pageR = pgR;
+      renderPageR();
+    }).catch(function(errorR) {
+      console.error('Error loading R PDF: ', errorR);
+    });
+
+    // Listen to window resize events and re-render the page accordingly
+    window.addEventListener('resize', function() {
+      if (pageR) {
+        renderPageR();
+      }
+    });
+  </script>
+</body>
+</html>
+```
