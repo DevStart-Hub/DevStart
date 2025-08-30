@@ -368,7 +368,7 @@ Variable predicted: LookingTime</code></pre>
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotRawPredicted-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><a href="ModelEstimates_files/figure-html/PlotRawPredicted-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotRawPredicted-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -699,7 +699,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotPred-1.png" class="img-fluid figure-img" width="768"></p>
+<figure class="figure"><p><a href="ModelEstimates_files/figure-html/PlotPred-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotPred-1.png" class="img-fluid figure-img" width="768"></a></p>
 </figure>
 </div>
 </div>
@@ -826,7 +826,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotEstMean-1.png" class="img-fluid figure-img" width="768"></p>
+<figure class="figure"><p><a href="ModelEstimates_files/figure-html/PlotEstMean-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotEstMean-1.png" class="img-fluid figure-img" width="768"></a></p>
 </figure>
 </div>
 </div>
@@ -1012,7 +1012,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotContrasts-1.png" class="img-fluid figure-img" width="768"></p>
+<figure class="figure"><p><a href="ModelEstimates_files/figure-html/PlotContrasts-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotContrasts-1.png" class="img-fluid figure-img" width="768"></a></p>
 </figure>
 </div>
 </div>
@@ -1101,7 +1101,7 @@ Important
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotContrastInteraction-1.png" class="img-fluid figure-img" width="816"></p>
+<figure class="figure"><p><a href="ModelEstimates_files/figure-html/PlotContrastInteraction-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotContrastInteraction-1.png" class="img-fluid figure-img" width="816"></a></p>
 </figure>
 </div>
 </div>
@@ -1286,7 +1286,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><a href="ModelEstimates_files/figure-html/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -1652,7 +1652,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotGrid-1.png" class="img-fluid figure-img" width="960"></p>
+<figure class="figure"><p><a href="ModelEstimates_files/figure-html/PlotGrid-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotGrid-1.png" class="img-fluid figure-img" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -1904,7 +1904,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="768"></p>
+<figure class="figure"><p><a href="GeneralisedModels_files/figure-html/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="768"></a></p>
 </figure>
 </div>
 </div>
@@ -2053,7 +2053,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/ViolinPlot-1.png" class="img-fluid figure-img" width="768"></p>
+<figure class="figure"><p><a href="GeneralisedModels_files/figure-html/ViolinPlot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/ViolinPlot-1.png" class="img-fluid figure-img" width="768"></a></p>
 </figure>
 </div>
 </div>
@@ -2121,7 +2121,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/PlotCheck-1.png" class="img-fluid figure-img" width="4200"></p>
+<figure class="figure"><p><a href="GeneralisedModels_files/figure-html/PlotCheck-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/PlotCheck-1.png" class="img-fluid figure-img" width="4200"></a></p>
 </figure>
 </div>
 </div>
@@ -2192,7 +2192,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/FitDistrPlus-1.png" class="img-fluid figure-img" width="2100"></p>
+<figure class="figure"><p><a href="GeneralisedModels_files/figure-html/FitDistrPlus-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/FitDistrPlus-1.png" class="img-fluid figure-img" width="2100"></a></p>
 </figure>
 </div>
 </div>
@@ -2312,7 +2312,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/GLMM_check-1.png" class="img-fluid figure-img" width="4200"></p>
+<figure class="figure"><p><a href="GeneralisedModels_files/figure-html/GLMM_check-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/GLMM_check-1.png" class="img-fluid figure-img" width="4200"></a></p>
 </figure>
 </div>
 </div>
@@ -2589,7 +2589,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/GLMPlot-1.png" class="img-fluid figure-img" width="1152"></p>
+<figure class="figure"><p><a href="GeneralisedModels_files/figure-html/GLMPlot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/GLMPlot-1.png" class="img-fluid figure-img" width="1152"></a></p>
 </figure>
 </div>
 </div>
@@ -2833,7 +2833,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/GLMMRandomPlot-1.png" class="img-fluid figure-img" width="1152"></p>
+<figure class="figure"><p><a href="GeneralisedModels_files/figure-html/GLMMRandomPlot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/GLMMRandomPlot-1.png" class="img-fluid figure-img" width="1152"></a></p>
 </figure>
 </div>
 </div>
@@ -3304,7 +3304,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearMixedModels_files/figure-html/SimpsonParadox-1.png" class="img-fluid figure-img" width="960"></p>
+<figure class="figure"><p><a href="LinearMixedModels_files/figure-html/SimpsonParadox-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearMixedModels_files/figure-html/SimpsonParadox-1.png" class="img-fluid figure-img" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -3841,7 +3841,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearMixedModels_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="1152"></p>
+<figure class="figure"><p><a href="LinearMixedModels_files/figure-html/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearMixedModels_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="1152"></a></p>
 </figure>
 </div>
 </div>
@@ -4063,7 +4063,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearMixedModels_files/figure-html/PlotInterceptModelOverall-1.png" class="img-fluid figure-img" width="1152"></p>
+<figure class="figure"><p><a href="LinearMixedModels_files/figure-html/PlotInterceptModelOverall-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearMixedModels_files/figure-html/PlotInterceptModelOverall-1.png" class="img-fluid figure-img" width="1152"></a></p>
 </figure>
 </div>
 </div>
@@ -4376,7 +4376,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearMixedModels_files/figure-html/PlotSlopeModel-1.png" class="img-fluid figure-img" width="1152"></p>
+<figure class="figure"><p><a href="LinearMixedModels_files/figure-html/PlotSlopeModel-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearMixedModels_files/figure-html/PlotSlopeModel-1.png" class="img-fluid figure-img" width="1152"></a></p>
 </figure>
 </div>
 </div>
@@ -4673,7 +4673,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearMixedModels_files/figure-html/PlotInterceptSlopeModel-1.png" class="img-fluid figure-img" width="1152"></p>
+<figure class="figure"><p><a href="LinearMixedModels_files/figure-html/PlotInterceptSlopeModel-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearMixedModels_files/figure-html/PlotInterceptSlopeModel-1.png" class="img-fluid figure-img" width="1152"></a></p>
 </figure>
 </div>
 </div>
@@ -4853,10 +4853,7 @@ Note
 <section id="what-is-a-linear-model" class="level1"><h1>What is a linear model?</h1>
 <p>A linear model is a simple statistical test that tries to find the best line that represent the relations between two variables ( or more).</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="https://towardsdatascience.com/linear-regression-5100fe32993a"><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*MtuQBTW0-XbjA2RrP2z3Kw.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="image found on towardsdatascience.com"></a></p>
-</figure>
-</div>
+<figure class="figure"><p><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*MtuQBTW0-XbjA2RrP2z3Kw.gif" class="img-fluid figure-img"></p>
 <figcaption>image found on towardsdatascience.com</figcaption></figure>
 </div>
 <p>What’s truly fascinating about linear models is their versatility. They start off incredibly simple, but their complexity can grow exponentially! This makes them a remarkably flexible tool in the world of data analysis.</p>
@@ -4868,7 +4865,7 @@ Note
 <p>So, if you notice something that doesn’t seem quite perfect at this stage, don’t worry! It’s all part of the plan. Our goal is to guide you step-by-step towards building the best model. Just remember, this process takes time!</p>
 <section id="import-data" class="level2"><h2 class="anchored" data-anchor-id="import-data">Import data</h2>
 <p>You can download the data that we will use in this tutorial from here:</p>
-<p><button class="btn btn-secondary downloadthis  " id="dnldts44708"><i class="bi bi-download"></i> Dataset.csv </button></p>
+<p><button class="btn btn-secondary downloadthis  " id="dnldts48531"><i class="bi bi-download"></i> Dataset.csv </button></p>
 <p>Once downloaded we need to import it in our R session. Here we read our csv and we print a small preview of it.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
@@ -5135,7 +5132,7 @@ Tip
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="3000"></p>
+<figure class="figure"><p><a href="LinearModels_files/figure-html/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="3000"></a></p>
 </figure>
 </div>
 </div>
@@ -5151,7 +5148,7 @@ Tip
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="3000"></p>
+<figure class="figure"><p><a href="LinearModels_files/figure-html/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="3000"></a></p>
 </figure>
 </div>
 </div>
@@ -5177,7 +5174,7 @@ Important
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="3000"></p>
+<figure class="figure"><p><a href="LinearModels_files/figure-html/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="3000"></a></p>
 </figure>
 </div>
 </div>
@@ -5214,7 +5211,7 @@ Important
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="3000"></p>
+<figure class="figure"><p><a href="LinearModels_files/figure-html/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="3000"></a></p>
 </figure>
 </div>
 </div>
@@ -5412,7 +5409,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/PlotCheck-1.png" class="img-fluid figure-img" width="4200"></p>
+<figure class="figure"><p><a href="LinearModels_files/figure-html/PlotCheck-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/PlotCheck-1.png" class="img-fluid figure-img" width="4200"></a></p>
 </figure>
 </div>
 </div>
@@ -5990,7 +5987,7 @@ Note
 <p>Before starting any type of analysis, let’s import the data and take a quick look at it.</p>
 <section id="import-data" class="level2"><h2 class="anchored" data-anchor-id="import-data">Import data</h2>
 <p>The data used in this tutorial comes from the pre-processing tutorial of pupil dilation. If you haven’t run that tutorial yet, it’s a good idea to check it out first to ensure your data is prepared and ready for analysis: <a href="../../CONTENT/EyeTracking/PupilPreprocessing.html">Pre-processing pupil data</a>. In case you did not save the result of the pre-processing you can download them from here :</p>
-<p><button class="btn btn-secondary downloadthis  " id="dnldts23982"><i class="bi bi-download"></i> Preprocessed_PupilData.csv </button></p>
+<p><button class="btn btn-secondary downloadthis  " id="dnldts64504"><i class="bi bi-download"></i> Preprocessed_PupilData.csv </button></p>
 <p>Now that you have the data, let’s import it along with the necessary libraries. We’ll also ensure that the <code>Event</code> and <code>Subjects</code> columns are properly set as factors (categorical for easier analysis. Here’s how:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;
@@ -7994,7 +7991,7 @@ Warning
   <link>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/PupilPreprocessing.html</link>
   <description><![CDATA[ <p>Welcome to your first step into the world of pupillometry! In this tutorial, we’ll walk you through how to preprocess pupil data using a handy R package called <a href="http://samforbes.me/PupillometryR/index.html">PupillometryR</a>. This package makes it simple to clean and even analyze your pupil data with just a few lines of R code.</p>
 <p>To keep things straightforward, we’ll be working with a simulated dataset that you can download right here:</p>
-<p><button class="btn btn-secondary downloadthis  " id="dnldts8801"><i class="bi bi-download"></i> PupilData.zip </button></p>
+<p><button class="btn btn-secondary downloadthis  " id="dnldts63042"><i class="bi bi-download"></i> PupilData.zip </button></p>
 <p>Download and unzip this folder. This dataset is based on the experimental design we introduced earlier in our eye-tracking series. If you’re not familiar with it or need a quick refresher, we recommend checking out the “<a href="../../CONTENT/EyeTracking/Intro_eyetracking.html">Introduction to eye-tracking</a>” guide before diving in.</p>
 <p>This tutorial serves as a foundation for understanding how to preprocess pupil data. Once you’ve grasped the essentials, we encourage you to explore the full range of functions and features <a href="http://samforbes.me/PupillometryR">PupillometryR</a> has to offer.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -14297,11 +14294,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 <p>Well, an eye-tracker works by using illuminators to emit near-infrared light towards the eye. This light reflects off the cornea, creating a visible glint or reflection that the eye-tracker’s sensors can detect. By capturing this reflection, the eye-tracker can determine the position of the eye relative to a screen, allowing it to pinpoint where the user is looking, known as the gaze point.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://help.tobii.com/hc/en-us/articles/360023794433-How-does-the-calibration-work"><img src="https://help.tobii.com/hc/article_attachments/360036648293/How_DoesEyetrackingWork_ScreenBased.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="528" alt="Image from the tobii website"></a></p>
-</figure>
-</div>
+<p><img src="https://help.tobii.com/hc/article_attachments/360036648293/How_DoesEyetrackingWork_ScreenBased.jpg" class="img-fluid figure-img" width="528"></p>
 <figcaption>Image from the tobii website</figcaption>
 </figure>
 </div>
@@ -14353,7 +14346,7 @@ Note
 <p>You should end up like with something like this:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://tommasoghilardi.github.io/DevStart/images/CreateAnEyetrackingExperiment/FinalConfTobiiInfant.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><a href="../..\images/CreateAnEyetrackingExperiment/FinalConfTobiiInfant.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/images/CreateAnEyetrackingExperiment/FinalConfTobiiInfant.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
 </figure>
 </div>
 <p><strong>Now we are all set and ready to go !!!!!!!!!!</strong></p>
@@ -14427,7 +14420,7 @@ font-style: inherit;">'pix'</span>)</span></code></pre></div>
 <p>The .pngs are images of cute cartoon animals that we will use in the calibration.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://tommasoghilardi.github.io/DevStart/resources/EyetrackingCalibration/animals.jpg.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="347"></p>
+<p><a href="../..\resources/EyetrackingCalibration/animals.jpg.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://tommasoghilardi.github.io/DevStart/resources/EyetrackingCalibration/animals.jpg.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="347"></a></p>
 </figure>
 </div>
 <p>Let’s find them and put the in a list.</p>
@@ -14506,7 +14499,7 @@ font-style: inherit;">=</span> TobiiInfantController(win)</span></code></pre></d
 <p>You can see here two classic scenarios of infants in front of a eye-tracker. Again, the important thing is that the head and gaze of the child is perpendicular to the screen</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://tommasoghilardi.github.io/DevStart/resources/EyetrackingCalibration/Calibration.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="753"></p>
+<p><a href="../..\resources/EyetrackingCalibration/Calibration.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://tommasoghilardi.github.io/DevStart/resources/EyetrackingCalibration/Calibration.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="753"></a></p>
 </figure>
 </div>
 <p>But how to do it?? We can eyeball it but it’s not going to be easy. Luckily we can get some help!!</p>
@@ -14529,7 +14522,7 @@ font-style: inherit;"># show the relative position of the subject to the eyetrac
 <p>This is what we will see:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://tommasoghilardi.github.io/DevStart/resources/EyetrackingCalibration/ShowStatus.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="852"></p>
+<p><a href="../..\resources/EyetrackingCalibration/ShowStatus.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://tommasoghilardi.github.io/DevStart/resources/EyetrackingCalibration/ShowStatus.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="852"></a></p>
 </figure>
 </div>
 <p>In the center of the screen you will see the video we imported. In this case, a video of funny dancing fruits. But more importantly, at the top we can see the eyes of our participant. We need to make sure that we actually see the eyes and that they are centered in the screen. In addition is important to notice that under the eye position there is a green bar. The black line on it represents the distance of the participant head from the eye-tracker (the more on the right, the further from the screen; the more on the left, the closer to it). Ideally the black line should be in the center (overlapping the white thick line). This would indicate that the head of the participant is at an ideal distance (usually 65cm).</p>
@@ -14613,13 +14606,13 @@ font-style: inherit;">=</span> Sound)</span></code></pre></div>
 <p>Ok, but what is going to happen??? After running this line we will start our calibration. Using the numbers on our keyboard (use 1~9 (depending on the number of calibration points) to present) we will show 1 of the <code>.png</code> stimuli that we have listed in <code>CALISTIMS</code> in the selected position. The presentation of the cartoon will be accompanied by the sound passed with <code>Sound</code>. The cartoon will start to zoom in and out in the attempt to capture the attention of the infant.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://tommasoghilardi.github.io/DevStart/resources/EyetrackingCalibration/ZoomingStim.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="852"></p>
+<p><a href="../..\resources/EyetrackingCalibration/ZoomingStim.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="https://tommasoghilardi.github.io/DevStart/resources/EyetrackingCalibration/ZoomingStim.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="852"></a></p>
 </figure>
 </div>
 <p>Once we are confident that the infant is looking at the cartoon zooming in and out you can press <strong>Space</strong> to collect the first calibration sample. Once that’s been done, we can move to the following points. Once all point are done we can press <strong>Enter</strong>. This will show the result of our calibration, e.g:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://tommasoghilardi.github.io/DevStart/resources/EyetrackingCalibration/CalibrationResults.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="852"></p>
+<p><a href="../..\resources/EyetrackingCalibration/CalibrationResults.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="https://tommasoghilardi.github.io/DevStart/resources/EyetrackingCalibration/CalibrationResults.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="852"></a></p>
 </figure>
 </div>
 <p>The red and green lines represent the gaze data from the left and right eyes, respectively. Each cluster of lines corresponds to a calibration point, with the central cluster indicating the main fixation point. Tight convergence of the lines within each cluster signifies high calibration accuracy and precision, while any significant discrepancies or spread indicate potential calibration issues.</p>
@@ -15245,7 +15238,7 @@ font-style: inherit;"># Show the plot</span></span>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/FromFixationsToData_files/figure-html/cell-4-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="658" height="367"></p>
+<p><a href="FromFixationsToData_files/figure-html/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/FromFixationsToData_files/figure-html/cell-4-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="658" height="367"></a></p>
 </figure>
 </div>
 </div>
@@ -15257,7 +15250,7 @@ font-style: inherit;"># Show the plot</span></span>
 <p>We can check whether the (x, y) coordinates of the point are within the x and y coordinates of the left bottom and top right corners of the AOI.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://tommasoghilardi.github.io/DevStart/images/FromDataToMeasures/Squares.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
+<p><a href="../..\images/FromDataToMeasures/Squares.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/images/FromDataToMeasures/Squares.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></a></p>
 </figure>
 </div>
 <p>So imagine we have a point: <code>point</code> and an area: <code>area</code>, we can check if the point falls inside the area by:</p>
@@ -15392,7 +15385,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
 <p>Let’s take a look at the design image. What we are interest in is the last part, the target presentation.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://tommasoghilardi.github.io/DevStart/images/FromDataToMeasures/DesignSelection.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="495"></p>
+<p><a href="../..\images/FromDataToMeasures/DesignSelection.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://tommasoghilardi.github.io/DevStart/images/FromDataToMeasures/DesignSelection.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="495"></a></p>
 </figure>
 </div>
 <p>In this case, our attention is on the target window. We’re going to establish a time window that begins 750ms before the target appears and continues for 2000ms after its presentation. Indeed, both <strong>Saccadic latency</strong> and <strong>Lookign time</strong> occur within this time window, while we don’t really care about where the participant is looking during other phases of the task.</p>
@@ -15502,7 +15495,7 @@ font-style: inherit;">0</span>]</span></code></pre></div>
 <p>Our Fixations dataframe is now chock-full of event-related info. But, there’s a catch. The fixations that took place at times other than during the target presentation are still hanging around in the dataframe. And they’re filled with NANs in the new columns we just created.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://tommasoghilardi.github.io/DevStart/images/FromDataToMeasures/CorrectFixations.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="416"></p>
+<p><a href="../..\images/FromDataToMeasures/CorrectFixations.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://tommasoghilardi.github.io/DevStart/images/FromDataToMeasures/CorrectFixations.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="416"></a></p>
 </figure>
 </div>
 <p>We can use this to our advantage and filter all the NANs out:</p>
@@ -15757,7 +15750,7 @@ font-style: inherit;"># Show the plot</span></span>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/FromFixationsToData_files/figure-html/cell-16-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="604" height="429"></p>
+<p><a href="FromFixationsToData_files/figure-html/cell-16-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/FromFixationsToData_files/figure-html/cell-16-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="604" height="429"></a></p>
 </figure>
 </div>
 </div>
@@ -15825,7 +15818,7 @@ font-style: inherit;"># Show the plot</span></span>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/FromFixationsToData_files/figure-html/cell-18-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="602" height="429"></p>
+<p><a href="FromFixationsToData_files/figure-html/cell-18-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/FromFixationsToData_files/figure-html/cell-18-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="602" height="429"></a></p>
 </figure>
 </div>
 </div>
@@ -18984,7 +18977,7 @@ font-style: inherit;">not</span> os.path.isfile(filename))</span></code></pre></
 <p>While this works fine, it can be confusing during analysis because most plotting systems expect the origin in the bottom-left corner, not the top-left. The image below shows this difference:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://tommasoghilardi.github.io/DevStart/images/CreateAnEyetrackingExperiment/Origins.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="419"></p>
+<p><a href="../..\images/CreateAnEyetrackingExperiment/Origins.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/images/CreateAnEyetrackingExperiment/Origins.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="419"></a></p>
 </figure>
 </div>
 <p>Let’s adjust our data to make it more analysis-friendly:</p>
@@ -20908,7 +20901,7 @@ Note
 </div>
 <p>To test this, we devised a very simple paradigm in which two cue stimuli (either a circle or a square) reliably predict the location of the following target stimulus (either on the right or on the left, respectively). Crucially, we will manipulate how much they can learn from these two target stimuli. The stimulus associated with the circle will be visually complex, and it will thus offer many components which infants can slowly unpack and learn about. The stimulus associated with the square will be visually simple, and it will thus offer very little to learn. The exact paradigm is illustrated below. Please not that we generated a very simple paradigm for educational purposes, and this is thus not fit for a robust, fully-fledged experimental inquiry.</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/images/Introduction_eyetracking/DesignBasics.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<figure class="figure"><p><a href="../..\images/Introduction_eyetracking/DesignBasics.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/images/Introduction_eyetracking/DesignBasics.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
 </figure>
 </div>
 <p>It is much easier to start an eye-tracking project if you have a clear idea of what is your measure of interest. At the same time, what measure of interest you choose really depends on what cognitive process you are trying to study. Here we review some eye-tracking variables which have been key in the field of (developmental) cognitive science, and what cognitive processes they might relate to. However, it is very important to notice that ultimately, no measure is perfectly related to any cognitive function. The same measure can be related to many different cognitive processes depending on the specific experimental paradigm we are using.</p>
@@ -20935,7 +20928,7 @@ Warning
 <p>In the example above, we can conclude that infants can distinguish dogs from cats only if we control for many alternative explanations and chose the stimuli carefully. In reality, all we know with habituation paradigms is whether infants can spot any difference between the images. If for example the dog image is bigger, or it has different colors, it might be that infants are reacting to changes in size or color rather than animal category! Always chose your stimuli carefully.</p>
 <p><strong>Can you spot the problem here?😁</strong></p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/images/Introduction_eyetracking/CatDog.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="416"></p>
+<figure class="figure"><p><a href="../..\images/Introduction_eyetracking\CatDog.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/images/Introduction_eyetracking/CatDog.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="416"></a></p>
 </figure>
 </div>
 </div>
@@ -21006,7 +20999,7 @@ Important
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/Intro_eyetracking_files/figure-html/plot tonic and phasic pupil size-1.png" class="img-fluid figure-img" width="4800"></p>
+<figure class="figure"><p><a href="Intro_eyetracking_files/figure-html/plot tonic and phasic pupil size-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Pupil signal and its components"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/Intro_eyetracking_files/figure-html/plot tonic and phasic pupil size-1.png" class="img-fluid figure-img" width="4800" alt="Pupil signal and its components"></a></p>
 <figcaption>Pupil signal and its components</figcaption></figure>
 </div>
 </div>
@@ -21044,7 +21037,7 @@ Some practical recommendations for successful pupillometry
 </section></section></section><section id="recap" class="level1"><h1>Recap</h1>
 <p>Below you can find a visual summary of some of the things you can measure using eye-tracking. These are the main measures we will be focusing on, but there are many more. We hope that by doing the tutorials, you will not only acquire the tools to collect and process these data, but you will get a solid conceptual and practical understanding. This way, you will be able to take our examples, modify them, build on them, and get out of the data all the measures you want!</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://tommasoghilardi.github.io/DevStart/images/Introduction_eyetracking/Design.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<figure class="figure"><p><a href="../..\images/Introduction_eyetracking/Design.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://tommasoghilardi.github.io/DevStart/images/Introduction_eyetracking/Design.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
 </figure>
 </div>
 
@@ -21093,7 +21086,7 @@ Stimuli!
 <section id="preparation" class="level2">
 <h2 class="anchored" data-anchor-id="preparation">Preparation:</h2>
 <p>First things first, let’s import the relevant libraries and define the path to where our stimuli are. PsychoPy has a lot of different modules that allow us to interface with different types of stimuli and systems. For this tutorial we need the following:</p>
-<div id="12be2312" class="cell" data-execution_count="1">
+<div id="561a7200" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Import some libraries from PsychoPy and others</span></span>
@@ -21115,7 +21108,7 @@ font-style: inherit;">import</span> core, event, visual,sound</span></code></pre
 <section id="stimuli-1" class="level2">
 <h2 class="anchored" data-anchor-id="stimuli-1">Stimuli:</h2>
 <p>The next step is to create the window. The window is what we will show the stimuli in; it is the canvas on which to draw objects. For now, we will create a small window of 960*540 pixels. In this way, we will able to see the stimuli and still interact with the rest of our PC interface. In a real experiment, we would probably set the window dimension to the entirety of the display (fullscr=True) and maybe on a secondary screen (screen = 1).</p>
-<div id="34841587" class="cell" data-execution_count="2">
+<div id="0192a0a3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Winsize</span></span>
@@ -21234,7 +21227,7 @@ font-style: inherit;">'/Users/tomma/Desktop'</span></span></code></pre></div>
 <section id="modern-solution" class="level3">
 <h3 class="anchored" data-anchor-id="modern-solution">Modern Solution</h3>
 <p>Python 3.4+ includes the <code>pathlib</code> module which provides a more intuitive, object-oriented approach to working with file paths that works across all operating systems. Once you create a Path object, the most powerful feature of pathlib is the ability to use the forward slash / operator to join paths together. This makes constructing file paths much more intuitive and readable:</p>
-<div id="266974f1" class="cell" data-execution_count="3">
+<div id="2972a028" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> pathlib <span class="im" style="color: #00769E;
@@ -21285,7 +21278,7 @@ font-style: inherit;">str</span>(full_path)</span></code></pre></div>
 </section>
 </div>
 </div>
-<div id="dc6b8452" class="cell" data-execution_count="4">
+<div id="e275d918" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#%% Load and prepare stimuli</span></span>
@@ -21477,18 +21470,18 @@ font-style: inherit;">1</span> ]</span></code></pre></div>
 <h2 class="anchored" data-anchor-id="show-a-visual-stimulus">Show a visual stimulus:</h2>
 <p>Now we want to show a stimulus in the center of our window. To do so, we will have to use the function “draw”. As the name suggests this function draws the stimulus that we want on the window that we have created.</p>
 <p>Let’s start with displaying the fixation cross in the center.</p>
-<div id="34092422" class="cell" data-execution_count="5">
+<div id="c7bb2a4e" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Draw the fixation</span></span>
 <span id="cb8-2">fixation.draw()</span></code></pre></div>
 </div>
 <p>Do you see the fixation cross?????? Probably not!! This is because we have drawn the fixation cross but we have not refreshed the window. Psychopy allows you to draw as many stimuli as you want on a window but the changes are only shown when you “refresh” the window. To do so we need to use the “flip” function.</p>
-<div id="ece9d9c0" class="cell" data-execution_count="6">
+<div id="77409fd3" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">win.flip()</span></code></pre></div>
 </div>
 <p>Perfect!!!! The fixation cross is there. Before each flip, we need to draw our objects. Otherwise, we will only see the basic window with nothing in it. Let’s try!!! flip the window now.</p>
-<div id="8a0a2457" class="cell" data-execution_count="7">
+<div id="c0b159b8" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Flipping the window (refreshing)</span></span>
@@ -21496,7 +21489,7 @@ font-style: inherit;"># Flipping the window (refreshing)</span></span>
 </div>
 <p>The fixation is gone again! Exactly as predicted. Flipping the window allows us to draw and show something new in each frame. This means that the speed limit of our presentation is the actual frame rate of our display. <em>If we have a 60Hz display we can present an image 60 times in a second.</em></p>
 <p>So if we want to present our fixation for an entire second we would have to draw and flip it 60 times (our display has a refresh rate of 60Hz)! Let’s try:</p>
-<div id="725d42df" class="cell" data-execution_count="8">
+<div id="2bfd91ad" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -21516,7 +21509,7 @@ font-style: inherit;"># we re-flip at the end to clean the window</span></span><
 </div>
 <p>Now we have shown the fixation for 1 second and then it disappeared. Nice!! However, you probably have already figured out that what we have done was unnecessary. If we want to present a static stimulus for 1s we could have just drawn it, flipped the window, and then waited for 1s. But now you have an idea of how to show animated stimuli or even videos!!! <strong>AMAZING!!!</strong>.</p>
 <p>Now let’s try to show the fixation for 1s by just waiting.</p>
-<div id="5976e579" class="cell" data-execution_count="9">
+<div id="8ff54043" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1">fixation.draw()</span>
 <span id="cb12-2">win.flip()</span>
 <span id="cb12-3">core.wait(<span class="dv" style="color: #AD0000;
@@ -21532,7 +21525,7 @@ font-style: inherit;"># we re-flip at the end to clean the window</span></span><
 <section id="play-a-sound" class="level2">
 <h2 class="anchored" data-anchor-id="play-a-sound">Play a sound:</h2>
 <p>We have seen how to show a stimulus let’s now play the sound that we have imported. This is extremely simple, we can just <code>play()</code> it:</p>
-<div id="bfbdec3a" class="cell" data-execution_count="10">
+<div id="a850ea2b" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">presentation_sound.play()</span>
 <span id="cb13-2">core.wait(<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -21563,7 +21556,7 @@ Warning
 <li><p>we present the reward or the non-reward depending on the cue for 2s.</p></li>
 </ul>
 <p>In the end, we also close the window.</p>
-<div id="194b8e04" class="cell" data-execution_count="11">
+<div id="d3744a65" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">###### 1st Trial ######</span></span>
@@ -21665,14 +21658,14 @@ font-style: inherit;"># let's close the window at the end of the trial</span></s
 <section id="isi" class="level2">
 <h2 class="anchored" data-anchor-id="isi">ISI</h2>
 <p>We’ve now completed a trial, but having trials run back-to-back is often not ideal. Typically, we insert a brief pause between trials—this is called the Inter-Stimulus Interval (ISI).One common way to implement an ISI is to use a simple wait function, for example:</p>
-<div id="4034609b" class="cell" data-execution_count="12">
+<div id="afb66183" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">core.wait(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>)</span></code></pre></div>
 </div>
 <p>This is straightforward, but in some cases you might want more control over the timing. For example, if you need to account for any slight delays during a trial, you can use a clock to measure elapsed time.</p>
 <p>To implement this ISI, we’ll create a PsychoPy <code>core.Clock()</code>. Once initiated, this clock starts keeping track of time, letting us know how much time has elapsed. After kicking off the clock, we can do some other tasks, then wait for the remaining time to reach our 1-second ISI.</p>
-<div id="aa0681ea" class="cell" data-execution_count="13">
+<div id="6e7f318f" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">### ISI</span></span>
@@ -21701,7 +21694,7 @@ font-style: inherit;">0</span>:</span>
 <p>Fantastic, we’ve nearly have our study! However, studies often don’t run to completion, especially when we’re working with infants and children. More often than not, we need to halt the study prematurely. This could be due to the participant becoming fatigued or distracted, or perhaps we need to tweak some settings.</p>
 <p>How can we accomplish this? Of course, we could just shut down Python and let the experiment crash… but surely, there’s a more elegant solution… And indeed, there is! In fact, there are numerous methods to achieve this, and we’re going to demonstrate one of the most straightforward and flexible ones to you.</p>
 <p>We can use the&nbsp;<code>event.getKeys()</code>&nbsp;function to ask Psychopy to report any key that has been pressed during our trial. In our case, we will check if the&nbsp;ESC&nbsp;key has been pressed and if it has, we will simply close the window and stop the study.</p>
-<div id="ba6392b4" class="cell" data-execution_count="14">
+<div id="d93234ab" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">### Check for closing experiment</span></span>
@@ -21745,7 +21738,7 @@ Important
 <h2 class="anchored" data-anchor-id="create-an-entire-experiment">Create an entire experiment</h2>
 <p>In an experiment, we want more than 1 trial. Let’s then create an experiment with 10 trials. We just need to repeat what we have done above multiple times. However, we need to randomize the type of trials, otherwise, it would be too easy to learn. To do so, we will create a list of <code>0</code> and <code>1</code>. where <code>0</code> would identify a rewarding trial and <code>1</code> would index a non-rewarding trial.</p>
 <p>To properly utilize this list of <code>0</code> and <code>1</code>, we will need to create other lists of our stimuli. This will make it easier to call the right stimuli depending on the trial. We can do so by:</p>
-<div id="fdca8e2b" class="cell" data-execution_count="15">
+<div id="feb87d94" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Create list of trials in which 0 means winning and 1 means losing</span></span>
@@ -21804,7 +21797,7 @@ Caution
 <p>If you are testing this script on your laptop and do not want to lose the ability to interact with it until the experiment is finished, keep the same window size and position as the previous lines of code.</p>
 </div>
 </div>
-<div id="ef74427f" class="cell" data-execution_count="16">
+<div id="48297cac" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Import some libraries from PsychoPy and others</span></span>
@@ -22175,106 +22168,125 @@ font-style: inherit;"># stop study</span></span>
 <p>So, let’s start and install PsychoPy!!!</p>
 <section id="install-psychopy" class="level1">
 <h1>Install PsychoPy</h1>
-<p>As reported on the PsychoPy <a href="https://www.psychopy.org/download.html">website</a>, there are multiple ways to install PsychoPy. Our favorite way to install it is using <em>conda/mamba</em> (refer to the <a href="../../CONTENT/GettingStarted/GettingStartedWithPython.html">Getting started with python</a>).</p>
+<p>As reported on the PsychoPy <a href="https://www.psychopy.org/download.html">website</a>, there are multiple ways to install PsychoPy. Our favorite way to install it is using <em>conda</em> (refer to the <a href="../../CONTENT/GettingStarted/GettingStartedWithPython.html">Getting started with python</a>).</p>
 <p>This installation method offers several advantages: you are not restricted to using the PsychoPy GUI, and you can easily add libraries to enhance PsychoPy’s functionality. However, this process can sometimes be challenging, as compatibility issues with certain packages may require troubleshooting. Here, we provide some tips to help you make it work. If you find this method too complex or encounter persistent issues, remember that you can always follow the tutorials on this site using the PsychoPy standalone installer, which provides a secure and reliable way to use PsychoPy.</p>
-<section id="minicondaminiforge" class="level2">
-<h2 class="anchored" data-anchor-id="minicondaminiforge">Miniconda/Miniforge</h2>
-<p>We recommend installing PsychoPy in a dedicated virtual environment where you can create and run your studies. To ensure optimal performance and avoid compatibility issues, keep this environment as clean as possible. Ideally, install PsychoPy and only the additional libraries required for your study. For any other libraries, for example for analysis, consider creating separate environments to prevent conflicts with PsychoPy</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We strongly recommend using our interactive flowchart to guide yourself through the tutorials! It will help you follow the setup steps in the right order based on your experience level. <br> <a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#python-and-psychopy" class="btn btn-primary btn-sm">Flowchart</a></p>
+</div>
+</div>
+<section id="miniconda" class="level2">
+<h2 class="anchored" data-anchor-id="miniconda">Miniconda</h2>
+<p>We recommend installing PsychoPy in a dedicated virtual environment where you can create and run your studies. To ensure optimal performance and avoid compatibility issues, keep this environment as clean as possible. Ideally, install PsychoPy and only the additional libraries required for your study.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Windows</a></li><li class="nav-item"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" aria-controls="tabset-1-2" aria-selected="false">Mac</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" aria-labelledby="tabset-1-1-tab">
-<p>On windows python 3.8 seems to be a safe bet. Create a new environment:</p>
+<p>Open your anaconda terminal and create a new environment:</p>
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">conda</span> create <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">-n</span> psychopy python=3.8</span></code></pre></div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Remember if you have installed minforge instead of miniconda you can use <em>mamba</em> and <em>conda</em> interchangeably for these steps.</p>
-</div>
-</div>
-<p>once done we actually need to install psychopy in this new environment. Let’s do that, activate the environment and just type <code>pip install psychopy</code> :</p>
+font-style: inherit;">-n</span> psychopy python=3.10</span></code></pre></div>
+<p>Conda will ask you to confirm with a <code>y</code> and will create a new environment called psychopy.</p>
+<p>Conda will also tell you that if you want to interact and install packages in the newly created environment, you should activate it. Let’s do it!!! Type:</p>
 <div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">conda</span> activate psychpy</span>
-<span id="cb2-2"><span class="ex" style="color: null;
+font-style: inherit;">conda</span> activate psychpy</span></code></pre></div>
+<p>You’ll see that the parenthesis at the command line will change from (base) to (psychopy). This means we are in!!! Now we can install any package and those packages will be contained in this new environment.</p>
+<p>As mentioned before, we will use PsychoPy to create our experimental design!! So let’s install it (and also let’s install spyder-kernels that will help us interact with Spyder that we will cover later and tobii_research). Type:</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">pip</span> install psychopy</span></code></pre></div>
+font-style: inherit;">pip</span> install psychopy spyder-kernels tobii_research</span></code></pre></div>
+<p>Conda will think and download stuff for a while!! Do not worry if you see a lot of lines popping up! Give conda time and confirm if prompted. After a while, hopefully you will see that everything went well and now you have a nice psychopy environment with PsychoPy in it!!</p>
 </div>
 <div id="tabset-1-2" class="tab-pane" aria-labelledby="tabset-1-2-tab">
-<p>On Mac Python 3.10 seems to work better. Thus create a new environment:</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
+<p>To create a new environment open your terminal and type:</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">conda</span> create <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-n</span> psychopy python=3.10</span></code></pre></div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Remember if you have installed minforge instead of miniconda you can use <em>mamba</em> and <em>conda</em> interchangeably for these steps.</p>
-</div>
-</div>
-<p>once done we actually need to install psychopy in this new environment. Let’s do that, activate the environment and just type <code>pip install psychopy</code> :</p>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="ex" style="color: null;
+<p>Conda will ask you to confirm with a <code>y</code> and will create a new environment called psychopy.</p>
+<p>Conda will also tell you that if you want to interact and install packages in the newly created environment, you should activate it. Let’s do it!!! Type:</p>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">conda</span> activate psychpy</span>
-<span id="cb4-2"><span class="ex" style="color: null;
+font-style: inherit;">conda</span> activate psychpy</span></code></pre></div>
+<p>You’ll see that the parenthesis at the command line will change from (base) to (psychopy). This means we are in!!! Now we can install any package and those packages will be contained in this new environment.</p>
+<p>As mentioned before, we will use PsychoPy to create our experimental design!! So let’s install it (and also let’s install spyder-kernels that will help us interact with Spyder that we will cover later and tobii_research). Type:</p>
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">pip</span> install psychopy</span></code></pre></div>
+font-style: inherit;">pip</span> install psychopy spyder-kernels tobii_research</span></code></pre></div>
+<p>Conda will think and download stuff for a while!! Do not worry if you see a lot of lines popping up! Give conda time and confirm if prompted. After a while, hopefully you will see that everything went well and now you have a nice psychopy environment with PsychoPy in it!!</p>
 </div>
 </div>
 </div>
-<p>It may take some time and require your confirmation during the process, but eventually, the setup will complete. Once finished, your psychopy environment will include the PsychoPy library, allowing you to import it easily using <code>import psychopy</code></p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If you are planning to use Spyder as your Ide to interact with PsychoPy you require an additional library to interact with Spyder</p>
-<p>You can install it by:<br>
-<code>conda install spyder-kernels</code><br>
-or<br>
-<code>pip install spyder-kernels</code></p>
-<p>In case you need more information please check our <a href="../../CONTENT/GettingStarted/GettingStartedWithPython.html">python installation guide</a></p>
-</div>
-</div>
+<p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#psychopy-standalone" class="btn btn-primary btn-sm" style="float: right;">Flowchart</a></p>
 </section>
 <section id="psychopy-standalone" class="level2">
 <h2 class="anchored" data-anchor-id="psychopy-standalone">Psychopy Standalone</h2>
-<p>If you’re unable to install PsychoPy using conda/mamba or simply prefer a reliable setup with access to the intuitive PsychoPy GUI, the standalone installer is a great option.</p>
-<p>However, it’s important to note that PsychoPy offers two main ways to create experiments:</p>
+<p>Installing PsychoPy as a library sometimes can be tricky as it depends a lot on which OS you are on, which hardware that OS has, and a lot of dependencies. While we prefer to install PsychoPy as a library and use it through Spyder, it is not always possible.</p>
+<p>However, there is a simple solution. PsychoPy offers a standalone version. This version comes packaged with everything that is needed to run your experiments and includes the PsychoPy GUI.</p>
+<p>It is usually easier and less error-prone, but it offers less flexibility in some aspects. However, for this study it will be plenty enough! So in case you had any problem installing PsychoPy in a separate environment, we suggest you install it as a standalone.</p>
+<p>You can find it <a href="https://www.psychopy.org/download.html#download"><strong>here</strong></a>. Please download and install it following your operating system guidelines!</p>
+<p>Well done!! Now you should have the PsychoPy icon <img src="https://www.psychopy.org/_static/psychopyLogoType_h240.png" class="img-fluid" width="73"> on your machine!!</p>
+<p>FYI! It’s important to note that PsychoPy offers two main ways to create experiments:</p>
 <ul>
-<li><p>The Builder: Ideal for those who prefer a graphical, point-and-click interface. <img src="https://psychopy.org/_images/builder.png" class="img-fluid quarto-figure quarto-figure-center" width="343"></p></li>
-<li><p>The Coder: Designed for users who prefer to program their experiments from scratch. <img src="https://psychopy.org/_images/coder_small.gif" class="img-fluid quarto-figure quarto-figure-center"></p></li>
+<li><p>The Builder: Ideal for those who prefer a graphical, point-and-click interface.<br> <img src="https://psychopy.org/_images/builder.png" class="img-fluid quarto-figure quarto-figure-center" width="343"></p></li>
+<li><p>The Coder: Designed for users who prefer to program their experiments from scratch.<br> <img src="https://psychopy.org/_images/coder_small.gif" class="img-fluid quarto-figure quarto-figure-center"></p></li>
 </ul>
 <p>In our tutorials, we will focus on coding experiments directly. If you’re using the PsychoPy standalone installer, <strong>you’ll need to follow along using the Coder interface</strong>.</p>
+<p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#psychopy-standalone" class="btn btn-primary btn-sm" style="float: right;">Flowchart</a></p>
+</section>
+</section>
+<section id="check-psychopy-installation" class="level1">
+<h1>Check Psychopy Installation</h1>
+<p>As Psychopy can be tricky to install we suggest to do a small check of its working even if it looked like the installation worked perfectly. We ask you to check whether Psychopy worked by simply running a small code in your Psychopy in both cases whether you installed as library or as a standalone software. This won’t only test your Psychopy installation but also give you a taste on how to interact with Spyder and Psychopy</p>
+<p>Here you can find the script to run:</p>
+<p><a href="../../resources/getting_started_psychopy/TestInstallatioPsychopy.py" class="btn btn-dark" download="TestInstallatioPsychopy.py">📥 Download Test Script</a></p>
+<p>To do so:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" aria-controls="tabset-2-1" aria-selected="true">PsychoPy as library</a></li><li class="nav-item"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" aria-controls="tabset-2-2" aria-selected="false">PsychoPy as standalone</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" aria-labelledby="tabset-2-1-tab">
+<ul>
+<li><p>open Spyder</p></li>
+<li><p>Create a new console in the psychopy environment we created before:</p>
+<p><em>Consoles –&gt; New console in environment –&gt; Conda: psychopy</em></p>
+<p><a href="../..\images/GettingStartedWithPsychopy\CreateConsole.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPsychopy/CreateConsole.png" class="img-fluid" width="550"></a></p></li>
+<li><p>Open the script you just downloaded (TestInstallatioPsychopy.py) in Spyder ( use the open Icon or drag and drop the file on Spyder)</p></li>
+<li><p>Press the green play button.</p></li>
+<li><p>A window should appear and show a short countdown at the end of which it will tell you that you are ready for the workshop!</p></li>
+</ul>
+<p>Well done!!</p>
+</div>
+<div id="tabset-2-2" class="tab-pane" aria-labelledby="tabset-2-2-tab">
+<ul>
+<li><p>Open Psychopy</p></li>
+<li><p>In <em>Window</em> select <em>Show coder</em></p>
+<p><a href="../..\images/GettingStartedWithPsychopy\Psychopy2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPsychopy/Psychopy2.png" class="img-fluid" width="550"></a></p></li>
+<li><p>Opend the downloaded file (TesterPsychopy.py) using the open button</p></li>
+<li><p>Press the green play button</p>
+<p><a href="../..\images/GettingStartedWithPsychopy\Psychopy3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPsychopy/Psychopy3.png" class="img-fluid" width="660"></a></p></li>
+<li><p>A window should appear and show a short countdown at the end of which it will tell you that you are ready for the workshop!</p></li>
+</ul>
+<p>Well done!!</p>
+</div>
+</div>
+</div>
+<p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#psychopy-standalone" class="btn btn-primary btn-sm" style="float: right;">Flowchart</a></p>
 
 
 <!-- -->
 
-</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
@@ -22282,6 +22294,140 @@ or<br>
   <category>Python</category>
   <guid>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/GettingStartedWithPsychopy.html</guid>
   <pubDate>Wed, 27 Dec 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Starting with R</title>
+  <link>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/GettingStartedWithR.html</link>
+  <description><![CDATA[ <p><img src="https://media1.tenor.com/m/K8Lc2HcGiPEAAAAd/dario-moccia.gif" class="img-fluid quarto-figure quarto-figure-right" style="float:right; margin-right:10px;margin-bottom:10px;" width="150"> R is THE BEST programming language for statistics. <strong>We are ready to fight you on this!</strong> <br><br> We’ll use R extensively throughout the website, especially for statistical modeling, data preprocessing, creating beautiful visualizations, and running complex analyses like mixed-effects models. Whether you’re analyzing reaction times, eye-tracking data, or running sophisticated statistical tests, R will be your best friend. So… on this page, we’ll guide you through installing R and RStudio (one of its best IDEs), plus all the essential libraries you’ll need for our tutorials. Don’t worry – these steps are straightforward and easy to follow.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We strongly recommend using our interactive flowchart to guide yourself through the tutorials! It will help you follow the setup steps in the right order based on your experience level. <br><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#r-and-rstudio" class="btn btn-primary btn-sm">Flowchart</a></p>
+</div>
+</div>
+<section id="install-r" class="level1"><h1>Install R</h1>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/2560px-R_logo.svg.png" class="img-fluid quarto-figure quarto-figure-right" style="float:right; margin-right:10px;margin-bottom:10px;" width="60"> Let’s start..:</p>
+<ol type="1">
+<li><p>Go to <a href="https://cran.rstudio.com/">this page</a> (CRAN stands for Comprehensive R Archive Network – it’s the official repository for R)</p></li>
+<li><p>Download R for your operating system</p></li>
+<li><p>Run the installer and follow the on-screen instructions (just keep clicking “Next” – the defaults are perfectly fine)</p></li>
+</ol>
+<p>Well… that really was easy! R is now installed on your computer, but we’re not quite done yet.</p>
+<p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#r-and-rstudio" class="btn btn-primary btn-sm" style="float: right;">Flowchart</a></p>
+</section><section id="rstudio" class="level1"><h1>RStudio</h1>
+<p>While the R installation includes a basic IDE (think of it as a very plain text editor), we definitely want to use RStudio. This is where the magic happens! RStudio transforms R from a command-line tool into a beautiful, user-friendly interface that makes coding a joy rather than a chore. RStudio offers tons of features that will make your data analysis journey much smoother Maybe this step will be a bit trickier…</p>
+<ol type="1">
+<li><p>Go to the <a href="https://posit.co/download/rstudio-desktop/">RStudio page</a> (Note: Posit is the company that makes RStudio)</p></li>
+<li><p>Download RSrtudio Desktop for your operating system</p></li>
+<li><p>Run the installer and follow the on-screen instructions</p></li>
+</ol>
+<p>Nope – just as easy as before!</p>
+<p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#r-and-rstudio" class="btn btn-primary btn-sm" style="float: right;">Flowchart</a></p>
+</section><section id="installing-r-packages" class="level1"><h1>Installing R packages</h1>
+<p>Now that we have both R and RStudio, we need some essential libraries (called “packages” in R). I’ll describe only a few of the main ones here, but more will be installed and covered throughout the tutorials. Core Packages:</p>
+<ul>
+<li><p><a href="https://www.tidyverse.org/"><strong>tidyverse</strong></a><strong>:</strong> This is a collection of packages, so when you install and import it, you’re not just getting one library but an entire suite of them. It includes ggplot2 (for stunning visualizations), dplyr (for data manipulation), readr (for reading data), and many more. Perfect for data wrangling and creating beautiful plots. This is probably the most important package ecosystem in R. Explore all the sub-packages to learn more!</p></li>
+<li><p><a href="https://easystats.github.io/easystats/"><strong>easystats</strong></a><strong>:</strong> A user-friendly collection that makes statistical analysis much simpler and more intuitive. It includes packages for model fitting, reporting, and interpretation. Explore all the sub-packages to learn more!</p></li>
+<li><p><a href="https://github.com/lme4/lme4/"><strong>lme4</strong></a><strong>:</strong> The go-to package for fitting linear and generalized linear mixed-effects models. Essential for analyzing complex experimental data where you have repeated measures or hierarchical data structures (which is pretty much every psychology experiment).</p></li>
+<li><p><a href="http://samforbes.me/PupillometryR/"><strong>pupillometryR</strong></a><strong>:</strong> Specialized package for preprocessing and analyzing pupillometry data. A lifesaver if you’re working with eye-tracking studies.</p></li>
+</ul>
+<p>Installing the packages is extremely easy. There are two ways one with a command int he console:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs">
+<li class="nav-item"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Console</a></li>
+<li class="nav-item"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" aria-controls="tabset-1-2" aria-selected="false">Gui</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" aria-labelledby="tabset-1-1-tab">
+<p>Paste in the console</p>
+<div class="cell">
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"tidyverse"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"easystats"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lme4"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lmerTest"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"patchwork"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PupillometryR"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"fitdistrplus"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
+</div>
+<p><a href="../..\images/GettingStartedWithR\ConsolePackages.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithR/ConsolePackages.png" class="img-fluid" width="800"></a></p>
+<p>Follow the instructions if any and you are done!!!!</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" aria-labelledby="tabset-1-2-tab">
+<ol type="1">
+<li><p>Go to <strong>Tools</strong> in the top bar</p></li>
+<li><p>Click install packages</p></li>
+<li><p>Paste: <code>tidyverse, easystats, lme4, lmerTest, patchwork, PupillometryR, fitdistrplus</code></p></li>
+<li><p>Click Install</p></li>
+</ol>
+<p><a href="../..\images/GettingStartedWithR\GuiPackages.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithR/GuiPackages.png" class="img-fluid" width="800"></a></p>
+<p>Follow the instructions if any and you are done!!!!</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Additional Packages
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We may use additional packages in specific tutorials, but don’t worry – we’ll always mention which ones you need and provide clear installation instructions when the time comes!</p>
+</div>
+</div>
+<p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#r-and-rstudio" class="btn btn-primary btn-sm" style="float: right;">Flowchart</a></p>
+</section><section id="test-your-installation" class="level1"><h1>Test your installation</h1>
+<p><strong>🎉 Congratulations!</strong> You should now have R and RStudio fully set up with all essential packages!</p>
+<p>But let’s make sure everything is working perfectly before we dive into the tutorials. Want to test whether all packages installed correctly and you’re ready to go? We’ve created a test script that checks whterh all is ok.</p>
+<p>Download our test script and run it in RStudio. If everything is working properly, you’ll see detailed progress updates, sample results, and a nice completion message with a celebration plot at the end. If there are any issues, the script will try to tell you what is wrong.</p>
+<p><a href="../../resources/GettingStartedWithR/TestInstallationR.R" class="btn btn-dark" download="TestInstallationR.R">📥 Download Test Script</a></p>
+<p>How to use the script:</p>
+<ol type="1">
+<li>Download the file above</li>
+<li>Open RStudio</li>
+<li>Open the downloaded TestInstallationR.R file</li>
+<li>Select all the code and run it (or press Ctrl+A then Ctrl/Cmd+Enter)</li>
+<li>Watch the magic happen!</li>
+</ol>
+<p>If you see the celebration plot at the end, you’re officially ready to tackle all our R tutorials!</p>
+
+
+<!-- -->
+
+</section><a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+  <category>Setup</category>
+  <category>R</category>
+  <guid>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/GettingStartedWithR.html</guid>
+  <pubDate>Tue, 21 Nov 2023 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Starting with Python</title>
@@ -22293,6 +22439,19 @@ or<br>
 
 <p>Python is one of the most popular programming languages in general. In data science, it competes with Matlab and R for first place on the podium.</p>
 <p>In our everyday we often use python to pre-process and analyze the data. In this tutorial we will explain our preferred way of installing python and managing its libraries. There are several ways to install python, this is the one we recommend for its simplicity and flexibility.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We strongly recommend using our interactive flowchart to guide yourself through the tutorials! It will help you follow the setup steps in the right order based on your experience level. <br> <a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#python-and-psychopy" class="btn btn-primary btn-sm">Flowchart</a></p>
+</div>
+</div>
 <section id="installing-python" class="level1">
 <h1>Installing Python</h1>
 <section id="miniconda" class="level2">
@@ -22307,7 +22466,7 @@ or<br>
 <p>The installation process is similar to that of Anaconda. Once the installation is complete, you will find the Anaconda Prompt among your programs. This prompt serves as your interface for installing Python packages and creating environments. To verify everything’s working properly, simply type <code>conda</code>. You’ll be greeted with a comprehensive list of available conda commands ready for you to explore and use (we will see below how to do so).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPython/prompt.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><a href="../..\images/GettingStartedWithPython/prompt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPython/prompt.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -22331,39 +22490,32 @@ Caution
 </div>
 </div>
 </div>
+<p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#python-and-psychopy" class="btn btn-primary btn-sm" style="float: right;">Flowchart</a></p>
 </section>
-</section>
-<section id="installing-python-packages" class="level1">
-<h1>Installing python packages</h1>
-<p>To pre-process and analyze the data we will need some specific packages. It is easy to install and manage packages using conda.</p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>It is recommended to avoid installing packages in the base environment. Instead, create dedicated environments tailored to your needs for better dependency management and a clean, organized setup.</p>
-<p>But what are environments, and how can you manage them? Keep reading below to find out!</p>
-</div>
-</div>
-<p>Open the Anaconda prompt and type <code>conda install …</code>. For example, if we want to install pandas (a very useful package to handle data-frames) we would write:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">conda</span> install pandas</span></code></pre></div>
-<p>After thinking about for few seconds the prompt will download the package and its dependencies. Occasionally, conda may encounter difficulties locating the precise package you need. In such cases, pip, another renowned Python package manager, can come to the rescue. You might already be aware of <code>pip</code>, versatility for installing and manage packages in Python.</p>
-<p>Let’s consider I2MC, an exceptional package processing eye-tracking data. With pip, installation is a breeze. Simply use the following command:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">pip</span> install I2MC</span></code></pre></div>
 </section>
 <section id="managing-environments" class="level1">
 <h1>Managing environments</h1>
-<p>Python has different versions. Sometimes when we create scripts we needs to run a specific version of python or of other packages because some of our packages may rely on older version of python or we have conflicting dependencies with other packages. Virtual environments keep these dependencies in separate “sandboxes” so you can switch between both applications easily and get them running.</p>
-<p>One of the best features of Anaconda and Miniconda is how easily you can create and manage environments. Conda lets you create, export, list, remove, and update environments with different Python versions and packages. Let’s create an environment called <code>working</code> that we’ll use for our everyday tasks and let’s make sure to have python in it. To do this, open the Anaconda Prompt and type:</p>
+<p>Python has different versions, and so do all the packages you install (like PsychoPy, numpy, pandas, etc.). Here’s the problem: different projects often need different versions of the same tools.Project A might need Python 3.9 with PsychoPy version 2022.1, while Project B might need Python 3.11 with PsychoPy version 2023.2, and your system analysis scripts might work best with the latest versions of everything.</p>
+<p>Virtual environments create separate “sandboxes” for each project. Each sandbox has its own Python version and package versions, completely isolated from the others. You can switch between these environments easily, ensuring each project gets exactly what it needs without conflicts.</p>
+<p>Without virtual environments, installing new packages can break your existing projects. It’s like trying to run Windows 95 software on Windows 11 – things get messy fast.</p>
+<p>One of the best features of Miniconda is how easily you can create and manage environments. Conda lets you create, export, list, remove, and update environments with different Python versions and packages. Let’s create an environment called <code>working</code> that we’ll use for our everyday tasks and let’s make sure to have python in it.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="os">
+<ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" aria-controls="tabset-2-1" aria-selected="true">Windows</a></li><li class="nav-item"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" aria-controls="tabset-2-2" aria-selected="false">Mac</a></li></ul>
+<div class="tab-content" data-group="os">
+<div id="tabset-2-1" class="tab-pane active" aria-labelledby="tabset-2-1-tab">
+<p>To do this, open the Anaconda Prompt and type:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">conda</span> create <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--name</span> working python</span></code></pre></div>
+<p>Press <code>y</code> when asked and after few seconds we will have out new <code>working</code> environment. Now we want to tell our Anaconda prompt that we want to work on our brand new <code>working</code> environment. To do so let’s write:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">conda</span> activate working</span></code></pre></div>
+</div>
+<div id="tabset-2-2" class="tab-pane" aria-labelledby="tabset-2-2-tab">
+<p>To do this, open your terminal and type:</p>
 <div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">conda</span> create <span class="at" style="color: #657422;
@@ -22373,32 +22525,89 @@ font-style: inherit;">--name</span> working python</span></code></pre></div>
 <div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">conda</span> activate working</span></code></pre></div>
+</div>
+</div>
+</div>
 <p>You’ll notice that the name on the left side of the command prompt has changed from <code>base</code> to <code>working</code>. This indicates that everything you do in the Anaconda Prompt now will apply to the <code>working</code> environment.</p>
-<p>Now we would probably want to install some packages in this new environment. Follow the tutorials above: [Installing python packages]</p>
+<p>Now we would probably want to install some packages in this new environment. Follow the tutorials</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When you install Anaconda or Miniconda, you get a default environment called <code>base</code>. This contains the essential tools that make conda work properly. <strong>It is recommended to avoid installing packages in the base environment</strong> - always create new environments for your work.</p>
+</div>
+</div>
+<p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#python-and-psychopy" class="btn btn-primary btn-sm" style="float: right;">Flowchart</a></p>
 </section>
-<section id="sec-installspyder" class="level1">
-<h1>Installing Spyder ide</h1>
-<p>Now that we have our environment and packages set up, how can we actually use them? Sure, we could type python in the terminal and run commands there… but let’s be honest, that would be tedious and inefficient!</p>
-<p>What we need is an IDE—and our choice is Spyder! Spyder is a powerful scientific IDE written in Python, designed specifically for scientists, engineers, and data analysts. With features like a variable explorer and integrated plotting, it’s our top pick for writing and running Python code efficiently.</p>
-<p>If you install the full version of Anaconda, Spyder is included by default. However, Miniconda and Miniforge do not come with Spyder pre-installed. Fortunately, installing Spyder is simple!</p>
-<p>You have two options to install Spyder:</p>
-<ul>
-<li>Standalone Installer: A ready-to-use application that doesn’t require setting up a Python environment.</li>
-<li>Installing as a Library: Add Spyder to your Python environment using a package manager like mamba or conda.</li>
-</ul>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" aria-controls="tabset-2-1" aria-selected="true">Standalone installer</a></li><li class="nav-item"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" aria-controls="tabset-2-2" aria-selected="false">As a library</a></li></ul>
-<div class="tab-content">
-<div id="tabset-2-1" class="tab-pane active" aria-labelledby="tabset-2-1-tab">
-<p>The standalone installer is likely the easiest approach. You can install the software once and then connect it to the Python environments of your choice.</p>
-<p>To get started, visit the <a href="https://www.spyder-ide.org/">Spyder website</a>, download the appropriate installer for your operating system, and install it on your machine.</p>
+<section id="installing-python-packages" class="level1">
+<h1>Installing python packages</h1>
+<p>To pre-process and analyze the data we will need some specific packages. It is easy to install and manage packages using conda.</p>
+<p>We will use the command <code>conda install …</code> and a list of packages. Here we will install <strong>pandas</strong> (a package to handle dataframes), <strong>numpy</strong> (library to manage arrays), <strong>matplotlib</strong> and <strong>seaborn</strong> (two libraries to plot data), <strong>spyder-kernels</strong> (to allow interaction with the Spyder GUI that we will cover later on).</p>
+<p>To do so:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="os">
+<ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" aria-controls="tabset-3-1" aria-selected="true">Windows</a></li><li class="nav-item"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" aria-controls="tabset-3-2" aria-selected="false">Mac</a></li></ul>
+<div class="tab-content" data-group="os">
+<div id="tabset-3-1" class="tab-pane active" aria-labelledby="tabset-3-1-tab">
+<p>Open the Anaconda prompt and type :</p>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">conda</span> install pandas numpy matplotlib seaborn spyder-kernels</span></code></pre></div>
+<p>After thinking about for few seconds the prompt will download the package and its dependencies.</p>
+<p>Occasionally, conda may encounter difficulties locating the precise package you need. In such cases, pip, another renowned Python package manager, can come to the rescue. You might already be aware of <code>pip</code>, versatility for installing and manage packages in Python.</p>
+<p>Let’s consider I2MC, an exceptional package processing eye-tracking data. With pip, installation is a breeze. Simply use the following command:</p>
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install I2MC</span></code></pre></div>
+</div>
+<div id="tabset-3-2" class="tab-pane" aria-labelledby="tabset-3-2-tab">
+<p>Open your terminal and type :</p>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">conda</span> install pandas numpy matplotlib seaborn spyder-kernels</span></code></pre></div>
+<p>After thinking about for few seconds the prompt will download the package and its dependencies.</p>
+<p>Occasionally, conda may encounter difficulties locating the precise package you need. In such cases, pip, another renowned Python package manager, can come to the rescue. You might already be aware of <code>pip</code>, versatility for installing and manage packages in Python.</p>
+<p>Let’s consider I2MC, an exceptional package processing eye-tracking data. With pip, installation is a breeze. Simply use the following command:</p>
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install I2MC</span></code></pre></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Additional Packages
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We may use additional packages in specific tutorials, but don’t worry – we’ll always mention which ones you need and provide clear installation instructions when the time comes!</p>
+</div>
+</div>
+<p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#python-and-psychopy" class="btn btn-primary btn-sm" style="float: right;">Flowchart</a></p>
+</section>
+<section id="installing-spyder-ide" class="level1">
+<h1>Installing Spyder IDE</h1>
+<p>Now that we have our environment and packages set up, how do we actually use them? Sure, we could type Python commands directly in the terminal… but let’s be honest, that would be tedious and inefficient for any serious work!</p>
+<p>What we need is an IDE – and our choice is Spyder! Spyder is a powerful scientific IDE built specifically for scientists, engineers, and data analysts. With features like variable exploration, integrated plotting, and excellent debugging tools, it’s perfect for writing and running Python code efficiently.</p>
+<p>Installing Spyder is straightforward. To get started, visit the <a href="https://www.spyder-ide.org/">Spyder website</a>, download the appropriate installer for your operating system, and install it on your machine.</p>
 <p>Once installed, you can launch Spyder. Here it is in all its glory:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPython/spyder.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="946"></p>
+<p><a href="../..\images/GettingStartedWithPython/spyder.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPython/spyder.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="946"></a></p>
 </figure>
 </div>
-<p>As mentioned earlier, you can configure Spyder to use any of the environments you’ve created. Simply click on <strong>Console</strong>, select <strong>New Console in Environment</strong>, and choose your desired environment. This means that the code you will now run into Spyder will access the python and the packages you have in the specific environment.</p>
+<p>Here’s the key part: you can configure Spyder to use any environment you’ve created. Simply click <strong>Console</strong>, select <strong>New Console in Environment</strong>, and choose your desired environment (for example the <em>working</em> one). This means that the code you will now run into Spyder will access the python and the packages you have in the specific environment.</p>
+<p>That’s it—now any code you run will execute within the environment you selected. Well done!<br>
+<img src="https://www.spyder-ide.org/assets/media/conda.webp" class="img-fluid" width="503"></p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -22414,47 +22623,10 @@ Caution
 <code>conda install spyder-kernels</code><br>
 or<br>
 <code>pip install spyder-kernels</code></p>
+<p>we should have already instaleld this but in case you didn’t please do install it.</p>
 </div>
 </div>
-<p>That’s it—now any code you run will execute within the environment you selected. Well done!<br>
-<img src="https://www.spyder-ide.org/assets/media/conda.webp" class="img-fluid" width="503"></p>
-</div>
-<div id="tabset-2-2" class="tab-pane" aria-labelledby="tabset-2-2-tab">
-<p>Another option is to install Spyder as a library. To do this, open the Anaconda Prompt, type the following command, and press the <strong>Enter</strong> key:</p>
-<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">conda</span> install <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">-c</span> conda-forge spyder</span></code></pre></div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Remember, if you are using Miniforge, it is configured to use the Conda-Forge channel by default. This means you can simply install Spyder with the following command <code>mamba install spyder</code></p>
-</div>
-</div>
-<p>After thinking a bit, the Anaconda prompt will prepared a bunch of files to download and ask if you’d like to proceed. Go ahead and type “y” and hit “enter” to proceed.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPython/prompt_spyder.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="776"></p>
-</figure>
-</div>
-<p>It will take a while but after few seconds Spyder will be installed on your computer. To launch it you can click on the shortcut that should have appeared in your Start menu or by typing “spyder” in the Anaconda prompt.</p>
-<p>Here it is Spyder in all its glory:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPython/spyder.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="946"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
+<p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#python-and-psychopy" class="btn btn-primary btn-sm" style="float: right;">Flowchart</a></p>
 
 
 <!-- -->
@@ -22466,6 +22638,352 @@ Tip
   <category>Python</category>
   <guid>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/GettingStartedWithPython.html</guid>
   <pubDate>Mon, 30 Oct 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>DevStart Setup Guide</title>
+  <link>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/DevStartSetupGuide.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><strong>Welcome to DevStart!!!</strong></p>
+<p>This is your starting point for an exciting journey with us! Together, we’ll explore everything from creating experiments and collecting data to processing and analyzing your results. In this section, we’ll prepare your computer with all the essential tools you’ll need for our tutorials and ensure you have the best setup for your future research endeavors!</p>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
+<p>In DevStart, you’ll learn to create psychological studies using <strong>Python and PsychoPy</strong>, then preprocess and analyze your data with a powerful combination of <strong>Python and R</strong>.</p>
+<p>We’ve chosen these tools because they’re completely <strong>free and open-source</strong> – which we absolutely love! However, we’ll be honest: they’re not always the most straightforward to install (especially Python and PsychoPy). That’s exactly why we’ve created detailed, step-by-step installation guides based on our own experience and best practices.</p>
+<p><em>Please note: These aren’t the only ways to set up these tools, but they represent what we use and have seen works reliably.</em></p>
+<p>We’ve prepared comprehensive guides for:</p>
+<ul>
+<li><p><a href="../../CONTENT/GettingStarted/GettingStartedWithPython.html">Getting started with Python</a></p></li>
+<li><p><a href="../../CONTENT/GettingStarted/GettingStartedWithPsychopy.html">Getting started with Psychopy</a></p></li>
+<li><p><a href="../../CONTENT/GettingStarted/GettingStartedWithR.html">Getting started with R</a></p></li>
+</ul>
+</section>
+<section id="however." class="level2">
+<h2 class="anchored" data-anchor-id="however.">HOWEVER….</h2>
+<p>If you’re new to these tools, we strongly recommend following our interactive flowcharts below. Simply click the buttons to navigate to the most relevant sections of our tutorials based on your experience level and goals.</p>
+<p><em>The flowcharts will guide you through the setup process in the right order for your specific situation.</em></p>
+<section id="python-and-psychopy" class="level3">
+<h3 class="anchored" data-anchor-id="python-and-psychopy">Python and Psychopy</h3>
+<p>Here the flwochart to install Python and Psychopy.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<br>
+<div style="display: inline-flex; align-items: center;">
+  <span>In case the flowchart is not rendering properly on your screen, please download it here:</span>
+  <a href="../../resources/GettingStartedWithDevStart/FlowchartPython.pdf" download="FlowchartPython.pdf" style="margin-left: 8px;">
+    <button type="button" class="btn btn-secondary btn-sm">FlowchartPython.pdf</button>
+  </a>
+</div>
+<br>
+</div>
+</div>
+
+
+  <meta charset="UTF-8">
+  <title>Responsive PDF with Clickable Links</title>
+  <!-- Load PDF.js from cdnjs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
+  <style>
+    /* Container for the PDF */
+    #pdf-container {
+      position: relative;
+      width: 100%;
+      border: 1px solid #ccc;
+      overflow: hidden;
+    }
+    /* Canvas styling */
+    canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    /* Annotation layer styling */
+    #annotation-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      /* The layer will be resized via JS to match the canvas */
+    }
+    /* Individual clickable link styling */
+    .annotation-layer a {
+      position: absolute;
+      text-decoration: none;
+      /* Uncomment below for debugging clickable areas */
+      /* background: rgba(0, 0, 255, 0.2); */
+      /* border: 1px solid rgba(0, 0, 255, 0.5); */
+    }
+  </style>
+
+
+  <div id="pdf-container">
+    <canvas id="pdf-canvas"></canvas>
+    <!-- This div will hold the clickable link overlays -->
+    <div id="annotation-layer" class="annotation-layer"></div>
+  </div>
+
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+    const url = '../../resources/GettingStartedWithDevStart/FlowchartPython.pdf';
+    const container = document.getElementById('pdf-container');
+    const canvas = document.getElementById('pdf-canvas');
+    const annotationLayer = document.getElementById('annotation-layer');
+    const context = canvas.getContext('2d');
+
+    let pdfDoc, page, viewport;
+
+    // Function to render the page with a computed scale that fits the container's width
+    function renderPage() {
+      // Clear previous annotation overlays
+      annotationLayer.innerHTML = '';
+
+      // Get container width
+      const containerWidth = container.clientWidth;
+
+      // First, get a viewport with scale=1 to know the intrinsic dimensions
+      const initialViewport = page.getViewport({ scale: 1 });
+      const scale = containerWidth / initialViewport.width;
+
+      // Compute a new viewport with this scale
+      viewport = page.getViewport({ scale: scale });
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+
+      // Resize the annotation layer to exactly overlay the canvas
+      annotationLayer.style.width = canvas.width + 'px';
+      annotationLayer.style.height = canvas.height + 'px';
+
+      // Render the page onto the canvas
+      const renderContext = {
+        canvasContext: context,
+        viewport: viewport
+      };
+
+      page.render(renderContext).promise.then(() => {
+        // After rendering, get annotations (links)
+        return page.getAnnotations();
+      }).then(function(annotationsData) {
+        annotationsData.forEach(function(annotation) {
+          if (annotation.subtype === 'Link' && annotation.url) {
+            // Normalize and convert annotation rectangle
+            const rect = pdfjsLib.Util.normalizeRect(annotation.rect);
+            const transform = viewport.convertToViewportRectangle(rect);
+            const x = Math.min(transform[0], transform[2]);
+            const y = Math.min(transform[1], transform[3]);
+            const width = Math.abs(transform[0] - transform[2]);
+            const height = Math.abs(transform[1] - transform[3]);
+
+            const linkEl = document.createElement('a');
+            linkEl.href = annotation.url;
+            linkEl.target = '_blank';
+            linkEl.style.left = x + 'px';
+            linkEl.style.top = y + 'px';
+            linkEl.style.width = width + 'px';
+            linkEl.style.height = height + 'px';
+
+            annotationLayer.appendChild(linkEl);
+          }
+        });
+      });
+    }
+
+    // Load the PDF document and the first page
+    pdfjsLib.getDocument(url).promise.then(function(pdf) {
+      pdfDoc = pdf;
+      return pdfDoc.getPage(1);
+    }).then(function(pg) {
+      page = pg;
+      renderPage();
+    }).catch(function(error) {
+      console.error('Error loading PDF: ', error);
+    });
+
+    // Listen to window resize events and re-render the page accordingly
+    window.addEventListener('resize', function() {
+      if (page) {
+        renderPage();
+      }
+    });
+  </script>
+
+
+</section>
+<section id="r-and-rstudio" class="level3">
+<h3 class="anchored" data-anchor-id="r-and-rstudio">R and Rstudio</h3>
+<p>Here the flowchart to install R and Rstudio (<em>this is way more straightforward</em>).</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<br>
+<div style="display: inline-flex; align-items: center;">
+  <span>In case the flowchart is not rendering properly on your screen, please download it here:</span>
+  <a href="../../resources/GettingStartedWithDevStart/FlowchartR.pdf" download="FlowchartR.pdf" style="margin-left: 8px;">
+    <button type="button" class="btn btn-secondary btn-sm">FlowchartR.pdf</button>
+  </a>
+</div>
+<br>
+</div>
+</div>
+
+
+  <meta charset="UTF-8">
+  <title>R Flowchart PDF Viewer</title>
+  <style>
+    /* Container for the PDF */
+    #pdf-container-r {
+      position: relative;
+      width: 100%;
+      border: 1px solid #ccc;
+      overflow: hidden;
+    }
+    /* Canvas styling */
+    #pdf-canvas-r {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    /* Annotation layer styling */
+    #annotation-layer-r {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      /* The layer will be resized via JS to match the canvas */
+    }
+    /* Individual clickable link styling */
+    .annotation-layer a {
+      position: absolute;
+      text-decoration: none;
+      /* Uncomment below for debugging clickable areas */
+      /* background: rgba(0, 0, 255, 0.2); */
+      /* border: 1px solid rgba(0, 0, 255, 0.5); */
+    }
+  </style>
+
+
+  <div id="pdf-container-r">
+    <canvas id="pdf-canvas-r"></canvas>
+    <!-- This div will hold the clickable link overlays -->
+    <div id="annotation-layer-r" class="annotation-layer"></div>
+  </div>
+
+  <script>
+    const urlR = '../../resources/GettingStartedWithDevStart/FlowchartR.pdf';
+    const containerR = document.getElementById('pdf-container-r');
+    const canvasR = document.getElementById('pdf-canvas-r');
+    const annotationLayerR = document.getElementById('annotation-layer-r');
+    const contextR = canvasR.getContext('2d');
+
+    let pdfDocR, pageR, viewportR;
+
+    // Function to render the page with a computed scale that fits the container's width
+    function renderPageR() {
+      // Clear previous annotation overlays
+      annotationLayerR.innerHTML = '';
+
+      // Get container width
+      const containerWidthR = containerR.clientWidth;
+
+      // First, get a viewport with scale=1 to know the intrinsic dimensions
+      const initialViewportR = pageR.getViewport({ scale: 1 });
+      const scaleR = containerWidthR / initialViewportR.width;
+
+      // Compute a new viewport with this scale
+      viewportR = pageR.getViewport({ scale: scaleR });
+      canvasR.width = viewportR.width;
+      canvasR.height = viewportR.height;
+
+      // Resize the annotation layer to exactly overlay the canvas
+      annotationLayerR.style.width = canvasR.width + 'px';
+      annotationLayerR.style.height = canvasR.height + 'px';
+
+      // Render the page onto the canvas
+      const renderContextR = {
+        canvasContext: contextR,
+        viewport: viewportR
+      };
+
+      pageR.render(renderContextR).promise.then(() => {
+        // After rendering, get annotations (links)
+        return pageR.getAnnotations();
+      }).then(function(annotationsDataR) {
+        annotationsDataR.forEach(function(annotationR) {
+          if (annotationR.subtype === 'Link' && annotationR.url) {
+            // Normalize and convert annotation rectangle
+            const rectR = pdfjsLib.Util.normalizeRect(annotationR.rect);
+            const transformR = viewportR.convertToViewportRectangle(rectR);
+            const xR = Math.min(transformR[0], transformR[2]);
+            const yR = Math.min(transformR[1], transformR[3]);
+            const widthR = Math.abs(transformR[0] - transformR[2]);
+            const heightR = Math.abs(transformR[1] - transformR[3]);
+
+            const linkElR = document.createElement('a');
+            linkElR.href = annotationR.url;
+            linkElR.target = '_blank';
+            linkElR.style.left = xR + 'px';
+            linkElR.style.top = yR + 'px';
+            linkElR.style.width = widthR + 'px';
+            linkElR.style.height = heightR + 'px';
+
+            annotationLayerR.appendChild(linkElR);
+          }
+        });
+      });
+    }
+
+    // Load the PDF document and the first page
+    pdfjsLib.getDocument(urlR).promise.then(function(pdfR) {
+      pdfDocR = pdfR;
+      return pdfDocR.getPage(1);
+    }).then(function(pgR) {
+      pageR = pgR;
+      renderPageR();
+    }).catch(function(errorR) {
+      console.error('Error loading R PDF: ', errorR);
+    });
+
+    // Listen to window resize events and re-render the page accordingly
+    window.addEventListener('resize', function() {
+      if (pageR) {
+        renderPageR();
+      }
+    });
+  </script>
+
+
+
+
+<!-- -->
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+  <category>Setup</category>
+  <category>R</category>
+  <category>Python</category>
+  <guid>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/DevStartSetupGuide.html</guid>
+  <pubDate>Sat, 30 Aug 2025 21:48:32 GMT</pubDate>
 </item>
 </channel>
 </rss>

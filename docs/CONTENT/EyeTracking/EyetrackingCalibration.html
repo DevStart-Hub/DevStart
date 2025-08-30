@@ -83,6 +83,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/quarto-contrib/output-styling/output-styling-default.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -137,14 +140,14 @@ cookieconsent.run({
 </script> 
   
 <style>
-div.callout-info.callout {
+div.callout-details.callout {
   border-left-color: #8E44AD;
 }
-div.callout-info.callout-style-default > .callout-header {
+div.callout-details.callout-style-default > .callout-header {
   background-color: rgba(142, 68, 173, 0.13);
 }
-div.callout-info .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
-div.callout-info.callout-style-default .callout-icon::before, div.callout-info.callout-titled .callout-icon::before {
+div.callout-details .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-details.callout-style-default .callout-icon::before, div.callout-details.callout-titled .callout-icon::before {
   content: '🔍';
   background-image: none;
 }
@@ -224,10 +227,16 @@ div.callout-info.callout-style-default .callout-icon::before, div.callout-info.c
  <span class="menu-text">Welcome to DevStart</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DevStart Setup Guide</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Getting started:</span></a>
+ <span class="menu-text">Getting started</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -243,6 +252,12 @@ div.callout-info.callout-style-default .callout-icon::before, div.callout-info.c
   <div class="sidebar-item-container"> 
   <a href="../../CONTENT/GettingStarted/GettingStartedWithPsychopy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Starting with PsychoPy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../CONTENT/GettingStarted/GettingStartedWithR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Starting with R</span></a>
   </div>
 </li>
       </ul>
@@ -445,11 +460,7 @@ div.callout-info.callout-style-default .callout-icon::before, div.callout-info.c
 <p>Well, an eye-tracker works by using illuminators to emit near-infrared light towards the eye. This light reflects off the cornea, creating a visible glint or reflection that the eye-tracker’s sensors can detect. By capturing this reflection, the eye-tracker can determine the position of the eye relative to a screen, allowing it to pinpoint where the user is looking, known as the gaze point.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://help.tobii.com/hc/en-us/articles/360023794433-How-does-the-calibration-work"><img src="https://help.tobii.com/hc/article_attachments/360036648293/How_DoesEyetrackingWork_ScreenBased.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="528" alt="Image from the tobii website"></a></p>
-</figure>
-</div>
+<p><img src="https://help.tobii.com/hc/article_attachments/360036648293/How_DoesEyetrackingWork_ScreenBased.jpg" class="img-fluid figure-img" width="528"></p>
 <figcaption>Image from the tobii website</figcaption>
 </figure>
 </div>
@@ -501,7 +512,7 @@ Note
 <p>You should end up like with something like this:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../..\images/CreateAnEyetrackingExperiment/FinalConfTobiiInfant.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><a href="../..\images/CreateAnEyetrackingExperiment/FinalConfTobiiInfant.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="../..\images/CreateAnEyetrackingExperiment/FinalConfTobiiInfant.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
 </figure>
 </div>
 <p><strong>Now we are all set and ready to go !!!!!!!!!!</strong></p>
@@ -533,7 +544,7 @@ Note
 <p>The .pngs are images of cute cartoon animals that we will use in the calibration.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../..\resources/EyetrackingCalibration/animals.jpg.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="347"></p>
+<p><a href="../..\resources/EyetrackingCalibration/animals.jpg.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="../..\resources/EyetrackingCalibration/animals.jpg.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="347"></a></p>
 </figure>
 </div>
 <p>Let’s find them and put the in a list.</p>
@@ -560,7 +571,7 @@ Note
 <p>You can see here two classic scenarios of infants in front of a eye-tracker. Again, the important thing is that the head and gaze of the child is perpendicular to the screen</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../..\resources/EyetrackingCalibration/Calibration.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="753"></p>
+<p><a href="../..\resources/EyetrackingCalibration/Calibration.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="../..\resources/EyetrackingCalibration/Calibration.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="753"></a></p>
 </figure>
 </div>
 <p>But how to do it?? We can eyeball it but it’s not going to be easy. Luckily we can get some help!!</p>
@@ -577,7 +588,7 @@ Note
 <p>This is what we will see:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../..\resources/EyetrackingCalibration/ShowStatus.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="852"></p>
+<p><a href="../..\resources/EyetrackingCalibration/ShowStatus.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="../..\resources/EyetrackingCalibration/ShowStatus.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="852"></a></p>
 </figure>
 </div>
 <p>In the center of the screen you will see the video we imported. In this case, a video of funny dancing fruits. But more importantly, at the top we can see the eyes of our participant. We need to make sure that we actually see the eyes and that they are centered in the screen. In addition is important to notice that under the eye position there is a green bar. The black line on it represents the distance of the participant head from the eye-tracker (the more on the right, the further from the screen; the more on the left, the closer to it). Ideally the black line should be in the center (overlapping the white thick line). This would indicate that the head of the participant is at an ideal distance (usually 65cm).</p>
@@ -607,13 +618,13 @@ Note
 <p>Ok, but what is going to happen??? After running this line we will start our calibration. Using the numbers on our keyboard (use 1~9 (depending on the number of calibration points) to present) we will show 1 of the <code>.png</code> stimuli that we have listed in <code>CALISTIMS</code> in the selected position. The presentation of the cartoon will be accompanied by the sound passed with <code>Sound</code>. The cartoon will start to zoom in and out in the attempt to capture the attention of the infant.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../..\resources/EyetrackingCalibration/ZoomingStim.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="852"></p>
+<p><a href="../..\resources/EyetrackingCalibration/ZoomingStim.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="../..\resources/EyetrackingCalibration/ZoomingStim.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="852"></a></p>
 </figure>
 </div>
 <p>Once we are confident that the infant is looking at the cartoon zooming in and out you can press <strong>Space</strong> to collect the first calibration sample. Once that’s been done, we can move to the following points. Once all point are done we can press <strong>Enter</strong>. This will show the result of our calibration, e.g:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../..\resources/EyetrackingCalibration/CalibrationResults.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="852"></p>
+<p><a href="../..\resources/EyetrackingCalibration/CalibrationResults.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="../..\resources/EyetrackingCalibration/CalibrationResults.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="852"></a></p>
 </figure>
 </div>
 <p>The red and green lines represent the gaze data from the left and right eyes, respectively. Each cluster of lines corresponds to a calibration point, with the central cluster indicating the main fixation point. Tight convergence of the lines within each cluster signifies high calibration accuracy and precision, while any significant discrepancies or spread indicate potential calibration issues.</p>
@@ -1468,6 +1479,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

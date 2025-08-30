@@ -69,7 +69,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../CONTENT/EyeTracking/Intro_eyetracking.html" rel="next">
-<link href="../../CONTENT/GettingStarted/GettingStartedWithPsychopy.html" rel="prev">
+<link href="../../CONTENT/GettingStarted/GettingStartedWithR.html" rel="prev">
 <link href="../../resources/ICON.png" rel="icon" type="image/png">
 <script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
@@ -137,14 +137,14 @@ cookieconsent.run({
 </script> 
   
 <style>
-div.callout-info.callout {
+div.callout-details.callout {
   border-left-color: #8E44AD;
 }
-div.callout-info.callout-style-default > .callout-header {
+div.callout-details.callout-style-default > .callout-header {
   background-color: rgba(142, 68, 173, 0.13);
 }
-div.callout-info .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
-div.callout-info.callout-style-default .callout-icon::before, div.callout-info.callout-titled .callout-icon::before {
+div.callout-details .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-details.callout-style-default .callout-icon::before, div.callout-details.callout-titled .callout-icon::before {
   content: '🔍';
   background-image: none;
 }
@@ -224,10 +224,16 @@ div.callout-info.callout-style-default .callout-icon::before, div.callout-info.c
  <span class="menu-text">Welcome to DevStart</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DevStart Setup Guide</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Getting started:</span></a>
+ <span class="menu-text">Getting started</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -243,6 +249,12 @@ div.callout-info.callout-style-default .callout-icon::before, div.callout-info.c
   <div class="sidebar-item-container"> 
   <a href="../../CONTENT/GettingStarted/GettingStartedWithPsychopy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Starting with PsychoPy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../CONTENT/GettingStarted/GettingStartedWithR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Starting with R</span></a>
   </div>
 </li>
       </ul>
@@ -465,7 +477,7 @@ Stimuli!
 <section id="preparation" class="level2">
 <h2 class="anchored" data-anchor-id="preparation">Preparation:</h2>
 <p>First things first, let’s import the relevant libraries and define the path to where our stimuli are. PsychoPy has a lot of different modules that allow us to interface with different types of stimuli and systems. For this tutorial we need the following:</p>
-<div id="12be2312" class="cell" data-execution_count="1">
+<div id="561a7200" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import some libraries from PsychoPy and others</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
@@ -475,7 +487,7 @@ Stimuli!
 <section id="stimuli-1" class="level2">
 <h2 class="anchored" data-anchor-id="stimuli-1">Stimuli:</h2>
 <p>The next step is to create the window. The window is what we will show the stimuli in; it is the canvas on which to draw objects. For now, we will create a small window of 960*540 pixels. In this way, we will able to see the stimuli and still interact with the rest of our PC interface. In a real experiment, we would probably set the window dimension to the entirety of the display (fullscr=True) and maybe on a secondary screen (screen = 1).</p>
-<div id="34841587" class="cell" data-execution_count="2">
+<div id="0192a0a3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Winsize</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>winsize <span class="op">=</span> (<span class="dv">960</span>, <span class="dv">540</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -540,7 +552,7 @@ PATHS
 <section id="modern-solution" class="level3">
 <h3 class="anchored" data-anchor-id="modern-solution">Modern Solution</h3>
 <p>Python 3.4+ includes the <code>pathlib</code> module which provides a more intuitive, object-oriented approach to working with file paths that works across all operating systems. Once you create a Path object, the most powerful feature of pathlib is the ability to use the forward slash / operator to join paths together. This makes constructing file paths much more intuitive and readable:</p>
-<div id="266974f1" class="cell" data-execution_count="3">
+<div id="2972a028" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a path object</span></span>
@@ -561,7 +573,7 @@ PATHS
 </section>
 </div>
 </div>
-<div id="dc6b8452" class="cell" data-execution_count="4">
+<div id="e275d918" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#%% Load and prepare stimuli</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting the directory of our experiment</span></span>
@@ -593,22 +605,22 @@ PATHS
 <h2 class="anchored" data-anchor-id="show-a-visual-stimulus">Show a visual stimulus:</h2>
 <p>Now we want to show a stimulus in the center of our window. To do so, we will have to use the function “draw”. As the name suggests this function draws the stimulus that we want on the window that we have created.</p>
 <p>Let’s start with displaying the fixation cross in the center.</p>
-<div id="34092422" class="cell" data-execution_count="5">
+<div id="c7bb2a4e" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw the fixation</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>fixation.draw()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Do you see the fixation cross?????? Probably not!! This is because we have drawn the fixation cross but we have not refreshed the window. Psychopy allows you to draw as many stimuli as you want on a window but the changes are only shown when you “refresh” the window. To do so we need to use the “flip” function.</p>
-<div id="ece9d9c0" class="cell" data-execution_count="6">
+<div id="77409fd3" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>win.flip()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Perfect!!!! The fixation cross is there. Before each flip, we need to draw our objects. Otherwise, we will only see the basic window with nothing in it. Let’s try!!! flip the window now.</p>
-<div id="8a0a2457" class="cell" data-execution_count="7">
+<div id="c0b159b8" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Flipping the window (refreshing)</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>win.flip()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The fixation is gone again! Exactly as predicted. Flipping the window allows us to draw and show something new in each frame. This means that the speed limit of our presentation is the actual frame rate of our display. <em>If we have a 60Hz display we can present an image 60 times in a second.</em></p>
 <p>So if we want to present our fixation for an entire second we would have to draw and flip it 60 times (our display has a refresh rate of 60Hz)! Let’s try:</p>
-<div id="725d42df" class="cell" data-execution_count="8">
+<div id="2bfd91ad" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">60</span>):</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    fixation.draw()</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    win.flip()</span>
@@ -616,7 +628,7 @@ PATHS
 </div>
 <p>Now we have shown the fixation for 1 second and then it disappeared. Nice!! However, you probably have already figured out that what we have done was unnecessary. If we want to present a static stimulus for 1s we could have just drawn it, flipped the window, and then waited for 1s. But now you have an idea of how to show animated stimuli or even videos!!! <strong>AMAZING!!!</strong>.</p>
 <p>Now let’s try to show the fixation for 1s by just waiting.</p>
-<div id="5976e579" class="cell" data-execution_count="9">
+<div id="8ff54043" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fixation.draw()</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>win.flip()</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>core.wait(<span class="dv">1</span>)  <span class="co"># wait for 1 second</span></span>
@@ -626,7 +638,7 @@ PATHS
 <section id="play-a-sound" class="level2">
 <h2 class="anchored" data-anchor-id="play-a-sound">Play a sound:</h2>
 <p>We have seen how to show a stimulus let’s now play the sound that we have imported. This is extremely simple, we can just <code>play()</code> it:</p>
-<div id="bfbdec3a" class="cell" data-execution_count="10">
+<div id="a850ea2b" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>presentation_sound.play()</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>core.wait(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -655,7 +667,7 @@ Warning
 <li><p>we present the reward or the non-reward depending on the cue for 2s.</p></li>
 </ul>
 <p>In the end, we also close the window.</p>
-<div id="194b8e04" class="cell" data-execution_count="11">
+<div id="d3744a65" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">###### 1st Trial ######</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">### Present the fixation</span></span>
@@ -705,12 +717,12 @@ Warning
 <section id="isi" class="level2">
 <h2 class="anchored" data-anchor-id="isi">ISI</h2>
 <p>We’ve now completed a trial, but having trials run back-to-back is often not ideal. Typically, we insert a brief pause between trials—this is called the Inter-Stimulus Interval (ISI).One common way to implement an ISI is to use a simple wait function, for example:</p>
-<div id="4034609b" class="cell" data-execution_count="12">
+<div id="afb66183" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>core.wait(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This is straightforward, but in some cases you might want more control over the timing. For example, if you need to account for any slight delays during a trial, you can use a clock to measure elapsed time.</p>
 <p>To implement this ISI, we’ll create a PsychoPy <code>core.Clock()</code>. Once initiated, this clock starts keeping track of time, letting us know how much time has elapsed. After kicking off the clock, we can do some other tasks, then wait for the remaining time to reach our 1-second ISI.</p>
-<div id="aa0681ea" class="cell" data-execution_count="13">
+<div id="6e7f318f" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">### ISI</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>remaining_time <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> clock.getTime()</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> remaining_time <span class="op">&gt;</span> <span class="dv">0</span>:</span>
@@ -724,7 +736,7 @@ Warning
 <p>Fantastic, we’ve nearly have our study! However, studies often don’t run to completion, especially when we’re working with infants and children. More often than not, we need to halt the study prematurely. This could be due to the participant becoming fatigued or distracted, or perhaps we need to tweak some settings.</p>
 <p>How can we accomplish this? Of course, we could just shut down Python and let the experiment crash… but surely, there’s a more elegant solution… And indeed, there is! In fact, there are numerous methods to achieve this, and we’re going to demonstrate one of the most straightforward and flexible ones to you.</p>
 <p>We can use the&nbsp;<code>event.getKeys()</code>&nbsp;function to ask Psychopy to report any key that has been pressed during our trial. In our case, we will check if the&nbsp;ESC&nbsp;key has been pressed and if it has, we will simply close the window and stop the study.</p>
-<div id="ba6392b4" class="cell" data-execution_count="14">
+<div id="d93234ab" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Check for closing experiment</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>keys <span class="op">=</span> event.getKeys() <span class="co"># collect list of pressed keys</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">'escape'</span> <span class="kw">in</span> keys:</span>
@@ -750,7 +762,7 @@ Important
 <h2 class="anchored" data-anchor-id="create-an-entire-experiment">Create an entire experiment</h2>
 <p>In an experiment, we want more than 1 trial. Let’s then create an experiment with 10 trials. We just need to repeat what we have done above multiple times. However, we need to randomize the type of trials, otherwise, it would be too easy to learn. To do so, we will create a list of <code>0</code> and <code>1</code>. where <code>0</code> would identify a rewarding trial and <code>1</code> would index a non-rewarding trial.</p>
 <p>To properly utilize this list of <code>0</code> and <code>1</code>, we will need to create other lists of our stimuli. This will make it easier to call the right stimuli depending on the trial. We can do so by:</p>
-<div id="fdca8e2b" class="cell" data-execution_count="15">
+<div id="feb87d94" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create list of trials in which 0 means winning and 1 means losing</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>Trials <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span> ]</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -773,7 +785,7 @@ Caution
 <p>If you are testing this script on your laptop and do not want to lose the ability to interact with it until the experiment is finished, keep the same window size and position as the previous lines of code.</p>
 </div>
 </div>
-<div id="ef74427f" class="cell" data-execution_count="16">
+<div id="48297cac" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import some libraries from PsychoPy and others</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
@@ -1337,8 +1349,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../CONTENT/GettingStarted/GettingStartedWithPsychopy.html" class="pagination-link" aria-label="Starting with PsychoPy">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Starting with PsychoPy</span>
+      <a href="../../CONTENT/GettingStarted/GettingStartedWithR.html" class="pagination-link" aria-label="Starting with R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Starting with R</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

@@ -137,14 +137,14 @@ cookieconsent.run({
 </script> 
   
 <style>
-div.callout-info.callout {
+div.callout-details.callout {
   border-left-color: #8E44AD;
 }
-div.callout-info.callout-style-default > .callout-header {
+div.callout-details.callout-style-default > .callout-header {
   background-color: rgba(142, 68, 173, 0.13);
 }
-div.callout-info .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
-div.callout-info.callout-style-default .callout-icon::before, div.callout-info.callout-titled .callout-icon::before {
+div.callout-details .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-details.callout-style-default .callout-icon::before, div.callout-details.callout-titled .callout-icon::before {
   content: '🔍';
   background-image: none;
 }
@@ -224,10 +224,16 @@ div.callout-info.callout-style-default .callout-icon::before, div.callout-info.c
  <span class="menu-text">Welcome to DevStart</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DevStart Setup Guide</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Getting started:</span></a>
+ <span class="menu-text">Getting started</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -243,6 +249,12 @@ div.callout-info.callout-style-default .callout-icon::before, div.callout-info.c
   <div class="sidebar-item-container"> 
   <a href="../../CONTENT/GettingStarted/GettingStartedWithPsychopy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Starting with PsychoPy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../CONTENT/GettingStarted/GettingStartedWithR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Starting with R</span></a>
   </div>
 </li>
       </ul>

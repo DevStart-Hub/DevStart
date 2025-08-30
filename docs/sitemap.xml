@@ -2,71 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/index.html</loc>
-    <lastmod>2025-08-23T21:23:27.059Z</lastmod>
+    <lastmod>2025-08-27T19:03:44.381Z</lastmod>
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/Workshops/BCCCD2024.html</loc>
-    <lastmod>2025-08-21T14:41:12.003Z</lastmod>
+    <lastmod>2025-08-27T19:03:43.711Z</lastmod>
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels.html</loc>
-    <lastmod>2025-08-23T21:23:26.431Z</lastmod>
+    <lastmod>2025-08-27T19:03:43.708Z</lastmod>
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels.html</loc>
-    <lastmod>2025-08-23T21:23:26.430Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/GettingStartedWithPsychopy.html</loc>
-    <lastmod>2025-08-21T14:41:11.994Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/PupilPreprocessing.html</loc>
-    <lastmod>2025-08-27T18:08:49.806Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/Intro_eyetracking.html</loc>
-    <lastmod>2025-08-23T21:23:26.428Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/FromFixationsToData.html</loc>
-    <lastmod>2025-08-23T21:23:26.427Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/CreateAnEyetrackingExperiment.html</loc>
-    <lastmod>2025-08-23T21:35:05.706Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/ContentList.html</loc>
-    <lastmod>2025-08-22T11:38:46.959Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/EyetrackingCalibration.html</loc>
-    <lastmod>2025-08-21T14:41:11.984Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/I2MC_tutorial.html</loc>
-    <lastmod>2025-08-21T14:41:11.986Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/PupilDataAnalysis.html</loc>
-    <lastmod>2025-08-27T14:59:12.983Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/CreateYourFirstParadigm.html</loc>
-    <lastmod>2025-08-23T21:25:20.608Z</lastmod>
+    <lastmod>2025-08-27T19:03:43.706Z</lastmod>
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/GettingStartedWithPython.html</loc>
-    <lastmod>2025-08-21T14:41:11.996Z</lastmod>
+    <lastmod>2025-08-30T21:47:53.192Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/DevStartSetupGuide.html</loc>
+    <lastmod>2025-08-30T21:47:53.190Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/PupilPreprocessing.html</loc>
+    <lastmod>2025-08-27T19:03:43.700Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/Intro_eyetracking.html</loc>
+    <lastmod>2025-08-27T19:03:43.697Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/FromFixationsToData.html</loc>
+    <lastmod>2025-08-27T19:03:43.694Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/CreateAnEyetrackingExperiment.html</loc>
+    <lastmod>2025-08-27T19:03:43.691Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/ContentList.html</loc>
+    <lastmod>2025-08-27T19:03:43.690Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/EyetrackingCalibration.html</loc>
+    <lastmod>2025-08-27T19:03:43.693Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/I2MC_tutorial.html</loc>
+    <lastmod>2025-08-27T19:03:43.695Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/PupilDataAnalysis.html</loc>
+    <lastmod>2025-08-27T19:03:43.698Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/CreateYourFirstParadigm.html</loc>
+    <lastmod>2025-08-27T19:03:43.702Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/GettingStartedWithPsychopy.html</loc>
+    <lastmod>2025-08-30T21:47:53.192Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/GettingStartedWithR.html</loc>
+    <lastmod>2025-08-30T21:47:53.193Z</lastmod>
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearMixedModels.html</loc>
-    <lastmod>2025-08-27T10:12:41.145Z</lastmod>
+    <lastmod>2025-08-27T19:03:43.707Z</lastmod>
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates.html</loc>
-    <lastmod>2025-08-23T21:23:26.432Z</lastmod>
+    <lastmod>2025-08-27T19:03:43.710Z</lastmod>
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/Workshops/GAP_2024.html</loc>
