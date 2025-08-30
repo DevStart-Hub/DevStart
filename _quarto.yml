@@ -3,8 +3,9 @@ project:
   execute-dir: project
   output-dir: docs
   resources:
-  - resources/
-
+    - resources/
+    - "*/resources/"  # Add this line
+    
 execute:
   freeze: auto
 
@@ -70,11 +71,12 @@ website:
     
     contents:
       - index.qmd
-      - section: "Getting started:"
+      - CONTENT/GettingStarted/DevStartSetupGuide.qmd
+      - section: "Getting started"
         contents:
           - CONTENT/GettingStarted/GettingStartedWithPython.qmd
           - CONTENT/GettingStarted/GettingStartedWithPsychopy.qmd
-
+          - CONTENT/GettingStarted/GettingStartedWithR.qmd
       - section: "Creating an experiment:"
         href: CONTENT/GettingStarted/CreateYourFirstParadigm.qmd
         contents:
@@ -144,9 +146,13 @@ custom-callout:
 ##### Format #####
 format:
   html:
-
+    
+    # Toc
     toc: true
     toc-expand: 4    
+
+    # Images
+    lightbox: true
     
     theme:
       light: bookup.scss
