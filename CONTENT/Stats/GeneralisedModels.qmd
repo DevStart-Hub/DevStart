@@ -37,7 +37,7 @@ library(lmerTest)
 df = read.csv("resources/Stats/Dataset.csv")
 
 df$Id = factor(df$Id) # make sure subject_id is a factor
-df$StandardTrialN = scale(df$TrialN) # standardize the continuous variable
+df$StandardTrialN = standardize(df$TrialN) # standardize the continuous variable
 ```
 
 Step one in ANY statistical analysis: **look at your data**! Let's create a histogram with a density curve to see what we're working with:
