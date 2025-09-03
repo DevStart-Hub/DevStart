@@ -26,19 +26,18 @@ library(easystats)  # Easy statistical modeling and reporting
 
 # Load Reaction Time Data -----------------------------------------------------
 # Load the lognormally distributed reaction time data from the simulation
-ReactionTime <- vroom::vroom("CONTENT\\Simulation\\simulatedLognormal.csv") %>% 
+ReactionTime <- vroom::vroom("Simulations/LT_RT/simulatedLognormal.csv") %>% 
   rename(
     ReactionTime = reaction_time,  # Rename for clarity
     Id = subject_id,              # Standardize ID column name
     Event = categorical_condition, # Standardize condition column name
     TrialN = trial_number         # Standardize trial number column name
   ) %>% 
-  mutate(Event = fct_rev(Event)) %>%  # Reverse factor levels for consistent ordering
   select(Id, Event, TrialN, ReactionTime)  # Keep only relevant columns
 
 # Load Looking Time Data ------------------------------------------------------
 # Load the normally distributed looking time data from the simulation
-LookingTime <- vroom::vroom("CONTENT\\Simulation\\simulatedNormal.csv") %>% 
+LookingTime <- vroom::vroom("Simulations/LT_RT/simulatedNormal.csv") %>% 
   rename(
     LookingTime = dependent_variable,  # Rename for clarity
     Id = subject_id,                  # Standardize ID column name
@@ -53,13 +52,7 @@ LookingTime <- vroom::vroom("CONTENT\\Simulation\\simulatedNormal.csv") %>%
 
 # Combine Datasets ------------------------------------------------------------
 # Merge reaction time and looking time data by participant, condition, and trial
-Df <- left_join(ReactionTime, LookingTime, by = c("Id", "Event", "TrialN")) %>% 
-  mutate(
-    # Recode event labels to be more meaningful
-    Event = fct_recode(Event, 
-                       NoReward = "Hammer",  # Hammer condition = No Reward
-                       Reward = "Spoon")     # Spoon condition = Reward
-  )
+Df <- left_join(ReactionTime, LookingTime, by = c("Id", "Event", "TrialN"))
 
 # Handle Missing Data ---------------------------------------------------------
 # If reaction time is missing (NA), also set looking time to missing
@@ -76,7 +69,8 @@ Df[is.na(Df$ReactionTime), ]$LookingTime <- NA
 Df <- Df %>%
   group_by(Id) %>%
   mutate(SES = sample(c("low", "medium", "high"), 1)) %>%  # Random SES assignment
-  ungroup()
+  ungroup() %>% 
+  arrange(Id, desc(Event))
 
 # Quick check of SES distribution (optional visualization)
 # ggplot(Df, aes(x = SES)) + geom_bar()  # Uncomment to see SES distribution
@@ -143,7 +137,7 @@ combined_plot <- D1 + D2
 combined_plot
 
 # Save the combined visualization
-ggsave("CONTENT\\Simulation\\CombinedDensity.png", 
+ggsave("Simulations/LT_RT/CombinedDensity.png", 
        plot = combined_plot,
        width = 20, 
        height = 10,  # Reduced height since plots are side by side
