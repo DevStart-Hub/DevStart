@@ -13,6 +13,7 @@
 # =============================================================================
 
 # Load Required Libraries -----------------------------------------------------
+# Load necessary libraries for data manipulation, visualization, and statistical modeling.
 library(tidyverse) # Data manipulation and visualization
 library(easystats) # Easy statistical modeling
 library(lmerTest) # Mixed-effect models
@@ -20,6 +21,7 @@ library(GGally) # Plotting relationships between variables
 library(faux) # Simulating correlated variables
 
 # Set Global Options ----------------------------------------------------------
+# Set display options to control how numbers are shown in the output.
 options("scipen" = 10, "digits" = 4) # Prevent scientific notation, display up to 4 digits
 # set.seed(8675309) # Uncomment to set a seed for reproducibility
 
@@ -28,6 +30,7 @@ options("scipen" = 10, "digits" = 4) # Prevent scientific notation, display up t
 # =============================================================================
 
 # Sample Size Parameters -----------------------------------------------------
+# Define parameters and settings for the simulation.
 n_subjects <- 20 # Number of participants in the study
 trialn <- 20     # Number of trials per condition per participant
 
@@ -46,11 +49,44 @@ grand_mean_dv <- 400                 # Overall average of the dependent variable
 fixed_categorical_effect <- -50      # Main effect of condition (Spoon vs. Hammer)
                                      # When effect-coded: Spoon = +25, Hammer = -25
 fixed_continuous_effect <- -8        # Learning effect: DV decreases by 8 units per trial
-interaction_effect <- -4             # Interaction: differential learning rates between conditions
+interaction_effect <- -5           # Interaction: differential learning rates between conditions
                                      # Adds/subtracts 4 units per trial depending on condition
 
 # Error Parameters ------------------------------------------------------------
 residual_sd <- 30                    # Within-subject measurement error (trial-to-trial noise)
+
+
+# =============================================================================
+# Trials data creation / reading
+# =============================================================================
+
+# Create subject - trials - Event ----------------------------------------------------------
+# If the trial sequence file doesn't exist, generate it; otherwise load it
+if (!file.exists("Simulations/LT_RT/trial_sequences.csv")) {
+  # Create a base data frame for subjects and trials.
+  trial_data = crossing(
+    subject_id = 1:n_subjects,
+    trial_number = 1:trialn) # Note: was ntrials in original, should be trialn
+
+  trial_data$categorical_condition <- NA
+
+  # Loop through each subject to create a constrained-randomized sequence of conditions.
+  for (S in 1:n_subjects) {
+    # Repeatedly generate a sequence until it meets the specified criterion.
+    repeat {
+      # Generate a random sequence of 'Complex' and 'Simple' conditions for the number of trials.
+      seq <- sample(c("Complex", "Simple"), trialn, replace = TRUE)
+      # Check that no condition is repeated more than 3 times in a row using run-length encoding.
+      if (all(rle(seq)$lengths <= 3)) break # Exit the loop if the condition is met.
+    }
+    # Assign the valid sequence of conditions to the current subject.
+    trial_data$categorical_condition[trial_data$subject_id == S] <- seq
+  }
+  write.csv(trial_data, "Simulations/LT_RT/trial_sequences.csv", row.names = FALSE)
+} else {
+  trial_data <- read.csv("Simulations/LT_RT/trial_sequences.csv")
+}
+
 
 # =============================================================================
 # GENERATE SUBJECT-LEVEL RANDOM EFFECTS
@@ -60,7 +96,6 @@ residual_sd <- 30                    # Within-subject measurement error (trial-t
 # This section generates subject-specific deviations from the population means.
 # Each subject gets their own intercept (baseline performance) and slope 
 # (learning rate), which are correlated according to the specified correlation.
-
 subjects <- faux::rnorm_multi(
   n = n_subjects,                              # Number of subjects to generate
   vars = 2,                                    # Two random effects: intercept and slope
@@ -75,21 +110,12 @@ subjects <- faux::rnorm_multi(
 # GENERATE TRIAL-LEVEL DATA STRUCTURE
 # =============================================================================
 
-# Create All Possible Trial Combinations -------------------------------------
-# This creates the full factorial design: every subject experiences every 
-# combination of condition and trial number.
-
-trial_data <- crossing(
-  subject_id = subjects$subject_id,                    # All subject IDs
-  categorical_condition = c("Spoon", "Hammer"),        # Both experimental conditions
-  trial_number = 1:trialn                             # All trial numbers (1 to 20)
-) 
-# Total observations = n_subjects × 2 conditions × trialn trials = 20 × 2 × 20 = 800
-
 # Merge Subject Random Effects with Trial Data -------------------------------
 # This joins the subject-specific random effects with the trial structure,
 # so each trial inherits the appropriate subject's random intercept and slope.
+# Merge with subject-level random effects to include individual variations.
 trial_data <- left_join(trial_data, subjects, by = "subject_id")
+trial_data$subject_id <- as.factor(trial_data$subject_id)
 
 # =============================================================================
 # SIMULATION VALIDATION LOOP
@@ -100,11 +126,13 @@ trial_data <- left_join(trial_data, subjects, by = "subject_id")
 # If these conditions aren't met, new data is generated automatically.
 
 # Initialize Validation Variables ---------------------------------------------
+# Set up variables to track validation criteria
 P1 <- -Inf  # p-value for interaction effect in linear model
 P2 <- -Inf  # p-value for normality test in mixed-effects model
 iter <- 1   # Iteration counter
 
 # Validation Loop -------------------------------------------------------------
+# Continue generating data until both statistical criteria are met
 while(P1 < 0.05 | P2 < 0.05) {
   print(paste("Simulation attempt:", iter))
   iter <- iter + 1
@@ -120,8 +148,8 @@ while(P1 < 0.05 | P2 < 0.05) {
       # Effect coding ensures that the intercept represents the grand mean
       categorical_coded = recode(
         categorical_condition,
-        "Spoon" = -0.5,    # Spoon condition gets -0.5
-        "Hammer" = 0.5     # Hammer condition gets +0.5
+        "Complex" = -0.5,    # Complex condition gets -0.5
+        "Simple" = 0.5     # Simple condition gets +0.5
       ),
       
       # Calculate Component Effects ------------------------------------------
@@ -177,8 +205,9 @@ while(P1 < 0.05 | P2 < 0.05) {
   )
   
   # Extract Validation Metrics ----------------------------------------------
+  # Check if interaction is significant and residuals are normal
   P1 <- parameters(mod_lm)[4, 'p']        # p-value for interaction in linear model
-  P2 <- check_normality(mod_mixed)$p       # p-value for normality of residuals in mixed model
+  P2 <- as.numeric(check_normality(mod_mixed))       # p-value for normality of residuals in mixed model
   
   # Continue loop if validation criteria not met
 }
@@ -188,7 +217,8 @@ while(P1 < 0.05 | P2 < 0.05) {
 # =============================================================================
 
 # Export Final Dataset -------------------------------------------------------
-write.csv(simulated_data, "CONTENT\\Simulation\\simulatedNormal.csv", row.names = FALSE)
+# Save the validated simulated data to CSV file
+# write.csv(simulated_data, "Simulations/LT_RT/simulatedNormal.csv", row.names = FALSE)
 
 # =============================================================================
 # MODEL DIAGNOSTICS
@@ -249,13 +279,13 @@ ggplot(
 # Generate Model-Based Predictions -------------------------------------------
 # Use the fitted mixed-effects model to estimate expected values across
 # the range of trial numbers and categorical conditions, including confidence intervals
-
 Est <- estimate_expectation(
   mod_mixed,
   get_datagrid(mod_mixed, by = c('categorical_condition', 'trial_number'))
 )
 
 # Plot Expected Trajectories with Uncertainty --------------------------------
+# Visualize model predictions with confidence bands
 ggplot(
   Est,
   aes(
