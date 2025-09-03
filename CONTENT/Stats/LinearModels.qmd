@@ -75,12 +75,12 @@ You can see that the data is really simple! We have 4 columns:
 :::::: callout-important
 ## Long format
 
-One important information that we need to keep in mind is that to run `lm()` (and most models!!) in R we need the data in a long format and not a wide format. 
+One important information that we need to keep in mind is that to run `lm()` (and most models!!) in R we need the data in a long format and not a wide format.
 
 In long format, each row represents a single observation. Variables are organized in columns, with one column for the variable names and another for the values. This means that the column you want to model (in the example `LookingTime`) has 1 row for observation but the other columns usually have repeated entries ( e.g. `Id` , `TrialN`, `Event`)
 
 Wide format, on the other hand, has each row representing a subject or group, with multiple columns for different variables or time-points. While this can be visually appealing for humans, it's not optimal for our linear modeling needs.
- 
+
 Here a small comparison of the two formats:
 
 ```{r}
@@ -191,7 +191,7 @@ summary(mod_lm)
 
 Woohoo! This was super simple!! 🎉 We can use the output of the model to understand whether the variables are predicting LookingTime. The magic number we're looking for is the p-value, hiding in the last column of the **Coefficients section**. If the p-value is below 0.05, we've got ourselves an effect! If it's above, sadly we don't. [**AND YES, EVEN IF IT'S 0.051!!!**]{.underline} Rules are rules in the p-value game!
 
-What goodies can we spot here? First, our **Intercept** is significant (don't worry, we'll decode this mysterious value later!). Even more exciting, we've got a significant effect of **TrialN** – our continuous variable – (p = 0.0113) and a significant effect of **Event** (p = 0.0114). Double win! However, the interaction between TrialN and Event is playing hard to get with that p = 0.9715. That's nowhere near significant!
+What can we spot here? First, our **Intercept** is significant (don't worry, we'll decode this mysterious value later!). Even more exciting, we've got a significant effect of **TrialN** – our continuous variable – (p = `r formatC(parameters::parameters(mod_lm)[2, 9], format = "f", digits = 4)`) and a significant effect of **Event** (p = `r formatC(parameters::parameters(mod_lm)[3, 9], format = "f", digits = 5)`). Double win! However, the interaction between TrialN and Event is playing hard to get with that p = `r formatC(parameters::parameters(mod_lm)[4, 9], format = "f", digits = 3)`. That's nowhere near significant!
 
 This is already pretty cool, right?!? But here's the deal - when looking at model outputs, people often get hypnotized by p-values. **However, there's MUCH more to unpack in a model summary!** The full story of our data is waiting to be discovered in the complete model output. Let's dive in together and crack this statistical puzzle!
 
@@ -295,7 +295,7 @@ ggplot() +
     color = "black", lwd = 1.2,
     arrow = arrow(length = unit(0.1, "inches"), ends = "both")
   ) +
-  annotate("text", x = 0.20, y = 1300, label = expression(beta), size = 4) +
+  annotate("text", x = 0.20, y = 1260, label = expression(beta), size = 4) +
 
   scale_color_manual( values = color_map) +
   labs(y = "Looking time", x = "Event number", color = '') +
@@ -318,7 +318,7 @@ ggplot() +
     scale = 3,
     space = 1
   )+
-  ylim(0, 1550)
+  ylim(0, 1400)
 ```
 
 As you can see, the intercept is pretty straightforward—it gives us the estimate when everything is set to 0, both for continuous and categorical variables. The intercept is the foundation of your model, where all the predictors are at their baseline value (in this case, **Simple** was cleverly selected as the reference or 0 level for the categorical variable).
@@ -362,11 +362,11 @@ ggplot() +
   geom_segment(aes(x = 0, xend = 0, y = intercept_Simple, yend = intercept_Complex), 
                color = "black", lwd = 1.2,
                arrow = arrow( length = unit(0.1, "inches"), ends = "both")) +
-  annotate("text", x = -0.05, y = 1450, label = expression(beta), size = 4) +
+  annotate("text", x = -0.05, y = intercept_Simple - (intercept_Simple-intercept_Complex)/2, label = expression(beta), size = 4) +
   
   # Customize the color scale for the legend
   scale_color_manual( values = color_map) +
-  coord_cartesian(xlim = c(-1,3), ylim = c(1200,1550))+
+  coord_cartesian(xlim = c(-1,3), ylim = c(1000,1400))+
   
   # Labels and theme
   labs(y = 'Looking time', x = 'Event number', color = '') +
@@ -427,15 +427,15 @@ ggplot() +
     
   geom_pointrange(aes(x=0, y=intercept_brush, ymin= intercept_brush-intercept_brush_se, ymax= intercept_brush+intercept_brush_se, color = 'Simple'), lwd=1.3)+
   
-  annotate("text", x = 4.4, y = 1315, label = expression(beta), size = 4) +
-  geom_path(aes(x = c(4, 4, 10), y = c(1350, 1300, 1300)), 
+  annotate("text", x = 4.4, y = 1162, label = expression(beta), size = 4) +
+  geom_path(aes(x = c(4, 4, 10), y = c(1250, 1150, 1150)), 
           color = "black", lwd = 1.2, arrow = arrow( length = unit(0.1, "inches"), ends = "both"))+
   
   # Customize the color scale for the legend
   scale_color_manual(values = color_map) +
   scale_fill_manual(values = color_map)+
   # Set the limits for x and y axes
-  coord_cartesian(xlim = c(-1,20), ylim = c(1200,1550))+
+  coord_cartesian(xlim = c(-1,20), ylim = c(1000,1400))+
   
   # Labels and theme
   labs(y = 'Looking time', x = 'Event number', color = '') +

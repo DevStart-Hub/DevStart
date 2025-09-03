@@ -228,16 +228,18 @@ ggplot(is_pred, aes(x = StandardTrialN,
   theme_classic(base_size = 16)
 ```
 
-Reaction times decrease much more across trials for the Complex than for the Simple condition! However, we don't have a complete picture yet. For example, we do not know whether the decrease in reaction times across trials is significant only for the Complex condition or also for the Simple condition. To find out, we can estimate the slopes as we did in the previous tutorial: [ModelEstimates.qmd](ModelEstimates.qmd)
+Reaction times decrease much more across trials for the Complex than for the Simple condition! However, we don't have a complete picture yet. For example, we do not know whether the decrease in reaction times across trials is significant only for the Complex condition or also for the Simple condition. To find out, we can estimate the slopes as we did in the previous tutorial: [Model Estimates](ModelEstimates.qmd)
 
 ```{r}
 #| label: Estimate slopes
 #| message: false
 #| warning: false
-estimate_slopes(mod_gamma, trend = 'Event', by = 'StandardTrialN')
+estimate_slopes(mod_gamma, trend = 'StandardTrialN', by = 'Event')
 ```
 
-\[add with same structure as in previous tutorial\]
+Nice !! This is confirming what we could already guess from the plot!!
+
+that there is an change in the effect of the complex with the number of trials but there for the complex shape is
 
 Although we've been focusing on the main effects, remember that we also had random intercepts and slopes in our model! We can have a look at the random effects as well:
 
