@@ -213,14 +213,6 @@ while(P1 < 0.05 | P2 < 0.05) {
 }
 
 # =============================================================================
-# SAVE VALIDATED DATA
-# =============================================================================
-
-# Export Final Dataset -------------------------------------------------------
-# Save the validated simulated data to CSV file
-# write.csv(simulated_data, "Simulations/LT_RT/simulatedNormal.csv", row.names = FALSE)
-
-# =============================================================================
 # MODEL DIAGNOSTICS
 # =============================================================================
 
@@ -228,6 +220,17 @@ while(P1 < 0.05 | P2 < 0.05) {
 # Generate diagnostic plots to verify model fit and assumptions
 check_model(mod_lm)      # Diagnostics for linear model
 check_model(mod_mixed)   # Diagnostics for mixed-effects model
+
+
+# =============================================================================
+# SAVE VALIDATED DATA
+# =============================================================================
+
+# Export Final Dataset -------------------------------------------------------
+# Save the validated simulated data to CSV file
+# write.csv(simulated_data, "Simulations/LT_RT/simulatedNormal.csv", row.names = FALSE)
+
+
 
 # =============================================================================
 # DATA VISUALIZATION

@@ -90,16 +90,24 @@ write_csv(Df, "resources\\Stats\\Dataset.csv")
 # Looking Time Model ----------------------------------------------------------
 # Linear mixed-effects model for normally distributed looking time data
 # Random intercepts and slopes for each participant
+Df$Stand_TrialN <- datawizard::standardise(Df$TrialN)  # Standardize trial numbers
+Df$Id <- as.factor(Df$Id)
+Df$Event <- as.factor(Df$Event)
+
 mod_l <- lmer(LookingTime ~ Event * TrialN + (1 + TrialN | Id), data = Df)
+check_model(mod_l)
+
 
 # Reaction Time Model ---------------------------------------------------------
 # Generalized linear mixed-effects model for reaction time data
 # Uses Gamma distribution with log link (appropriate for reaction times)
-Df$Stand_TrialN <- datawizard::standardise(Df$TrialN)  # Standardize trial numbers
 mod_gam <- glmer(ReactionTime ~ Event * Stand_TrialN + 
                    (1 + Stand_TrialN | Id),
                  family = Gamma(link = 'log'), 
                  data = Df)
+check_model(mod_gam)
+
+
 
 # =============================================================================
 # DATA VISUALIZATION
