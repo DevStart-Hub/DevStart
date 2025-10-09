@@ -53,23 +53,6 @@ LookingTime <- vroom::vroom("Simulations/LT_RT/simulatedNormal.csv") %>%
 # Merge reaction time and looking time data by participant, condition, and trial
 Df <- left_join(SaccadicRT, LookingTime, by = c("Id", "Event", "TrialN"))
 
-# Handle Missing Data ---------------------------------------------------------
-# If reaction time is missing (NA), also set looking time to missing
-# This maintains data consistency across both measures
-# Df[is.na(Df$SaccadicRT), ]$LookingTime <- NA
-
-# Find percentage of missing reaction time data
-percent_na <- mean(is.na(Df$SaccadicRT)) 
-
-n <- nrow(Df)
-num_na <- ceiling(percent_na * n)  # 5% of rows
-
-# Randomly select row indices to assign NA
-rows_to_na <- sample(seq_len(n), num_na)
-
-# Assign NA to those rows in the chosen column
-Df$LookingTime[rows_to_na] <- NA
-
 # =============================================================================
 # ADD DEMOGRAPHIC VARIABLES
 # =============================================================================
@@ -179,3 +162,8 @@ ggsave("Simulations/LT_RT/CombinedDensity.png",
 # plot(estimate_expectation(mod_l, by = c('TrialN', 'Event'), transform = T))  # Expected values
 
 # Uncomment the lines above to generate model visualization plots
+
+estimate_relation(mod_gam, by = c('Stand_TrialN', 'Event')) |> 
+  ggplot() +
+  geom_line(aes(x = Stand_TrialN, y = Predicted, color = Event), size = 1.5) +
+  geom_ribbon(aes(x = Stand_TrialN, ymin = Predicted - SE, ymax = Predicted+SE, fill = Event), alpha = 0.2) 
