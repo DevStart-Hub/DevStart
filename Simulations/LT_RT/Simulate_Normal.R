@@ -46,7 +46,7 @@ random_intercept_slope_cor <- -0.2   # Correlation between baseline and learning
 grand_mean_dv <- 400                 # Overall average of the dependent variable across all conditions
 
 # Effect sizes (adjusted to create realistic opposing effects)
-fixed_categorical_effect <- -50      # Main effect of condition (Spoon vs. Hammer)
+fixed_categorical_effect <- -65      # Main effect of condition (Spoon vs. Hammer)
                                      # When effect-coded: Spoon = +25, Hammer = -25
 fixed_continuous_effect <- -8        # Learning effect: DV decreases by 8 units per trial
 interaction_effect <- -5           # Interaction: differential learning rates between conditions
@@ -66,7 +66,7 @@ if (!file.exists("Simulations/LT_RT/trial_sequences.csv")) {
   # Create a base data frame for subjects and trials.
   trial_data = crossing(
     subject_id = 1:n_subjects,
-    trial_number = 1:trialn) # Note: was ntrials in original, should be trialn
+    trial_number = 1:trialn)
 
   trial_data$categorical_condition <- NA
 
@@ -89,35 +89,6 @@ if (!file.exists("Simulations/LT_RT/trial_sequences.csv")) {
 
 
 # =============================================================================
-# GENERATE SUBJECT-LEVEL RANDOM EFFECTS
-# =============================================================================
-
-# Create Correlated Random Effects -------------------------------------------
-# This section generates subject-specific deviations from the population means.
-# Each subject gets their own intercept (baseline performance) and slope 
-# (learning rate), which are correlated according to the specified correlation.
-subjects <- faux::rnorm_multi(
-  n = n_subjects,                              # Number of subjects to generate
-  vars = 2,                                    # Two random effects: intercept and slope
-  r = random_intercept_slope_cor,              # Correlation between the two effects
-  mu = 0,                                      # Both effects centered at zero (deviations from grand mean)
-  sd = c(random_intercept_sd, random_slope_sd), # Different variability for intercept vs. slope
-  varnames = c("random_intercept", "random_slope_trial") # Descriptive names
-) %>%
-  mutate(subject_id = 1:n_subjects)            # Add unique identifier for each subject
-
-# =============================================================================
-# GENERATE TRIAL-LEVEL DATA STRUCTURE
-# =============================================================================
-
-# Merge Subject Random Effects with Trial Data -------------------------------
-# This joins the subject-specific random effects with the trial structure,
-# so each trial inherits the appropriate subject's random intercept and slope.
-# Merge with subject-level random effects to include individual variations.
-trial_data <- left_join(trial_data, subjects, by = "subject_id")
-trial_data$subject_id <- as.factor(trial_data$subject_id)
-
-# =============================================================================
 # SIMULATION VALIDATION LOOP
 # =============================================================================
 # This loop ensures that the simulated data meets our statistical requirements:
@@ -138,10 +109,38 @@ while(P1 < 0.05 | P2 < 0.05) {
   iter <- iter + 1
   
   # ==========================================================================
+  # GENERATE SUBJECT-LEVEL RANDOM EFFECTS (NEW FOR EACH ITERATION)
+  # ==========================================================================
+  
+  # Create Correlated Random Effects -------------------------------------------
+  # This section generates subject-specific deviations from the population means.
+  # Each subject gets their own intercept (baseline performance) and slope 
+  # (learning rate), which are correlated according to the specified correlation.
+  subjects <- faux::rnorm_multi(
+    n = n_subjects,                              # Number of subjects to generate
+    vars = 2,                                    # Two random effects: intercept and slope
+    r = random_intercept_slope_cor,              # Correlation between the two effects
+    mu = 0,                                      # Both effects centered at zero (deviations from grand mean)
+    sd = c(random_intercept_sd, random_slope_sd), # Different variability for intercept vs. slope
+    varnames = c("random_intercept", "random_slope_trial") # Descriptive names
+  ) %>%
+    mutate(subject_id = 1:n_subjects)            # Add unique identifier for each subject
+  
+  # ==========================================================================
+  # GENERATE TRIAL-LEVEL DATA STRUCTURE
+  # ==========================================================================
+  
+  # Merge Subject Random Effects with Trial Data -------------------------------
+  # This joins the subject-specific random effects with the trial structure,
+  # so each trial inherits the appropriate subject's random intercept and slope.
+  trial_data_iter <- left_join(trial_data, subjects, by = "subject_id")
+  trial_data_iter$subject_id <- as.factor(trial_data_iter$subject_id)
+  
+  # ==========================================================================
   # CALCULATE DEPENDENT VARIABLE
   # ==========================================================================
   
-  simulated_data <- trial_data %>%
+  simulated_data <- trial_data_iter %>%
     mutate(
       # Effect Coding for Categorical Variable -------------------------------
       # Convert categorical condition to numeric codes for analysis
@@ -216,10 +215,22 @@ while(P1 < 0.05 | P2 < 0.05) {
 # MODEL DIAGNOSTICS
 # =============================================================================
 
+parameters(mod_lm)
+parameters(mod_mixed)   # Diagnostics for mixed-effects model
+
+estimate_expectation(mod_mixed, by = c('trial_number','categorical_condition')) |> 
+  ggplot(aes(x=trial_number, y=Predicted, color=categorical_condition)) +
+  geom_line() +
+  geom_ribbon(aes(ymin=Predicted-SE, ymax=Predicted+SE, fill=categorical_condition), alpha=0.3) +
+  theme_minimal()
+
+
 # Check Model Assumptions ----------------------------------------------------
 # Generate diagnostic plots to verify model fit and assumptions
 check_model(mod_lm)      # Diagnostics for linear model
 check_model(mod_mixed)   # Diagnostics for mixed-effects model
+
+
 
 
 # =============================================================================
@@ -228,7 +239,7 @@ check_model(mod_mixed)   # Diagnostics for mixed-effects model
 
 # Export Final Dataset -------------------------------------------------------
 # Save the validated simulated data to CSV file
-# write.csv(simulated_data, "Simulations/LT_RT/simulatedNormal.csv", row.names = FALSE)
+write.csv(simulated_data, "Simulations/LT_RT/simulatedNormal.csv", row.names = FALSE)
 
 
 

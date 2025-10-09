@@ -28,7 +28,6 @@ library(easystats)  # Easy statistical modeling and reporting
 # Load the lognormally distributed reaction time data from the simulation
 SaccadicRT <- vroom::vroom("Simulations/LT_RT/simulatedLognormal.csv") %>% 
   rename(
-    SaccadicRT = reaction_time,  # Rename for clarity
     Id = subject_id,              # Standardize ID column name
     Event = categorical_condition, # Standardize condition column name
     TrialN = trial_number         # Standardize trial number column name
