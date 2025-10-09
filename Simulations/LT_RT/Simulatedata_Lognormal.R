@@ -38,7 +38,7 @@ grand_mean_log_rt <- 6                   # Grand mean on log scale (~400ms when 
 fixed_categorical_effect <- -0.1         # Effect of categorical condition (e.g., Complex vs Simple)
 fixed_continuous_effect <- -0.02         # Continuous effect of trial number (learning/practice)
 interaction_effect <- -0.034             # Interaction between condition and trial number
-residual_sd <- 0.07                      # Residual error on log scale
+residual_sd <- 0.1                     # Residual error on log scale
 
 
 # =============================================================================
@@ -131,11 +131,11 @@ simulated_data <- trial_data %>%
       random_error,
     
     # Convert log RT to milliseconds (lognormal distribution)
-    reaction_time = exp(log_rt),
+    SaccadicRT = exp(log_rt),
     
     # Remove implausibly fast responses (< threshold)
     treshold = rnorm(nrow(.), 210, 10),
-    reaction_time = ifelse(reaction_time < treshold, NA, reaction_time)
+    SaccadicRT = ifelse(SaccadicRT < treshold, NA, SaccadicRT)
   )
 
 
@@ -147,12 +147,12 @@ simulated_data <- trial_data %>%
 simulated_data$stand_TrialN = datawizard::standardise(simulated_data$trial_number)
 
 # Fit a linear mixed-effects model on log-transformed reaction times
-mod_rt <- lmer(reaction_time ~ categorical_condition * stand_TrialN + 
+mod_rt <- lmer(SaccadicRT ~ categorical_condition * stand_TrialN + 
                  (1 + stand_TrialN | subject_id), data = simulated_data)
 
 
 # Fit a generalized linear mixed model using Gamma distribution
-mod_gam = glmer(reaction_time ~ categorical_condition * stand_TrialN + 
+mod_gam = glmer(SaccadicRT ~ categorical_condition * stand_TrialN + 
                   (1 + stand_TrialN | subject_id),
                 family = Gamma(link = 'log'), data = simulated_data)
 
@@ -188,7 +188,7 @@ write.csv(simulated_data, "Simulations/LT_RT/simulatedLognormal.csv", row.names 
 
 # Visualize the Simulated Data --------------------------------------------
 # Plot individual subject lines colored by condition
-ggplot(simulated_data, aes(x = trial_number, y = reaction_time, color = categorical_condition)) +
+ggplot(simulated_data, aes(x = trial_number, y = SaccadicRT, color = categorical_condition)) +
   geom_line() +
   geom_point() +
   labs(title = "Simulated Reaction Times (ms)",
@@ -200,7 +200,7 @@ ggplot(simulated_data, aes(x = trial_number, y = reaction_time, color = categori
 
 
 # Histogram showing density of reaction times by condition
-ggplot(simulated_data, aes(x = reaction_time, fill = categorical_condition)) +
+ggplot(simulated_data, aes(x = SaccadicRT, fill = categorical_condition)) +
   geom_density(alpha = 0.3, color = "black") +
   labs(title = "Distribution of Reaction Times",
        x = "Reaction Time (ms)",
