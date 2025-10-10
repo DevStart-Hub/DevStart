@@ -54,6 +54,7 @@ You can download the data that we will use in this tutorial from here:
 Once downloaded we need to import it in our R session. Here we read our csv and we print a small preview of it.
 
 ```{r}
+#| label: read data
 df = read.csv("resources/Stats/Dataset.csv")
 head(df)
 ```
@@ -75,15 +76,16 @@ You can see that the data is really simple! We have 4 columns:
 :::::: callout-important
 ## Long format
 
-One important information that we need to keep in mind is that to run `lm()` (and most models!!) in R we need the data in a long format and not a wide format. 
+One important information that we need to keep in mind is that to run `lm()` (and most models!!) in R we need the data in a long format and not a wide format.
 
 In long format, each row represents a single observation. Variables are organized in columns, with one column for the variable names and another for the values. This means that the column you want to model (in the example `LookingTime`) has 1 row for observation but the other columns usually have repeated entries ( e.g. `Id` , `TrialN`, `Event`)
 
 Wide format, on the other hand, has each row representing a subject or group, with multiple columns for different variables or time-points. While this can be visually appealing for humans, it's not optimal for our linear modeling needs.
- 
+
 Here a small comparison of the two formats:
 
 ```{r}
+#| label: long wide
 #| message: false
 #| warning: false
 #| include: false
@@ -129,6 +131,7 @@ head(long_data, 8)
 ### Long Format
 
 ```{r}
+#| label: head long
 #| echo: false
 head(long_data, 8)
 ```
@@ -138,6 +141,7 @@ head(long_data, 8)
 ### Wide Format
 
 ```{r}
+#| label: wide
 #| echo: false
 wide_data
 ```
@@ -191,7 +195,7 @@ summary(mod_lm)
 
 Woohoo! This was super simple!! 🎉 We can use the output of the model to understand whether the variables are predicting LookingTime. The magic number we're looking for is the p-value, hiding in the last column of the **Coefficients section**. If the p-value is below 0.05, we've got ourselves an effect! If it's above, sadly we don't. [**AND YES, EVEN IF IT'S 0.051!!!**]{.underline} Rules are rules in the p-value game!
 
-What goodies can we spot here? First, our **Intercept** is significant (don't worry, we'll decode this mysterious value later!). Even more exciting, we've got a significant effect of **TrialN** – our continuous variable – (p = 0.0113) and a significant effect of **Event** (p = 0.0114). Double win! However, the interaction between TrialN and Event is playing hard to get with that p = 0.9715. That's nowhere near significant!
+What can we spot here? First, our **Intercept** is significant (don't worry, we'll decode this mysterious value later!). Even more exciting, we've got a significant effect of **TrialN** – our continuous variable – (p = `r formatC(parameters::parameters(mod_lm)[2, 9], format = "f", digits = 4)`) and of **Event** (p = `r formatC(parameters::parameters(mod_lm)[3, 9], format = "f", digits = 5)`). However the interaction between **TrialN** and **Event** (p = `r formatC(parameters::parameters(mod_lm)[4, 9], format = "f", digits = 3)`) is playing hard to get.
 
 This is already pretty cool, right?!? But here's the deal - when looking at model outputs, people often get hypnotized by p-values. **However, there's MUCH more to unpack in a model summary!** The full story of our data is waiting to be discovered in the complete model output. Let's dive in together and crack this statistical puzzle!
 
@@ -245,7 +249,7 @@ The intercept often confuses people who approach linear models for the first tim
 
 The (Intercept) represents the reference levels where all our predictors (`TrialN` and `Event`) are **0**. While `TrialN` is easy to understand when it's 0 (`TrialN` 0 in our case would be the first trial), you may be scratching your head thinking...how can `Event` be 0? It's a categorical variable, it can't be 0!!!! `TrialN == 0`...sure....but `Event`??
 
-You are absolutely right! When a model encounters a categorical variable, it cleverly selects the first level of such variable as the reference level. If you take another look at our model summary, you can see that there's information for the **Complex Stimulus** level of the `Event` variable but nothing about the **Simple Stimulus** level. This is because the **Simple Stimulus** level has been selected by the model as the reference level and is thus represented in the intercept value! 💡
+You are absolutely right! When a model encounters a categorical variable, it cleverly selects the first level of such variable as the reference level. If you take another look at our model summary, you can see that there's information for the **Simple Stimulus** level of the `Event` variable but nothing about the **Complex Stimulus** level. This is because the **Complex Stimulus** level has been selected by the model as the reference level and is thus represented in the intercept value! 💡
 
 So our intercept (1390.1) actually represents the predicted **LookingTime** when:
 
@@ -262,6 +266,7 @@ Since the intercept has a significant p-value, it means that the estimate for th
 Ok, all this explanation is great...but it's much easier to visualize these Estimates!
 
 ```{r}
+#| label: plot mean
 #| echo: false
 #| message: false
 #| warning: false
@@ -279,7 +284,7 @@ intercept_brush_se <- model_p[1,3]
 
 
 # Create a named vector for colors
-color_map <- c("Simple" = "darkred")
+color_map <- c("Simple" = "darkred", "Complex" = 'darkblue')
 
 ggplot() +
   geom_vline(xintercept = 0, lwd = 0.4, linetype = 'dashed') +
@@ -287,7 +292,7 @@ ggplot() +
     aes(x = -0.15, y = intercept_brush,
         ymin = intercept_brush - intercept_brush_se,
         ymax = intercept_brush + intercept_brush_se,
-        color = "Simple"),
+        color = "Complex"),
     lwd = 1.3
   ) +
   geom_segment(
@@ -295,11 +300,11 @@ ggplot() +
     color = "black", lwd = 1.2,
     arrow = arrow(length = unit(0.1, "inches"), ends = "both")
   ) +
-  annotate("text", x = 0.20, y = 1300, label = expression(beta), size = 4) +
+  annotate("text", x = 0.3, y = 1260, label = 'beta', parse= T,size = 8) +
 
   scale_color_manual( values = color_map) +
   labs(y = "Looking time", x = "Event number", color = '') +
-  theme_modern(base_size = 20) +
+  theme_classic(base_size = 20) +
   theme(
     legend.position = "bottom",
     axis.line.y.right = element_blank(),
@@ -308,7 +313,7 @@ ggplot() +
   ) +
   # Only set x-limits via scale_x_continuous
   scale_x_continuous(
-    limits = c(-1, 3),
+    limits = c(-1, 2),
     breaks = c(-1, 0, 1, 2, 3),
     labels = c("", "0\n(Intercept)", "", "", "")
   ) +
@@ -318,7 +323,7 @@ ggplot() +
     scale = 3,
     space = 1
   )+
-  ylim(0, 1550)
+  ylim(0, 1600)
 ```
 
 As you can see, the intercept is pretty straightforward—it gives us the estimate when everything is set to 0, both for continuous and categorical variables. The intercept is the foundation of your model, where all the predictors are at their baseline value (in this case, **Simple** was cleverly selected as the reference or 0 level for the categorical variable).
@@ -333,11 +338,12 @@ Well... not exactly! 🤔
 
 **In linear models, each coefficient shows the difference in relation to the intercept (the 0 or the reference level), not the exact value of the Complex condition.**
 
-It sounds a bit confusing, but let's break it down. If we want to understand what is the estimate for a **Complex** event we need to take the **Intercept** (1390.1) –as we mentioned that is actually the **Simple** event – and then just simply add to it the Estimate for the `Event [Complex]` (99.8). So the model is telling us that a **Complex** event should be 1390.1 + 99.8 = 1489.9.
+It sounds a bit confusing, but let's break it down. If we want to understand what is the estimate for a **Complex** event we need to take the **Intercept** (`r formatC(parameters::parameters(mod_lm)[1, 2], format = "f", digits = 2)`) –as we mentioned that is actually the **Complex** event – and then just simply add to it the Estimate for the `Event [Simple]` (`r formatC(parameters::parameters(mod_lm)[3, 2], format = "f", digits = 2)`). So the model is telling us that a **Complex** event should be `r formatC(parameters::parameters(mod_lm)[1, 2], format = "f", digits = 2)`- `r formatC(parameters::parameters(mod_lm)[3, 2], format = "f", digits = 2)`= `r formatC(parameters::parameters(mod_lm)[3, 2] + parameters::parameters(mod_lm)[3, 2], format = "f", digits = 2)`.
 
 See? Not too bad! Let's visualize it and make it even clearer!
 
 ```{r}
+#| label: plot mean diff
 #| echo: false
 #| message: false
 #| warning: false
@@ -356,17 +362,17 @@ color_map <- c("Simple" = "darkred", "Complex" = 'darkblue')
 ggplot() +
   geom_vline(xintercept = 0, lwd = 0.4, linetype = 'dashed') +
 
-  geom_pointrange(aes(x=-.15, y=intercept_Simple, ymin= intercept_Simple-intercept_Simple_se, ymax= intercept_brush+intercept_Simple_se, color = 'Simple'), lwd=1.3)+
-  geom_pointrange(aes(x=.15, y=intercept_Complex, ymin= intercept_Complex-intercept_Complex_se, ymax= intercept_Complex+intercept_Complex_se, color = 'Complex'), lwd=1.3)+
+  geom_pointrange(aes(x=-.15, y=intercept_Simple, ymin= intercept_Simple-intercept_Simple_se, ymax= intercept_brush+intercept_Simple_se, color = 'Complex'), lwd=1.3)+
+  geom_pointrange(aes(x=.15, y=intercept_Complex, ymin= intercept_Complex-intercept_Complex_se, ymax= intercept_Complex+intercept_Complex_se, color = 'Simple'), lwd=1.3)+
   
   geom_segment(aes(x = 0, xend = 0, y = intercept_Simple, yend = intercept_Complex), 
                color = "black", lwd = 1.2,
                arrow = arrow( length = unit(0.1, "inches"), ends = "both")) +
-  annotate("text", x = -0.05, y = 1450, label = expression(beta), size = 4) +
+  annotate("text", x = +0.07, y = intercept_Simple - (intercept_Simple-intercept_Complex)/2, label = 'beta',parse = T, size = 4) +
   
   # Customize the color scale for the legend
   scale_color_manual( values = color_map) +
-  coord_cartesian(xlim = c(-1,3), ylim = c(1200,1550))+
+  coord_cartesian(xlim = c(-1,2), ylim = c(1250,1600))+
   
   # Labels and theme
   labs(y = 'Looking time', x = 'Event number', color = '') +
@@ -394,6 +400,7 @@ Remember!! This coefficient represents the effect of `TrialN` specifically when 
 Even easier..let's plot again!
 
 ```{r}
+#| label: plot slope
 #| echo: false
 #| message: false
 #| warning: false
@@ -418,24 +425,24 @@ color_map <- c("Simple" = "darkred", "Complex" = 'darkblue', "EventTrial" = '#e0
 ggplot() +
   geom_vline(xintercept = 0, lwd =0.4,linetype = "dashed") +
 
-  geom_line(data = df_p, aes(x = time, y = est_performance_EventTrial), color = 'darkred', size  = 1) +
+  geom_line(data = df_p, aes(x = time, y = est_performance_EventTrial), color = 'darkblue', size  = 1) +
   # geom_pointrange(aes(x  =0, y = intercept_brush, ymin = intercept_brush - intercept_brush_se,ymax = intercept_brush + intercept_brush_se, fill = 'Simple' ),
   #                 color = 'black', shape = 21, 
   #                 lwd = 1.3,fatten = 8) +
   
   
     
-  geom_pointrange(aes(x=0, y=intercept_brush, ymin= intercept_brush-intercept_brush_se, ymax= intercept_brush+intercept_brush_se, color = 'Simple'), lwd=1.3)+
+  geom_pointrange(aes(x=0, y=intercept_brush, ymin= intercept_brush-intercept_brush_se, ymax= intercept_brush+intercept_brush_se, color = 'Complex'), lwd=1.3)+
   
-  annotate("text", x = 4.4, y = 1315, label = expression(beta), size = 4) +
-  geom_path(aes(x = c(4, 4, 10), y = c(1350, 1300, 1300)), 
+  annotate("text", x = 4.4, y = 1400, label = 'beta', parse= T, size = 4) +
+  geom_path(aes(x = c(4, 4, 12), y = c(1490, 1390, 1390)), 
           color = "black", lwd = 1.2, arrow = arrow( length = unit(0.1, "inches"), ends = "both"))+
   
   # Customize the color scale for the legend
   scale_color_manual(values = color_map) +
   scale_fill_manual(values = color_map)+
   # Set the limits for x and y axes
-  coord_cartesian(xlim = c(-1,20), ylim = c(1200,1550))+
+  coord_cartesian(xlim = c(-1,20), ylim = c(900,1600))+
   
   # Labels and theme
   labs(y = 'Looking time', x = 'Event number', color = '') +
@@ -456,11 +463,11 @@ We'll take it step by step and look at the interaction in our model parameters. 
 
 To put it simply:
 
--   For **Simple** events, **LookingTime** decreases by 7.5 units per trial (that's our main `TrialN` coefficient)
+-   For **Complex** events, **LookingTime** decreases by `r formatC(parameters::parameters(mod_lm)[2, 2], format = "f", digits = 2)` units per trial (that's our main `TrialN` coefficient)
 
--   The interaction coefficient (0.13) tells us how this slope changes for **Complex** events
+-   The interaction coefficient (`r formatC(parameters::parameters(mod_lm)[4, 2], format = "f", digits = 2)`) tells us how this slope changes for **Simple** events
 
-So for **Complex** events, the slope would be: -7.5 + 0.13 = -7.37 units per trial.
+So for **Simple** events, the slope would be: `r formatC(parameters::parameters(mod_lm)[2, 2], format = "f", digits = 2)`+ `r formatC(parameters::parameters(mod_lm)[4, 2], format = "f", digits = 2)` = `r formatC(parameters::parameters(mod_lm)[2, 2] + parameters::parameters(mod_lm)[4, 2], format = "f", digits = 2)` units per trial.
 
 What does this mean in real terms? If the interaction coefficient is positive (like in our example), it means participants' looking time decreases more slowly during **Complex** trials compared to **Simple** trials – the estimate is slightly less negative.
 
@@ -471,6 +478,7 @@ In this model the interaction effect is extremely small and not significant. Thi
 While there is no significant difference, let's plot the estimated effects for **TrialN** for both **Complex** and **Simple** conditions to visualize this relationship!
 
 ```{r}
+#| label: plot slopes
 #| echo: false
 #| message: false
 #| warning: false
@@ -500,36 +508,31 @@ df_p <- data.frame(
   est_performance_Interaction = intercept_Complex + (slope_EventTrial + slope_Interaction) * time_values
 )
 
-df_p[df_p$time == -0.15,]
-
-
 color_map <- c("Simple" = "darkred", "Complex" = 'darkblue')
-
-
 
 ggplot()+
     geom_vline(xintercept = 0, lwd =0.4, linetype = 'dashed') +
 
-  geom_line(data = df_p, aes(x = time, y = est_performance_EventTrial), color = "darkred", lwd  = 1) +
-  geom_line(data = df_p, aes(x = time, y = est_performance_Interaction), color = "darkblue", lwd  = 1)+
+  geom_line(data = df_p, aes(x = time, y = est_performance_EventTrial), color = "darkblue", lwd  = 1) +
+  geom_line(data = df_p, aes(x = time, y = est_performance_Interaction), color = "darkred", lwd  = 1)+
   
-  geom_pointrange(aes(x =-.15, y = intercept_brush, ymin = intercept_brush - intercept_brush_se,ymax = intercept_brush + intercept_brush_se, color = 'Simple' ),
+  geom_pointrange(aes(x =-.15, y = intercept_brush, ymin = intercept_brush - intercept_brush_se,ymax = intercept_brush + intercept_brush_se, color = 'Complex' ),
                   lwd  = 1.3) +
-  geom_pointrange(aes(x=.15, y=intercept_Complex, ymin= intercept_Complex-intercept_Complex_se, ymax= intercept_Complex+intercept_Complex_se, color = 'Complex'),
+  geom_pointrange(aes(x=.15, y=intercept_Complex, ymin= intercept_Complex-intercept_Complex_se, ymax= intercept_Complex+intercept_Complex_se, color = 'Simple'),
                   lwd  = 1.3)+
 
 
-  annotate("text", x = 4.4, y = 1315, label = expression(beta), size = 4) +
-  geom_path(aes(x = c(4, 4, 10), y = c(1350, 1300, 1300)), 
+  annotate("text", x = 4.4, y = 1400, label = 'beta', parse= T, size = 4) +
+  geom_path(aes(x = c(4, 4, 12), y = c(1490, 1390, 1390)), 
           color = "black", lwd = 1.2, arrow = arrow( length = unit(0.1, "inches"), ends = "both"))+
   
-  annotate("text", x = 6.4, y = 1415, label = expression(beta), size = 4) +
-  geom_path(aes(x = c(6, 6, 11), y = c(1440, 1400, 1400)), 
+  annotate("text", x = 6.4, y = 1150, label = 'beta', parse= T, size = 4) +
+  geom_path(aes(x = c(6, 6, 10.5), y = c(1240, 1140, 1140)), 
           color = "black", lwd = 1.2, arrow = arrow( length = unit(0.1, "inches"), ends = "both"))+
   
   
   scale_color_manual( values = color_map) +
-  coord_cartesian(xlim = c(-1,20), ylim = c(1200,1550))+
+  coord_cartesian(xlim = c(-1,20), ylim = c(900,1600))+
   
   # Labels and theme
   labs(y = 'Looking time', x = 'Event number', color = '') +
@@ -583,6 +586,7 @@ In this tutorial here we will use the function from the packages [**datawizard**
 So now we import `easystats` and we use the function `standardize()`
 
 ```{r}
+#| label: standardize
 #| message: false
 #| warning: false
 library(easystats)
@@ -596,11 +600,84 @@ We have created like this a new column `StandardTrialN` with the standardized va
 #| label: RunStandardLm
 #| message: false
 #| warning: false
-mod_lm = lm(LookingTime ~ StandardTrialN*Event, data = df)
-summary(mod_lm)
+mod_lm_standardized = lm(LookingTime ~ StandardTrialN*Event, data = df)
+summary(mod_lm_standardized)
 ```
 
 As you can see the estimates are different!!! Because as we mentioned the reference level and the scale are different now. However do not panic, even if some values are different the relations are the same, we still have negative estimate for the time variable (here StandardTrialN and before TrialN) and positive for the **Complex** condition. Also the p-values are the same!
+
+What is important to keep in mind is that now **0 is the mean of our data** and this makes the intercept much more interpretable! All the estimates are now in relation to the mean of the data. Let's visualize this!
+
+```{r}
+#| label: standardized plot
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-dpi: 300
+#| fig-height: 8
+#| fig-width: 10
+
+model_p_std = parameters(mod_lm_standardized)
+
+# Define intercept and slope for the NoReward
+intercept_brush <- model_p_std[1,2]
+intercept_brush_se <- model_p_std[1,3]
+
+# Define intercept and slope for the Simple condition
+intercept_Simple <- model_p_std[1,2]  # Intercept for Simple
+intercept_Simple_se <- model_p_std[1,3]
+
+# Define intercept for Complex condition (Intercept + Complex Effect)
+intercept_Complex <- model_p_std[3,2] + intercept_Simple
+intercept_Complex_se <- model_p_std[3,3]
+
+# Define slopes
+slope_EventTrial <- model_p_std[2,2]  # Slope for Event Trial
+slope_Interaction <- model_p_std[4,2] # Interaction effect
+
+# Some hypothetical TrialN values
+time_values <- seq(min(df$StandardTrialN), max(df$StandardTrialN), by = .05)
+# index <- which.min(abs(time_values - (-0.15)))
+
+# Create a small data frame for plotting
+df_p <- data.frame(
+  time  = time_values,
+  est_performance_EventTrial = intercept_Simple + slope_EventTrial * time_values,
+  est_performance_Interaction = intercept_Complex + (slope_EventTrial + slope_Interaction) * time_values
+)
+
+color_map <- c("Simple" = "darkred", "Complex" = 'darkblue')
+
+ggplot()+
+  geom_vline(xintercept = 0, lwd =0.4, linetype = 'dashed') +
+
+  geom_line(data = df_p, aes(x = time, y = est_performance_EventTrial), color = "darkblue", lwd  = 1) +
+  geom_line(data = df_p, aes(x = time, y = est_performance_Interaction), color = "darkred", lwd  = 1)+
+  
+  geom_pointrange(aes(x =-.018, y = intercept_brush, ymin = intercept_brush - intercept_brush_se,ymax = intercept_brush + intercept_brush_se, color = 'Complex' ),
+                  lwd  = 1.3) +
+  geom_pointrange(aes(x=.018, y=intercept_Complex, ymin= intercept_Complex-intercept_Complex_se, ymax= intercept_Complex+intercept_Complex_se, color = 'Simple'),
+                  lwd  = 1.3)+  
+  
+  scale_color_manual( values = color_map) +
+  coord_cartesian(xlim = c(-1.7,1.7), ylim = c(900,1600))+
+  
+  # Labels and theme
+  labs(y = 'Looking time', x = 'Event number', color = '') +
+  theme_classic(base_size = 20)+
+  theme(legend.position = 'bottom')+
+    # Customize x-axis labels
+  scale_x_continuous(
+    breaks = seq(-2,2,.5),              # The x-values where you want ticks
+    labels = ifelse(
+    as.character(seq(-2, 2, 0.5)) == "0",
+    "0\n(Intercept)",
+    as.character(seq(-2, 2, 0.5))
+)  # Corresponding custom labels
+  )
+```
+
+As you can see the plot is the same but now the data hits 0 at the mean of the data!!
 
 So there you have it - standardizing your predictors makes your model both more interpretable and more robust, all while keeping the fundamental relationships in your data intact. It's one of those simple steps that can make a big difference in your statistical journey! 🌟
 
@@ -609,7 +686,7 @@ So there you have it - standardizing your predictors makes your model both more 
 So now we have run our model and seen the summary... That's great but how can we know that our model actually is ok?? Linear models, like most statistical techniques require some data assumption to be run. These assumption need to be met otherwise even if our model could be showing amazing results it won't be valid.
 
 ::: callout-warning
-As we mentioned at the beginning of our tutorial the model we have run in this tutorial is a very simple model that is not actully...correct!!
+As we mentioned at the beginning of our tutorial the model we have run in this tutorial is a very simple model that is not actually...correct!! We will see in the next tutorials how we should actually analyze this data and what we are missing here.
 :::
 
 What are these assumptions?? Well they depend a lot on the model you are running. We won't go into much details as there are very good website that explain them<sup>[1](https://bookdown.org/pingapang9/linear_models_bookdown/assumptions.html)</sup> ,<sup>[2](https://www.statology.org/linear-regression-assumptions/)</sup>, in this simple linear mode they are:
