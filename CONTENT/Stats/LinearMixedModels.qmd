@@ -39,7 +39,8 @@ Simpson's Paradox is a statistical head-scratcher. It’s when a trend you see i
 
 Imagine we’re looking at how years of experience impact salary at a university. Here’s some simulated data to make it fun.
 
-```{r SimpsonParadox}
+```{r}
+#| label: SimsonParadox
 #| code-fold: true
 #| message: false
 #| warning: false
@@ -112,7 +113,8 @@ In this section, we'll set up our working environment by loading the necessary l
 {{< downloadthis ../../resources/Stats/Dataset.csv label="Dataset.csv" type="secondary" >}}
 ```
 
-```{r Libraries}
+```{r}
+#| label: Libraries
 #| message: false
 #| warning: false
 library(lme4)
@@ -129,6 +131,9 @@ To run our Linear Mixed Effects Model, these are the key packages we'll use. On 
 ### Read the data
 
 ```{r}
+#| label: ReadData
+#| code-fold: true
+#| message: false
 df = read.csv("resources/Stats/Dataset.csv")
 df$Id = factor(df$Id) # make sure subject_id is a factor
 df$StandardTrialN = standardize(df$TrialN) # create standardize trial column
@@ -151,7 +156,10 @@ summary(mod_lm)
 We won’t delve into the details of the model results in this tutorial, as we have already covered it in the previous one. However, we want to point out one thing about the data we run it on!!
 
 ```{r}
-str(df)
+#| label: DataCodebook
+#| code-fold: true
+#| message: false
+print_html(data_codebook(df))
 ```
 
 Wait a minute! Look at our data - we have an **Id** column! 👀 This column tells us which participant each trial belongs to. As each subject experienced all trial conditions, we have multiple data points per person. This is similar to the departments in the previous example... it's a grouping variable
@@ -188,7 +196,7 @@ Now, let’s look at how to include this in our mixed model.
 
 #### Model
 
-To run a **linear mixed-effects model**, we’ll use the `lmer` function from the **lme4** package. it Functions very similarly to the `lm` function we used before: you pass a formula and a dataset, but with one important addition: specifying the **random intercept**.
+To run a **linear mixed-effects model**, we’ll use the `lmer` function from the **lme4** package. It functions very similarly to the `lm` function we used before: you pass a formula and a dataset, but with one important addition: specifying the **random intercept**.
 
 The formula is nearly the same as a standard linear model, but we include `(1|subject_id)` to tell the model that each subject should have its own unique intercept. This accounts for variations in baseline performance across individuals.
 
@@ -196,16 +204,20 @@ The formula is nearly the same as a standard linear model, but we include `(1|su
 When specifying random intercepts (like `(1|Group)`), your grouping variables must be factors! If a grouping variable is numeric, R will wrongly treat it as a continuous variable rather than discrete categories. Character variables are automatically fine, but numeric grouping variables must be explicitly converted using `factor()`.
 :::
 
-```{r InterceptModel}
+```{r}
+#| label: InterceptModel
+#| code-fold: true
+#| message: false
 mod_rintercept =lmer(LookingTime ~ StandardTrialN * Event+ (1|Id ), data= df,  na.action = na.exclude)
 summary(mod_rintercept)
 ```
 
 Wow! Now the model is showing us something **new** compared to the simple linear model. We observe an **interaction between Event and StandardTrialN**. By letting the intercept vary for each subject, the model is able to capture nuances in the data that a standard linear model might miss.
 
-To understand this interaction, let’s plot it and see how performance changes across trials for each condition.
+To understand this interaction, let’s plot what the random intercept is doing.
 
 ```{r}
+#| label: PlotInterceptModel
 #| code-fold: true
 #| message: false
 #| warning: false
@@ -223,7 +235,9 @@ ggplot(i_pred, aes(x= StandardTrialN, y= Predicted, color= Id, shape = Event))+
     facet_wrap(~Event)
 ```
 
-As you can see here, each color represents a different subject, and we've divided the plot into two panels - one for each type of event - to make visualization simpler. Cool isn't it??.
+As you can see here, each color represents a different subject, and we've divided the plot into two panels - one for each type of event - to make visualization simpler.
+
+You can clearly see that our model is capturing the different intercepts that subjects have!! Cool isn't it??.
 
 Now, you might be thinking, *“This looks interesting, but my plot is going to be a mess with all these individual estimates!”* Well, don’t worry! While what we’ve plotted is how the data is modeled by our mixed-effects model, the random effects are actually used to make more accurate estimates—but the model still returns an overall estimate.
 
@@ -231,7 +245,8 @@ Think of it like this: the random effects allow the model to account for individ
 
 we can plot the actual estimate of the model:
 
-```{r PlotInterceptModelOverall}
+```{r}
+#| label: PlotInterceptModelOverall
 #| code-fold: true
 #| message: false
 #| warning: false
@@ -263,14 +278,18 @@ This way, we’re allowing each subject to have their own slope in addition to t
 Any variable used as a random slope (before the `|`) must also be included as a fixed effect in your model. The fixed effect estimates the overall effect, while the random slope captures how that effect varies across groups. Without the fixed effect, you're modeling deviations from zero instead of from an average, which rarely makes theoretical sense.
 :::
 
-```{r SlopeModel}
+```{r}
+#| label: SlopeModel
+#| code-fold: true
+#| message: false
 mod_rslope =lmer(LookingTime ~ StandardTrialN * Event+ (0 + StandardTrialN | Id ), data= df)
 summary(mod_rslope)
 ```
 
 The results aren't too different from the intercept-only model, but let's take a closer look at what we've actually modeled.
 
-```{r PlotSlopeModel}
+```{r}
+#| label: PlotSlopeModel
 #| code-fold: true
 #| message: false
 #| warning: false
@@ -288,6 +307,8 @@ ggplot(s_pred, aes(x= StandardTrialN, y= Predicted, color= Id, shape = Event))+
     facet_wrap(~Event)
 ```
 
+As you can see here we have an unique intercept ( all the lines pass trough the same point where x = 0) but the slope of each line is different. And.....I don't have to tell you that what we are looking at dosen't really make sense.
+
 ### Intercept + Slope
 
 That plot does look nuts, and it’s a clear signal that something is off. Why? Because by modeling only the random slopes while keeping the intercepts fixed, we’re essentially forcing all subjects to start from the same baseline. That’s clearly unrealistic for most real-world data.
@@ -300,14 +321,18 @@ To make the model more realistic, we can model both the random intercept and the
 
 Now, we are telling the model to estimate both a random intercept (baseline performance) and a random slope (rate of improvement). This captures the full variability in how each subject learns over time!
 
-```{r InterceptSlopeModel}
+```{r}
+#| label: InterceptSlopeModel
+#| code-fold: true
+#| message: false
 mod_rinterraction = lmer(LookingTime ~ StandardTrialN * Event+ (1 + StandardTrialN | Id ), data= df)
 summary(mod_rinterraction)
 ```
 
 Now, let’s visualize how the model is modeling the data:
 
-```{r PlotInterceptSlopeModel}
+```{r}
+#| label: PlotInterceptSlopeModel
 #| code-fold: true
 #| message: false
 #| warning: false
@@ -325,7 +350,7 @@ ggplot(is_pred, aes(x= StandardTrialN, y= Predicted, color= Id, shape = Event))+
     facet_wrap(~Event)
 ```
 
-While it is not super apparent from the data, you can see that different subjects have different slopes, meaning that they do not all grow at the same rate
+If you look closely, you'll see each subject has their own intercept and slope now. That means we're actually modeling the real differences between people—exactly what we wanted!
 
 ## Summary of mixed models
 
@@ -333,7 +358,10 @@ Now that we've seen how to run mixed-effects models, it's time to focus on **int
 
 To start, we’ll use our **final model** and inspect its summary. This will give us a chance to break it down step by step and understand the key information it provides. Here's how to check the summary:
 
-```{r SummaryCheck}
+```{r}
+#| label: SummaryMixed
+#| message: false
+#| warning: false
 summary(mod_rinterraction)
 ```
 
@@ -347,13 +375,30 @@ The **Residual** section shows the unexplained variability after accounting for 
 
 ## Model comparison
 
-But how can we be sure the random effects are helping our model? One of the easiest ways is to check the variance explained by the random effects. As we said, if the variance related to the random effects is too small, it probably isn’t contributing much to the model. If it’s high, it’s likely helping the model by capturing important variability in the data.
+But how can we be sure the random effects are helping our model? One of the easiest ways is to check the variance explained by the random effects.
 
-Another method is to compare the performance of different models. One of the best indices for this is the Akaike Information Criterion (AIC). AIC gives a relative measure of how well a model fits the data, while penalizing the number of parameters in the model. Lower AIC values indicate better models, as they balance goodness-of-fit with model complexity.
+::::: {.info-box .info-box-large}
+::: info-box-title
+Why AIC?
+:::
+
+AIC is great because it balances how well your model fits the data with how many predictors you're using. It does this by penalizing models with more predictors—so you can't just keep adding variables to improve fit. Without this penalty, you'd end up overfitting: your model would fit the current data perfectly but fail on new data.
+
+AIC by itself doesn't mean much—it's only useful as a relative measure for comparing different models against each other. When you do compare models, lower AIC values indicate better models.
+:::::
+
+As we said, if the variance related to the random effects is too small, it probably isn’t contributing much to the model. If it’s high, it’s likely helping the model by capturing important variability in the data.
+
+The best way to make this kind of decision is to compare the performance of different models. One of the best indices for this is the Akaike Information Criterion (AIC). AIC gives a relative measure of how well a model fits the data, while penalizing the number of parameters in the model. Lower AIC values indicate better models, as they balance goodness-of-fit with model complexity.
+
+
 
 You can compare the AIC of different models using the following:
 
 ```{r}
+#| label: AIC
+#| message: false
+#| warning: false
 compare_performance(mod_lm, mod_rintercept, mod_rslope, mod_rinterraction, metrics='AIC')
 ```
 

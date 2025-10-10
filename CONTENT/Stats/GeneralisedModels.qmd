@@ -48,7 +48,7 @@ Step one in ANY statistical analysis: **look at your data**! Let's create a hist
 #| fig-height: 5.5
 #| fig-width: 8
 # Distribution with histograma and density
-ggplot(df, aes(x = ReactionTime)) +
+ggplot(df, aes(x = SaccadicRT)) +
   geom_histogram(aes(y = ..density..),bins = 30, fill = "#00b3b3", color = "black") +
   geom_density(lwd = 1.2)+
   theme_classic(base_size = 20)+
@@ -71,7 +71,7 @@ Now that we've looked at the overall distribution, let's use violin plots and bo
 #| warning: false
 #| fig-height: 5.5
 #| fig-width: 8
-ggplot(df, aes(x = Event, y = ReactionTime)) +
+ggplot(df, aes(x = Event, y = SaccadicRT)) +
   geom_violin(aes(fill = Event), alpha = .5, color = 'transparent') +
   geom_boxplot(alpha = 0.8, outlier.color = "darkred", width = .2, lwd = 1.2, outlier.size =4) +
   scale_fill_manual(values = c('Simple' = '#4A6274', 'Complex' = '#E2725A')) +
@@ -92,7 +92,7 @@ Following what we have learned in the previous tutorial we will fit a linear mix
 #| message: false
 #| warning: false
 mod_lm <- lmer(
-  ReactionTime ~ StandardTrialN * Event + (1 + StandardTrialN | Id),
+  SaccadicRT ~ StandardTrialN * Event + (1 + StandardTrialN | Id),
   data = df
 )
 ```
@@ -131,7 +131,7 @@ But which distribution should we use? The more you get familiarised with distrib
 library(fitdistrplus)
 
 # first we need to remove NAs:
-RTs = as.vector(na.omit(df$ReactionTime))
+RTs = as.vector(na.omit(df$SaccadicRT))
 # then we can plot
 descdist(RTs, discrete = FALSE, boot = 500)
 ```
@@ -154,7 +154,7 @@ All this means is that we specify a distribution different from a gaussian and i
 #| warning: false
 # Fit a GLMM with Gamma distribution
 mod_gamma <- glmer(
-  ReactionTime ~ StandardTrialN * Event + (1 + StandardTrialN| Id),
+  SaccadicRT ~ StandardTrialN * Event + (1 + StandardTrialN| Id),
   data   = df,
   family = Gamma(link = "log")
 )
@@ -253,7 +253,7 @@ Although we've been focusing on the main effects, remember that we also had rand
 is_pred_random = estimate_expectation(mod_gamma, include_random =T)
 
 ggplot(is_pred_random, aes(x= StandardTrialN, y= Predicted, color= Id, shape = Event))+
-    geom_point(data = df, aes(y= ReactionTime, color= Id), position= position_jitter(width=0.2))+
+    geom_point(data = df, aes(y= SaccadicRT, color= Id), position= position_jitter(width=0.2))+
     geom_line()+
     geom_ribbon(aes(ymin=Predicted-SE, ymax=Predicted+SE, fill = Id),color= 'transparent', alpha=0.1)+
     labs(y='Reaction time', x='# trial')+
