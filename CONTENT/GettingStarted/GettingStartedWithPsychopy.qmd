@@ -5,8 +5,8 @@ execute:
   eval: false
 
 author-meta: Tommaso Ghilardi, Franesco Poli
-description-meta: "Learn how to install psychpy and spyder in a new econda environment"
-keywords: "PsychoPy, Python, experimental psychology, tutorial, installation, DevStart, developmental science, Spyder ide, Spyder"
+description-meta: "Learn how to install psychpy and positron in a new conda environment"
+keywords: "PsychoPy, Python, experimental psychology, tutorial, installation, DevStart, developmental science, Spyder ide, Positron"
 categories:
   - Setup
   - Python
@@ -23,10 +23,7 @@ As reported on the PsychoPy [website](https://www.psychopy.org/download.html), t
 This installation method offers several advantages: you are not restricted to using the PsychoPy GUI, and you can easily add libraries to enhance PsychoPy's functionality. However, this process can sometimes be challenging, as compatibility issues with certain packages may require troubleshooting. Here, we provide some tips to help you make it work. If you find this method too complex or encounter persistent issues, remember that you can always follow the tutorials on this site using the PsychoPy standalone installer, which provides a secure and reliable way to use PsychoPy.
 
 ::: callout-tip
-We strongly recommend using our interactive flowchart to guide yourself through the tutorials! It will help you follow the setup steps in the right order based on your experience level.
-<br>
-[Flowchart](DevStartSetupGuide.qmd#python-and-psychopy){.btn .btn-primary .btn-sm role="button"}
-
+We strongly recommend using our interactive flowchart to guide yourself through the tutorials! It will help you follow the setup steps in the right order based on your experience level. <br> [Flowchart](DevStartSetupGuide.qmd#python-and-psychopy){.btn .btn-primary .btn-sm role="button"}
 :::
 
 ## Miniconda
@@ -55,7 +52,7 @@ You'll see that the parenthesis at the command line will change from (base) to (
 As mentioned before, we will use PsychoPy to create our experimental design!! So let's install it (and also let's install spyder-kernels that will help us interact with Spyder that we will cover later and tobii_research). Type:
 
 ``` bash
-pip install psychopy spyder-kernels tobii_research
+pip install psychopy
 ```
 
 Conda will think and download stuff for a while!! Do not worry if you see a lot of lines popping up! Give conda time and confirm if prompted. After a while, hopefully you will see that everything went well and now you have a nice psychopy environment with PsychoPy in it!!
@@ -81,7 +78,7 @@ You'll see that the parenthesis at the command line will change from (base) to (
 As mentioned before, we will use PsychoPy to create our experimental design!! So let's install it (and also let's install spyder-kernels that will help us interact with Spyder that we will cover later and tobii_research). Type:
 
 ``` bash
-pip install psychopy spyder-kernels tobii_research
+pip install psychopy
 ```
 
 Conda will think and download stuff for a while!! Do not worry if you see a lot of lines popping up! Give conda time and confirm if prompted. After a while, hopefully you will see that everything went well and now you have a nice psychopy environment with PsychoPy in it!!
@@ -97,7 +94,7 @@ However, there is a simple solution. PsychoPy offers a standalone version. This 
 
 It is usually easier and less error-prone, but it offers less flexibility in some aspects. However, for this study it will be plenty enough! So in case you had any problem installing PsychoPy in a separate environment, we suggest you install it as a standalone.
 
-You can find it [**here**](https://www.psychopy.org/download.html#download). Please download and install it following your operating system guidelines!
+You can find it **herse**. Please download and install it following your operating system guidelines!
 
 Well done!! Now you should have the PsychoPy icon ![](https://www.psychopy.org/_static/psychopyLogoType_h240.png){width="73"} on your machine!!
 
@@ -111,10 +108,9 @@ In our tutorials, we will focus on coding experiments directly. If you're using 
 
 [Flowchart](DevStartSetupGuide.qmd#psychopy-standalone){.btn .btn-primary .btn-sm role="button" style="float: right;"}
 
-
 # Check Psychopy Installation
 
-As Psychopy can be tricky to install we suggest to do a small check of its working even if it looked like the installation worked perfectly. We ask you to check whether Psychopy worked by simply running a small code in your Psychopy in both cases whether you installed as library or as a standalone software. This won't only test your Psychopy installation but also give you a taste on how to interact with Spyder and Psychopy
+As Psychopy can be tricky to install we suggest to do a small check of its working even if it looked like the installation worked perfectly. We ask you to check whether Psychopy worked by simply running a small code in your Psychopy in both cases whether you installed as library or as a standalone software. This won't only test your Psychopy installation but also give you a taste on how to interact with Positron and Psychopy
 
 Here you can find the script to run:
 
@@ -129,13 +125,13 @@ To do so:
 
 -   Create a new console in the psychopy environment we created before:
 
-    *Consoles –\> New console in environment –\> Conda: psychopy*
+    *Select interpreter –\> Conda: psychopy*
 
     ![](/images/GettingStartedWithPsychopy\CreateConsole.png){width="550"}
 
--   Open the script you just downloaded (TestInstallatioPsychopy.py) in Spyder ( use the open Icon or drag and drop the file on Spyder)
+-   Open the script you just downloaded (`TestInstallatioPsychopy.py`) in Positron ( use the open Icon or drag and drop the file on Positron)
 
--   Press the green play button.
+-   Press the play button on the left top corner.
 
 -   A window should appear and show a short countdown at the end of which it will tell you that you are ready for the workshop!
 
@@ -149,7 +145,7 @@ Well done!!
 
     ![](/images/GettingStartedWithPsychopy\Psychopy2.png){width="550"}
 
--   Opend the downloaded file (TesterPsychopy.py) using the open button
+-   Opend the downloaded file (`TestInstallatioPsychopy.py`) using the open button
 
 -   Press the green play button
 

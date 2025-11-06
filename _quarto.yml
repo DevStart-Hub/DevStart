@@ -48,6 +48,7 @@ website:
   search:
     location: sidebar
     type: textbox
+
   
   ## Sidebar settings
   sidebar:

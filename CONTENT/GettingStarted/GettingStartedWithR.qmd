@@ -3,19 +3,16 @@ title: Starting with R
 date: "11/21/2023"
 author-meta: Tommaso Ghilardi
 description-meta: Learn how to insatll and manage R.
-keywords: R, Rstudio, lme4, lmer, easystats, tidyverse, experimental psychology, tutorial, installation, DevStart, developmental science
+keywords: R, Positron, lme4, lmer, easystats, tidyverse, experimental psychology, tutorial, installation, DevStart, developmental science
 categories:
   - Setup
   - R
 ---
 
-![](https://media1.tenor.com/m/K8Lc2HcGiPEAAAAd/dario-moccia.gif){fig-align="right" style="float:right; margin-right:10px;margin-bottom:10px;" width="150"} R is THE BEST programming language for statistics. **We are ready to fight you on this!** <br><br> We'll use R extensively throughout the website, especially for statistical modeling, data preprocessing, creating beautiful visualizations, and running complex analyses like mixed-effects models. Whether you're analyzing reaction times, eye-tracking data, or running sophisticated statistical tests, R will be your best friend. So... on this page, we'll guide you through installing R and RStudio (one of its best IDEs), plus all the essential libraries you'll need for our tutorials. Don't worry – these steps are straightforward and easy to follow.
+![](https://media1.tenor.com/m/K8Lc2HcGiPEAAAAd/dario-moccia.gif){fig-align="right" style="float:right; margin-right:10px;margin-bottom:10px;" width="150"} R is THE BEST programming language for statistics. **We are ready to fight you on this!** <br><br> We'll use R extensively throughout the website, especially for statistical modeling, data preprocessing, creating beautiful visualizations, and running complex analyses like mixed-effects models. Whether you're analyzing reaction times, eye-tracking data, or running sophisticated statistical tests, R will be your best friend. So... on this page, we'll guide you through installing R and Positron (one of its best IDEs), plus all the essential libraries you'll need for our tutorials. Don't worry – these steps are straightforward and easy to follow.
 
 ::: callout-tip
-We strongly recommend using our interactive flowchart to guide yourself through the tutorials! It will help you follow the setup steps in the right order based on your experience level.
-<br>
-[Flowchart](DevStartSetupGuide.qmd#r-and-rstudio){.btn .btn-primary .btn-sm role="button"}
-
+We strongly recommend using our interactive flowchart to guide yourself through the tutorials! It will help you follow the setup steps in the right order based on your experience level. <br> [Flowchart](DevStartSetupGuide.qmd#r-and-rstudio){.btn .btn-primary .btn-sm role="button"}
 :::
 
 # Install R
@@ -32,23 +29,40 @@ Well... that really was easy! R is now installed on your computer, but we're not
 
 [Flowchart](DevStartSetupGuide.qmd#r-and-rstudio){.btn .btn-primary .btn-sm role="button" style="float: right;"}
 
-# RStudio
+# Positron
 
-While the R installation includes a basic IDE (think of it as a very plain text editor), we definitely want to use RStudio. This is where the magic happens! RStudio transforms R from a command-line tool into a beautiful, user-friendly interface that makes coding a joy rather than a chore. RStudio offers tons of features that will make your data analysis journey much smoother Maybe this step will be a bit trickier...
+::: callout-note
+If you have already follow the getting started with Python documentation you shoudl already have positron installed and you can skip this step!
+:::
 
-1.  Go to the [RStudio page](https://posit.co/download/rstudio-desktop/) (Note: Posit is the company that makes RStudio)
+While the R installation includes a basic IDE (think of it as a very plain text editor), we definitely want to use something more refined. While Rstudio has been our favorite IDE for a while we now prefer Positron. Positron is a IDE ( based on a fork of Vs Code) that allows to run and interact efficiently with both R and Python and has become our IDE of choice lately.
 
-2.  Download RSrtudio Desktop for your operating system
+Installing Positron is straightforward:
+
+1.  Go to the [Positron website](https://positron.posit.co/)
+
+2.  Follow the instructions and download Positron for your operating system
 
 3.  Run the installer and follow the on-screen instructions
 
-Nope – just as easy as before!
+Once installed, you can launch Positron. Here it is in all its glory:
+
+![](/images/GettingStartedWithPython/Positron.png){fig-align="center" width="946"}
+
+The first time you launch Positron, you’ll see a **“Start Session”** button in the top-right corner. (If it’s *not* your first time, you’ll instead see a button showing which environment you’re currently using.)
+
+Click it—and *voilà!*—you’ll get a list of all your R interpreters and Python environments. Pretty neat, right?
+
+Just pick the R interpreter you want to work in (you probably have just one), and the console at the bottom will instantly switch to that setup. From that moment on, any code you run in Positron will use the exact R version and packages installed in it.
+
+That’s it—now any code you run will execute within the environment you selected. Well done!\
+![](/images/GettingStartedWithPython\PositronEnvs.png){width="631"}
 
 [Flowchart](DevStartSetupGuide.qmd#r-and-rstudio){.btn .btn-primary .btn-sm role="button" style="float: right;"}
 
 # Installing R packages
 
-Now that we have both R and RStudio, we need some essential libraries (called "packages" in R). I'll describe only a few of the main ones here, but more will be installed and covered throughout the tutorials. Core Packages:
+Now that we have both R and Positron, we need some essential libraries (called "packages" in R). I'll describe only a few of the main ones here, but more will be installed and covered throughout the tutorials. Core Packages:
 
 -   [**tidyverse**](https://www.tidyverse.org/)**:** This is a collection of packages, so when you install and import it, you're not just getting one library but an entire suite of them. It includes ggplot2 (for stunning visualizations), dplyr (for data manipulation), readr (for reading data), and many more. Perfect for data wrangling and creating beautiful plots. This is probably the most important package ecosystem in R. Explore all the sub-packages to learn more!
 
@@ -58,36 +72,14 @@ Now that we have both R and RStudio, we need some essential libraries (called "p
 
 -   [**pupillometryR**](http://samforbes.me/PupillometryR/)**:** Specialized package for preprocessing and analyzing pupillometry data. A lifesaver if you're working with eye-tracking studies.
 
-Installing the packages is extremely easy. There are two ways one with a command int he console:
-
-::: panel-tabset
-## Console
-
-Paste in the console
+Installing the packages is extremely easy. In the R console we just activated paste:
 
 ```{r}
 #| eval: false
 install.packages(c("tidyverse", "easystats", "lme4", "lmerTest", "patchwork", "PupillometryR", "fitdistrplus"))
 ```
 
-![](/images/GettingStartedWithR\ConsolePackages.png){width="800"}
-
 Follow the instructions if any and you are done!!!!
-
-## Gui
-
-1.  Go to **Tools** in the top bar
-
-2.  Click install packages
-
-3.  Paste: `tidyverse, easystats, lme4, lmerTest, patchwork, PupillometryR, fitdistrplus`
-
-4.  Click Install
-
-![](/images/GettingStartedWithR\GuiPackages.png){width="800"}
-
-Follow the instructions if any and you are done!!!!
-:::
 
 ::: callout-note
 ## Additional Packages
@@ -99,18 +91,18 @@ We may use additional packages in specific tutorials, but don't worry – we'll 
 
 # Test your installation
 
-**🎉 Congratulations!** You should now have R and RStudio fully set up with all essential packages!
+**🎉 Congratulations!** You should now have R and Positron fully set up with all essential packages!
 
-But let's make sure everything is working perfectly before we dive into the tutorials. Want to test whether all packages installed correctly and you're ready to go? We've created a test script that checks whterh all is ok.
+But let's make sure everything is working perfectly before we dive into the tutorials. Want to test whether all packages installed correctly and you're ready to go? We've created a test script that checks whether all is ok.
 
-Download our test script and run it in RStudio. If everything is working properly, you'll see detailed progress updates, sample results, and a nice completion message with a celebration plot at the end. If there are any issues, the script will try to tell you what is wrong.
+Download our test script and run it in Positron. If everything is working properly, you'll see detailed progress updates, sample results, and a nice completion message with a celebration plot at the end. If there are any issues, the script will try to tell you what is wrong.
 
 [📥 Download Test Script](../../resources/GettingStartedWithR/TestInstallationR.R){.btn .btn-dark .btn role="button" download="TestInstallationR.R"}
 
 How to use the script:
 
 1.  Download the file above
-2.  Open RStudio
+2.  Open Positron
 3.  Open the downloaded TestInstallationR.R file
 4.  Select all the code and run it (or press Ctrl+A then Ctrl/Cmd+Enter)
 5.  Watch the magic happen!

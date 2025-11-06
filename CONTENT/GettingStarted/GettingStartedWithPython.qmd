@@ -5,7 +5,7 @@ date: "10/30/2023"
 pagetitle: Starting with Python
 author-meta: Tommaso Ghilardi
 description-meta: Learn how to insatll and manage python.
-keywords: Python, Anaconda, Conda,virtual environment, Spyder, experimental psychology, tutorial, installation, DevStart, developmental science
+keywords: Python, Anaconda, Conda,virtual environment, Positron, experimental psychology, tutorial, installation, DevStart, developmental science
 categories:
   - Setup
   - Python
@@ -16,10 +16,7 @@ Python is one of the most popular programming languages in general. In data scie
 In our everyday we often use python to pre-process and analyze the data. In this tutorial we will explain our preferred way of installing python and managing its libraries. There are several ways to install python, this is the one we recommend for its simplicity and flexibility.
 
 ::: callout-tip
-We strongly recommend using our interactive flowchart to guide yourself through the tutorials! It will help you follow the setup steps in the right order based on your experience level.
-<br>
-[Flowchart](DevStartSetupGuide.qmd#python-and-psychopy){.btn .btn-primary .btn-sm role="button"}
-
+We strongly recommend using our interactive flowchart to guide yourself through the tutorials! It will help you follow the setup steps in the right order based on your experience level. <br> [Flowchart](DevStartSetupGuide.qmd#python-and-psychopy){.btn .btn-primary .btn-sm role="button"}
 :::
 
 # Installing Python
@@ -108,7 +105,7 @@ When you install Anaconda or Miniconda, you get a default environment called `ba
 
 To pre-process and analyze the data we will need some specific packages. It is easy to install and manage packages using conda.
 
-We will use the command `conda install …` and a list of packages. Here we will install **pandas** (a package to handle dataframes), **numpy** (library to manage arrays), **matplotlib** and **seaborn** (two libraries to plot data), **spyder-kernels** (to allow interaction with the Spyder GUI that we will cover later on).
+We will use the command `conda install …` and a list of packages. Here we will install **pandas** (a package to handle dataframes), **numpy** (library to manage arrays), **matplotlib** and **seaborn** (two libraries to plot data).
 
 To do so:
 
@@ -118,7 +115,7 @@ To do so:
 Open the Anaconda prompt and type :
 
 ``` bash
-conda install pandas numpy matplotlib seaborn spyder-kernels
+conda install pandas numpy matplotlib seaborn
 ```
 
 After thinking about for few seconds the prompt will download the package and its dependencies.
@@ -136,7 +133,7 @@ pip install I2MC
 Open your terminal and type :
 
 ``` bash
-conda install pandas numpy matplotlib seaborn spyder-kernels
+conda install pandas numpy matplotlib seaborn
 ```
 
 After thinking about for few seconds the prompt will download the package and its dependencies.
@@ -158,32 +155,33 @@ We may use additional packages in specific tutorials, but don't worry – we'll 
 
 [Flowchart](DevStartSetupGuide.qmd#python-and-psychopy){.btn .btn-primary .btn-sm role="button" style="float: right;"}
 
-# Installing Spyder IDE
+# Installing Positron IDE
 
 Now that we have our environment and packages set up, how do we actually use them? Sure, we could type Python commands directly in the terminal... but let's be honest, that would be tedious and inefficient for any serious work!
 
-What we need is an IDE – and our choice is Spyder! Spyder is a powerful scientific IDE built specifically for scientists, engineers, and data analysts. With features like variable exploration, integrated plotting, and excellent debugging tools, it's perfect for writing and running Python code efficiently.
+What we need is an IDE – and our choice is Positron! Positron is a powerful scientific IDE (a fork of Vs Code for the nerds out there) built specifically for scientists, engineers, and data analysts. With features like variable exploration, integrated plotting, and excellent debugging tools, it's perfect for writing and running Python code efficiently.
 
-Installing Spyder is straightforward. To get started, visit the [Spyder website](https://www.spyder-ide.org/), download the appropriate installer for your operating system, and install it on your machine.
+And here’s one of its standout features: **it runs both Python and R**! Yep, two of the most popular languages for data science!!
 
-Once installed, you can launch Spyder. Here it is in all its glory:
+Installing Positron is straightforward:
 
-![](/images/GettingStartedWithPython/spyder.png){fig-align="center" width="946"}
+1.  Go to the [Positron website](https://positron.posit.co/)
 
-Here's the key part: you can configure Spyder to use any environment you've created. Simply click **Console**, select **New Console in Environment**, and choose your desired environment (for example the *working* one). This means that the code you will now run into Spyder will access the python and the packages you have in the specific environment.
+2.  Follow the instructions and download Positron for your operating system
+
+3.  Run the installer and follow the on-screen instructions
+
+Once installed, you can launch Positron. Here it is in all its glory:
+
+![](/images/GettingStartedWithPython/Positron.png){fig-align="center" width="946"}
+
+The first time you launch Positron, you’ll see a **“Start Session”** button in the top-right corner. (If it’s *not* your first time, you’ll instead see a button showing which environment you’re currently using.)
+
+Click it—and *voilà!*—you’ll get a list of all your Python environments plus any available R interpreter. Pretty neat, right?
+
+Just pick the one you want to work in (for example, your **working** environment), and the console at the bottom will instantly switch to that setup. From that moment on, any code you run in Positron will use the exact Python version and packages installed in the environment you selected.
 
 That’s it—now any code you run will execute within the environment you selected. Well done!\
-![](https://www.spyder-ide.org/assets/media/conda.webp){width="503"}
-
-::: callout-caution
-To properly run Spyder while connected to your environments, your environment needs to include a specific library.
-
-Thus you need to install it by:\
-`conda install spyder-kernels`\
-or\
-`pip install spyder-kernels`
-
-we should have already instaleld this but in case you didn't please do install it.
-:::
+![](/images/GettingStartedWithPython\PositronEnvs.png){width="631"}
 
 [Flowchart](DevStartSetupGuide.qmd#python-and-psychopy){.btn .btn-primary .btn-sm role="button" style="float: right;"}
