@@ -233,59 +233,29 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Fixed Effects
 
-Parameter                                          | Coefficient |     SE
--------------------------------------------------------------------------
-(Intercept)                                        |     1415.14 |  73.53
-StandardTrialN                                     |      -42.28 |  19.05
-Event [NoReward]                                   |     -123.67 |   4.63
-SES [low]                                          |       51.44 | 151.59
-SES [medium]                                       |      -82.90 | 169.81
-StandardTrialN × Event [NoReward]                  |      -26.50 |   4.61
-StandardTrialN × SES [low]                         |       -0.18 |  39.26
-StandardTrialN × SES [medium]                      |        8.28 |  43.98
-Event [NoReward] × SES [low]                       |       -8.78 |   8.45
-Event [NoReward] × SES [medium]                    |       -5.20 |  11.79
-(StandardTrialN × Event [NoReward]) × SES [low]    |       -2.35 |   8.66
-(StandardTrialN × Event [NoReward]) × SES [medium] |        9.68 |  11.52
-
-Parameter                                          |             95% CI
------------------------------------------------------------------------
-(Intercept)                                        | [1270.75, 1559.53]
-StandardTrialN                                     | [ -79.69,   -4.87]
-Event [NoReward]                                   | [-132.77, -114.57]
-SES [low]                                          | [-246.22,  349.10]
-SES [medium]                                       | [-416.34,  250.55]
-StandardTrialN × Event [NoReward]                  | [ -35.56,  -17.44]
-StandardTrialN × SES [low]                         | [ -77.27,   76.91]
-StandardTrialN × SES [medium]                      | [ -78.07,   94.63]
-Event [NoReward] × SES [low]                       | [ -25.37,    7.82]
-Event [NoReward] × SES [medium]                    | [ -28.35,   17.95]
-(StandardTrialN × Event [NoReward]) × SES [low]    | [ -19.35,   14.66]
-(StandardTrialN × Event [NoReward]) × SES [medium] | [ -12.95,   32.31]
-
-Parameter                                          |    t(644) |      p
------------------------------------------------------------------------
-(Intercept)                                        |     19.25 | &lt; .001
-StandardTrialN                                     |     -2.22 | 0.027 
-Event [NoReward]                                   |    -26.69 | &lt; .001
-SES [low]                                          |      0.34 | 0.734 
-SES [medium]                                       |     -0.49 | 0.626 
-StandardTrialN × Event [NoReward]                  |     -5.74 | &lt; .001
-StandardTrialN × SES [low]                         | -4.69e-03 | 0.996 
-StandardTrialN × SES [medium]                      |      0.19 | 0.851 
-Event [NoReward] × SES [low]                       |     -1.04 | 0.299 
-Event [NoReward] × SES [medium]                    |     -0.44 | 0.659 
-(StandardTrialN × Event [NoReward]) × SES [low]    |     -0.27 | 0.787 
-(StandardTrialN × Event [NoReward]) × SES [medium] |      0.84 | 0.401 
+Parameter                                        | Coefficient |     SE |             95% CI |   t(364) |      p
+----------------------------------------------------------------------------------------------------------------
+(Intercept)                                      |     1397.79 | 105.24 | [1190.84, 1604.74] |    13.28 | &lt; .001
+StandardTrialN                                   |      -59.32 |  45.38 | [-148.56,   29.91] |    -1.31 | 0.192 
+Event [Simple]                                   |     -282.56 |  10.89 | [-303.98, -261.14] |   -25.94 | &lt; .001
+SES [low]                                        |       65.99 | 139.22 | [-207.78,  339.77] |     0.47 | 0.636 
+SES [medium]                                     |        3.67 | 148.81 | [-288.97,  296.30] |     0.02 | 0.980 
+StandardTrialN × Event [Simple]                  |      -85.35 |  11.14 | [-107.25,  -63.45] |    -7.66 | &lt; .001
+StandardTrialN × SES [low]                       |       -8.39 |  59.96 | [-126.30,  109.51] |    -0.14 | 0.889 
+StandardTrialN × SES [medium]                    |       36.97 |  64.04 | [ -88.96,  162.90] |     0.58 | 0.564 
+Event [Simple] × SES [low]                       |        2.43 |  14.59 | [ -26.26,   31.11] |     0.17 | 0.868 
+Event [Simple] × SES [medium]                    |       17.12 |  15.39 | [ -13.15,   47.39] |     1.11 | 0.267 
+(StandardTrialN × Event [Simple]) × SES [low]    |        5.16 |  14.91 | [ -24.15,   34.48] |     0.35 | 0.729 
+(StandardTrialN × Event [Simple]) × SES [medium] |        0.09 |  15.59 | [ -30.56,   30.74] | 5.86e-03 | 0.995 
 
 # Random Effects
 
 Parameter                          | Coefficient
 ------------------------------------------------
-SD (Intercept: Id)                 |      264.96
-SD (StandardTrialN: Id)            |       68.05
-Cor (Intercept~StandardTrialN: Id) |        0.57
-SD (Residual)                      |       40.43</code></pre>
+SD (Intercept: Id)                 |      257.06
+SD (StandardTrialN: Id)            |      109.21
+Cor (Intercept~StandardTrialN: Id) |        0.44
+SD (Residual)                      |       57.56</code></pre>
 </div>
 </div>
 </section><section id="beyond-p-values-understanding-your-effects" class="level1"><h1>Beyond p-values: Understanding Your Effects</h1>
@@ -351,14 +321,14 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Model-based Predictions
 
-StandardTrialN | Event    | SES | Id | Predicted |     SE |            95% CI | Residuals
------------------------------------------------------------------------------------------
--1.65          | NoReward | low | 1  |   1135.79 | 111.06 | [917.71, 1353.87] |      4.02
--1.47          | NoReward | low | 1  |   1116.77 | 112.17 | [896.50, 1337.03] |     39.65
--1.30          | NoReward | low | 1  |   1097.74 | 113.59 | [874.69, 1320.78] |    -24.19
--1.13          | NoReward | low | 1  |   1078.71 | 115.30 | [852.31, 1305.11] |     27.87
--0.95          | NoReward | low | 1  |   1059.68 | 117.29 | [829.37, 1289.99] |    -69.13
--0.78          | NoReward | low | 1  |   1040.66 | 119.54 | [805.92, 1275.40] |     13.00
+StandardTrialN | Event  | SES  | Id | Predicted |     SE |            95% CI | Residuals
+----------------------------------------------------------------------------------------
+-1.47          | Simple | high | 1  |   1146.35 |  97.20 | [955.22, 1337.49] |     -3.05
+-1.13          | Simple | high | 1  |   1055.49 |  95.05 | [868.58, 1242.40] |     -1.67
+-0.95          | Simple | high | 1  |   1010.06 |  94.92 | [823.39, 1196.73] |     -6.70
+-0.43          | Simple | high | 1  |    873.77 |  98.36 | [680.34, 1067.20] |    -20.55
+-0.26          | Simple | high | 1  |    828.34 | 100.70 | [630.30, 1026.38] |    -54.90
+0.26           | Simple | high | 1  |    692.05 | 110.79 | [474.18,  909.92] |     50.76
 
 Variable predicted: LookingTime</code></pre>
 </div>
@@ -397,14 +367,14 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Model-based Predictions
 
-Event    | Predicted |    SE |                 CI
+Event   | Predicted |     SE |                 CI
 -------------------------------------------------
-Complex  |   1422.15 | 71.80 | [1281.17, 1563.14]
-NoReward |   1302.88 | 71.84 | [1161.81, 1443.96]
+Complex |   1397.49 | 105.33 | [1190.35, 1604.63]
+Simple  |   1114.50 | 105.31 | [ 907.40, 1321.60]
 
 Variable predicted: LookingTime
 Predictors modulated: Event
-Predictors controlled: StandardTrialN (-0.17), SES (high)</code></pre>
+Predictors controlled: StandardTrialN (0.005), SES (high)</code></pre>
 </div>
 </div>
 <p>This gives us predictions for each level of the Event and SES factor while:</p>
@@ -451,13 +421,13 @@ font-style: inherit;">)</span></span></code></pre></div>
 
 SES    | Predicted |     SE |                 CI
 ------------------------------------------------
-high   |   1422.15 |  71.80 | [1281.17, 1563.14]
-low    |   1473.62 | 129.43 | [1219.46, 1727.78]
-medium |   1337.88 | 149.46 | [1044.40, 1631.36]
+high   |   1397.49 | 105.33 | [1190.35, 1604.63]
+low    |   1463.44 |  91.23 | [1284.05, 1642.84]
+medium |   1401.34 | 105.31 | [1194.25, 1608.44]
 
 Variable predicted: LookingTime
 Predictors modulated: Event == 'Simple', SES
-Predictors controlled: StandardTrialN (-0.17), Event (Complex)</code></pre>
+Predictors controlled: StandardTrialN (0.005), Event (Complex)</code></pre>
 </div>
 </div>
 <p>Remember to learn more at the <a href="https://easystats.github.io/modelbased/articles/estimate_slopes.html">modelbased website</a> !!</p>
@@ -486,11 +456,11 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Model-based Predictions
 
-StandardTrialN | Predicted |    SE |                 CI
--------------------------------------------------------
--1.65          |   1484.73 | 61.59 | [1363.79, 1605.66]
-0.00           |   1415.14 | 73.53 | [1270.75, 1559.53]
-1.65           |   1345.54 | 94.80 | [1159.38, 1531.70]
+StandardTrialN | Predicted |     SE |                 CI
+--------------------------------------------------------
+-1.64          |   1495.37 |  99.36 | [1299.97, 1690.77]
+0.00           |   1397.79 | 105.24 | [1190.84, 1604.74]
+1.64           |   1300.21 | 153.04 | [ 999.26, 1601.15]
 
 Variable predicted: LookingTime
 Predictors modulated: StandardTrialN
@@ -516,14 +486,14 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Model-based Predictions
 
-StandardTrialN | Predicted |    SE |                 CI
--------------------------------------------------------
--1.65          |   1484.73 | 61.59 | [1363.79, 1605.66]
--0.99          |   1456.91 | 64.82 | [1329.62, 1584.20]
--0.33          |   1429.05 | 70.19 | [1291.21, 1566.88]
-0.33           |   1401.23 | 77.23 | [1249.56, 1552.89]
-0.99           |   1373.36 | 85.56 | [1205.36, 1541.37]
-1.65           |   1345.54 | 94.80 | [1159.38, 1531.70]
+StandardTrialN | Predicted |     SE |                 CI
+--------------------------------------------------------
+-1.64          |   1495.37 |  99.36 | [1299.97, 1690.77]
+-0.99          |   1456.34 |  94.95 | [1269.61, 1643.07]
+-0.33          |   1417.30 |  99.71 | [1221.22, 1613.39]
+0.33           |   1378.27 | 112.48 | [1157.07, 1599.47]
+0.99           |   1339.24 | 130.94 | [1081.75, 1596.73]
+1.64           |   1300.21 | 153.04 | [ 999.26, 1601.15]
 
 Variable predicted: LookingTime
 Predictors modulated: StandardTrialN
@@ -561,20 +531,20 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Model-based Predictions
 
-StandardTrialN | Event    | Predicted |    SE |                 CI
+StandardTrialN | Event   | Predicted |     SE |                 CI
 ------------------------------------------------------------------
--1.65          | Complex  |   1484.73 | 61.59 | [1363.79, 1605.66]
--0.99          | Complex  |   1456.91 | 64.82 | [1329.62, 1584.20]
--0.33          | Complex  |   1429.05 | 70.19 | [1291.21, 1566.88]
-0.33           | Complex  |   1401.23 | 77.23 | [1249.56, 1552.89]
-0.99           | Complex  |   1373.36 | 85.56 | [1205.36, 1541.37]
-1.65           | Complex  |   1345.54 | 94.80 | [1159.38, 1531.70]
--1.65          | NoReward |   1404.69 | 61.64 | [1283.65, 1525.72]
--0.99          | NoReward |   1359.43 | 64.84 | [1232.11, 1486.74]
--0.33          | NoReward |   1314.10 | 70.23 | [1176.20, 1452.00]
-0.33           | NoReward |   1268.84 | 77.33 | [1116.99, 1420.69]
-0.99           | NoReward |   1223.51 | 85.75 | [1055.13, 1391.88]
-1.65           | NoReward |   1178.25 | 95.10 | [ 991.50, 1365.00]
+-1.64          | Complex |   1495.37 |  99.36 | [1299.97, 1690.77]
+-0.99          | Complex |   1456.34 |  94.95 | [1269.61, 1643.07]
+-0.33          | Complex |   1417.30 |  99.71 | [1221.22, 1613.39]
+0.33           | Complex |   1378.27 | 112.48 | [1157.07, 1599.47]
+0.99           | Complex |   1339.24 | 130.94 | [1081.75, 1596.73]
+1.64           | Complex |   1300.21 | 153.04 | [ 999.26, 1601.15]
+-1.64          | Simple  |   1353.21 |  99.18 | [1158.18, 1548.24]
+-0.99          | Simple  |   1258.02 |  94.90 | [1071.41, 1444.63]
+-0.33          | Simple  |   1162.83 |  99.70 | [ 966.76, 1358.89]
+0.33           | Simple  |   1067.63 | 112.44 | [ 846.53, 1288.74]
+0.99           | Simple  |    972.44 | 130.80 | [ 715.22, 1229.66]
+1.64           | Simple  |    877.25 | 152.78 | [ 576.80, 1177.69]
 
 Variable predicted: LookingTime
 Predictors modulated: StandardTrialN, Event
@@ -635,28 +605,28 @@ font-style: inherit;">Est_plot</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Model-based Predictions
 
-StandardTrialN | Event    | Predicted |    SE |                 CI
+StandardTrialN | Event   | Predicted |     SE |                 CI
 ------------------------------------------------------------------
--1.65          | Complex  |   1484.73 | 61.59 | [1363.79, 1605.66]
--1.28          | Complex  |   1469.30 | 63.10 | [1345.40, 1593.19]
--0.92          | Complex  |   1453.82 | 65.32 | [1325.55, 1582.09]
--0.55          | Complex  |   1438.35 | 68.19 | [1304.45, 1572.25]
--0.18          | Complex  |   1422.87 | 71.63 | [1282.23, 1563.52]
-0.18           | Complex  |   1407.40 | 75.55 | [1259.05, 1555.75]
-0.55           | Complex  |   1391.92 | 79.89 | [1235.05, 1548.80]
-0.92           | Complex  |   1376.45 | 84.58 | [1210.36, 1542.54]
-1.28           | Complex  |   1360.97 | 89.58 | [1185.08, 1536.87]
-1.65           | Complex  |   1345.54 | 94.80 | [1159.38, 1531.70]
--1.65          | NoReward |   1404.69 | 61.64 | [1283.65, 1525.72]
--1.28          | NoReward |   1379.58 | 63.12 | [1255.64, 1503.52]
--0.92          | NoReward |   1354.40 | 65.33 | [1226.11, 1482.70]
--0.55          | NoReward |   1329.23 | 68.21 | [1195.29, 1463.17]
--0.18          | NoReward |   1304.06 | 71.67 | [1163.32, 1444.79]
-0.18           | NoReward |   1278.88 | 75.63 | [1130.37, 1427.39]
-0.55           | NoReward |   1253.71 | 80.01 | [1096.58, 1410.83]
-0.92           | NoReward |   1228.53 | 84.76 | [1062.09, 1394.97]
-1.28           | NoReward |   1203.36 | 89.81 | [1027.00, 1379.71]
-1.65           | NoReward |   1178.25 | 95.10 | [ 991.50, 1365.00]
+-1.64          | Complex |   1495.37 |  99.36 | [1299.97, 1690.77]
+-1.28          | Complex |   1473.72 |  95.80 | [1285.33, 1662.11]
+-0.91          | Complex |   1452.01 |  95.03 | [1265.13, 1638.89]
+-0.55          | Complex |   1430.30 |  97.14 | [1239.27, 1621.33]
+-0.18          | Complex |   1408.64 | 101.93 | [1208.19, 1609.09]
+0.18           | Complex |   1386.93 | 109.07 | [1172.44, 1601.43]
+0.55           | Complex |   1365.28 | 118.11 | [1133.02, 1597.54]
+0.91           | Complex |   1343.57 | 128.68 | [1090.52, 1596.62]
+1.28           | Complex |   1321.86 | 140.43 | [1045.71, 1598.00]
+1.64           | Complex |   1300.21 | 153.04 | [ 999.26, 1601.15]
+-1.64          | Simple  |   1353.21 |  99.18 | [1158.18, 1548.24]
+-1.28          | Simple  |   1300.41 |  95.69 | [1112.23, 1488.59]
+-0.91          | Simple  |   1247.46 |  94.98 | [1060.67, 1434.25]
+-0.55          | Simple  |   1194.51 |  97.12 | [1003.51, 1385.51]
+-0.18          | Simple  |   1141.70 | 101.92 | [ 941.28, 1342.13]
+0.18           | Simple  |   1088.76 | 109.04 | [ 874.33, 1303.18]
+0.55           | Simple  |   1035.95 | 118.04 | [ 803.83, 1268.07]
+0.91           | Simple  |    983.00 | 128.55 | [ 730.20, 1235.80]
+1.28           | Simple  |    930.05 | 140.24 | [ 654.28, 1205.83]
+1.64           | Simple  |    877.25 | 152.78 | [ 576.80, 1177.69]
 
 Variable predicted: LookingTime
 Predictors modulated: StandardTrialN, Event
@@ -761,14 +731,14 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Estimated Marginal Means
 
-Event    |    Mean |    SE |             95% CI | t(644)
---------------------------------------------------------
-Complex  | 1411.22 | 70.12 | [1273.54, 1548.90] |  20.13
-NoReward | 1286.88 | 70.16 | [1149.11, 1424.66] |  18.34
+Event   |    Mean |    SE |             95% CI | t(364)
+-------------------------------------------------------
+Complex | 1420.76 | 58.22 | [1306.27, 1535.25] |  24.40
+Simple  | 1144.30 | 58.22 | [1029.81, 1258.79] |  19.65
 
 Variable predicted: LookingTime
 Predictors modulated: Event
-Predictors averaged: StandardTrialN (-0.17), SES, Id</code></pre>
+Predictors averaged: StandardTrialN (0.005), SES, Id</code></pre>
 </div>
 </div>
 <p>Notice the information message! This approach is fundamentally different from what we did before. Previously, with <code>estimate_expectation()</code>, we were setting SES to its reference level (“high”). <strong>Now instead, the function extracts predictions for all levels of SES and then averages across them!</strong> These results represent the effect of Event type averaged across all SES conditions, giving you a more comprehensive view of how Event influences looking behavior.<br>
@@ -855,14 +825,14 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Estimated Marginal Means
 
-StandardTrialN |    Mean |    SE |             95% CI | t(644)
+StandardTrialN |    Mean |    SE |             95% CI | t(364)
 --------------------------------------------------------------
--1.65          | 1425.44 | 60.06 | [1307.50, 1543.37] |  23.73
--0.99          | 1391.48 | 63.26 | [1267.26, 1515.70] |  22.00
--0.33          | 1357.47 | 68.53 | [1222.89, 1492.04] |  19.81
-0.33           | 1323.51 | 75.43 | [1175.39, 1471.62] |  17.55
-0.99           | 1289.49 | 83.56 | [1125.41, 1453.58] |  15.43
-1.65           | 1255.53 | 92.59 | [1073.72, 1437.35] |  13.56
+-1.64          | 1433.66 | 54.56 | [1326.37, 1540.95] |  26.28
+-0.99          | 1373.39 | 52.30 | [1270.54, 1476.24] |  26.26
+-0.33          | 1313.12 | 55.03 | [1204.91, 1421.33] |  23.86
+0.33           | 1252.85 | 62.08 | [1130.77, 1374.93] |  20.18
+0.99           | 1192.58 | 72.21 | [1050.59, 1334.58] |  16.52
+1.64           | 1132.32 | 84.31 | [ 966.53, 1298.10] |  13.43
 
 Variable predicted: LookingTime
 Predictors modulated: StandardTrialN
@@ -903,13 +873,13 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Marginal Contrasts Analysis
 
-Level1   | Level2  | Difference |   SE |             95% CI | t(644) |      p
------------------------------------------------------------------------------
-NoReward | Complex |    -124.33 | 4.34 | [-132.85, -115.82] | -28.66 | &lt; .001
+Level1 | Level2  | Difference |   SE |             95% CI | t(364) |      p
+---------------------------------------------------------------------------
+Simple | Complex |    -276.46 | 6.07 | [-288.39, -264.53] | -45.58 | &lt; .001
 
 Variable predicted: LookingTime
 Predictors contrasted: Event
-Predictors averaged: StandardTrialN (-0.17), SES, Id
+Predictors averaged: StandardTrialN (0.005), SES, Id
 p-values are uncorrected.</code></pre>
 </div>
 </div>
@@ -955,15 +925,15 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Marginal Contrasts Analysis
 
-Level1 | Level2 | Difference |     SE |            95% CI | t(644) |     p
+Level1 | Level2 | Difference |     SE |            95% CI | t(364) |     p
 --------------------------------------------------------------------------
-low    | high   |      47.27 | 147.98 | [-243.30, 337.85] |   0.32 | 0.749
-medium | high   |     -87.67 | 165.80 | [-413.24, 237.89] |  -0.53 | 0.749
-medium | low    |    -134.95 | 197.68 | [-523.13, 253.24] |  -0.68 | 0.749
+low    | high   |      67.18 | 139.14 | [-206.45, 340.81] |   0.48 | 0.934
+medium | high   |      12.41 | 148.75 | [-280.10, 304.93] |   0.08 | 0.934
+medium | low    |     -54.76 | 139.14 | [-328.39, 218.86] |  -0.39 | 0.934
 
 Variable predicted: LookingTime
 Predictors contrasted: SES
-Predictors averaged: StandardTrialN (-0.17), Event, Id
+Predictors averaged: StandardTrialN (0.005), Event, Id
 p-value adjustment method: Hochberg (1988)</code></pre>
 </div>
 </div>
@@ -1051,31 +1021,18 @@ font-style: inherit;">ContrastbyTrial</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Marginal Contrasts Analysis
 
-Level1   | Level2  | StandardTrialN | Difference |    SE |             95% CI
------------------------------------------------------------------------------
-NoReward | Complex |          -1.65 |     -88.73 |  7.06 | [-102.59,  -74.86]
-NoReward | Complex |          -1.28 |     -97.51 |  5.81 | [-108.91,  -86.10]
-NoReward | Complex |          -0.92 |    -106.31 |  4.81 | [-115.76,  -96.86]
-NoReward | Complex |          -0.55 |    -115.12 |  4.26 | [-123.48, -106.76]
-NoReward | Complex |          -0.18 |    -123.92 |  4.32 | [-132.41, -115.44]
-NoReward | Complex |           0.18 |    -132.73 |  4.97 | [-142.49, -122.97]
-NoReward | Complex |           0.55 |    -141.54 |  6.03 | [-153.37, -129.70]
-NoReward | Complex |           0.92 |    -150.34 |  7.32 | [-164.71, -135.98]
-NoReward | Complex |           1.28 |    -159.15 |  8.73 | [-176.29, -142.00]
-NoReward | Complex |           1.65 |    -167.93 | 10.22 | [-187.99, -147.86]
-
-Level1   | t(644) |      p
---------------------------
-NoReward | -12.57 | &lt; .001
-NoReward | -16.79 | &lt; .001
-NoReward | -22.09 | &lt; .001
-NoReward | -27.03 | &lt; .001
-NoReward | -28.69 | &lt; .001
-NoReward | -26.69 | &lt; .001
-NoReward | -23.48 | &lt; .001
-NoReward | -20.55 | &lt; .001
-NoReward | -18.23 | &lt; .001
-NoReward | -16.43 | &lt; .001
+Level1 | Level2  | StandardTrialN | Difference |    SE |             95% CI | t(364) |      p
+---------------------------------------------------------------------------------------------
+Simple | Complex |          -1.64 |    -138.52 | 11.91 | [-161.95, -115.09] | -11.63 | &lt; .001
+Simple | Complex |          -1.28 |    -169.04 | 10.05 | [-188.79, -149.28] | -16.83 | &lt; .001
+Simple | Complex |          -0.91 |    -199.63 |  8.36 | [-216.08, -183.19] | -23.88 | &lt; .001
+Simple | Complex |          -0.55 |    -230.23 |  7.00 | [-244.00, -216.46] | -32.88 | &lt; .001
+Simple | Complex |          -0.18 |    -260.74 |  6.19 | [-272.92, -248.57] | -42.10 | &lt; .001
+Simple | Complex |           0.18 |    -291.34 |  6.15 | [-303.43, -279.25] | -47.40 | &lt; .001
+Simple | Complex |           0.55 |    -321.85 |  6.88 | [-335.38, -308.33] | -46.78 | &lt; .001
+Simple | Complex |           0.91 |    -352.45 |  8.19 | [-368.55, -336.35] | -43.05 | &lt; .001
+Simple | Complex |           1.28 |    -383.05 |  9.84 | [-402.41, -363.69] | -38.91 | &lt; .001
+Simple | Complex |           1.64 |    -413.56 | 11.70 | [-436.56, -390.56] | -35.36 | &lt; .001
 
 Variable predicted: LookingTime
 Predictors contrasted: Event
@@ -1131,13 +1088,13 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Marginal Contrasts Analysis
 
-Level1   | Level2  | Difference |   SE |           95% CI | t(644) |      p
----------------------------------------------------------------------------
-NoReward | Complex |     -24.06 | 4.56 | [-33.01, -15.10] |  -5.28 | &lt; .001
+Level1 | Level2  | Difference |   SE |           95% CI | t(364) |      p
+-------------------------------------------------------------------------
+Simple | Complex |     -83.60 | 6.15 | [-95.70, -71.50] | -13.59 | &lt; .001
 
 Variable predicted: LookingTime
 Predictors contrasted: StandardTrialN
-Predictors averaged: StandardTrialN (-0.17), SES, Id
+Predictors averaged: StandardTrialN (0.005), SES, Id
 p-values are uncorrected.</code></pre>
 </div>
 </div>
@@ -1162,9 +1119,9 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Estimated Marginal Effects
 
-Slope  |    SE |           95% CI | t(644) |     p
---------------------------------------------------
--50.37 | 15.35 | [-80.50, -20.23] |  -3.28 | 0.001
+Slope  |    SE |            95% CI | t(364) |      p
+----------------------------------------------------
+-92.76 | 24.60 | [-141.13, -44.39] |  -3.77 | &lt; .001
 
 Marginal effects estimated for StandardTrialN
 Type of slope was dY/dX</code></pre>
@@ -1220,10 +1177,10 @@ font-style: inherit;">Slopes</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Estimated Marginal Effects
 
-Event    |  Slope |    SE |            95% CI | t(644) |      p
+Event   |   Slope |    SE |            95% CI | t(364) |      p
 ---------------------------------------------------------------
-Complex  | -39.58 | 18.64 | [ -76.18,  -2.99] |  -2.12 |  0.034
-NoReward | -63.64 | 18.87 | [-100.70, -26.59] |  -3.37 | &lt; .001
+Complex |  -49.79 | 25.03 | [ -99.02,  -0.57] |  -1.99 |  0.047
+Simple  | -133.39 | 25.01 | [-182.57, -84.21] |  -5.33 | &lt; .001
 
 Marginal effects estimated for StandardTrialN
 Type of slope was dY/dX</code></pre>
@@ -1286,7 +1243,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="ModelEstimates_files/figure-html/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="ModelEstimates_files/figure-html/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -1325,28 +1282,28 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Visualisation Grid
 
-Event    | StandardTrialN | SES  | Id
--------------------------------------
-Complex  |          -1.65 | high |  0
-Complex  |          -1.28 | high |  0
-Complex  |          -0.92 | high |  0
-Complex  |          -0.55 | high |  0
-Complex  |          -0.18 | high |  0
-Complex  |           0.18 | high |  0
-Complex  |           0.55 | high |  0
-Complex  |           0.92 | high |  0
-Complex  |           1.28 | high |  0
-Complex  |           1.65 | high |  0
-NoReward |          -1.65 | high |  0
-NoReward |          -1.28 | high |  0
-NoReward |          -0.92 | high |  0
-NoReward |          -0.55 | high |  0
-NoReward |          -0.18 | high |  0
-NoReward |           0.18 | high |  0
-NoReward |           0.55 | high |  0
-NoReward |           0.92 | high |  0
-NoReward |           1.28 | high |  0
-NoReward |           1.65 | high |  0
+Event   | StandardTrialN | SES  | Id
+------------------------------------
+Complex |          -1.64 | high |  0
+Complex |          -1.28 | high |  0
+Complex |          -0.91 | high |  0
+Complex |          -0.55 | high |  0
+Complex |          -0.18 | high |  0
+Complex |           0.18 | high |  0
+Complex |           0.55 | high |  0
+Complex |           0.91 | high |  0
+Complex |           1.28 | high |  0
+Complex |           1.64 | high |  0
+Simple  |          -1.64 | high |  0
+Simple  |          -1.28 | high |  0
+Simple  |          -0.91 | high |  0
+Simple  |          -0.55 | high |  0
+Simple  |          -0.18 | high |  0
+Simple  |           0.18 | high |  0
+Simple  |           0.55 | high |  0
+Simple  |           0.91 | high |  0
+Simple  |           1.28 | high |  0
+Simple  |           1.64 | high |  0
 
 Maintained constant: SES</code></pre>
 </div>
@@ -1414,17 +1371,17 @@ font-style: inherit;">20</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      Event StandardTrialN  SES Id
-1   Complex         -1.646 high  0
-2   Complex         -0.953 high  0
-3   Complex         -0.260 high  0
-4   Complex          0.607 high  0
-5   Complex          1.646 high  0
-6  NoReward         -1.646 high  0
-7  NoReward         -0.953 high  0
-8  NoReward         -0.260 high  0
-9  NoReward          0.607 high  0
-10 NoReward          1.646 high  0</code></pre>
+<pre><code>     Event StandardTrialN  SES Id
+1  Complex         -1.645 high  0
+2  Complex         -0.953 high  0
+3  Complex          0.087 high  0
+4  Complex          0.953 high  0
+5  Complex          1.645 high  0
+6   Simple         -1.645 high  0
+7   Simple         -0.953 high  0
+8   Simple          0.087 high  0
+9   Simple          0.953 high  0
+10  Simple          1.645 high  0</code></pre>
 </div>
 </div>
 <p>What we’ve done here is request both levels of Event, the five-number summary for StandardTrialN (minimum, lower-hinge, median, upper-hinge, maximum), and all different subjects by setting <code>include_random = TRUE</code>. Why would we want such a complex grid? Well, first things first to make it complex…… and also we want to see what is happening for each subject!! Let’s now use this grid……</p>
@@ -1449,8 +1406,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Predicted values:
 
- [1] 1484.729 1455.429 1426.129 1389.472 1345.543 1404.685 1357.018 1309.351
- [9] 1249.716 1178.250
+ [1] 1495.3716 1454.3213 1392.6274 1341.2553 1300.2050 1353.2138 1253.1015 1102.6437  977.3587  877.2464
 
 NOTE: Confidence intervals, if available, are stored as attributes and can be accessed using `as.data.frame()` on this output.</code></pre>
 </div>
@@ -1492,13 +1448,13 @@ font-style: inherit;">Pred</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Predicted       SE CI_low CI_high
-1  1484.729 61.58638   -Inf     Inf
-2  1455.429 65.05903   -Inf     Inf
-3  1426.129 70.85961   -Inf     Inf
-4  1389.472 80.61231   -Inf     Inf
-5  1345.543 94.80208   -Inf     Inf
-6  1404.685 61.63644   -Inf     Inf</code></pre>
+<pre><code>  Predicted        SE CI_low CI_high
+1  1495.372  99.36313   -Inf     Inf
+2  1454.321  94.97684   -Inf     Inf
+3  1392.627 106.99807   -Inf     Inf
+4  1341.255 129.88136   -Inf     Inf
+5  1300.205 153.03811   -Inf     Inf
+6  1353.214  99.17637   -Inf     Inf</code></pre>
 </div>
 </div>
 <p>Now we can merge the two to have a final dataframe that has all the information:</p>
@@ -1530,14 +1486,14 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Visualisation Grid
 
-Event    | StandardTrialN | SES  | Id | Predicted |    SE | CI_low | CI_high
+Event   | StandardTrialN | SES  | Id | Predicted |     SE | CI_low | CI_high
 ----------------------------------------------------------------------------
-Complex  |          -1.65 | high |  0 |   1484.73 | 61.59 |   -Inf |     Inf
-Complex  |          -0.95 | high |  0 |   1455.43 | 65.06 |   -Inf |     Inf
-Complex  |          -0.26 | high |  0 |   1426.13 | 70.86 |   -Inf |     Inf
-Complex  |           0.61 | high |  0 |   1389.47 | 80.61 |   -Inf |     Inf
-Complex  |           1.65 | high |  0 |   1345.54 | 94.80 |   -Inf |     Inf
-NoReward |          -1.65 | high |  0 |   1404.69 | 61.64 |   -Inf |     Inf
+Complex |          -1.64 | high |  0 |   1495.37 |  99.36 |   -Inf |     Inf
+Complex |          -0.95 | high |  0 |   1454.32 |  94.98 |   -Inf |     Inf
+Complex |           0.09 | high |  0 |   1392.63 | 107.00 |   -Inf |     Inf
+Complex |           0.95 | high |  0 |   1341.26 | 129.88 |   -Inf |     Inf
+Complex |           1.64 | high |  0 |   1300.21 | 153.04 |   -Inf |     Inf
+Simple  |          -1.64 | high |  0 |   1353.21 |  99.18 |   -Inf |     Inf
 
 Maintained constant: SES</code></pre>
 </div>
@@ -1784,7 +1740,7 @@ font-style: inherit;">StandardTrialN</span> <span class="op" style="color: #5E5E
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">standardize</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -1817,7 +1773,7 @@ font-style: inherit;">(</span>x <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">ReactionTime</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">SaccadicRT</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1935,7 +1891,7 @@ font-style: inherit;">Event</span>, y <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">ReactionTime</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">SaccadicRT</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2074,7 +2030,7 @@ background-color: null;
 font-style: inherit;">(</span></span>
 <span>  <span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">ReactionTime</span> <span class="op" style="color: #5E5E5E;
+font-style: inherit;">SaccadicRT</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">~</span> <span class="va" style="color: #111111;
 background-color: null;
@@ -2165,7 +2121,7 @@ font-style: inherit;">df</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">ReactionTime</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">SaccadicRT</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2199,12 +2155,12 @@ font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>summary statistics
 ------
-min:  197.6241   max:  847.4415 
-median:  343.4964 
-mean:  365.1186 
-estimated sd:  109.9071 
-estimated skewness:  0.9530788 
-estimated kurtosis:  3.88081 </code></pre>
+min:  189.959   max:  927.502 
+median:  308.5174 
+mean:  335.2607 
+estimated sd:  110.3912 
+estimated skewness:  1.694027 
+estimated kurtosis:  7.483638 </code></pre>
 </div>
 </div>
 <p>The Cullen and Frey graph reveals which distribution best matches our data by plotting skewness against kurtosis. Looking at our reaction time data (red dot), we can immediately see it falls far from the normal distribution (asterisk) and instead sits near both the gamma (dashed line) and lognormal (dotted line) distributions, within the gray beta distribution area. The yellow circles represent bootstrap samples that help us assess uncertainty in our estimate. Since these bootstrap points tend to closely follow the gamma distribution line, we have strong evidence to select gamma as our distribution family! This explains why our linear model (which assumes normality) performed so poorly and gives us a clear direction for building a more appropriate model.</p>
@@ -2239,7 +2195,7 @@ background-color: null;
 font-style: inherit;">(</span></span>
 <span>  <span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">ReactionTime</span> <span class="op" style="color: #5E5E5E;
+font-style: inherit;">SaccadicRT</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">~</span> <span class="va" style="color: #111111;
 background-color: null;
@@ -2351,37 +2307,37 @@ font-style: inherit;">)</span></span></code></pre></div>
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
  Family: Gamma  ( log )
-Formula: ReactionTime ~ StandardTrialN * Event + (1 + StandardTrialN |      Id)
+Formula: SaccadicRT ~ StandardTrialN * Event + (1 + StandardTrialN | Id)
    Data: df
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-   6181.1    6217.0   -3082.5    6165.1       652 
+   2610.4    2638.9   -1297.2    2594.4       253 
 
 Scaled residuals: 
-     Min       1Q   Median       3Q      Max 
--2.10383 -0.55231  0.00207  0.56421  2.67485 
+    Min      1Q  Median      3Q     Max 
+-1.8107 -0.5617  0.0282  0.5889  3.3005 
 
 Random effects:
  Groups   Name           Variance Std.Dev. Corr
- Id       (Intercept)    0.006482 0.08051      
-          StandardTrialN 0.003207 0.05663  0.26
- Residual                0.007262 0.08522      
-Number of obs: 660, groups:  Id, 20
+ Id       (Intercept)    0.014666 0.12110      
+          StandardTrialN 0.006314 0.07946  0.10
+ Residual                0.014798 0.12165      
+Number of obs: 261, groups:  Id, 20
 
 Fixed effects:
-                            Estimate Std. Error t value Pr(&gt;|z|)    
-(Intercept)                 5.442146   0.072155  75.423  &lt; 2e-16 ***
-StandardTrialN             -0.283501   0.038504  -7.363  1.8e-13 ***
-EventReward                 0.446262   0.006024  74.081  &lt; 2e-16 ***
-StandardTrialN:EventReward  0.200902   0.006031  33.311  &lt; 2e-16 ***
+                           Estimate Std. Error t value Pr(&gt;|z|)    
+(Intercept)                 5.30372    0.07102  74.676   &lt;2e-16 ***
+StandardTrialN             -0.35867    0.03868  -9.273   &lt;2e-16 ***
+EventSimple                 0.31795    0.01452  21.901   &lt;2e-16 ***
+StandardTrialN:EventSimple  0.18635    0.01442  12.926   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
-            (Intr) StndTN EvntRw
-StandrdTrlN  0.315              
-EventReward -0.062 -0.059       
-StndrdTN:ER -0.032 -0.112  0.345</code></pre>
+            (Intr) StndTN EvntSm
+StandrdTrlN -0.072              
+EventSimple -0.164 -0.176       
+StndrdTN:ES -0.101 -0.275  0.476</code></pre>
 </div>
 </div>
 <p>OMG, these results are AMAZING!!! 🎉 Look at that interaction between trial number and Event - it’s significant! This is super important to note because when we have significant interactions, we need to focus on understanding THOSE rather than looking at the main effects in isolation.</p>
@@ -2594,7 +2550,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 </div>
 </div>
-<p>Reaction times decrease much more across trials for the Complex than for the Simple condition! However, we don’t have a complete picture yet. For example, we do not know whether the decrease in reaction times across trials is significant only for the Complex condition or also for the Simple condition. To find out, we can estimate the slopes as we did in the previous tutorial: <a href="../../CONTENT/Stats/ModelEstimates.html">ModelEstimates.qmd</a></p>
+<p>Reaction times decrease much more across trials for the Complex than for the Simple condition! However, we don’t have a complete picture yet. For example, we do not know whether the decrease in reaction times across trials is significant only for the Complex condition or also for the Simple condition. To find out, we can estimate the slopes as we did in the previous tutorial: <a href="../../CONTENT/Stats/ModelEstimates.html">Model Estimates</a></p>
 <div class="cell">
 <div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2606,33 +2562,27 @@ font-style: inherit;">mod_gamma</span>, trend <span class="op" style="color: #5E
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">'Event'</span>, by <span class="op" style="color: #5E5E5E;
+font-style: inherit;">'StandardTrialN'</span>, by <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">'StandardTrialN'</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">'Event'</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Estimated Marginal Effects
 
-StandardTrialN | Comparison        |  Slope |    SE |           95% CI | t(652) |      p
-----------------------------------------------------------------------------------------
--1.65          | Reward - NoReward |  46.99 |  5.41 | [ 36.37,  57.61] |   8.69 | &lt; .001
--1.28          | Reward - NoReward |  72.46 |  6.13 | [ 60.43,  84.50] |  11.83 | &lt; .001
--0.92          | Reward - NoReward |  95.17 |  7.03 | [ 81.36, 108.99] |  13.53 | &lt; .001
--0.55          | Reward - NoReward | 115.44 |  8.13 | [ 99.47, 131.41] |  14.19 | &lt; .001
--0.18          | Reward - NoReward | 133.60 |  9.53 | [114.88, 152.32] |  14.01 | &lt; .001
-0.18           | Reward - NoReward | 149.96 | 11.31 | [127.74, 172.18] |  13.25 | &lt; .001
-0.55           | Reward - NoReward | 164.78 | 13.50 | [138.26, 191.30] |  12.20 | &lt; .001
-0.92           | Reward - NoReward | 178.29 | 16.09 | [146.69, 209.88] |  11.08 | &lt; .001
-1.28           | Reward - NoReward | 190.68 | 19.04 | [153.29, 228.07] |  10.01 | &lt; .001
-1.65           | Reward - NoReward | 202.11 | 22.31 | [158.30, 245.91] |   9.06 | &lt; .001
+Event   |  Slope |    SE |            95% CI | t(253) |      p
+--------------------------------------------------------------
+Complex | -87.40 | 13.10 | [-113.19, -61.61] |  -6.67 | &lt; .001
+Simple  | -51.16 | 13.85 | [ -78.43, -23.88] |  -3.69 | &lt; .001
 
-Marginal effects estimated for Event</code></pre>
+Marginal effects estimated for StandardTrialN
+Type of slope was dY/dX</code></pre>
 </div>
 </div>
-<p>[add with same structure as in previous tutorial]</p>
+<p>Nice !! This is confirming what we could already guess from the plot!!</p>
+<p>that there is an change in the effect of the complex with the number of trials but there for the complex shape is</p>
 <p>Although we’ve been focusing on the main effects, remember that we also had random intercepts and slopes in our model! We can have a look at the random effects as well:</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
@@ -2702,7 +2652,7 @@ font-style: inherit;">(</span>y<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">ReactionTime</span>, color<span class="op" style="color: #5E5E5E;
+font-style: inherit;">SaccadicRT</span>, color<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="va" style="color: #111111;
 background-color: null;
@@ -3304,7 +3254,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="LinearMixedModels_files/figure-html/SimpsonParadox-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearMixedModels_files/figure-html/SimpsonParadox-1.png" class="img-fluid figure-img" width="960"></a></p>
+<figure class="figure"><p><a href="LinearMixedModels_files/figure-html/SimsonParadox-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearMixedModels_files/figure-html/SimsonParadox-1.png" class="img-fluid figure-img" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -3374,7 +3324,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 <p>To run our Linear Mixed Effects Model, these are the key packages we’ll use. On top of that, the <code>tidyverse</code> suite will help with data wrangling and visualization, while <code>easystats</code> will let us easily extract and summarize the important details from our models. Let’s get started!</p>
 <section id="read-the-data" class="level3"><h3 class="anchored" data-anchor-id="read-the-data">Read the data</h3>
 <div class="cell">
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">df</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -3433,6 +3383,7 @@ background-color: null;
 font-style: inherit;">)</span> <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># create standardize trial column</span></span></code></pre></div>
+</details>
 </div>
 <p>After importing the data, we’ve ensured that Id is treated as a factor rather than a numerical column and that we have a standardized column of TrialN.</p>
 </section></section><section id="linear-model" class="level2"><h2 class="anchored" data-anchor-id="linear-model">Linear Model</h2>
@@ -3478,47 +3429,669 @@ Call:
 lm(formula = LookingTime ~ StandardTrialN * Event, data = df)
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--772.0 -159.7   -6.1  190.5  607.1 
+    Min      1Q  Median      3Q     Max 
+-609.15 -212.47   13.17  218.58  676.70 
 
 Coefficients:
-                              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)                  1411.5943    12.7418 110.784  &lt; 2e-16 ***
-StandardTrialN                -43.0814    12.8109  -3.363 0.000816 ***
-EventNoReward                -101.2269    21.1961  -4.776 2.21e-06 ***
-StandardTrialN:EventNoReward   -0.7688    21.4872  -0.036 0.971470    
+                           Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                 1419.44      19.51  72.740  &lt; 2e-16 ***
+StandardTrialN               -71.50      19.41  -3.683 0.000264 ***
+EventSimple                 -266.39      27.53  -9.677  &lt; 2e-16 ***
+StandardTrialN:EventSimple   -50.01      27.28  -1.833 0.067605 .  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 253.2 on 656 degrees of freedom
-  (140 observations deleted due to missingness)
-Multiple R-squared:  0.05147,   Adjusted R-squared:  0.04713 
-F-statistic: 11.87 on 3 and 656 DF,  p-value: 1.417e-07</code></pre>
+Residual standard error: 268.1 on 376 degrees of freedom
+  (20 observations deleted due to missingness)
+Multiple R-squared:  0.2892,    Adjusted R-squared:  0.2835 
+F-statistic: 50.99 on 3 and 376 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>We won’t delve into the details of the model results in this tutorial, as we have already covered it in the previous one. However, we want to point out one thing about the data we run it on!!</p>
 <div class="cell">
-<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://easystats.github.io/insight/reference/display.html">print_html</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data_codebook</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">df</span><span class="op" style="color: #5E5E5E;
 background-color: null;
+font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
+background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>'data.frame':   800 obs. of  7 variables:
- $ Id            : Factor w/ 20 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...
- $ Event         : chr  "NoReward" "NoReward" "NoReward" "NoReward" ...
- $ TrialN        : int  1 2 3 4 5 6 7 8 9 10 ...
- $ ReactionTime  : num  344 362 406 395 382 ...
- $ LookingTime   : num  1140 1156 1074 1107 991 ...
- $ SES           : chr  "low" "low" "low" "low" ...
- $ StandardTrialN: 'dw_transformer' num  -1.646 -1.473 -1.3 -1.127 -0.953 ...
-  ..- attr(*, "center")= num 10.5
-  ..- attr(*, "scale")= num 5.77
-  ..- attr(*, "robust")= logi FALSE</code></pre>
+</details><div class="cell-output-display">
+<div id="hchsydxtsz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hchsydxtsz table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hchsydxtsz thead, #hchsydxtsz tbody, #hchsydxtsz tfoot, #hchsydxtsz tr, #hchsydxtsz td, #hchsydxtsz th {
+  border-style: none;
+}
+
+#hchsydxtsz p {
+  margin: 0;
+  padding: 0;
+}
+
+#hchsydxtsz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 100%;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hchsydxtsz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hchsydxtsz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hchsydxtsz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hchsydxtsz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hchsydxtsz .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hchsydxtsz .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hchsydxtsz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hchsydxtsz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hchsydxtsz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hchsydxtsz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hchsydxtsz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hchsydxtsz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hchsydxtsz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hchsydxtsz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hchsydxtsz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hchsydxtsz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hchsydxtsz .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hchsydxtsz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hchsydxtsz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hchsydxtsz .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hchsydxtsz .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hchsydxtsz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hchsydxtsz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hchsydxtsz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hchsydxtsz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hchsydxtsz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hchsydxtsz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hchsydxtsz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hchsydxtsz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hchsydxtsz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hchsydxtsz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hchsydxtsz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hchsydxtsz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hchsydxtsz .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hchsydxtsz .gt_left {
+  text-align: left;
+}
+
+#hchsydxtsz .gt_center {
+  text-align: center;
+}
+
+#hchsydxtsz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hchsydxtsz .gt_font_normal {
+  font-weight: normal;
+}
+
+#hchsydxtsz .gt_font_bold {
+  font-weight: bold;
+}
+
+#hchsydxtsz .gt_font_italic {
+  font-style: italic;
+}
+
+#hchsydxtsz .gt_super {
+  font-size: 65%;
+}
+
+#hchsydxtsz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hchsydxtsz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hchsydxtsz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hchsydxtsz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hchsydxtsz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hchsydxtsz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hchsydxtsz .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#hchsydxtsz .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#hchsydxtsz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_heading">
+<th colspan="6" class="gt_heading gt_title gt_font_normal gt_bottom_border">df (400 rows and 7 variables, 7 shown)</th>
+</tr>
+<tr class="odd gt_col_headings">
+<th id="ID" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">ID</th>
+<th id="Name" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Name</th>
+<th id="Type" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Type</th>
+<th id="Missings" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Missings</th>
+<th id="Values" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Values</th>
+<th id="N" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">N</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="background-color: #EEEEEE">1</td>
+<td class="gt_row gt_left" headers="Name" style="background-color: #EEEEEE">Id</td>
+<td class="gt_row gt_left" headers="Type" style="background-color: #EEEEEE">categorical</td>
+<td class="gt_row gt_right" headers="Missings" style="background-color: #EEEEEE">0 (0.0%)</td>
+<td class="gt_row gt_right" headers="Values" style="background-color: #EEEEEE">1</td>
+<td class="gt_row gt_right" headers="N" style="background-color: #EEEEEE">20 (5.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Name" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Type" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Missings" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Values" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">2</td>
+<td class="gt_row gt_right" headers="N" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">20 (5.0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Name" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Type" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Missings" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Values" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">3</td>
+<td class="gt_row gt_right" headers="N" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">20 (5.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Name" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Type" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Missings" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Values" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">4</td>
+<td class="gt_row gt_right" headers="N" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">20 (5.0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Name" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Type" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Missings" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Values" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">5</td>
+<td class="gt_row gt_right" headers="N" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">20 (5.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Name" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Type" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Missings" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Values" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">6</td>
+<td class="gt_row gt_right" headers="N" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">20 (5.0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Name" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Type" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Missings" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Values" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">7</td>
+<td class="gt_row gt_right" headers="N" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">20 (5.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Name" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Type" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Missings" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Values" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">8</td>
+<td class="gt_row gt_right" headers="N" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">20 (5.0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Name" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Type" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Missings" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Values" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">9</td>
+<td class="gt_row gt_right" headers="N" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">20 (5.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Name" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Type" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Missings" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Values" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">10</td>
+<td class="gt_row gt_right" headers="N" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">20 (5.0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Name" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_left" headers="Type" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Missings" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+<td class="gt_row gt_right" headers="Values" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE">(...)</td>
+<td class="gt_row gt_right" headers="N" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; background-color: #EEEEEE"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID">2</td>
+<td class="gt_row gt_left" headers="Name">Event</td>
+<td class="gt_row gt_left" headers="Type">character</td>
+<td class="gt_row gt_right" headers="Missings">0 (0.0%)</td>
+<td class="gt_row gt_right" headers="Values">Complex</td>
+<td class="gt_row gt_right" headers="N">202 (50.5%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000"></td>
+<td class="gt_row gt_left" headers="Name" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000"></td>
+<td class="gt_row gt_left" headers="Type" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000"></td>
+<td class="gt_row gt_right" headers="Missings" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000"></td>
+<td class="gt_row gt_right" headers="Values" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000">Simple</td>
+<td class="gt_row gt_right" headers="N" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000">198 (49.5%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="background-color: #EEEEEE">3</td>
+<td class="gt_row gt_left" headers="Name" style="background-color: #EEEEEE">TrialN</td>
+<td class="gt_row gt_left" headers="Type" style="background-color: #EEEEEE">integer</td>
+<td class="gt_row gt_right" headers="Missings" style="background-color: #EEEEEE">0 (0.0%)</td>
+<td class="gt_row gt_right" headers="Values" style="background-color: #EEEEEE">[1, 20]</td>
+<td class="gt_row gt_right" headers="N" style="background-color: #EEEEEE">400</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID">4</td>
+<td class="gt_row gt_left" headers="Name">SaccadicRT</td>
+<td class="gt_row gt_left" headers="Type">numeric</td>
+<td class="gt_row gt_right" headers="Missings">139 (34.8%)</td>
+<td class="gt_row gt_right" headers="Values">[189.96, 927.5]</td>
+<td class="gt_row gt_right" headers="N">261</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="background-color: #EEEEEE">5</td>
+<td class="gt_row gt_left" headers="Name" style="background-color: #EEEEEE">LookingTime</td>
+<td class="gt_row gt_left" headers="Type" style="background-color: #EEEEEE">numeric</td>
+<td class="gt_row gt_right" headers="Missings" style="background-color: #EEEEEE">20 (5.0%)</td>
+<td class="gt_row gt_right" headers="Values" style="background-color: #EEEEEE">[400, 1980]</td>
+<td class="gt_row gt_right" headers="N" style="background-color: #EEEEEE">380</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID">6</td>
+<td class="gt_row gt_left" headers="Name">SES</td>
+<td class="gt_row gt_left" headers="Type">character</td>
+<td class="gt_row gt_right" headers="Missings">0 (0.0%)</td>
+<td class="gt_row gt_right" headers="Values">high</td>
+<td class="gt_row gt_right" headers="N">120 (30.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000"></td>
+<td class="gt_row gt_left" headers="Name" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000"></td>
+<td class="gt_row gt_left" headers="Type" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000"></td>
+<td class="gt_row gt_right" headers="Missings" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000"></td>
+<td class="gt_row gt_right" headers="Values" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000">low</td>
+<td class="gt_row gt_right" headers="N" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000">160 (40.0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000"></td>
+<td class="gt_row gt_left" headers="Name" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000"></td>
+<td class="gt_row gt_left" headers="Type" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000"></td>
+<td class="gt_row gt_right" headers="Missings" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000"></td>
+<td class="gt_row gt_right" headers="Values" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000">medium</td>
+<td class="gt_row gt_right" headers="N" style="border-top-width: 1px; border-top-style: hidden; border-top-color: #000000">120 (30.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="background-color: #EEEEEE">7</td>
+<td class="gt_row gt_left" headers="Name" style="background-color: #EEEEEE">StandardTrialN</td>
+<td class="gt_row gt_left" headers="Type" style="background-color: #EEEEEE">numeric</td>
+<td class="gt_row gt_right" headers="Missings" style="background-color: #EEEEEE">0 (0.0%)</td>
+<td class="gt_row gt_right" headers="Values" style="background-color: #EEEEEE">[-1.65, 1.65]</td>
+<td class="gt_row gt_right" headers="N" style="background-color: #EEEEEE">400</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <p>Wait a minute! Look at our data - we have an <strong>Id</strong> column! 👀 This column tells us which participant each trial belongs to. As each subject experienced all trial conditions, we have multiple data points per person. This is similar to the departments in the previous example… it’s a grouping variable</p>
@@ -3540,7 +4113,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 <p>This approach helps us capture <strong>variation in the starting performance</strong>, acknowledging that people are inherently different but might still follow a similar overall pattern of improvement. It’s a simple yet powerful way to model individual differences!</p>
 <p>Now, let’s look at how to include this in our mixed model.</p>
 <section id="model" class="level4"><h4 class="anchored" data-anchor-id="model">Model</h4>
-<p>To run a <strong>linear mixed-effects model</strong>, we’ll use the <code>lmer</code> function from the <strong>lme4</strong> package. it Functions very similarly to the <code>lm</code> function we used before: you pass a formula and a dataset, but with one important addition: specifying the <strong>random intercept</strong>.</p>
+<p>To run a <strong>linear mixed-effects model</strong>, we’ll use the <code>lmer</code> function from the <strong>lme4</strong> package. It functions very similarly to the <code>lm</code> function we used before: you pass a formula and a dataset, but with one important addition: specifying the <strong>random intercept</strong>.</p>
 <p>The formula is nearly the same as a standard linear model, but we include <code>(1|subject_id)</code> to tell the model that each subject should have its own unique intercept. This accounts for variations in baseline performance across individuals.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -3556,7 +4129,7 @@ Caution
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">mod_rintercept</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -3606,44 +4179,44 @@ background-color: null;
 font-style: inherit;">mod_rintercept</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
+</details><div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
 Formula: LookingTime ~ StandardTrialN * Event + (1 | Id)
    Data: df
 
-REML criterion at convergence: 7665.4
+REML criterion at convergence: 4774.7
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--3.4289 -0.6265  0.0007  0.6061  4.1655 
+-3.7640 -0.5509  0.0426  0.5462  2.7304 
 
 Random effects:
  Groups   Name        Variance Std.Dev.
- Id       (Intercept) 61071    247.13  
- Residual              5669     75.29  
-Number of obs: 660, groups:  Id, 20
+ Id       (Intercept) 59981    244.9   
+ Residual             14531    120.5   
+Number of obs: 380, groups:  Id, 20
 
 Fixed effects:
-                             Estimate Std. Error       df t value Pr(&gt;|t|)    
-(Intercept)                  1411.963     55.389   19.070  25.492 3.39e-16 ***
-StandardTrialN                -42.477      3.815  637.015 -11.135  &lt; 2e-16 ***
-EventNoReward                -120.849      6.552  637.315 -18.446  &lt; 2e-16 ***
-StandardTrialN:EventNoReward  -18.901      6.535  637.176  -2.892  0.00396 ** 
+                           Estimate Std. Error       df t value Pr(&gt;|t|)    
+(Intercept)                1418.273     55.468   19.493  25.569  &lt; 2e-16 ***
+StandardTrialN              -51.123      8.781  357.118  -5.822 1.29e-08 ***
+EventSimple                -261.851     12.480  357.153 -20.981  &lt; 2e-16 ***
+StandardTrialN:EventSimple  -85.062     12.404  357.212  -6.858 3.09e-11 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
-            (Intr) StndTN EvntNR
-StandrdTrlN  0.001              
-EventNoRwrd -0.039 -0.008       
-StndrTN:ENR -0.001 -0.581  0.299</code></pre>
+            (Intr) StndTN EvntSm
+StandrdTrlN  0.005              
+EventSimple -0.113 -0.020       
+StndrdTN:ES -0.003 -0.715 -0.008</code></pre>
 </div>
 </div>
 <p>Wow! Now the model is showing us something <strong>new</strong> compared to the simple linear model. We observe an <strong>interaction between Event and StandardTrialN</strong>. By letting the intercept vary for each subject, the model is able to capture nuances in the data that a standard linear model might miss.</p>
-<p>To understand this interaction, let’s plot it and see how performance changes across trials for each condition.</p>
+<p>To understand this interaction, let’s plot what the random intercept is doing.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">i_pred</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -3841,17 +4414,18 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="LinearMixedModels_files/figure-html/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearMixedModels_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="1152"></a></p>
+<figure class="figure"><p><a href="LinearMixedModels_files/figure-html/PlotInterceptModel-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearMixedModels_files/figure-html/PlotInterceptModel-1.png" class="img-fluid figure-img" width="1152"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<p>As you can see here, each color represents a different subject, and we’ve divided the plot into two panels - one for each type of event - to make visualization simpler. Cool isn’t it??.</p>
+<p>As you can see here, each color represents a different subject, and we’ve divided the plot into two panels - one for each type of event - to make visualization simpler.</p>
+<p>You can clearly see that our model is capturing the different intercepts that subjects have!! Cool isn’t it??.</p>
 <p>Now, you might be thinking, <em>“This looks interesting, but my plot is going to be a mess with all these individual estimates!”</em> Well, don’t worry! While what we’ve plotted is how the data is modeled by our mixed-effects model, the random effects are actually used to make more accurate estimates—but the model still returns an overall estimate.</p>
 <p>Think of it like this: the random effects allow the model to account for individual differences between subjects. But instead of just showing all the individual estimates in the plot, the model takes these individual estimates for each subject and returns the <em>average</em> of these estimates to give you a cleaner, more generalizable result.</p>
 <p>we can plot the actual estimate of the model:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">i_pred</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -4087,7 +4661,7 @@ Caution
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">mod_rslope</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -4137,48 +4711,43 @@ background-color: null;
 font-style: inherit;">mod_rslope</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
+</details><div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
 Formula: LookingTime ~ StandardTrialN * Event + (0 + StandardTrialN |      Id)
    Data: df
 
-REML criterion at convergence: 9136.9
+REML criterion at convergence: 5272
 
 Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.3355 -0.6449  0.0801  0.7321  2.7171 
+     Min       1Q   Median       3Q      Max 
+-1.84592 -0.78577 -0.03054  0.80683  2.04769 
 
 Random effects:
  Groups   Name           Variance Std.Dev.
- Id       StandardTrialN  2407     49.06  
- Residual                61817    248.63  
-Number of obs: 660, groups:  Id, 20
+ Id       StandardTrialN  8279     90.99  
+ Residual                63840    252.67  
+Number of obs: 380, groups:  Id, 20
 
 Fixed effects:
-                              Estimate Std. Error        df t value Pr(&gt;|t|)
-(Intercept)                  1411.5892    12.5213  639.5877 112.735  &lt; 2e-16
-StandardTrialN                -43.1199    16.7045   32.4399  -2.581   0.0146
-EventNoReward                -100.7614    21.0343  652.7701  -4.790 2.06e-06
-StandardTrialN:EventNoReward   -0.7738    21.3998  655.1091  -0.036   0.9712
-                                
-(Intercept)                  ***
-StandardTrialN               *  
-EventNoReward                ***
-StandardTrialN:EventNoReward    
+                           Estimate Std. Error      df t value Pr(&gt;|t|)    
+(Intercept)                 1424.42      18.47  359.45  77.131   &lt;2e-16 ***
+StandardTrialN               -72.82      27.52   31.83  -2.646   0.0126 *  
+EventSimple                 -277.27      26.16  361.58 -10.601   &lt;2e-16 ***
+StandardTrialN:EventSimple   -47.07      26.31  368.33  -1.789   0.0744 .  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
-            (Intr) StndTN EvntNR
-StandrdTrlN  0.014              
-EventNoRwrd -0.594 -0.007       
-StndrTN:ENR -0.009 -0.442  0.277</code></pre>
+            (Intr) StndTN EvntSm
+StandrdTrlN  0.019              
+EventSimple -0.711 -0.010       
+StndrdTN:ES -0.016 -0.485 -0.017</code></pre>
 </div>
 </div>
 <p>The results aren’t too different from the intercept-only model, but let’s take a closer look at what we’ve actually modeled.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">s_pred</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -4381,6 +4950,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 </div>
 </div>
+<p>As you can see here we have an unique intercept ( all the lines pass trough the same point where x = 0) but the slope of each line is different. And…..I don’t have to tell you that what we are looking at dosen’t really make sense.</p>
 </section></section><section id="intercept-slope" class="level3"><h3 class="anchored" data-anchor-id="intercept-slope">Intercept + Slope</h3>
 <p>That plot does look nuts, and it’s a clear signal that something is off. Why? Because by modeling only the random slopes while keeping the intercepts fixed, we’re essentially forcing all subjects to start from the same baseline. That’s clearly unrealistic for most real-world data.</p>
 <p>In real life, the intercept and slope often go hand-in-hand for each subject.</p>
@@ -4388,7 +4958,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 <p>To make the model more realistic, we can model both the random intercept and the random slope together. We simply modify the random effects part of the formula to <code>(trial_number | subject_id)</code>.</p>
 <p>Now, we are telling the model to estimate both a random intercept (baseline performance) and a random slope (rate of improvement). This captures the full variability in how each subject learns over time!</p>
 <div class="cell">
-<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">mod_rinterraction</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -4438,44 +5008,44 @@ background-color: null;
 font-style: inherit;">mod_rinterraction</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
+</details><div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
 Formula: LookingTime ~ StandardTrialN * Event + (1 + StandardTrialN |      Id)
    Data: df
 
-REML criterion at convergence: 6948.7
+REML criterion at convergence: 4320.1
 
 Scaled residuals: 
      Min       1Q   Median       3Q      Max 
--3.10408 -0.69312 -0.01849  0.66571  2.84041 
+-2.40197 -0.62005  0.02697  0.68028  2.66893 
 
 Random effects:
  Groups   Name           Variance Std.Dev. Corr
- Id       (Intercept)    64540    254.05       
-          StandardTrialN  4162     64.51   0.55
- Residual                 1631     40.39       
-Number of obs: 660, groups:  Id, 20
+ Id       (Intercept)    60185    245.33       
+          StandardTrialN 10981    104.79   0.41
+ Residual                 3290     57.36       
+Number of obs: 380, groups:  Id, 20
 
 Fixed effects:
-                             Estimate Std. Error       df t value Pr(&gt;|t|)    
-(Intercept)                  1412.985     56.844   19.017  24.857 5.79e-16 ***
-StandardTrialN                -41.080     14.572   19.297  -2.819   0.0108 *  
-EventNoReward                -126.844      3.630  619.185 -34.940  &lt; 2e-16 ***
-StandardTrialN:EventNoReward  -26.037      3.639  619.368  -7.156 2.36e-12 ***
+                           Estimate Std. Error       df t value Pr(&gt;|t|)    
+(Intercept)                1425.068     55.019   19.115  25.901 2.38e-16 ***
+StandardTrialN              -51.595     23.816   19.656  -2.166   0.0428 *  
+EventSimple                -276.278      6.007  338.381 -45.991  &lt; 2e-16 ***
+StandardTrialN:EventSimple  -83.322      6.100  339.010 -13.659  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
-            (Intr) StndTN EvntNR
-StandrdTrlN  0.547              
-EventNoRwrd -0.020  0.000       
-StndrTN:ENR  0.000 -0.078  0.346</code></pre>
+            (Intr) StndTN EvntSm
+StandrdTrlN  0.407              
+EventSimple -0.055 -0.001       
+StndrdTN:ES -0.001 -0.130 -0.026</code></pre>
 </div>
 </div>
 <p>Now, let’s visualize how the model is modeling the data:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb16" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">is_pred</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -4678,12 +5248,12 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 </div>
 </div>
-<p>While it is not super apparent from the data, you can see that different subjects have different slopes, meaning that they do not all grow at the same rate</p>
+<p>If you look closely, you’ll see each subject has their own intercept and slope now. That means we’re actually modeling the real differences between people—exactly what we wanted!</p>
 </section></section></section><section id="summary-of-mixed-models" class="level2"><h2 class="anchored" data-anchor-id="summary-of-mixed-models">Summary of mixed models</h2>
 <p>Now that we’ve seen how to run mixed-effects models, it’s time to focus on <strong>interpreting the summary output</strong>. While we’ve been building models, we haven’t delved into what the summary actually tells us or which parts of it deserve our attention. Let’s fix that!</p>
 <p>To start, we’ll use our <strong>final model</strong> and inspect its summary. This will give us a chance to break it down step by step and understand the key information it provides. Here’s how to check the summary:</p>
 <div class="cell">
-<div class="sourceCode" id="cb18" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
+<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -4698,33 +5268,33 @@ lmerModLmerTest]
 Formula: LookingTime ~ StandardTrialN * Event + (1 + StandardTrialN |      Id)
    Data: df
 
-REML criterion at convergence: 6948.7
+REML criterion at convergence: 4320.1
 
 Scaled residuals: 
      Min       1Q   Median       3Q      Max 
--3.10408 -0.69312 -0.01849  0.66571  2.84041 
+-2.40197 -0.62005  0.02697  0.68028  2.66893 
 
 Random effects:
  Groups   Name           Variance Std.Dev. Corr
- Id       (Intercept)    64540    254.05       
-          StandardTrialN  4162     64.51   0.55
- Residual                 1631     40.39       
-Number of obs: 660, groups:  Id, 20
+ Id       (Intercept)    60185    245.33       
+          StandardTrialN 10981    104.79   0.41
+ Residual                 3290     57.36       
+Number of obs: 380, groups:  Id, 20
 
 Fixed effects:
-                             Estimate Std. Error       df t value Pr(&gt;|t|)    
-(Intercept)                  1412.985     56.844   19.017  24.857 5.79e-16 ***
-StandardTrialN                -41.080     14.572   19.297  -2.819   0.0108 *  
-EventNoReward                -126.844      3.630  619.185 -34.940  &lt; 2e-16 ***
-StandardTrialN:EventNoReward  -26.037      3.639  619.368  -7.156 2.36e-12 ***
+                           Estimate Std. Error       df t value Pr(&gt;|t|)    
+(Intercept)                1425.068     55.019   19.115  25.901 2.38e-16 ***
+StandardTrialN              -51.595     23.816   19.656  -2.166   0.0428 *  
+EventSimple                -276.278      6.007  338.381 -45.991  &lt; 2e-16 ***
+StandardTrialN:EventSimple  -83.322      6.100  339.010 -13.659  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
-            (Intr) StndTN EvntNR
-StandrdTrlN  0.547              
-EventNoRwrd -0.020  0.000       
-StndrTN:ENR  0.000 -0.078  0.346</code></pre>
+            (Intr) StndTN EvntSm
+StandrdTrlN  0.407              
+EventSimple -0.055 -0.001       
+StndrdTN:ES -0.001 -0.130 -0.026</code></pre>
 </div>
 </div>
 <p>The <strong>Random effects</strong> section in the model summary shows how variability is accounted for by the random effects. The <strong>Groups</strong> column indicates the grouping factor (e.g., subject), while the <strong>Name</strong> column lists the random effects (e.g., intercept and slope). The <strong>Variance</strong> column represents the variability for each random effect—higher values indicate greater variation in how the effect behaves across groups. The <strong>Std.Dev.</strong> column is simply the standard deviation of the variance, showing the spread in the same units as the data.</p>
@@ -4732,11 +5302,19 @@ StndrTN:ENR  0.000 -0.078  0.346</code></pre>
 <p>The <strong>Residual</strong> section shows the unexplained variability after accounting for the fixed and random effects.</p>
 <p><strong>The key takeaway here is that random effects capture the variability in the data that can’t be explained by the fixed effects alone.</strong> If the variance for a random effect is low, it suggests the random effect isn’t adding much to the model and may be unnecessary. On the other hand, high variance indicates that the random effect is important for capturing group-level differences and improving the model’s accuracy.</p>
 </section><section id="model-comparison" class="level2"><h2 class="anchored" data-anchor-id="model-comparison">Model comparison</h2>
-<p>But how can we be sure the random effects are helping our model? One of the easiest ways is to check the variance explained by the random effects. As we said, if the variance related to the random effects is too small, it probably isn’t contributing much to the model. If it’s high, it’s likely helping the model by capturing important variability in the data.</p>
-<p>Another method is to compare the performance of different models. One of the best indices for this is the Akaike Information Criterion (AIC). AIC gives a relative measure of how well a model fits the data, while penalizing the number of parameters in the model. Lower AIC values indicate better models, as they balance goodness-of-fit with model complexity.</p>
+<p>But how can we be sure the random effects are helping our model? One of the easiest ways is to check the variance explained by the random effects.</p>
+<div class="info-box info-box-large">
+<div class="info-box-title">
+<p>Why AIC?</p>
+</div>
+<p>AIC is great because it balances how well your model fits the data with how many predictors you’re using. It does this by penalizing models with more predictors—so you can’t just keep adding variables to improve fit. Without this penalty, you’d end up overfitting: your model would fit the current data perfectly but fail on new data.</p>
+<p>AIC by itself doesn’t mean much—it’s only useful as a relative measure for comparing different models against each other. When you do compare models, lower AIC values indicate better models.</p>
+</div>
+<p>As we said, if the variance related to the random effects is too small, it probably isn’t contributing much to the model. If it’s high, it’s likely helping the model by capturing important variability in the data.</p>
+<p>The best way to make this kind of decision is to compare the performance of different models. One of the best indices for this is the Akaike Information Criterion (AIC). AIC gives a relative measure of how well a model fits the data, while penalizing the number of parameters in the model. Lower AIC values indicate better models, as they balance goodness-of-fit with model complexity.</p>
 <p>You can compare the AIC of different models using the following:</p>
 <div class="cell">
-<div class="sourceCode" id="cb20" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
+<div class="sourceCode" id="cb19" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">compare_performance</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -4760,10 +5338,10 @@ font-style: inherit;">)</span></span></code></pre></div>
 
 Name              |           Model |  AIC (weights)
 ----------------------------------------------------
-mod_lm            |              lm | 9184.1 (&lt;.001)
-mod_rintercept    | lmerModLmerTest | 7702.4 (&lt;.001)
-mod_rslope        | lmerModLmerTest | 9178.3 (&lt;.001)
-mod_rinterraction | lmerModLmerTest | 6990.1 (&gt;.999)</code></pre>
+mod_lm            |              lm | 5333.9 (&lt;.001)
+mod_rintercept    | lmerModLmerTest | 4815.8 (&lt;.001)
+mod_rslope        | lmerModLmerTest | 5315.8 (&lt;.001)
+mod_rinterraction | lmerModLmerTest | 4364.8 (&gt;.999)</code></pre>
 </div>
 </div>
 <p>As you can see, the best model based on AIC is the one with both intercept and slope. This is a good way to check if and which random effect structure is necessary for our model.</p>
@@ -4865,7 +5443,7 @@ Note
 <p>So, if you notice something that doesn’t seem quite perfect at this stage, don’t worry! It’s all part of the plan. Our goal is to guide you step-by-step towards building the best model. Just remember, this process takes time!</p>
 <section id="import-data" class="level2"><h2 class="anchored" data-anchor-id="import-data">Import data</h2>
 <p>You can download the data that we will use in this tutorial from here:</p>
-<p><button class="btn btn-secondary downloadthis  " id="dnldts48531"><i class="bi bi-download"></i> Dataset.csv </button></p>
+<p><button class="btn btn-secondary downloadthis  " id="dnldts21689"><i class="bi bi-download"></i> Dataset.csv </button></p>
 <p>Once downloaded we need to import it in our R session. Here we read our csv and we print a small preview of it.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
@@ -4891,13 +5469,13 @@ font-style: inherit;">df</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Id    Event TrialN ReactionTime LookingTime SES
-1  1 NoReward      1     344.1243   1139.8102 low
-2  1 NoReward      2     361.9389   1156.4140 low
-3  1 NoReward      3     406.3499   1073.5468 low
-4  1 NoReward      4     395.2774   1106.5766 low
-5  1 NoReward      5     382.1649    990.5572 low
-6  1 NoReward      6     367.3000   1053.6605 low</code></pre>
+<pre><code>  Id  Event TrialN SaccadicRT LookingTime  SES
+1  1 Simple      2   354.4634   1143.3041 high
+2  1 Simple      4   287.6544   1053.8191 high
+3  1 Simple      5   298.2421   1003.3585 high
+4  1 Simple      8         NA    853.2175 high
+5  1 Simple      9         NA    773.4392 high
+6  1 Simple     12   234.9623    742.8035 high</code></pre>
 </div>
 </div>
 <p>You can see that the data is really simple! We have 4 columns:</p>
@@ -5034,26 +5612,26 @@ Call:
 lm(formula = LookingTime ~ TrialN * Event, data = df)
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--772.0 -159.7   -6.1  190.5  607.1 
+    Min      1Q  Median      3Q     Max 
+-609.15 -212.47   13.17  218.58  676.70 
 
 Coefficients:
-                    Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)        1390.1655    29.1769  47.646   &lt;2e-16 ***
-TrialN               -7.5998     2.9897  -2.542   0.0113 *  
-EventReward          99.8279    39.3360   2.538   0.0114 *  
-TrialN:EventReward    0.1332     3.7240   0.036   0.9715    
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        1549.469     39.763  38.967  &lt; 2e-16 ***
+TrialN              -12.384      3.362  -3.683 0.000264 ***
+EventSimple        -175.450     56.846  -3.086 0.002176 ** 
+TrialN:EventSimple   -8.661      4.725  -1.833 0.067605 .  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 253.2 on 656 degrees of freedom
-  (140 observations deleted due to missingness)
-Multiple R-squared:  0.05147,   Adjusted R-squared:  0.04713 
-F-statistic: 11.87 on 3 and 656 DF,  p-value: 1.417e-07</code></pre>
+Residual standard error: 268.1 on 376 degrees of freedom
+  (20 observations deleted due to missingness)
+Multiple R-squared:  0.2892,    Adjusted R-squared:  0.2835 
+F-statistic: 50.99 on 3 and 376 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Woohoo! This was super simple!! 🎉 We can use the output of the model to understand whether the variables are predicting LookingTime. The magic number we’re looking for is the p-value, hiding in the last column of the <strong>Coefficients section</strong>. If the p-value is below 0.05, we’ve got ourselves an effect! If it’s above, sadly we don’t. <u><strong>AND YES, EVEN IF IT’S 0.051!!!</strong></u> Rules are rules in the p-value game!</p>
-<p>What goodies can we spot here? First, our <strong>Intercept</strong> is significant (don’t worry, we’ll decode this mysterious value later!). Even more exciting, we’ve got a significant effect of <strong>TrialN</strong> – our continuous variable – (p = 0.0113) and a significant effect of <strong>Event</strong> (p = 0.0114). Double win! However, the interaction between TrialN and Event is playing hard to get with that p = 0.9715. That’s nowhere near significant!</p>
+<p>What can we spot here? First, our <strong>Intercept</strong> is significant (don’t worry, we’ll decode this mysterious value later!). Even more exciting, we’ve got a significant effect of <strong>TrialN</strong> – our continuous variable – (p = 0.0003) and of <strong>Event</strong> (p = 0.00218). However the interaction between <strong>TrialN</strong> and <strong>Event</strong> (p = 0.068) is playing hard to get.</p>
 <p>This is already pretty cool, right?!? But here’s the deal - when looking at model outputs, people often get hypnotized by p-values. <strong>However, there’s MUCH more to unpack in a model summary!</strong> The full story of our data is waiting to be discovered in the complete model output. Let’s dive in together and crack this statistical puzzle!</p>
 </section></section><section id="interpret-our-model" class="level1"><h1>Interpret our Model</h1>
 <p>Here what the summary is telling us!!</p>
@@ -5108,7 +5686,7 @@ Note
 <section id="intercept" class="level3"><h3 class="anchored" data-anchor-id="intercept">(Intercept)</h3>
 <p>The intercept often confuses people who approach linear models for the first time. What exactly is it? 🤔</p>
 <p>The (Intercept) represents the reference levels where all our predictors (<code>TrialN</code> and <code>Event</code>) are <strong>0</strong>. While <code>TrialN</code> is easy to understand when it’s 0 (<code>TrialN</code> 0 in our case would be the first trial), you may be scratching your head thinking…how can <code>Event</code> be 0? It’s a categorical variable, it can’t be 0!!!! <code>TrialN == 0</code>…sure….but <code>Event</code>??</p>
-<p>You are absolutely right! When a model encounters a categorical variable, it cleverly selects the first level of such variable as the reference level. If you take another look at our model summary, you can see that there’s information for the <strong>Complex Stimulus</strong> level of the <code>Event</code> variable but nothing about the <strong>Simple Stimulus</strong> level. This is because the <strong>Simple Stimulus</strong> level has been selected by the model as the reference level and is thus represented in the intercept value! 💡</p>
+<p>You are absolutely right! When a model encounters a categorical variable, it cleverly selects the first level of such variable as the reference level. If you take another look at our model summary, you can see that there’s information for the <strong>Simple Stimulus</strong> level of the <code>Event</code> variable but nothing about the <strong>Complex Stimulus</strong> level. This is because the <strong>Complex Stimulus</strong> level has been selected by the model as the reference level and is thus represented in the intercept value! 💡</p>
 <p>So our intercept (1390.1) actually represents the predicted <strong>LookingTime</strong> when:</p>
 <ol type="1">
 <li><p>We’re on the first trial (<code>TrialN</code> = 0)</p></li>
@@ -5132,7 +5710,7 @@ Tip
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="LinearModels_files/figure-html/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="3000"></a></p>
+<figure class="figure"><p><a href="LinearModels_files/figure-html/plot mean-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/plot mean-1.png" class="img-fluid figure-img" width="3000"></a></p>
 </figure>
 </div>
 </div>
@@ -5143,12 +5721,12 @@ Tip
 <p>At first, the results for <code>Event [Complex]</code> might look like they’re giving us the value of looking time for the <strong>Complex Stimulus</strong>. Super easy, right?!?</p>
 <p>Well… not exactly! 🤔</p>
 <p><strong>In linear models, each coefficient shows the difference in relation to the intercept (the 0 or the reference level), not the exact value of the Complex condition.</strong></p>
-<p>It sounds a bit confusing, but let’s break it down. If we want to understand what is the estimate for a <strong>Complex</strong> event we need to take the <strong>Intercept</strong> (1390.1) –as we mentioned that is actually the <strong>Simple</strong> event – and then just simply add to it the Estimate for the <code>Event [Complex]</code> (99.8). So the model is telling us that a <strong>Complex</strong> event should be 1390.1 + 99.8 = 1489.9.</p>
+<p>It sounds a bit confusing, but let’s break it down. If we want to understand what is the estimate for a <strong>Complex</strong> event we need to take the <strong>Intercept</strong> (1549.47) –as we mentioned that is actually the <strong>Complex</strong> event – and then just simply add to it the Estimate for the <code>Event [Simple]</code> (-175.45). So the model is telling us that a <strong>Complex</strong> event should be 1549.47- -175.45= -350.90.</p>
 <p>See? Not too bad! Let’s visualize it and make it even clearer!</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="LinearModels_files/figure-html/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="3000"></a></p>
+<figure class="figure"><p><a href="LinearModels_files/figure-html/plot mean diff-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/plot mean diff-1.png" class="img-fluid figure-img" width="3000"></a></p>
 </figure>
 </div>
 </div>
@@ -5174,7 +5752,7 @@ Important
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="LinearModels_files/figure-html/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="3000"></a></p>
+<figure class="figure"><p><a href="LinearModels_files/figure-html/plot slope-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/plot slope-1.png" class="img-fluid figure-img" width="3000"></a></p>
 </figure>
 </div>
 </div>
@@ -5184,10 +5762,10 @@ Important
 <p>We’ll take it step by step and look at the interaction in our model parameters. The interaction term between <code>TrialN</code> and <code>Event [Complex]</code> tells us how the relationship between <code>TrialN</code> and <code>LookingTime</code> changes when we switch from the reference Event (<strong>Simple</strong>) to the <strong>Complex</strong> condition.</p>
 <p>To put it simply:</p>
 <ul>
-<li><p>For <strong>Simple</strong> events, <strong>LookingTime</strong> decreases by 7.5 units per trial (that’s our main <code>TrialN</code> coefficient)</p></li>
-<li><p>The interaction coefficient (0.13) tells us how this slope changes for <strong>Complex</strong> events</p></li>
+<li><p>For <strong>Complex</strong> events, <strong>LookingTime</strong> decreases by -12.38 units per trial (that’s our main <code>TrialN</code> coefficient)</p></li>
+<li><p>The interaction coefficient (-8.66) tells us how this slope changes for <strong>Simple</strong> events</p></li>
 </ul>
-<p>So for <strong>Complex</strong> events, the slope would be: -7.5 + 0.13 = -7.37 units per trial.</p>
+<p>So for <strong>Simple</strong> events, the slope would be: -12.38+ -8.66 = -21.05 units per trial.</p>
 <p>What does this mean in real terms? If the interaction coefficient is positive (like in our example), it means participants’ looking time decreases more slowly during <strong>Complex</strong> trials compared to <strong>Simple</strong> trials – the estimate is slightly less negative.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -5204,14 +5782,9 @@ Important
 </div>
 <p>While there is no significant difference, let’s plot the estimated effects for <strong>TrialN</strong> for both <strong>Complex</strong> and <strong>Simple</strong> conditions to visualize this relationship!</p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] time                        est_performance_EventTrial 
-[3] est_performance_Interaction
-&lt;0 rows&gt; (or 0-length row.names)</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="LinearModels_files/figure-html/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="3000"></a></p>
+<figure class="figure"><p><a href="LinearModels_files/figure-html/plot slopes-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/plot slopes-1.png" class="img-fluid figure-img" width="3000"></a></p>
 </figure>
 </div>
 </div>
@@ -5261,7 +5834,7 @@ Note
 </div>
 <p>So now we import <code>easystats</code> and we use the function <code>standardize()</code></p>
 <div class="cell">
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;
@@ -5302,20 +5875,20 @@ font-style: inherit;">df</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Id    Event TrialN ReactionTime LookingTime SES StandardTrialN
-1  1 NoReward      1     344.1243   1139.8102 low     -1.6464789
-2  1 NoReward      2     361.9389   1156.4140 low     -1.4731654
-3  1 NoReward      3     406.3499   1073.5468 low     -1.2998518
-4  1 NoReward      4     395.2774   1106.5766 low     -1.1265382
-5  1 NoReward      5     382.1649    990.5572 low     -0.9532246
-6  1 NoReward      6     367.3000   1053.6605 low     -0.7799111</code></pre>
+<pre><code>  Id  Event TrialN SaccadicRT LookingTime  SES StandardTrialN
+1  1 Simple      2   354.4634   1143.3041 high     -1.4722432
+2  1 Simple      4   287.6544   1053.8191 high     -1.1258330
+3  1 Simple      5   298.2421   1003.3585 high     -0.9526279
+4  1 Simple      8         NA    853.2175 high     -0.4330127
+5  1 Simple      9         NA    773.4392 high     -0.2598076
+6  1 Simple     12   234.9623    742.8035 high      0.2598076</code></pre>
 </div>
 </div>
 <p>We have created like this a new column <code>StandardTrialN</code> with the standardized values of the TrialN and now we can run the model again</p>
 <div class="cell">
-<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">mod_lm</span> <span class="op" style="color: #5E5E5E;
+font-style: inherit;">mod_lm_standardized</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -5344,7 +5917,7 @@ font-style: inherit;"><a href="https://rdrr.io/r/base/summary.html">summary</a><
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">mod_lm</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">mod_lm_standardized</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -5353,25 +5926,35 @@ Call:
 lm(formula = LookingTime ~ StandardTrialN * Event, data = df)
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--772.0 -159.7   -6.1  190.5  607.1 
+    Min      1Q  Median      3Q     Max 
+-609.15 -212.47   13.17  218.58  676.70 
 
 Coefficients:
-                            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)                1310.3674    16.9387  77.359  &lt; 2e-16 ***
-StandardTrialN              -43.8501    17.2505  -2.542   0.0113 *  
-EventReward                 101.2269    21.1961   4.776 2.21e-06 ***
-StandardTrialN:EventReward    0.7688    21.4872   0.036   0.9715    
+                           Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                 1419.44      19.51  72.740  &lt; 2e-16 ***
+StandardTrialN               -71.50      19.41  -3.683 0.000264 ***
+EventSimple                 -266.39      27.53  -9.677  &lt; 2e-16 ***
+StandardTrialN:EventSimple   -50.01      27.28  -1.833 0.067605 .  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 253.2 on 656 degrees of freedom
-  (140 observations deleted due to missingness)
-Multiple R-squared:  0.05147,   Adjusted R-squared:  0.04713 
-F-statistic: 11.87 on 3 and 656 DF,  p-value: 1.417e-07</code></pre>
+Residual standard error: 268.1 on 376 degrees of freedom
+  (20 observations deleted due to missingness)
+Multiple R-squared:  0.2892,    Adjusted R-squared:  0.2835 
+F-statistic: 50.99 on 3 and 376 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>As you can see the estimates are different!!! Because as we mentioned the reference level and the scale are different now. However do not panic, even if some values are different the relations are the same, we still have negative estimate for the time variable (here StandardTrialN and before TrialN) and positive for the <strong>Complex</strong> condition. Also the p-values are the same!</p>
+<p>What is important to keep in mind is that now <strong>0 is the mean of our data</strong> and this makes the intercept much more interpretable! All the estimates are now in relation to the mean of the data. Let’s visualize this!</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="LinearModels_files/figure-html/standardized plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/standardized plot-1.png" class="img-fluid figure-img" width="3000"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As you can see the plot is the same but now the data hits 0 at the mean of the data!!</p>
 <p>So there you have it - standardizing your predictors makes your model both more interpretable and more robust, all while keeping the fundamental relationships in your data intact. It’s one of those simple steps that can make a big difference in your statistical journey! 🌟</p>
 </section></section><section id="model-checks" class="level1"><h1>Model checks</h1>
 <p>So now we have run our model and seen the summary… That’s great but how can we know that our model actually is ok?? Linear models, like most statistical techniques require some data assumption to be run. These assumption need to be met otherwise even if our model could be showing amazing results it won’t be valid.</p>
@@ -5385,7 +5968,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>As we mentioned at the beginning of our tutorial the model we have run in this tutorial is a very simple model that is not actully…correct!!</p>
+<p>As we mentioned at the beginning of our tutorial the model we have run in this tutorial is a very simple model that is not actually…correct!! We will see in the next tutorials how we should actually analyze this data and what we are missing here.</p>
 </div>
 </div>
 <p>What are these assumptions?? Well they depend a lot on the model you are running. We won’t go into much details as there are very good website that explain them<sup><a href="https://bookdown.org/pingapang9/linear_models_bookdown/assumptions.html">1</a></sup> ,<sup><a href="https://www.statology.org/linear-regression-assumptions/">2</a></sup>, in this simple linear mode they are:</p>
@@ -5398,7 +5981,7 @@ Warning
 <p>Again this is not a theoretical tutorial. So we won’t go into details as which are the assumptions (please read some of the link provided tho!!) but we will show you how to actually check these assumptions.</p>
 <p>There is a super easy and convenient way we usually check these assumptions. Using the <a href="https://easystats.github.io/easystats/">easystats</a> library we can run the function <a href="https://easystats.github.io/performance/reference/check_model.html"><code>check_model()</code></a> to indeed check the model assumptions.</p>
 <div class="cell">
-<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">check_model</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -5409,7 +5992,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="LinearModels_files/figure-html/PlotCheck-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/PlotCheck-1.png" class="img-fluid figure-img" width="4200"></a></p>
+<figure class="figure"><p><a href="LinearModels_files/figure-html/PlotCheck-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/PlotCheck-1.png" class="img-fluid figure-img" width="4200"></a></p>
 </figure>
 </div>
 </div>
@@ -5417,26 +6000,26 @@ font-style: inherit;">)</span></span></code></pre></div>
 <p>Perfect all done!! We have a plot of the model assumptions and we can check if they are met!! But what do these plot represent? Here below we created a table that mirrors each plot with it explanation in it. These are brief and simple explanations. If you want to understand more about the <a href="https://easystats.github.io/performance/reference/check_model.html"><code>check_model()</code></a> function we suggest you to read the documentation about it and also the <a href="https://easystats.github.io/performance/articles/check_model.html">very nice vignette</a> that the package provides.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="wkfusqxedf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="htywnblurp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#wkfusqxedf table {
+#htywnblurp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wkfusqxedf thead, #wkfusqxedf tbody, #wkfusqxedf tfoot, #wkfusqxedf tr, #wkfusqxedf td, #wkfusqxedf th {
+#htywnblurp thead, #htywnblurp tbody, #htywnblurp tfoot, #htywnblurp tr, #htywnblurp td, #htywnblurp th {
   border-style: none;
 }
 
-#wkfusqxedf p {
+#htywnblurp p {
   margin: 0;
   padding: 0;
 }
 
-#wkfusqxedf .gt_table {
+#htywnblurp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -5462,12 +6045,12 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-left-color: #000000;
 }
 
-#wkfusqxedf .gt_caption {
+#htywnblurp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wkfusqxedf .gt_title {
+#htywnblurp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -5479,7 +6062,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-bottom-width: 0;
 }
 
-#wkfusqxedf .gt_subtitle {
+#htywnblurp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5491,7 +6074,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-top-width: 0;
 }
 
-#wkfusqxedf .gt_heading {
+#htywnblurp .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -5503,13 +6086,13 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#wkfusqxedf .gt_bottom_border {
+#htywnblurp .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wkfusqxedf .gt_col_headings {
+#htywnblurp .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5524,7 +6107,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#wkfusqxedf .gt_col_heading {
+#htywnblurp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 12px;
@@ -5544,7 +6127,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   overflow-x: hidden;
 }
 
-#wkfusqxedf .gt_column_spanner_outer {
+#htywnblurp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 12px;
@@ -5556,15 +6139,15 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 4px;
 }
 
-#wkfusqxedf .gt_column_spanner_outer:first-child {
+#htywnblurp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wkfusqxedf .gt_column_spanner_outer:last-child {
+#htywnblurp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wkfusqxedf .gt_column_spanner {
+#htywnblurp .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 1px;
   border-bottom-color: #334422;
@@ -5576,11 +6159,11 @@ font-style: inherit;">)</span></span></code></pre></div>
   width: 100%;
 }
 
-#wkfusqxedf .gt_spanner_row {
+#htywnblurp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wkfusqxedf .gt_group_heading {
+#htywnblurp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5606,7 +6189,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   text-align: left;
 }
 
-#wkfusqxedf .gt_empty_group_heading {
+#htywnblurp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5621,15 +6204,15 @@ font-style: inherit;">)</span></span></code></pre></div>
   vertical-align: middle;
 }
 
-#wkfusqxedf .gt_from_md > :first-child {
+#htywnblurp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wkfusqxedf .gt_from_md > :last-child {
+#htywnblurp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wkfusqxedf .gt_row {
+#htywnblurp .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -5648,7 +6231,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   overflow-x: hidden;
 }
 
-#wkfusqxedf .gt_stub {
+#htywnblurp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5661,7 +6244,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#wkfusqxedf .gt_stub_row_group {
+#htywnblurp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5675,15 +6258,15 @@ font-style: inherit;">)</span></span></code></pre></div>
   vertical-align: top;
 }
 
-#wkfusqxedf .gt_row_group_first td {
+#htywnblurp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wkfusqxedf .gt_row_group_first th {
+#htywnblurp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wkfusqxedf .gt_summary_row {
+#htywnblurp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5693,16 +6276,16 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#wkfusqxedf .gt_first_summary_row {
+#htywnblurp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wkfusqxedf .gt_first_summary_row.thick {
+#htywnblurp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wkfusqxedf .gt_last_summary_row {
+#htywnblurp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5712,7 +6295,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#wkfusqxedf .gt_grand_summary_row {
+#htywnblurp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5722,7 +6305,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#wkfusqxedf .gt_first_grand_summary_row {
+#htywnblurp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5732,7 +6315,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-top-color: #D3D3D3;
 }
 
-#wkfusqxedf .gt_last_grand_summary_row_top {
+#htywnblurp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5742,11 +6325,11 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#wkfusqxedf .gt_striped {
+#htywnblurp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wkfusqxedf .gt_table_body {
+#htywnblurp .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5755,7 +6338,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-bottom-color: #FFFFFF;
 }
 
-#wkfusqxedf .gt_footnotes {
+#htywnblurp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5769,7 +6352,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#wkfusqxedf .gt_footnote {
+#htywnblurp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5778,7 +6361,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#wkfusqxedf .gt_sourcenotes {
+#htywnblurp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5792,7 +6375,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#wkfusqxedf .gt_sourcenote {
+#htywnblurp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5800,72 +6383,72 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#wkfusqxedf .gt_left {
+#htywnblurp .gt_left {
   text-align: left;
 }
 
-#wkfusqxedf .gt_center {
+#htywnblurp .gt_center {
   text-align: center;
 }
 
-#wkfusqxedf .gt_right {
+#htywnblurp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wkfusqxedf .gt_font_normal {
+#htywnblurp .gt_font_normal {
   font-weight: normal;
 }
 
-#wkfusqxedf .gt_font_bold {
+#htywnblurp .gt_font_bold {
   font-weight: bold;
 }
 
-#wkfusqxedf .gt_font_italic {
+#htywnblurp .gt_font_italic {
   font-style: italic;
 }
 
-#wkfusqxedf .gt_super {
+#htywnblurp .gt_super {
   font-size: 65%;
 }
 
-#wkfusqxedf .gt_footnote_marks {
+#htywnblurp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wkfusqxedf .gt_asterisk {
+#htywnblurp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wkfusqxedf .gt_indent_1 {
+#htywnblurp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wkfusqxedf .gt_indent_2 {
+#htywnblurp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wkfusqxedf .gt_indent_3 {
+#htywnblurp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wkfusqxedf .gt_indent_4 {
+#htywnblurp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wkfusqxedf .gt_indent_5 {
+#htywnblurp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wkfusqxedf .katex-display {
+#htywnblurp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wkfusqxedf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#htywnblurp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -5922,7 +6505,7 @@ Tip
 <p>You’ve probably noticed that we’ve been relying on visual checks so far. In our view, this is often the best approach, as statistical tests for model assumptions can sometime be overly stringent. However, there may be situations where you need to provide statistical evidence to support your model assumptions. This often happens when a reviewer (let’s call them Reviewer 2, shall we?) insists on seeing numerical proof. Fortunately, <code>easystats</code> has got your back.</p>
 <p>Here are some examples of what you can use:</p>
 <div class="cell">
-<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
+<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">check_normality</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -5932,12 +6515,12 @@ font-style: inherit;">mod_lm</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Warning: Non-normality of residuals detected (p &lt; .001).</code></pre>
+<pre><code>Warning: Non-normality of residuals detected (p = 0.001).</code></pre>
 </div>
 </div>
 <p>To check the normality of our residuals and:</p>
 <div class="cell">
-<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
+<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">check_homogeneity</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -5947,7 +6530,7 @@ font-style: inherit;">mod_lm</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>OK: There is not clear evidence for different variances across groups (Bartlett Test, p = 0.986).</code></pre>
+<pre><code>OK: There is not clear evidence for different variances across groups (Bartlett Test, p = 0.983).</code></pre>
 </div>
 </div>
 <p>to check homoscedasticity/homogeneity of variance. Again you can find all the function in the <strong>performance</strong> package (part of the Easystats collection)</p>
@@ -5987,7 +6570,7 @@ Note
 <p>Before starting any type of analysis, let’s import the data and take a quick look at it.</p>
 <section id="import-data" class="level2"><h2 class="anchored" data-anchor-id="import-data">Import data</h2>
 <p>The data used in this tutorial comes from the pre-processing tutorial of pupil dilation. If you haven’t run that tutorial yet, it’s a good idea to check it out first to ensure your data is prepared and ready for analysis: <a href="../../CONTENT/EyeTracking/PupilPreprocessing.html">Pre-processing pupil data</a>. In case you did not save the result of the pre-processing you can download them from here :</p>
-<p><button class="btn btn-secondary downloadthis  " id="dnldts64504"><i class="bi bi-download"></i> Preprocessed_PupilData.csv </button></p>
+<p><button class="btn btn-secondary downloadthis  " id="dnldts16586"><i class="bi bi-download"></i> Preprocessed_PupilData.csv </button></p>
 <p>Now that you have the data, let’s import it along with the necessary libraries. We’ll also ensure that the <code>Event</code> and <code>Subjects</code> columns are properly set as factors (categorical for easier analysis. Here’s how:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;
@@ -7991,7 +8574,7 @@ Warning
   <link>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/PupilPreprocessing.html</link>
   <description><![CDATA[ <p>Welcome to your first step into the world of pupillometry! In this tutorial, we’ll walk you through how to preprocess pupil data using a handy R package called <a href="http://samforbes.me/PupillometryR/index.html">PupillometryR</a>. This package makes it simple to clean and even analyze your pupil data with just a few lines of R code.</p>
 <p>To keep things straightforward, we’ll be working with a simulated dataset that you can download right here:</p>
-<p><button class="btn btn-secondary downloadthis  " id="dnldts63042"><i class="bi bi-download"></i> PupilData.zip </button></p>
+<p><button class="btn btn-secondary downloadthis  " id="dnldts19384"><i class="bi bi-download"></i> PupilData.zip </button></p>
 <p>Download and unzip this folder. This dataset is based on the experimental design we introduced earlier in our eye-tracking series. If you’re not familiar with it or need a quick refresher, we recommend checking out the “<a href="../../CONTENT/EyeTracking/Intro_eyetracking.html">Introduction to eye-tracking</a>” guide before diving in.</p>
 <p>This tutorial serves as a foundation for understanding how to preprocess pupil data. Once you’ve grasped the essentials, we encourage you to explore the full range of functions and features <a href="http://samforbes.me/PupillometryR">PupillometryR</a> has to offer.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -9729,7 +10312,7 @@ font-style: inherit;">)</span> </span></code></pre></div>
 <p>As you can see, the data structure is now completely transformed. We’ve segmented the data into distinct time windows, with each segment starting at <strong>-0.1 seconds (-100 ms)</strong> and extending to <strong>2 seconds (2000 ms)</strong>. This new structure ensures consistency across all segments, making the data ready for further analysis.</p>
 </section><section id="make-pupillometryr-data" class="level3"><h3 class="anchored" data-anchor-id="make-pupillometryr-data">Make PupillometryR data</h3>
 <p>Ok, now it’s time to start working with <strong>PupillometryR</strong>! 🎉</p>
-<p>In the previous steps, we changed our event structure, and you might be wondering — why all that effort? Well, it’s because PupillometryR needs the data in this specific format to do its magic. To get started, we’ll pass our dataframe to the <code><a href="https://rdrr.io/pkg/PupillometryR/man/make_pupillometryr_data.html">make_pupillometryr_data()</a></code> function. If you’re already thinking, “Oh no, not another weird object type that’s hard to work with!” — don’t worry! The good news is that the main object it creates is just a regular dataframe. That means we can still interact with like we’re used to. This makes the pre-processing steps much less frustrating. Let’s get started!</p>
+<p>In the previous steps, we changed our event structure, and you might be wondering — why all that effort? Well, it’s because PupillometryR needs the data in this specific format to do its magic. To get started, we’ll pass our dataframe to the <code>make_pupillometryr_data()</code> function. If you’re already thinking, “Oh no, not another weird object type that’s hard to work with!” — don’t worry! The good news is that the main object it creates is just a regular dataframe. That means we can still interact with like we’re used to. This makes the pre-processing steps much less frustrating. Let’s get started!</p>
 <div class="cell">
 <div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
@@ -9737,7 +10320,7 @@ font-style: inherit;">PupilR_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/make_pupillometryr_data.html">make_pupillometryr_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">make_pupillometryr_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -9767,7 +10350,7 @@ font-style: inherit;">Event</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 </div>
-<p>Here, we’re simply using the <strong><code><a href="https://rdrr.io/pkg/PupillometryR/man/make_pupillometryr_data.html">make_pupillometryr_data()</a></code></strong> function to pass in our data and specify which columns contain the key information. This tells PupillometryR where to find the crucial details, like subject IDs, events, and pupil measurements, so it knows how to structure and process the data properly.</p>
+<p>Here, we’re simply using the <strong><code>make_pupillometryr_data()</code></strong> function to pass in our data and specify which columns contain the key information. This tells PupillometryR where to find the crucial details, like subject IDs, events, and pupil measurements, so it knows how to structure and process the data properly.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -9783,7 +10366,7 @@ Tip
 </div>
 </div>
 <section id="plot" class="level4"><h4 class="anchored" data-anchor-id="plot">Plot</h4>
-<p>One cool feature of the data created using <strong><code><a href="https://rdrr.io/pkg/PupillometryR/man/make_pupillometryr_data.html">make_pupillometryr_data()</a></code></strong> is that it comes with a simple, built-in <code>plot</code> function. This makes it super easy to visualize your data without needing to write tons of code. The plot function works by averaging the data over the <code>group</code> variable. So we can group over subject or condition. Here we use the <code>group</code> variable to focus on the <strong>condition</strong> and average over the subjects.</p>
+<p>One cool feature of the data created using <strong><code>make_pupillometryr_data()</code></strong> is that it comes with a simple, built-in <code>plot</code> function. This makes it super easy to visualize your data without needing to write tons of code. The plot function works by averaging the data over the <code>group</code> variable. So we can group over subject or condition. Here we use the <code>group</code> variable to focus on the <strong>condition</strong> and average over the subjects.</p>
 <p>In this example, we’re plotting the L_P (left pupil) data, grouped by condition. The <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function is actually just a ggplot2 wrapper, which means you can customize to a certain extent like any other ggplot. That’s why we can add elements to it, like <strong><code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw()</a></code></strong>, which gives the plot a cleaner, black-and-white look. Give it a go without adding anything and then learn to customize it!!</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -9917,7 +10500,7 @@ font-style: inherit;">Regressed_data</span> <span class="op" style="color: #5E5E
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/regress_data.html">regress_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">regress_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -10032,7 +10615,7 @@ font-style: inherit;">PupilR_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/make_pupillometryr_data.html">make_pupillometryr_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">make_pupillometryr_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -10070,7 +10653,7 @@ font-style: inherit;">Regressed_data</span> <span class="op" style="color: #5E5E
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/regress_data.html">regress_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">regress_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -10100,7 +10683,7 @@ font-style: inherit;">Mean_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/calculate_mean_pupil_size.html">calculate_mean_pupil_size</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">calculate_mean_pupil_size</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -10222,7 +10805,7 @@ font-style: inherit;">Filtered_data</span> <span class="op" style="color: #5E5E5
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/filter_data.html">filter_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">filter_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -10350,7 +10933,7 @@ font-style: inherit;">Missing_data</span> <span class="op" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/calculate_missing_data.html">calculate_missing_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">calculate_missing_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -10399,7 +10982,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 20 Subject_3      1  0.0587</code></pre>
 </div>
 </div>
-<p>This gives us a new dataframe that shows the amount of missing data for each subject and each trial. While we could manually decide which trials and subjects to keep or remove, PupillometryR makes it easier with the <strong><code><a href="https://rdrr.io/pkg/PupillometryR/man/clean_missing_data.html">clean_missing_data()</a></code></strong> function.</p>
+<p>This gives us a new dataframe that shows the amount of missing data for each subject and each trial. While we could manually decide which trials and subjects to keep or remove, PupillometryR makes it easier with the <strong><code>clean_missing_data()</code></strong> function.</p>
 <p>This function lets you set two % thresholds — one for trials and one for subjects. Here, we’ll set it to reject trials with more than 25% missing data (keep at least 75% of the data) and reject subjects with more than 25% missing data. This way, we ensure our analysis is based on clean, high-quality data.</p>
 <div class="cell">
 <div class="sourceCode" id="cb23" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
@@ -10408,7 +10991,7 @@ font-style: inherit;">Clean_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/clean_missing_data.html">clean_missing_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">clean_missing_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -10654,7 +11237,7 @@ font-style: inherit;">Int_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/interpolate_data.html">interpolate_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">interpolate_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -10877,7 +11460,7 @@ font-style: inherit;">Blink_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/detect_blinks_by_velocity.html">detect_blinks_by_velocity</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">detect_blinks_by_velocity</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span></span>
 <span>    <span class="va" style="color: #111111;
@@ -11100,7 +11683,7 @@ font-style: inherit;">Int_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/interpolate_data.html">interpolate_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">interpolate_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -11350,7 +11933,7 @@ font-style: inherit;">Downsampled_data</span> <span class="op" style="color: #5E
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/downsample_time_data.html">downsample_time_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">downsample_time_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -11478,7 +12061,7 @@ font-style: inherit;">Base_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/baseline_data.html">baseline_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">baseline_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -11514,7 +12097,7 @@ font-style: inherit;">Final_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/subset_data.html">subset_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">subset_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -12780,7 +13363,7 @@ font-style: inherit;">PupilR_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/make_pupillometryr_data.html">make_pupillometryr_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">make_pupillometryr_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -12911,7 +13494,7 @@ font-style: inherit;">Regressed_data</span> <span class="op" style="color: #5E5E
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/regress_data.html">regress_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">regress_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -12942,7 +13525,7 @@ font-style: inherit;">Mean_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/calculate_mean_pupil_size.html">calculate_mean_pupil_size</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">calculate_mean_pupil_size</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -13064,7 +13647,7 @@ font-style: inherit;">filtered_data</span> <span class="op" style="color: #5E5E5
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/filter_data.html">filter_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">filter_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -13211,7 +13794,7 @@ font-style: inherit;">Downsampled_data</span> <span class="op" style="color: #5E
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/downsample_time_data.html">downsample_time_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">downsample_time_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -13338,7 +13921,7 @@ font-style: inherit;">Missing_data</span> <span class="op" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/calculate_missing_data.html">calculate_missing_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">calculate_missing_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -13359,7 +13942,7 @@ font-style: inherit;">Clean_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/clean_missing_data.html">clean_missing_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">clean_missing_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -13566,7 +14149,7 @@ font-style: inherit;">Blink_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/detect_blinks_by_velocity.html">detect_blinks_by_velocity</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">detect_blinks_by_velocity</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span></span>
 <span>  <span class="va" style="color: #111111;
@@ -13777,7 +14360,7 @@ font-style: inherit;">Int_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/interpolate_data.html">interpolate_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">interpolate_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -13981,7 +14564,7 @@ font-style: inherit;">Base_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/baseline_data.html">baseline_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">baseline_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -14017,7 +14600,7 @@ font-style: inherit;">Final_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/subset_data.html">subset_data</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">subset_data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -22205,7 +22788,7 @@ font-style: inherit;">conda</span> activate psychpy</span></code></pre></div>
 <p>As mentioned before, we will use PsychoPy to create our experimental design!! So let’s install it (and also let’s install spyder-kernels that will help us interact with Spyder that we will cover later and tobii_research). Type:</p>
 <div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">pip</span> install psychopy spyder-kernels tobii_research</span></code></pre></div>
+font-style: inherit;">pip</span> install psychopy</span></code></pre></div>
 <p>Conda will think and download stuff for a while!! Do not worry if you see a lot of lines popping up! Give conda time and confirm if prompted. After a while, hopefully you will see that everything went well and now you have a nice psychopy environment with PsychoPy in it!!</p>
 </div>
 <div id="tabset-1-2" class="tab-pane" aria-labelledby="tabset-1-2-tab">
@@ -22224,7 +22807,7 @@ font-style: inherit;">conda</span> activate psychpy</span></code></pre></div>
 <p>As mentioned before, we will use PsychoPy to create our experimental design!! So let’s install it (and also let’s install spyder-kernels that will help us interact with Spyder that we will cover later and tobii_research). Type:</p>
 <div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">pip</span> install psychopy spyder-kernels tobii_research</span></code></pre></div>
+font-style: inherit;">pip</span> install psychopy</span></code></pre></div>
 <p>Conda will think and download stuff for a while!! Do not worry if you see a lot of lines popping up! Give conda time and confirm if prompted. After a while, hopefully you will see that everything went well and now you have a nice psychopy environment with PsychoPy in it!!</p>
 </div>
 </div>
@@ -22236,7 +22819,7 @@ font-style: inherit;">pip</span> install psychopy spyder-kernels tobii_research<
 <p>Installing PsychoPy as a library sometimes can be tricky as it depends a lot on which OS you are on, which hardware that OS has, and a lot of dependencies. While we prefer to install PsychoPy as a library and use it through Spyder, it is not always possible.</p>
 <p>However, there is a simple solution. PsychoPy offers a standalone version. This version comes packaged with everything that is needed to run your experiments and includes the PsychoPy GUI.</p>
 <p>It is usually easier and less error-prone, but it offers less flexibility in some aspects. However, for this study it will be plenty enough! So in case you had any problem installing PsychoPy in a separate environment, we suggest you install it as a standalone.</p>
-<p>You can find it <a href="https://www.psychopy.org/download.html#download"><strong>here</strong></a>. Please download and install it following your operating system guidelines!</p>
+<p>You can find it <strong>herse</strong>. Please download and install it following your operating system guidelines!</p>
 <p>Well done!! Now you should have the PsychoPy icon <img src="https://www.psychopy.org/_static/psychopyLogoType_h240.png" class="img-fluid" width="73"> on your machine!!</p>
 <p>FYI! It’s important to note that PsychoPy offers two main ways to create experiments:</p>
 <ul>
@@ -22249,7 +22832,7 @@ font-style: inherit;">pip</span> install psychopy spyder-kernels tobii_research<
 </section>
 <section id="check-psychopy-installation" class="level1">
 <h1>Check Psychopy Installation</h1>
-<p>As Psychopy can be tricky to install we suggest to do a small check of its working even if it looked like the installation worked perfectly. We ask you to check whether Psychopy worked by simply running a small code in your Psychopy in both cases whether you installed as library or as a standalone software. This won’t only test your Psychopy installation but also give you a taste on how to interact with Spyder and Psychopy</p>
+<p>As Psychopy can be tricky to install we suggest to do a small check of its working even if it looked like the installation worked perfectly. We ask you to check whether Psychopy worked by simply running a small code in your Psychopy in both cases whether you installed as library or as a standalone software. This won’t only test your Psychopy installation but also give you a taste on how to interact with Positron and Psychopy</p>
 <p>Here you can find the script to run:</p>
 <p><a href="../../resources/getting_started_psychopy/TestInstallatioPsychopy.py" class="btn btn-dark" download="TestInstallatioPsychopy.py">📥 Download Test Script</a></p>
 <p>To do so:</p>
@@ -22260,10 +22843,10 @@ font-style: inherit;">pip</span> install psychopy spyder-kernels tobii_research<
 <ul>
 <li><p>open Spyder</p></li>
 <li><p>Create a new console in the psychopy environment we created before:</p>
-<p><em>Consoles –&gt; New console in environment –&gt; Conda: psychopy</em></p>
+<p><em>Select interpreter –&gt; Conda: psychopy</em></p>
 <p><a href="../..\images/GettingStartedWithPsychopy\CreateConsole.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPsychopy/CreateConsole.png" class="img-fluid" width="550"></a></p></li>
-<li><p>Open the script you just downloaded (TestInstallatioPsychopy.py) in Spyder ( use the open Icon or drag and drop the file on Spyder)</p></li>
-<li><p>Press the green play button.</p></li>
+<li><p>Open the script you just downloaded (<code>TestInstallatioPsychopy.py</code>) in Positron ( use the open Icon or drag and drop the file on Positron)</p></li>
+<li><p>Press the play button on the left top corner.</p></li>
 <li><p>A window should appear and show a short countdown at the end of which it will tell you that you are ready for the workshop!</p></li>
 </ul>
 <p>Well done!!</p>
@@ -22273,7 +22856,7 @@ font-style: inherit;">pip</span> install psychopy spyder-kernels tobii_research<
 <li><p>Open Psychopy</p></li>
 <li><p>In <em>Window</em> select <em>Show coder</em></p>
 <p><a href="../..\images/GettingStartedWithPsychopy\Psychopy2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPsychopy/Psychopy2.png" class="img-fluid" width="550"></a></p></li>
-<li><p>Opend the downloaded file (TesterPsychopy.py) using the open button</p></li>
+<li><p>Opend the downloaded file (<code>TestInstallatioPsychopy.py</code>) using the open button</p></li>
 <li><p>Press the green play button</p>
 <p><a href="../..\images/GettingStartedWithPsychopy\Psychopy3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPsychopy/Psychopy3.png" class="img-fluid" width="660"></a></p></li>
 <li><p>A window should appear and show a short countdown at the end of which it will tell you that you are ready for the workshop!</p></li>
@@ -22298,7 +22881,7 @@ font-style: inherit;">pip</span> install psychopy spyder-kernels tobii_research<
 <item>
   <title>Starting with R</title>
   <link>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/GettingStartedWithR.html</link>
-  <description><![CDATA[ <p><img src="https://media1.tenor.com/m/K8Lc2HcGiPEAAAAd/dario-moccia.gif" class="img-fluid quarto-figure quarto-figure-right" style="float:right; margin-right:10px;margin-bottom:10px;" width="150"> R is THE BEST programming language for statistics. <strong>We are ready to fight you on this!</strong> <br><br> We’ll use R extensively throughout the website, especially for statistical modeling, data preprocessing, creating beautiful visualizations, and running complex analyses like mixed-effects models. Whether you’re analyzing reaction times, eye-tracking data, or running sophisticated statistical tests, R will be your best friend. So… on this page, we’ll guide you through installing R and RStudio (one of its best IDEs), plus all the essential libraries you’ll need for our tutorials. Don’t worry – these steps are straightforward and easy to follow.</p>
+  <description><![CDATA[ <p><img src="https://media1.tenor.com/m/K8Lc2HcGiPEAAAAd/dario-moccia.gif" class="img-fluid quarto-figure quarto-figure-right" style="float:right; margin-right:10px;margin-bottom:10px;" width="150"> R is THE BEST programming language for statistics. <strong>We are ready to fight you on this!</strong> <br><br> We’ll use R extensively throughout the website, especially for statistical modeling, data preprocessing, creating beautiful visualizations, and running complex analyses like mixed-effects models. Whether you’re analyzing reaction times, eye-tracking data, or running sophisticated statistical tests, R will be your best friend. So… on this page, we’ll guide you through installing R and Positron (one of its best IDEs), plus all the essential libraries you’ll need for our tutorials. Don’t worry – these steps are straightforward and easy to follow.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -22321,32 +22904,46 @@ Tip
 </ol>
 <p>Well… that really was easy! R is now installed on your computer, but we’re not quite done yet.</p>
 <p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#r-and-rstudio" class="btn btn-primary btn-sm" style="float: right;">Flowchart</a></p>
-</section><section id="rstudio" class="level1"><h1>RStudio</h1>
-<p>While the R installation includes a basic IDE (think of it as a very plain text editor), we definitely want to use RStudio. This is where the magic happens! RStudio transforms R from a command-line tool into a beautiful, user-friendly interface that makes coding a joy rather than a chore. RStudio offers tons of features that will make your data analysis journey much smoother Maybe this step will be a bit trickier…</p>
+</section><section id="positron" class="level1"><h1>Positron</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you have already follow the getting started with Python documentation you shoudl already have positron installed and you can skip this step!</p>
+</div>
+</div>
+<p>While the R installation includes a basic IDE (think of it as a very plain text editor), we definitely want to use something more refined. While Rstudio has been our favorite IDE for a while we now prefer Positron. Positron is a IDE ( based on a fork of Vs Code) that allows to run and interact efficiently with both R and Python and has become our IDE of choice lately.</p>
+<p>Installing Positron is straightforward:</p>
 <ol type="1">
-<li><p>Go to the <a href="https://posit.co/download/rstudio-desktop/">RStudio page</a> (Note: Posit is the company that makes RStudio)</p></li>
-<li><p>Download RSrtudio Desktop for your operating system</p></li>
+<li><p>Go to the <a href="https://positron.posit.co/">Positron website</a></p></li>
+<li><p>Follow the instructions and download Positron for your operating system</p></li>
 <li><p>Run the installer and follow the on-screen instructions</p></li>
 </ol>
-<p>Nope – just as easy as before!</p>
+<p>Once installed, you can launch Positron. Here it is in all its glory:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="../..\images/GettingStartedWithPython/Positron.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPython/Positron.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="946"></a></p>
+</figure>
+</div>
+<p>The first time you launch Positron, you’ll see a <strong>“Start Session”</strong> button in the top-right corner. (If it’s <em>not</em> your first time, you’ll instead see a button showing which environment you’re currently using.)</p>
+<p>Click it—and <em>voilà!</em>—you’ll get a list of all your R interpreters and Python environments. Pretty neat, right?</p>
+<p>Just pick the R interpreter you want to work in (you probably have just one), and the console at the bottom will instantly switch to that setup. From that moment on, any code you run in Positron will use the exact R version and packages installed in it.</p>
+<p>That’s it—now any code you run will execute within the environment you selected. Well done!<br><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPython/PositronEnvs.png" class="img-fluid" width="631"></p>
 <p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#r-and-rstudio" class="btn btn-primary btn-sm" style="float: right;">Flowchart</a></p>
 </section><section id="installing-r-packages" class="level1"><h1>Installing R packages</h1>
-<p>Now that we have both R and RStudio, we need some essential libraries (called “packages” in R). I’ll describe only a few of the main ones here, but more will be installed and covered throughout the tutorials. Core Packages:</p>
+<p>Now that we have both R and Positron, we need some essential libraries (called “packages” in R). I’ll describe only a few of the main ones here, but more will be installed and covered throughout the tutorials. Core Packages:</p>
 <ul>
 <li><p><a href="https://www.tidyverse.org/"><strong>tidyverse</strong></a><strong>:</strong> This is a collection of packages, so when you install and import it, you’re not just getting one library but an entire suite of them. It includes ggplot2 (for stunning visualizations), dplyr (for data manipulation), readr (for reading data), and many more. Perfect for data wrangling and creating beautiful plots. This is probably the most important package ecosystem in R. Explore all the sub-packages to learn more!</p></li>
 <li><p><a href="https://easystats.github.io/easystats/"><strong>easystats</strong></a><strong>:</strong> A user-friendly collection that makes statistical analysis much simpler and more intuitive. It includes packages for model fitting, reporting, and interpretation. Explore all the sub-packages to learn more!</p></li>
 <li><p><a href="https://github.com/lme4/lme4/"><strong>lme4</strong></a><strong>:</strong> The go-to package for fitting linear and generalized linear mixed-effects models. Essential for analyzing complex experimental data where you have repeated measures or hierarchical data structures (which is pretty much every psychology experiment).</p></li>
 <li><p><a href="http://samforbes.me/PupillometryR/"><strong>pupillometryR</strong></a><strong>:</strong> Specialized package for preprocessing and analyzing pupillometry data. A lifesaver if you’re working with eye-tracking studies.</p></li>
 </ul>
-<p>Installing the packages is extremely easy. There are two ways one with a command int he console:</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs">
-<li class="nav-item"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Console</a></li>
-<li class="nav-item"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" aria-controls="tabset-1-2" aria-selected="false">Gui</a></li>
-</ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" aria-labelledby="tabset-1-1-tab">
-<p>Paste in the console</p>
+<p>Installing the packages is extremely easy. In the R console we just activated paste:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -22376,21 +22973,7 @@ font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 </div>
-<p><a href="../..\images/GettingStartedWithR\ConsolePackages.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithR/ConsolePackages.png" class="img-fluid" width="800"></a></p>
 <p>Follow the instructions if any and you are done!!!!</p>
-</div>
-<div id="tabset-1-2" class="tab-pane" aria-labelledby="tabset-1-2-tab">
-<ol type="1">
-<li><p>Go to <strong>Tools</strong> in the top bar</p></li>
-<li><p>Click install packages</p></li>
-<li><p>Paste: <code>tidyverse, easystats, lme4, lmerTest, patchwork, PupillometryR, fitdistrplus</code></p></li>
-<li><p>Click Install</p></li>
-</ol>
-<p><a href="../..\images/GettingStartedWithR\GuiPackages.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithR/GuiPackages.png" class="img-fluid" width="800"></a></p>
-<p>Follow the instructions if any and you are done!!!!</p>
-</div>
-</div>
-</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -22406,14 +22989,14 @@ Additional Packages
 </div>
 <p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#r-and-rstudio" class="btn btn-primary btn-sm" style="float: right;">Flowchart</a></p>
 </section><section id="test-your-installation" class="level1"><h1>Test your installation</h1>
-<p><strong>🎉 Congratulations!</strong> You should now have R and RStudio fully set up with all essential packages!</p>
-<p>But let’s make sure everything is working perfectly before we dive into the tutorials. Want to test whether all packages installed correctly and you’re ready to go? We’ve created a test script that checks whterh all is ok.</p>
-<p>Download our test script and run it in RStudio. If everything is working properly, you’ll see detailed progress updates, sample results, and a nice completion message with a celebration plot at the end. If there are any issues, the script will try to tell you what is wrong.</p>
+<p><strong>🎉 Congratulations!</strong> You should now have R and Positron fully set up with all essential packages!</p>
+<p>But let’s make sure everything is working perfectly before we dive into the tutorials. Want to test whether all packages installed correctly and you’re ready to go? We’ve created a test script that checks whether all is ok.</p>
+<p>Download our test script and run it in Positron. If everything is working properly, you’ll see detailed progress updates, sample results, and a nice completion message with a celebration plot at the end. If there are any issues, the script will try to tell you what is wrong.</p>
 <p><a href="../../resources/GettingStartedWithR/TestInstallationR.R" class="btn btn-dark" download="TestInstallationR.R">📥 Download Test Script</a></p>
 <p>How to use the script:</p>
 <ol type="1">
 <li>Download the file above</li>
-<li>Open RStudio</li>
+<li>Open Positron</li>
 <li>Open the downloaded TestInstallationR.R file</li>
 <li>Select all the code and run it (or press Ctrl+A then Ctrl/Cmd+Enter)</li>
 <li>Watch the magic happen!</li>
@@ -22548,7 +23131,7 @@ Important
 <section id="installing-python-packages" class="level1">
 <h1>Installing python packages</h1>
 <p>To pre-process and analyze the data we will need some specific packages. It is easy to install and manage packages using conda.</p>
-<p>We will use the command <code>conda install …</code> and a list of packages. Here we will install <strong>pandas</strong> (a package to handle dataframes), <strong>numpy</strong> (library to manage arrays), <strong>matplotlib</strong> and <strong>seaborn</strong> (two libraries to plot data), <strong>spyder-kernels</strong> (to allow interaction with the Spyder GUI that we will cover later on).</p>
+<p>We will use the command <code>conda install …</code> and a list of packages. Here we will install <strong>pandas</strong> (a package to handle dataframes), <strong>numpy</strong> (library to manage arrays), <strong>matplotlib</strong> and <strong>seaborn</strong> (two libraries to plot data).</p>
 <p>To do so:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset" data-group="os">
 <ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" aria-controls="tabset-3-1" aria-selected="true">Windows</a></li><li class="nav-item"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" aria-controls="tabset-3-2" aria-selected="false">Mac</a></li></ul>
@@ -22557,7 +23140,7 @@ Important
 <p>Open the Anaconda prompt and type :</p>
 <div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">conda</span> install pandas numpy matplotlib seaborn spyder-kernels</span></code></pre></div>
+font-style: inherit;">conda</span> install pandas numpy matplotlib seaborn</span></code></pre></div>
 <p>After thinking about for few seconds the prompt will download the package and its dependencies.</p>
 <p>Occasionally, conda may encounter difficulties locating the precise package you need. In such cases, pip, another renowned Python package manager, can come to the rescue. You might already be aware of <code>pip</code>, versatility for installing and manage packages in Python.</p>
 <p>Let’s consider I2MC, an exceptional package processing eye-tracking data. With pip, installation is a breeze. Simply use the following command:</p>
@@ -22569,7 +23152,7 @@ font-style: inherit;">pip</span> install I2MC</span></code></pre></div>
 <p>Open your terminal and type :</p>
 <div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">conda</span> install pandas numpy matplotlib seaborn spyder-kernels</span></code></pre></div>
+font-style: inherit;">conda</span> install pandas numpy matplotlib seaborn</span></code></pre></div>
 <p>After thinking about for few seconds the prompt will download the package and its dependencies.</p>
 <p>Occasionally, conda may encounter difficulties locating the precise package you need. In such cases, pip, another renowned Python package manager, can come to the rescue. You might already be aware of <code>pip</code>, versatility for installing and manage packages in Python.</p>
 <p>Let’s consider I2MC, an exceptional package processing eye-tracking data. With pip, installation is a breeze. Simply use the following command:</p>
@@ -22594,38 +23177,28 @@ Additional Packages
 </div>
 <p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#python-and-psychopy" class="btn btn-primary btn-sm" style="float: right;">Flowchart</a></p>
 </section>
-<section id="installing-spyder-ide" class="level1">
-<h1>Installing Spyder IDE</h1>
+<section id="installing-positron-ide" class="level1">
+<h1>Installing Positron IDE</h1>
 <p>Now that we have our environment and packages set up, how do we actually use them? Sure, we could type Python commands directly in the terminal… but let’s be honest, that would be tedious and inefficient for any serious work!</p>
-<p>What we need is an IDE – and our choice is Spyder! Spyder is a powerful scientific IDE built specifically for scientists, engineers, and data analysts. With features like variable exploration, integrated plotting, and excellent debugging tools, it’s perfect for writing and running Python code efficiently.</p>
-<p>Installing Spyder is straightforward. To get started, visit the <a href="https://www.spyder-ide.org/">Spyder website</a>, download the appropriate installer for your operating system, and install it on your machine.</p>
-<p>Once installed, you can launch Spyder. Here it is in all its glory:</p>
+<p>What we need is an IDE – and our choice is Positron! Positron is a powerful scientific IDE (a fork of Vs Code for the nerds out there) built specifically for scientists, engineers, and data analysts. With features like variable exploration, integrated plotting, and excellent debugging tools, it’s perfect for writing and running Python code efficiently.</p>
+<p>And here’s one of its standout features: <strong>it runs both Python and R</strong>! Yep, two of the most popular languages for data science!!</p>
+<p>Installing Positron is straightforward:</p>
+<ol type="1">
+<li><p>Go to the <a href="https://positron.posit.co/">Positron website</a></p></li>
+<li><p>Follow the instructions and download Positron for your operating system</p></li>
+<li><p>Run the installer and follow the on-screen instructions</p></li>
+</ol>
+<p>Once installed, you can launch Positron. Here it is in all its glory:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../..\images/GettingStartedWithPython/spyder.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPython/spyder.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="946"></a></p>
+<p><a href="../..\images/GettingStartedWithPython/Positron.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPython/Positron.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="946"></a></p>
 </figure>
 </div>
-<p>Here’s the key part: you can configure Spyder to use any environment you’ve created. Simply click <strong>Console</strong>, select <strong>New Console in Environment</strong>, and choose your desired environment (for example the <em>working</em> one). This means that the code you will now run into Spyder will access the python and the packages you have in the specific environment.</p>
+<p>The first time you launch Positron, you’ll see a <strong>“Start Session”</strong> button in the top-right corner. (If it’s <em>not</em> your first time, you’ll instead see a button showing which environment you’re currently using.)</p>
+<p>Click it—and <em>voilà!</em>—you’ll get a list of all your Python environments plus any available R interpreter. Pretty neat, right?</p>
+<p>Just pick the one you want to work in (for example, your <strong>working</strong> environment), and the console at the bottom will instantly switch to that setup. From that moment on, any code you run in Positron will use the exact Python version and packages installed in the environment you selected.</p>
 <p>That’s it—now any code you run will execute within the environment you selected. Well done!<br>
-<img src="https://www.spyder-ide.org/assets/media/conda.webp" class="img-fluid" width="503"></p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>To properly run Spyder while connected to your environments, your environment needs to include a specific library.</p>
-<p>Thus you need to install it by:<br>
-<code>conda install spyder-kernels</code><br>
-or<br>
-<code>pip install spyder-kernels</code></p>
-<p>we should have already instaleld this but in case you didn’t please do install it.</p>
-</div>
-</div>
+<img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPython/PositronEnvs.png" class="img-fluid" width="631"></p>
 <p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#python-and-psychopy" class="btn btn-primary btn-sm" style="float: right;">Flowchart</a></p>
 
 
@@ -22983,7 +23556,7 @@ Important
   <category>R</category>
   <category>Python</category>
   <guid>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/DevStartSetupGuide.html</guid>
-  <pubDate>Sat, 30 Aug 2025 21:48:32 GMT</pubDate>
+  <pubDate>Thu, 06 Nov 2025 13:23:02 GMT</pubDate>
 </item>
 </channel>
 </rss>

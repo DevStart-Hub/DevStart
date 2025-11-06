@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Tommaso Ghilardi">
 <meta name="dcterms.date" content="2023-11-21">
-<meta name="keywords" content="R, Rstudio, lme4, lmer, easystats, tidyverse, experimental psychology, tutorial, installation, DevStart, developmental science">
+<meta name="keywords" content="R, Positron, lme4, lmer, easystats, tidyverse, experimental psychology, tutorial, installation, DevStart, developmental science">
 <meta name="description" content="Learn how to insatll and manage R.">
 <title>Starting with R – DevStart</title>
 <style>
@@ -377,7 +377,7 @@ div.callout-details.callout-style-default .callout-icon::before, div.callout-det
    
   <ul>
 <li><a href="#install-r" id="toc-install-r" class="nav-link active" data-scroll-target="#install-r">Install R</a></li>
-  <li><a href="#rstudio" id="toc-rstudio" class="nav-link" data-scroll-target="#rstudio">RStudio</a></li>
+  <li><a href="#positron" id="toc-positron" class="nav-link" data-scroll-target="#positron">Positron</a></li>
   <li><a href="#installing-r-packages" id="toc-installing-r-packages" class="nav-link" data-scroll-target="#installing-r-packages">Installing R packages</a></li>
   <li><a href="#test-your-installation" id="toc-test-your-installation" class="nav-link" data-scroll-target="#test-your-installation">Test your installation</a></li>
   </ul></nav>
@@ -410,11 +410,11 @@ div.callout-details.callout-style-default .callout-icon::before, div.callout-det
 <div>
   <div class="keywords">
     <div class="block-title">Keywords</div>
-    <p>R, Rstudio, lme4, lmer, easystats, tidyverse, experimental psychology, tutorial, installation, DevStart, developmental science</p>
+    <p>R, Positron, lme4, lmer, easystats, tidyverse, experimental psychology, tutorial, installation, DevStart, developmental science</p>
   </div>
 </div>
 
-</header><p><img src="https://media1.tenor.com/m/K8Lc2HcGiPEAAAAd/dario-moccia.gif" class="img-fluid quarto-figure quarto-figure-right" style="float:right; margin-right:10px;margin-bottom:10px;" width="150"> R is THE BEST programming language for statistics. <strong>We are ready to fight you on this!</strong> <br><br> We’ll use R extensively throughout the website, especially for statistical modeling, data preprocessing, creating beautiful visualizations, and running complex analyses like mixed-effects models. Whether you’re analyzing reaction times, eye-tracking data, or running sophisticated statistical tests, R will be your best friend. So… on this page, we’ll guide you through installing R and RStudio (one of its best IDEs), plus all the essential libraries you’ll need for our tutorials. Don’t worry – these steps are straightforward and easy to follow.</p>
+</header><p><img src="https://media1.tenor.com/m/K8Lc2HcGiPEAAAAd/dario-moccia.gif" class="img-fluid quarto-figure quarto-figure-right" style="float:right; margin-right:10px;margin-bottom:10px;" width="150"> R is THE BEST programming language for statistics. <strong>We are ready to fight you on this!</strong> <br><br> We’ll use R extensively throughout the website, especially for statistical modeling, data preprocessing, creating beautiful visualizations, and running complex analyses like mixed-effects models. Whether you’re analyzing reaction times, eye-tracking data, or running sophisticated statistical tests, R will be your best friend. So… on this page, we’ll guide you through installing R and Positron (one of its best IDEs), plus all the essential libraries you’ll need for our tutorials. Don’t worry – these steps are straightforward and easy to follow.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -437,50 +437,50 @@ Tip
 </ol>
 <p>Well… that really was easy! R is now installed on your computer, but we’re not quite done yet.</p>
 <p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#r-and-rstudio" class="btn btn-primary btn-sm" role="button" style="float: right;">Flowchart</a></p>
-</section><section id="rstudio" class="level1"><h1>RStudio</h1>
-<p>While the R installation includes a basic IDE (think of it as a very plain text editor), we definitely want to use RStudio. This is where the magic happens! RStudio transforms R from a command-line tool into a beautiful, user-friendly interface that makes coding a joy rather than a chore. RStudio offers tons of features that will make your data analysis journey much smoother Maybe this step will be a bit trickier…</p>
+</section><section id="positron" class="level1"><h1>Positron</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you have already follow the getting started with Python documentation you shoudl already have positron installed and you can skip this step!</p>
+</div>
+</div>
+<p>While the R installation includes a basic IDE (think of it as a very plain text editor), we definitely want to use something more refined. While Rstudio has been our favorite IDE for a while we now prefer Positron. Positron is a IDE ( based on a fork of Vs Code) that allows to run and interact efficiently with both R and Python and has become our IDE of choice lately.</p>
+<p>Installing Positron is straightforward:</p>
 <ol type="1">
-<li><p>Go to the <a href="https://posit.co/download/rstudio-desktop/">RStudio page</a> (Note: Posit is the company that makes RStudio)</p></li>
-<li><p>Download RSrtudio Desktop for your operating system</p></li>
+<li><p>Go to the <a href="https://positron.posit.co/">Positron website</a></p></li>
+<li><p>Follow the instructions and download Positron for your operating system</p></li>
 <li><p>Run the installer and follow the on-screen instructions</p></li>
 </ol>
-<p>Nope – just as easy as before!</p>
+<p>Once installed, you can launch Positron. Here it is in all its glory:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="../..\images/GettingStartedWithPython/Positron.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../..\images/GettingStartedWithPython/Positron.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="946"></a></p>
+</figure>
+</div>
+<p>The first time you launch Positron, you’ll see a <strong>“Start Session”</strong> button in the top-right corner. (If it’s <em>not</em> your first time, you’ll instead see a button showing which environment you’re currently using.)</p>
+<p>Click it—and <em>voilà!</em>—you’ll get a list of all your R interpreters and Python environments. Pretty neat, right?</p>
+<p>Just pick the R interpreter you want to work in (you probably have just one), and the console at the bottom will instantly switch to that setup. From that moment on, any code you run in Positron will use the exact R version and packages installed in it.</p>
+<p>That’s it—now any code you run will execute within the environment you selected. Well done!<br><img src="../..\images/GettingStartedWithPython\PositronEnvs.png" class="img-fluid" width="631"></p>
 <p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#r-and-rstudio" class="btn btn-primary btn-sm" role="button" style="float: right;">Flowchart</a></p>
 </section><section id="installing-r-packages" class="level1"><h1>Installing R packages</h1>
-<p>Now that we have both R and RStudio, we need some essential libraries (called “packages” in R). I’ll describe only a few of the main ones here, but more will be installed and covered throughout the tutorials. Core Packages:</p>
+<p>Now that we have both R and Positron, we need some essential libraries (called “packages” in R). I’ll describe only a few of the main ones here, but more will be installed and covered throughout the tutorials. Core Packages:</p>
 <ul>
 <li><p><a href="https://www.tidyverse.org/"><strong>tidyverse</strong></a><strong>:</strong> This is a collection of packages, so when you install and import it, you’re not just getting one library but an entire suite of them. It includes ggplot2 (for stunning visualizations), dplyr (for data manipulation), readr (for reading data), and many more. Perfect for data wrangling and creating beautiful plots. This is probably the most important package ecosystem in R. Explore all the sub-packages to learn more!</p></li>
 <li><p><a href="https://easystats.github.io/easystats/"><strong>easystats</strong></a><strong>:</strong> A user-friendly collection that makes statistical analysis much simpler and more intuitive. It includes packages for model fitting, reporting, and interpretation. Explore all the sub-packages to learn more!</p></li>
 <li><p><a href="https://github.com/lme4/lme4/"><strong>lme4</strong></a><strong>:</strong> The go-to package for fitting linear and generalized linear mixed-effects models. Essential for analyzing complex experimental data where you have repeated measures or hierarchical data structures (which is pretty much every psychology experiment).</p></li>
 <li><p><a href="http://samforbes.me/PupillometryR/"><strong>pupillometryR</strong></a><strong>:</strong> Specialized package for preprocessing and analyzing pupillometry data. A lifesaver if you’re working with eye-tracking studies.</p></li>
 </ul>
-<p>Installing the packages is extremely easy. There are two ways one with a command int he console:</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Console</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Gui</a></li>
-</ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>Paste in the console</p>
+<p>Installing the packages is extremely easy. In the R console we just activated paste:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tidyverse"</span>, <span class="st">"easystats"</span>, <span class="st">"lme4"</span>, <span class="st">"lmerTest"</span>, <span class="st">"patchwork"</span>, <span class="st">"PupillometryR"</span>, <span class="st">"fitdistrplus"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><a href="../..\images/GettingStartedWithR\ConsolePackages.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../..\images/GettingStartedWithR\ConsolePackages.png" class="img-fluid" width="800"></a></p>
 <p>Follow the instructions if any and you are done!!!!</p>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<ol type="1">
-<li><p>Go to <strong>Tools</strong> in the top bar</p></li>
-<li><p>Click install packages</p></li>
-<li><p>Paste: <code>tidyverse, easystats, lme4, lmerTest, patchwork, PupillometryR, fitdistrplus</code></p></li>
-<li><p>Click Install</p></li>
-</ol>
-<p><a href="../..\images/GettingStartedWithR\GuiPackages.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="../..\images/GettingStartedWithR\GuiPackages.png" class="img-fluid" width="800"></a></p>
-<p>Follow the instructions if any and you are done!!!!</p>
-</div>
-</div>
-</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -496,14 +496,14 @@ Additional Packages
 </div>
 <p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#r-and-rstudio" class="btn btn-primary btn-sm" role="button" style="float: right;">Flowchart</a></p>
 </section><section id="test-your-installation" class="level1"><h1>Test your installation</h1>
-<p><strong>🎉 Congratulations!</strong> You should now have R and RStudio fully set up with all essential packages!</p>
-<p>But let’s make sure everything is working perfectly before we dive into the tutorials. Want to test whether all packages installed correctly and you’re ready to go? We’ve created a test script that checks whterh all is ok.</p>
-<p>Download our test script and run it in RStudio. If everything is working properly, you’ll see detailed progress updates, sample results, and a nice completion message with a celebration plot at the end. If there are any issues, the script will try to tell you what is wrong.</p>
+<p><strong>🎉 Congratulations!</strong> You should now have R and Positron fully set up with all essential packages!</p>
+<p>But let’s make sure everything is working perfectly before we dive into the tutorials. Want to test whether all packages installed correctly and you’re ready to go? We’ve created a test script that checks whether all is ok.</p>
+<p>Download our test script and run it in Positron. If everything is working properly, you’ll see detailed progress updates, sample results, and a nice completion message with a celebration plot at the end. If there are any issues, the script will try to tell you what is wrong.</p>
 <p><a href="../../resources/GettingStartedWithR/TestInstallationR.R" class="btn btn-dark" role="button" download="TestInstallationR.R">📥 Download Test Script</a></p>
 <p>How to use the script:</p>
 <ol type="1">
 <li>Download the file above</li>
-<li>Open RStudio</li>
+<li>Open Positron</li>
 <li>Open the downloaded TestInstallationR.R file</li>
 <li>Select all the code and run it (or press Ctrl+A then Ctrl/Cmd+Enter)</li>
 <li>Watch the magic happen!</li>
@@ -999,119 +999,111 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "11/21/2023"</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">author-meta:</span><span class="co"> Tommaso Ghilardi</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="an">description-meta:</span><span class="co"> Learn how to insatll and manage R.</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="an">keywords:</span><span class="co"> R, Rstudio, lme4, lmer, easystats, tidyverse, experimental psychology, tutorial, installation, DevStart, developmental science</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="an">keywords:</span><span class="co"> R, Positron, lme4, lmer, easystats, tidyverse, experimental psychology, tutorial, installation, DevStart, developmental science</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - Setup</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - R</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://media1.tenor.com/m/K8Lc2HcGiPEAAAAd/dario-moccia.gif)</span>{fig-align="right" style="float:right; margin-right:10px;margin-bottom:10px;" width="150"} R is THE BEST programming language for statistics. **We are ready to fight you on this!** &lt;br&gt;&lt;br&gt; We'll use R extensively throughout the website, especially for statistical modeling, data preprocessing, creating beautiful visualizations, and running complex analyses like mixed-effects models. Whether you're analyzing reaction times, eye-tracking data, or running sophisticated statistical tests, R will be your best friend. So... on this page, we'll guide you through installing R and RStudio (one of its best IDEs), plus all the essential libraries you'll need for our tutorials. Don't worry – these steps are straightforward and easy to follow.</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://media1.tenor.com/m/K8Lc2HcGiPEAAAAd/dario-moccia.gif)</span>{fig-align="right" style="float:right; margin-right:10px;margin-bottom:10px;" width="150"} R is THE BEST programming language for statistics. **We are ready to fight you on this!** &lt;br&gt;&lt;br&gt; We'll use R extensively throughout the website, especially for statistical modeling, data preprocessing, creating beautiful visualizations, and running complex analyses like mixed-effects models. Whether you're analyzing reaction times, eye-tracking data, or running sophisticated statistical tests, R will be your best friend. So... on this page, we'll guide you through installing R and Positron (one of its best IDEs), plus all the essential libraries you'll need for our tutorials. Don't worry – these steps are straightforward and easy to follow.</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>We strongly recommend using our interactive flowchart to guide yourself through the tutorials! It will help you follow the setup steps in the right order based on your experience level.</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Flowchart</span><span class="co">](DevStartSetupGuide.qmd#r-and-rstudio)</span>{.btn .btn-primary .btn-sm role="button"}</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu"># Install R</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/2560px-R_logo.svg.png)</span>{fig-align="right" style="float:right; margin-right:10px;margin-bottom:10px;" width="60"} Let's start..:</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Go to <span class="co">[</span><span class="ot">this page</span><span class="co">](https://cran.rstudio.com/)</span> (CRAN stands for Comprehensive R Archive Network – it's the official repository for R)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Download R for your operating system</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Run the installer and follow the on-screen instructions (just keep clicking "Next" – the defaults are perfectly fine)</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>Well... that really was easy! R is now installed on your computer, but we're not quite done yet.</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Flowchart</span><span class="co">](DevStartSetupGuide.qmd#r-and-rstudio)</span>{.btn .btn-primary .btn-sm role="button" style="float: right;"}</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="fu"># RStudio</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>While the R installation includes a basic IDE (think of it as a very plain text editor), we definitely want to use RStudio. This is where the magic happens! RStudio transforms R from a command-line tool into a beautiful, user-friendly interface that makes coding a joy rather than a chore. RStudio offers tons of features that will make your data analysis journey much smoother Maybe this step will be a bit trickier...</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Go to the <span class="co">[</span><span class="ot">RStudio page</span><span class="co">](https://posit.co/download/rstudio-desktop/)</span> (Note: Posit is the company that makes RStudio)</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Download RSrtudio Desktop for your operating system</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Run the installer and follow the on-screen instructions</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>Nope – just as easy as before!</span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Flowchart</span><span class="co">](DevStartSetupGuide.qmd#r-and-rstudio)</span>{.btn .btn-primary .btn-sm role="button" style="float: right;"}</span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="fu"># Installing R packages</span></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>Now that we have both R and RStudio, we need some essential libraries (called "packages" in R). I'll describe only a few of the main ones here, but more will be installed and covered throughout the tutorials. Core Packages:</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**tidyverse**</span><span class="co">](https://www.tidyverse.org/)</span>**:** This is a collection of packages, so when you install and import it, you're not just getting one library but an entire suite of them. It includes ggplot2 (for stunning visualizations), dplyr (for data manipulation), readr (for reading data), and many more. Perfect for data wrangling and creating beautiful plots. This is probably the most important package ecosystem in R. Explore all the sub-packages to learn more!</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**easystats**</span><span class="co">](https://easystats.github.io/easystats/)</span>**:** A user-friendly collection that makes statistical analysis much simpler and more intuitive. It includes packages for model fitting, reporting, and interpretation. Explore all the sub-packages to learn more!</span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**lme4**</span><span class="co">](https://github.com/lme4/lme4/)</span>**:** The go-to package for fitting linear and generalized linear mixed-effects models. Essential for analyzing complex experimental data where you have repeated measures or hierarchical data structures (which is pretty much every psychology experiment).</span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**pupillometryR**</span><span class="co">](http://samforbes.me/PupillometryR/)</span>**:** Specialized package for preprocessing and analyzing pupillometry data. A lifesaver if you're working with eye-tracking studies.</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>We strongly recommend using our interactive flowchart to guide yourself through the tutorials! It will help you follow the setup steps in the right order based on your experience level. &lt;br&gt; <span class="co">[</span><span class="ot">Flowchart</span><span class="co">](DevStartSetupGuide.qmd#r-and-rstudio)</span>{.btn .btn-primary .btn-sm role="button"}</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu"># Install R</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/2560px-R_logo.svg.png)</span>{fig-align="right" style="float:right; margin-right:10px;margin-bottom:10px;" width="60"} Let's start..:</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Go to <span class="co">[</span><span class="ot">this page</span><span class="co">](https://cran.rstudio.com/)</span> (CRAN stands for Comprehensive R Archive Network – it's the official repository for R)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Download R for your operating system</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Run the installer and follow the on-screen instructions (just keep clicking "Next" – the defaults are perfectly fine)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>Well... that really was easy! R is now installed on your computer, but we're not quite done yet.</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Flowchart</span><span class="co">](DevStartSetupGuide.qmd#r-and-rstudio)</span>{.btn .btn-primary .btn-sm role="button" style="float: right;"}</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu"># Positron</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>If you have already follow the getting started with Python documentation you shoudl already have positron installed and you can skip this step!</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>While the R installation includes a basic IDE (think of it as a very plain text editor), we definitely want to use something more refined. While Rstudio has been our favorite IDE for a while we now prefer Positron. Positron is a IDE ( based on a fork of Vs Code) that allows to run and interact efficiently with both R and Python and has become our IDE of choice lately.</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>Installing Positron is straightforward:</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Go to the <span class="co">[</span><span class="ot">Positron website</span><span class="co">](https://positron.posit.co/)</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Follow the instructions and download Positron for your operating system</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Run the installer and follow the on-screen instructions</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>Once installed, you can launch Positron. Here it is in all its glory:</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="al">![](/images/GettingStartedWithPython/Positron.png)</span>{fig-align="center" width="946"}</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>The first time you launch Positron, you’ll see a **“Start Session”** button in the top-right corner. (If it’s *not* your first time, you’ll instead see a button showing which environment you’re currently using.)</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>Click it—and *voilà!*—you’ll get a list of all your R interpreters and Python environments. Pretty neat, right?</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>Just pick the R interpreter you want to work in (you probably have just one), and the console at the bottom will instantly switch to that setup. From that moment on, any code you run in Positron will use the exact R version and packages installed in it.</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>That’s it—now any code you run will execute within the environment you selected. Well done!\</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="al">![](/images/GettingStartedWithPython\PositronEnvs.png)</span>{width="631"}</span>
 <span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>Installing the packages is extremely easy. There are two ways one with a command int he console:</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Flowchart</span><span class="co">](DevStartSetupGuide.qmd#r-and-rstudio)</span>{.btn .btn-primary .btn-sm role="button" style="float: right;"}</span>
 <span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>::: panel-tabset</span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="fu">## Console</span></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>Paste in the console</span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"easystats"</span>, <span class="st">"lme4"</span>, <span class="st">"lmerTest"</span>, <span class="st">"patchwork"</span>, <span class="st">"PupillometryR"</span>, <span class="st">"fitdistrplus"</span>))</span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="fu"># Installing R packages</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>Now that we have both R and Positron, we need some essential libraries (called "packages" in R). I'll describe only a few of the main ones here, but more will be installed and covered throughout the tutorials. Core Packages:</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**tidyverse**</span><span class="co">](https://www.tidyverse.org/)</span>**:** This is a collection of packages, so when you install and import it, you're not just getting one library but an entire suite of them. It includes ggplot2 (for stunning visualizations), dplyr (for data manipulation), readr (for reading data), and many more. Perfect for data wrangling and creating beautiful plots. This is probably the most important package ecosystem in R. Explore all the sub-packages to learn more!</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**easystats**</span><span class="co">](https://easystats.github.io/easystats/)</span>**:** A user-friendly collection that makes statistical analysis much simpler and more intuitive. It includes packages for model fitting, reporting, and interpretation. Explore all the sub-packages to learn more!</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**lme4**</span><span class="co">](https://github.com/lme4/lme4/)</span>**:** The go-to package for fitting linear and generalized linear mixed-effects models. Essential for analyzing complex experimental data where you have repeated measures or hierarchical data structures (which is pretty much every psychology experiment).</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**pupillometryR**</span><span class="co">](http://samforbes.me/PupillometryR/)</span>**:** Specialized package for preprocessing and analyzing pupillometry data. A lifesaver if you're working with eye-tracking studies.</span>
 <span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="al">![](/images/GettingStartedWithR\ConsolePackages.png)</span>{width="800"}</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>Installing the packages is extremely easy. In the R console we just activated paste:</span>
 <span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>Follow the instructions if any and you are done!!!!</span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## Gui</span></span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Go to **Tools** in the top bar</span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Click install packages</span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Paste: <span class="in">`tidyverse, easystats, lme4, lmerTest, patchwork, PupillometryR, fitdistrplus`</span></span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Click Install</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"easystats"</span>, <span class="st">"lme4"</span>, <span class="st">"lmerTest"</span>, <span class="st">"patchwork"</span>, <span class="st">"PupillometryR"</span>, <span class="st">"fitdistrplus"</span>))</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>Follow the instructions if any and you are done!!!!</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additional Packages</span></span>
 <span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="al">![](/images/GettingStartedWithR\GuiPackages.png)</span>{width="800"}</span>
-<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>Follow the instructions if any and you are done!!!!</span>
-<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>We may use additional packages in specific tutorials, but don't worry – we'll always mention which ones you need and provide clear installation instructions when the time comes!</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Flowchart</span><span class="co">](DevStartSetupGuide.qmd#r-and-rstudio)</span>{.btn .btn-primary .btn-sm role="button" style="float: right;"}</span>
 <span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additional Packages</span></span>
-<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>We may use additional packages in specific tutorials, but don't worry – we'll always mention which ones you need and provide clear installation instructions when the time comes!</span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="fu"># Test your installation</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>**🎉 Congratulations!** You should now have R and Positron fully set up with all essential packages!</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>But let's make sure everything is working perfectly before we dive into the tutorials. Want to test whether all packages installed correctly and you're ready to go? We've created a test script that checks whether all is ok.</span>
 <span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Flowchart</span><span class="co">](DevStartSetupGuide.qmd#r-and-rstudio)</span>{.btn .btn-primary .btn-sm role="button" style="float: right;"}</span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>Download our test script and run it in Positron. If everything is working properly, you'll see detailed progress updates, sample results, and a nice completion message with a celebration plot at the end. If there are any issues, the script will try to tell you what is wrong.</span>
 <span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a><span class="fu"># Test your installation</span></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">📥 Download Test Script</span><span class="co">](../../resources/GettingStartedWithR/TestInstallationR.R)</span>{.btn .btn-dark .btn role="button" download="TestInstallationR.R"}</span>
 <span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>**🎉 Congratulations!** You should now have R and RStudio fully set up with all essential packages!</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>How to use the script:</span>
 <span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>But let's make sure everything is working perfectly before we dive into the tutorials. Want to test whether all packages installed correctly and you're ready to go? We've created a test script that checks whterh all is ok.</span>
-<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>Download our test script and run it in RStudio. If everything is working properly, you'll see detailed progress updates, sample results, and a nice completion message with a celebration plot at the end. If there are any issues, the script will try to tell you what is wrong.</span>
-<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">📥 Download Test Script</span><span class="co">](../../resources/GettingStartedWithR/TestInstallationR.R)</span>{.btn .btn-dark .btn role="button" download="TestInstallationR.R"}</span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Download the file above</span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Open Positron</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Open the downloaded TestInstallationR.R file</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Select all the code and run it (or press Ctrl+A then Ctrl/Cmd+Enter)</span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>Watch the magic happen!</span>
 <span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>How to use the script:</span>
-<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Download the file above</span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Open RStudio</span>
-<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Open the downloaded TestInstallationR.R file</span>
-<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Select all the code and run it (or press Ctrl+A then Ctrl/Cmd+Enter)</span>
-<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>Watch the magic happen!</span>
-<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>If you see the celebration plot at the end, you're officially ready to tackle all our R tutorials!</span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>If you see the celebration plot at the end, you're officially ready to tackle all our R tutorials!</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
@@ -1122,7 +1114,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
 <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/TommasoGhilardi/DevStart">
+    <a class="nav-link active" href="https://github.com/TommasoGhilardi/DevStart" aria-current="page">
       <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
     </a>
@@ -1139,7 +1131,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom"});
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
