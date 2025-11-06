@@ -46,11 +46,12 @@ random_intercept_slope_cor <- -0.2   # Correlation between baseline and learning
 grand_mean_dv <- 400                 # Overall average of the dependent variable across all conditions
 
 # Effect sizes (adjusted to create realistic opposing effects)
-fixed_categorical_effect <- -50      # Main effect of condition (Spoon vs. Hammer)
-                                     # When effect-coded: Spoon = +25, Hammer = -25
+fixed_categorical_effect <- -65      # Main effect of condition (Spoon vs. Hammer)
+                                     # When effect-coded: Spoon = +32.5, Hammer = -32.5
 fixed_continuous_effect <- -8        # Learning effect: DV decreases by 8 units per trial
-interaction_effect <- -5           # Interaction: differential learning rates between conditions
-                                     # Adds/subtracts 4 units per trial depending on condition
+interaction_effect <- -8             # Interaction: Small value so linear model doesn't detect it
+                                     # but mixed model (accounting for random effects) does
+                                     # Adjust this value if validation takes too long
 
 # Error Parameters ------------------------------------------------------------
 residual_sd <- 30                    # Within-subject measurement error (trial-to-trial noise)
@@ -66,7 +67,7 @@ if (!file.exists("Simulations/LT_RT/trial_sequences.csv")) {
   # Create a base data frame for subjects and trials.
   trial_data = crossing(
     subject_id = 1:n_subjects,
-    trial_number = 1:trialn) # Note: was ntrials in original, should be trialn
+    trial_number = 1:trialn)
 
   trial_data$categorical_condition <- NA
 
@@ -89,59 +90,78 @@ if (!file.exists("Simulations/LT_RT/trial_sequences.csv")) {
 
 
 # =============================================================================
-# GENERATE SUBJECT-LEVEL RANDOM EFFECTS
-# =============================================================================
-
-# Create Correlated Random Effects -------------------------------------------
-# This section generates subject-specific deviations from the population means.
-# Each subject gets their own intercept (baseline performance) and slope 
-# (learning rate), which are correlated according to the specified correlation.
-subjects <- faux::rnorm_multi(
-  n = n_subjects,                              # Number of subjects to generate
-  vars = 2,                                    # Two random effects: intercept and slope
-  r = random_intercept_slope_cor,              # Correlation between the two effects
-  mu = 0,                                      # Both effects centered at zero (deviations from grand mean)
-  sd = c(random_intercept_sd, random_slope_sd), # Different variability for intercept vs. slope
-  varnames = c("random_intercept", "random_slope_trial") # Descriptive names
-) %>%
-  mutate(subject_id = 1:n_subjects)            # Add unique identifier for each subject
-
-# =============================================================================
-# GENERATE TRIAL-LEVEL DATA STRUCTURE
-# =============================================================================
-
-# Merge Subject Random Effects with Trial Data -------------------------------
-# This joins the subject-specific random effects with the trial structure,
-# so each trial inherits the appropriate subject's random intercept and slope.
-# Merge with subject-level random effects to include individual variations.
-trial_data <- left_join(trial_data, subjects, by = "subject_id")
-trial_data$subject_id <- as.factor(trial_data$subject_id)
-
-# =============================================================================
 # SIMULATION VALIDATION LOOP
 # =============================================================================
 # This loop ensures that the simulated data meets our statistical requirements:
-# - Significant interaction effect (p < 0.05)
-# - Normal residuals in the mixed-effects model
+# - Significant categorical main effect (p < 0.05)
+# - Significant continuous main effect (p < 0.05)
+# - NON-significant interaction in LINEAR model (p >= 0.05)
+# - Significant interaction in MIXED model (p < 0.05)
+# - Normal residuals in the mixed-effects model (p > 0.05)
+# - No outliers detected in the mixed-effects model
+# - 5% random missing data added to simulate realistic data collection
 # If these conditions aren't met, new data is generated automatically.
 
 # Initialize Validation Variables ---------------------------------------------
 # Set up variables to track validation criteria
-P1 <- -Inf  # p-value for interaction effect in linear model
-P2 <- -Inf  # p-value for normality test in mixed-effects model
-iter <- 1   # Iteration counter
+P_categorical <- Inf        # p-value for categorical condition main effect (linear model)
+P_continuous <- Inf         # p-value for trial number main effect (linear model)
+P_interaction_lm <- Inf     # p-value for interaction effect (linear model) - should be NON-sig
+P_interaction_mixed <- Inf  # p-value for interaction effect (mixed model) - should be sig
+P_normality <- 0            # p-value for normality test (want this > 0.05)
+has_outliers <- TRUE        # outlier check (want this to be FALSE)
+iter <- 1                   # Iteration counter
+
 
 # Validation Loop -------------------------------------------------------------
-# Continue generating data until both statistical criteria are met
-while(P1 < 0.05 | P2 < 0.05) {
-  print(paste("Simulation attempt:", iter))
+# Continue generating data until ALL statistical criteria are met:
+# - Categorical main effect significant (p < 0.05)
+# - Continuous main effect significant (p < 0.05)  
+# - Interaction effect in LINEAR model NON-significant (p >= 0.05)
+# - Interaction effect in MIXED model significant (p < 0.05)
+# - Residuals are normal (p > 0.05)
+# - No outliers detected in mixed model
+while(P_categorical >= 0.05 | P_continuous >= 0.05 | P_interaction_lm < 0.05 | 
+      P_interaction_mixed >= 0.05 | P_normality <= 0.05 | has_outliers) {
+  cat("\n")
+  cat("=" %>% rep(60) %>% paste(collapse = ""), "\n")
+  cat("Simulation attempt:", iter, "\n")
+  cat("=" %>% rep(60) %>% paste(collapse = ""), "\n")
   iter <- iter + 1
+  
+  # ==========================================================================
+  # GENERATE SUBJECT-LEVEL RANDOM EFFECTS (NEW FOR EACH ITERATION)
+  # ==========================================================================
+  
+  # Create Correlated Random Effects -------------------------------------------
+  # This section generates subject-specific deviations from the population means.
+  # Each subject gets their own intercept (baseline performance) and slope 
+  # (learning rate), which are correlated according to the specified correlation.
+  subjects <- faux::rnorm_multi(
+    n = n_subjects,                              # Number of subjects to generate
+    vars = 2,                                    # Two random effects: intercept and slope
+    r = random_intercept_slope_cor,              # Correlation between the two effects
+    mu = 0,                                      # Both effects centered at zero (deviations from grand mean)
+    sd = c(random_intercept_sd, random_slope_sd), # Different variability for intercept vs. slope
+    varnames = c("random_intercept", "random_slope_trial") # Descriptive names
+  ) %>%
+    mutate(subject_id = 1:n_subjects)            # Add unique identifier for each subject
+  
+  # ==========================================================================
+  # GENERATE TRIAL-LEVEL DATA STRUCTURE
+  # ==========================================================================
+  
+  # Merge Subject Random Effects with Trial Data -------------------------------
+  # This joins the subject-specific random effects with the trial structure,
+  # so each trial inherits the appropriate subject's random intercept and slope.
+  trial_data_iter <- left_join(trial_data, subjects, by = "subject_id")
+  trial_data_iter$subject_id <- as.factor(trial_data_iter$subject_id)
   
   # ==========================================================================
   # CALCULATE DEPENDENT VARIABLE
   # ==========================================================================
   
-  simulated_data <- trial_data %>%
+  simulated_data <- trial_data_iter %>%
     mutate(
       # Effect Coding for Categorical Variable -------------------------------
       # Convert categorical condition to numeric codes for analysis
@@ -149,7 +169,7 @@ while(P1 < 0.05 | P2 < 0.05) {
       categorical_coded = recode(
         categorical_condition,
         "Complex" = -0.5,    # Complex condition gets -0.5
-        "Simple" = 0.5     # Simple condition gets +0.5
+        "Simple" = 0.5       # Simple condition gets +0.5
       ),
       
       # Calculate Component Effects ------------------------------------------
@@ -183,13 +203,20 @@ while(P1 < 0.05 | P2 < 0.05) {
     to = c(400, 1980)
   )
   
+  # Add Random Missing Data ---------------------------------------------------
+  # Introduce 5% missing data randomly to simulate realistic data collection
+  n_total <- nrow(simulated_data)
+  n_missing <- round(n_total * 0.05)  # 5% of total observations
+  missing_indices <- sample(1:n_total, n_missing, replace = FALSE)
+  simulated_data$dependent_variable[missing_indices] <- NA
+    
   # ==========================================================================
   # MODEL FITTING AND VALIDATION
   # ==========================================================================
   
   # Linear Model (Ignores Subject-Level Dependencies) ----------------------
   # This model treats all observations as independent
-  # Used primarily to check the interaction effect
+  # Used primarily to check the main effects and interaction
   mod_lm <- lm(
     dependent_variable ~ categorical_condition * trial_number,
     data = simulated_data
@@ -205,12 +232,44 @@ while(P1 < 0.05 | P2 < 0.05) {
   )
   
   # Extract Validation Metrics ----------------------------------------------
-  # Check if interaction is significant and residuals are normal
-  P1 <- parameters(mod_lm)[4, 'p']        # p-value for interaction in linear model
-  P2 <- as.numeric(check_normality(mod_mixed))       # p-value for normality of residuals in mixed model
+  # Check if all effects are significant and residuals are normal
+  params_lm <- parameters(mod_lm)
+  params_mixed <- parameters(mod_mixed)
   
-  # Continue loop if validation criteria not met
+  P_categorical <- params_lm[2, 'p']          # p-value for categorical condition (linear model)
+  P_continuous <- params_lm[3, 'p']           # p-value for trial number (linear model)
+  P_interaction_lm <- params_lm[4, 'p']       # p-value for interaction (linear model)
+  P_interaction_mixed <- params_mixed[4, 'p'] # p-value for interaction (mixed model)
+  P_normality <- as.numeric(check_normality(mod_mixed))  # p-value for normality test
+  
+  # Check for outliers in the mixed model
+  outlier_check <- check_outliers(mod_mixed)
+  has_outliers <- any(outlier_check)
+  
 }
+
+
+# =============================================================================
+# MODEL DIAGNOSTICS
+# =============================================================================
+
+parameters(mod_lm)
+parameters(mod_mixed)   # Diagnostics for mixed-effects model
+
+estimate_expectation(mod_mixed, by = c('trial_number','categorical_condition')) |> 
+  ggplot(aes(x=trial_number, y=Predicted, color=categorical_condition)) +
+  geom_line() +
+  geom_ribbon(aes(ymin=Predicted-SE, ymax=Predicted+SE, fill=categorical_condition), alpha=0.3) +
+  theme_minimal()
+
+
+# Check Model Assumptions ----------------------------------------------------
+# Generate diagnostic plots to verify model fit and assumptions
+check_model(mod_lm)      # Diagnostics for linear model
+check_model(mod_mixed)   # Diagnostics for mixed-effects model
+
+
+
 
 # =============================================================================
 # SAVE VALIDATED DATA
@@ -218,16 +277,9 @@ while(P1 < 0.05 | P2 < 0.05) {
 
 # Export Final Dataset -------------------------------------------------------
 # Save the validated simulated data to CSV file
-# write.csv(simulated_data, "Simulations/LT_RT/simulatedNormal.csv", row.names = FALSE)
+write.csv(simulated_data, "Simulations/LT_RT/simulatedNormal.csv", row.names = FALSE)
 
-# =============================================================================
-# MODEL DIAGNOSTICS
-# =============================================================================
 
-# Check Model Assumptions ----------------------------------------------------
-# Generate diagnostic plots to verify model fit and assumptions
-check_model(mod_lm)      # Diagnostics for linear model
-check_model(mod_mixed)   # Diagnostics for mixed-effects model
 
 # =============================================================================
 # DATA VISUALIZATION
