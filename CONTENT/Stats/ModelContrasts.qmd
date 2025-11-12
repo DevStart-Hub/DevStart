@@ -17,13 +17,11 @@ categories:
 options(width = 150)
 ```
 
-Welcome back, stats adventurer! 👋 If you are here, it means you have already gone through our tutorial on: [Linear models](LinearModels.qmd), [Linear mixed effect models](LinearMixedModels.qmd) . Well done!! You are nearly there, my young stats padawan. ![](/images/Stats/ModelEstimates/Padawan.png){style="margin-right:10px;margin-bottom:10px;" width="144"}
+Welcome back, stats adventurer! 👋 If you are here, it means you have already gone through our tutorial on: [Linear models](LinearModels.qmd), [Linear mixed effect models](LinearMixedModels.qmd) and [Generalized linear models](GeneralisedModels.qmd). Well done!! You are nearly there, my young stats padawan. ![](/images/Stats/ModelEstimates/Padawan.png){style="margin-right:10px;margin-bottom:10px;" width="144"}
 
-You might think that all these models are just fancy tools to spit out p-values: “Is there an effect? Yes? Cool. No? Next.” But here’s the truth—**your model is so much more than that**.
+In this tutorial, we're going to take our analysis skills to the next level. One of the coolest and most important aspects of linear models (in my opinion!) isn't just the p-values you get for each predictor. Don't get me wrong—those are important and tell you where there is an effect. But after knowing *where* the effect is, the exciting part is trying to understand *what* our effect actually is. In other words, how can it be described?
 
-Think about it: you spent hours choosing covariates, checking assumptions, wrestling with random effects… all to build a model that *accurately describes your data*. And yet—too often—we reduce all that effort to a single asterisk next to a p-value.
-
-In this tutorial, we’re going beyond p-values. We’re going to **extract, visualize, and interpret predictions** from your model—turning abstract coefficients into real, meaningful patterns in your eye-tracking data.
+Be ready!! We'll explore how to extract and interpret predictions from your model, before learning how to transform these predictions into meaningful statistical insights that tell the complete story of your eyetracking data.
 
 # Model
 
@@ -94,11 +92,11 @@ Now we can extract the predictions from our model. We want to see what our model
 #| label: Predictions
 #| message: false
 #| warning: false
-Exp = estimate_expectation(mod)
-head(Exp)
+Pred = estimate_expectation(mod)
+head(Pred)
 ```
 
-Look!! The function gave us a new dataframe with all the levels of Event and of StandardTrialN and ID that we had in our dataframe (here I am just showing you teh firs 10 lines but you should have as many rows as your original dataframe minus those rows that had NaNs). OK, OK, I will agree....this looks so similar to the original dataframe we had...so why even bother???? Can't we just use the original dataframe?? Well because the predictions represent what our model thinks the data *should* look like based on the patterns it discovered, after accounting for random effects and noise!
+Look!! The function gave us a new dataframe with all the levels of Event and of StandardTrialN and ID that we had in our dataframe. OK, OK, I will agree....this looks so similar to the original dataframe we had...so why even bother???? Can't we just use the original dataframe?? Well because the predictions represent what our model thinks the data *should* look like based on the patterns it discovered, after accounting for random effects and noise!
 
 Let's visualize the difference between the raw data and the predictions
 
@@ -110,7 +108,7 @@ Let's visualize the difference between the raw data and the predictions
 #| fig-height: 5.5
 #| fig-width: 7
 ggplot() +
-  geom_point(data = Exp, aes(x = StandardTrialN, y = Predicted, color = "Predicted"), size = 3, alpha = 0.5) +
+  geom_point(data = Pred, aes(x = StandardTrialN, y = Predicted, color = "Predicted"), size = 3, alpha = 0.5) +
   geom_point(data = df, aes(x = StandardTrialN, y = LookingTime, color = "Observed"), size = 1) +
   scale_color_manual(values = c("Predicted" = "#018080", "Observed" = "black")) +
   labs(y = "Looking time", x = "Standardized trial number", color = "") +
