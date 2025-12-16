@@ -367,15 +367,12 @@ However, there is a better way to confidently adjudicate whether our fancy mixed
 
 There are many indices to compare model performance. One of the best indices is the Akaike Information Criterion (AIC). AIC gives a relative measure of how well a model fits the data, while penalizing the number of parameters in the model. Lower AIC values indicate better models, as they balance goodness-of-fit with model complexity.
 
-:::: {.info-box .info-box-large}
-::: info-box-title
-Why AIC?
-:::
-
+::: {.callout-important title="Why AIC?"}
 AIC is great because it balances how well your model fits the data with how many predictors you're using. If you just keep adding fixed or random effects, the fit will likely improve. Without any additional penalty, you'd end up overfitting: your model would fit the current data perfectly but fail on new data. AIC solves this problem by penalising models with more effects!
 
 The AIC score by itself doesn't mean much. You usually get wacky values like 24'783. However, it is super useful as a *relative* measure, for comparing different models against each other. When you do compare models, lower AIC values indicate better models.
-::::
+:::
+
 
 You can compare the AIC of different models using the following:
 
