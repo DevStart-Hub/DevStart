@@ -373,7 +373,6 @@ AIC is great because it balances how well your model fits the data with how many
 The AIC score by itself doesn't mean much. You usually get wacky values like 24'783. However, it is super useful as a *relative* measure, for comparing different models against each other. When you do compare models, lower AIC values indicate better models.
 :::
 
-
 You can compare the AIC of different models using the following:
 
 ```{r}
