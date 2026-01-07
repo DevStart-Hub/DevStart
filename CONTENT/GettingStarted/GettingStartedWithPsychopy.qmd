@@ -143,7 +143,7 @@ To do so:
 ::: panel-tabset
 ## PsychoPy as library
 
--   open Spyder
+-   open Positron
 
 -   Create a new console in the psychopy environment we created before:
 

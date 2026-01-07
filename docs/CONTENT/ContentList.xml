@@ -21438,7 +21438,7 @@ font-style: inherit;">pip</span> install psychopy dvst-detox</span></code></pre>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" aria-labelledby="tabset-2-1-tab">
 <ul>
-<li><p>open Spyder</p></li>
+<li><p>open Positron</p></li>
 <li><p>Create a new console in the psychopy environment we created before:</p>
 <p><em>Select interpreter –&gt; Conda: psychopy</em></p>
 <p><a href="../..\images/GettingStartedWithPsychopy\CreateConsole.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPsychopy/CreateConsole.png" class="img-fluid" width="550"></a></p></li>
@@ -22162,7 +22162,7 @@ Important
   <category>R</category>
   <category>Python</category>
   <guid>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/DevStartSetupGuide.html</guid>
-  <pubDate>Wed, 07 Jan 2026 21:00:49 GMT</pubDate>
+  <pubDate>Wed, 07 Jan 2026 21:05:38 GMT</pubDate>
 </item>
 </channel>
 </rss>
