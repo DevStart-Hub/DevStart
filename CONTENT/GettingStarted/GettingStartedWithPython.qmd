@@ -182,6 +182,20 @@ Click it—and *voilà!*—you’ll get a list of all your Python environments p
 Just pick the one you want to work in (for example, your **working** environment), and the console at the bottom will instantly switch to that setup. From that moment on, any code you run in Positron will use the exact Python version and packages installed in the environment you selected.
 
 That’s it—now any code you run will execute within the environment you selected. Well done!\
-![](/images/GettingStartedWithPython\PositronEnvs.png){width="631"}
+![](/images/GettingStartedWithPython\PositronEnvs.png){width="400"}
+
+**Final Step: Installing the H5Web Extension**
+
+Since we'll be working with HDF5 files throughout this tutorial, we recommend installing a helpful extension. Extensions are add-ons that enhance your environment with additional features and functionality.
+
+We suggest installing **H5Web**, which allows you to preview HDF5 file contents directly in Positron without writing any code.
+
+1.  Click the Extensions icon ![](/images/GettingStartedWithPython\ExtensioIcon.png){width="32" height="38"} in the primary sidebar (typically on the left side of VS Code)
+
+2.  Search for "H5Web"
+
+3.  Click Install
+
+That's it—you're all set!
 
 [Flowchart](DevStartSetupGuide.qmd#python-and-psychopy){.btn .btn-primary .btn-sm role="button" style="float: right;"}

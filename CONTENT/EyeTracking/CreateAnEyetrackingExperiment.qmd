@@ -13,7 +13,7 @@ categories:
   - Python
 ---
 
-This page will show you how to collect eye-tracking data in a simple Psychopy paradigm. We will use the same paradigm that we built together in the [Getting started with Psychopy](/CONTENT/GettingStarted/GettingStartedWithPsychopy.qmd) tutorial. If you have not done that tutorial yet, please go through it first.
+This page will show you how to collect eye-tracking data in a simple Psychopy paradigm using [DeToX](https://devstart.org/DeToX). We will use the same paradigm that we built together in the [Getting started with Psychopy](/CONTENT/GettingStarted/GettingStartedWithPsychopy.qmd) tutorial. If you have not done that tutorial yet, please go through it first.
 
 ::: callout-caution
 **Tobii eye-tracker**
@@ -21,394 +21,181 @@ This page will show you how to collect eye-tracking data in a simple Psychopy pa
 Note that this tutorial is specific for using **Tobii eye-trackers**. The general steps and idea are obviously applicable to other eye-trackers, but the specific code and packages may vary.
 :::
 
-::: callout-note
-**Our Approach**
+### Why DeToX?
 
-The method we'll show you here is designed to be **simple and functional** rather than the most efficient or sophisticated approach possible. There are more advanced techniques for handling eye tracking data collection, buffer management, and event synchronization, but we've prioritized code that's easy to understand and modify.
+In previous versions of this tutorial, we used the raw `tobii_research` library. While powerful, it required writing complex "callback functions," managing memory buffers manually, and performing difficult timestamp synchronizations.
 
-Our goal is to get you up and running with a working eye tracking experiment that you can build upon. Once you're comfortable with these basics, you can always optimize and refine your approach for more demanding applications.
-:::
+[DeToX ("Detoxify your Eye Tracking")](https://devstart.org/DeToX) is a wrapper we built to handle all that heavy lifting for you. It handles the connections, saves the data, and automatically synchronizes your event markers with the eye-tracking data.
 
-# Tobii_sdk
+## Preparation
 
-To start, we will look into how to connect and talk to our Tobii eyetracker with the **SDK** that Tobii provides. An **SDK** is a collection of tools and programs for developing applications for a specific platform or device. We will use the **Python Tobii SDK** that lets us easily find and get data from our Tobii eye tracker.
+Let’s begin importing the libraries that we will need for this example
 
-## Install
-
-To install the Python Tobii SDK, we can simply run this command in our conda terminal:
-
-``` bash
-pip install tobii_research
+```{python}
+#| label: imports
+import os
+from pathlib import Path
+from psychopy import core, event, visual,sound
+from DeToX import ETracker
 ```
 
-:::: {.info-box .info-box-large}
-::: info-box-title
-Compatibility older eye-trackers
-:::
+Most of these imports should look familiar from our previous tutorial—we need them to locate files, handle timing, and present our stimuli.
 
-If you're using an older Tobii eye-tracker, check the compatibility page to see which version of tobii_research you need for your specific model. Check it [here](https://developer.tobiipro.com/tobiiprosdk/eyetrackercompatibility.html).
-::::
+The new addition here is `ETracker`. This is DeToX’s main class and acts as your central hub for all eye-tracking operations. Throughout your experiment, you will interact with this single object to handle everything from calibration to data recording.
 
-Great! We have installed the Tobii SDK.
+### Window
+
+As we have seen in previous tutorials, every PsychoPy experiment needs a window. This is the canvas where all your stimuli will appear and where participants will interact with your study.
+
+Crucially, the `ETracker` class requires this window object to function properly. It uses the window's properties (like size and unit system) to correctly map eye-tracking coordinates to your screen.
+
+Let's create one now:
+
+```{python}
+#| label: Window creation
+# Create the experiment window
+win = visual.Window(
+    size=[1920, 1080],  # Window dimensions in pixels
+    fullscr=True,       # Expand to fill the entire screen
+    units='pix'         # Use pixels as the measurement unit
+)
+```
 
 ## Connect to the eye-tracker
 
-So how does this library work, how do we connect to the eye-tracker and collect our data? Very good questions!
+With our window prepared, the next step is to establish a connection to the hardware. Unlike standard SDKs that require you to manually search for devices and manage data streams, DeToX streamlines this process through a single main controller: the **`ETracker`**.
 
-The `tobii_research` documentation is quite extensive and describes in detail a lot of functions and data classes that are very useful. However, we don't need much to start our experiment.
-
-First we need to identify all the eye trackers connected to our computer. Yes, plural, `tobii_research` will return a list of all the eye trackers connected to our computer. 99.99999999% of the time you will only have 1 eye tracker connected, so we can just select the first (and usually only) eye tracker found.
+To initialize it, simply pass your PsychoPy window object. DeToX will automatically locate the first available Tobii tracker and configure the coordinate systems to match your screen settings.
 
 ```{python}
-# Import tobii_research library
-import tobii_research as tr
-
-# Find all connected eye trackers
-found_eyetrackers = tr.find_all_eyetrackers()
-
-# We will just use the first one
-Eyetracker = found_eyetrackers[0]
+#| label: Et controller
+#| eval: false
+ET_controller = ETracker(win)
 ```
 
-Perfect!! We have identified our eye-trackers, and we have selected the first one (and only).
+::: callout-important
+## Don't Have an Eye Tracker? No Problem!
 
-We are now ready to use our eye-tracker to collect some data... but how?
+If you're following along without a Tobii eye tracker connected, you can still test everything using **simulation mode**. Just pass `simulate=True` when creating your `ETracker`:
+
+```{python}
+#| label: Et controller simulation
+ET_controller = ETracker(win, simulate=True)
+```
+
+This tells DeToX to collect data from your **mouse position** instead of an actual eye tracker—perfect for development, testing, or learning the workflow before you have hardware access 😉
+:::
+
+Upon execution, DeToX connects to the device and prints a confirmation summary. This is a quick way to verify that your tracker is detected and running at the correct frequency:
+
+``` markdown
+┌────────────────── Eyetracker Info ──────────────────┐
+│Connected to the eyetracker:                         │
+│ - Model: Tobii Pro Fusion                           │
+│ - Current frequency: 250.0 Hz                       │
+│ - Current illumination mode: Default                │
+│Other options:                                       │
+│ - Possible frequencies: (30.0, 60.0, 120.0, 250.0)  │
+│ - Possible illumination modes: ('Default',)         │
+└─────────────────────────────────────────────────────┘
+```
+
+Now that we are connected, we are ready to start recording!
 
 ## Collect data
 
-Tobii_research has a cool way of telling us what data we are collecting at each time point. It uses a callback function. What is a callback function, you ask? It is a function that tobii runs each time it has a new data point. Let's say we have an eye tracker that collects data at 300Hz (300 samples per second): the function will be called every time the tobii has one of those 300 samples.
+Great! You’re now connected to the eye-tracker (or simulating it). However, we’re not actually collecting any data yet—let’s fix that.
 
-This callback function will give us a `gaze_data` dictionary. This dictionary contains multiple information of that collected sample
-
-Here is our callback function:
+To begin data collection, simply call the `start_recording` method on your controller:
 
 ```{python}
-# callback function
-def gaze_data_callback(gaze_data):
-    print(gaze_data)
+#| label: Start recording
+# Start recording data
+ET_controller.start_recording(filename="testing.h5")
 ```
 
-This will print the entire dictionary to your console. Here's what you'll see:
+This sets everything in motion. The eye-tracker will now continuously collect data in the background while you run your experiment.
 
-``` python
-{'device_time_stamp': 467525500,
- 'system_time_stamp': 6405415231,
- 'left_gaze_point_on_display_area': (0.4633694291, 0.4872185290),
- 'left_gaze_point_in_user_coordinate_system': (-10.15791702, 128.29026794, 40.876254),
- 'left_gaze_point_validity': 1,
- 'left_pupil_diameter': 5.655228,
- 'left_pupil_validity': 1,
- 'left_gaze_origin_in_user_coordinate_system': (-25.86829758, 1.41938722, 644.839478),
- 'left_gaze_origin_in_trackbox_coordinate_system': (0.561557, 0.481128, 0.489121),
- 'left_gaze_origin_validity': 1,
- 'right_gaze_point_on_display_area': (0.4944303632, 0.4498708546),
- 'right_gaze_point_in_user_coordinate_system': (0.7905667424, 135.2486572266, 43.373546),
- 'right_gaze_point_validity': 1,
- 'right_pupil_diameter': 5.307220,
- 'right_pupil_validity': 1,
- 'right_gaze_origin_in_user_coordinate_system': (32.52792358398, -2.97285223007, 640.345520),
- 'right_gaze_origin_in_trackbox_coordinate_system': (0.431783, 0.495703, 0.483452),
- 'right_gaze_origin_validity': 1}
-```
+We use the **HDF5** format (ending in `.h5`), which is a modern and efficient way to store scientific data. It keeps everything organized and fast, so you don't have to worry about managing massive, messy text files.
 
-Wow! Look at all that data from just one sample!
-
-Now we need to tell the eye tracker to actually use our callback function. This part is super easy:
-
-```{python}
-# Start the callback function
-Eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)
-```
-
-What we're doing here is subscribing to the `EYETRACKER_GAZE_DATA` stream and telling it to send all that data to our `gaze_data_callback` function. Once this runs, your console will start flooding with data!
-
-### Global to save
-
-Great! You've set up a callback function that receives eye tracking data from your device. However, printing 300 data points per second to the console creates an unreadable stream of text that's not useful for analysis. We need to store this data properly.
-
-Let's create a list to collect all the gaze data:
-
-```{python}
-# Create an empty list we will append our data to
-gaze_data_buffer = []
-```
-
-Perfect! We've got our list to which we can append the incoming data. We can simply have this list inside of our callback function so every time an new sample appears it will be added there. This is how our script could look now:
-
-```{python}
-# callback function
-def gaze_data_callback(gaze_data):
-    global gaze_data_buffer
-    gaze_data_buffer.append(gaze_data)
-
-
-# Create an empty list we will append our data to
-gaze_data_buffer = []
-
-# Start the callback function
-Eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback, as_dictionary=True)
-```
-
-Notice the `global` keyword in the callback function. This tells Python that we want to use the `gaze_data_buffer` variable that was created outside the function. Without this keyword, Python may create a new local variable instead of using our existing list.
-
-Now instead of flooding the console, every new sample gets stored in our list for later analysis!
+If you don't provide a filename, DeToX will automatically generate one for you based on the current time. For more details on the data structure, check the DeToX website.
 
 ## Triggers/Events
 
-As we've seen, our callback function can access Tobii data and process each sample. But there's one crucial piece missing: **we need to know exactly when we presented our stimuli**.
+We have successfully started recording, and data is now being collected continuously in the background. Now you are free to present images, videos, sounds, or whatever your experimental design requires!
 
-In most studies, we present various stimuli - pictures, sounds, or videos. For meaningful analysis, we must know the precise timing of when each stimulus appeared.
+However, presenting stimuli is only half the battle. While the eye tracker records *where* the participant is looking, it is crucial to mark *when* specific events happen (e.g., "Image appeared", "Sound started").
 
-The Tobii SDK provides an elegant solution through the `tr.get_system_time_stamp()` function. This function returns the current time using the same system clock that the eye tracker uses for its data timestamps. Remember that each gaze sample includes a `system_time_stamp` field? This means we can perfectly synchronize our events with the gaze data.
+Without these markers (or "triggers"), your data will just be a long, unbroken stream of coordinates, making it impossible to determine what the participant was looking at at any given moment. This synchronization is essential for analysis.
 
-We can create a simple event-logging system by storing timestamps alongside descriptive labels:
+### How to Record an Event
 
-```{python}
-Events = [] # create empty list
+To mark a specific moment in time, simply call the `record_event` function. DeToX automatically captures the precise system timestamp and merges it into your data file.
 
-# Get the current time from the eye-tracker's clock
-Events.append({'system_time_stamp':  tr.get_system_time_stamp(), 'label': 'Our First event!!'})
-```
-
-## Save the data
-
-Perfect! Now we have two lists containing all our information. They grow continuously (especially the `gaze_data_buffer`) and we need an efficient way to save them.
-
-There are two common approaches:
-
-1.  **Save immediately**: Write data inside the callback function, appending to a CSV each time
-
-2.  **Save at the end**: Collect all data in memory for the entire study, then save everything once
-
-Both approaches have serious drawbacks. The first might slow down our callback function, potentially causing us to miss samples if the computer struggles with frequent file operations. The second approach avoids callback bottlenecks, but if Python crashes during the study (and trust me, it happens!), we'd lose **all** our precious data.
-
-**The solution? A hybrid approach!** We store data in memory but save it periodically during quieter moments - like the Inter-Stimulus Interval (ISI) between trials. This timing is perfect because participants are resting anyway.
-
-### The Buffer Swap Technique
-
-The key challenge is avoiding data duplication when we save repeatedly. We need a way to save current data without affecting ongoing data collection.
-
-Our solution uses a **buffer swap**:
-
-Now we need to save our data efficiently. The key challenge is avoiding duplicate data - we don't want to save the same samples multiple times when we call our save function repeatedly.
-
-Our solution is simple: **we can add our sample to a list and once we want to save we can switch it with a new e,pty one!!!** Here, let me show how:
+You should call this function **right after** your window flips. Since `win.flip()` is the moment the stimulus actually appears on the screen, recording the event right after ensures your timestamp is as accurate as possible.
 
 ```{python}
-# Swap buffers
-saving_data, gaze_data_buffer = gaze_data_buffer, []
-saving_events, Events = Events, []
+#| label: Send event
+# Send event
+ET_controller.record_event('Event number 1')
 ```
 
-Here's what happens in this single line:
+## Save data
 
--   `gaze_data_buffer` (full of samples) gets copied to `saving_data`
+While the recording is active, your data (and events) are held in your computer's short-term memory (RAM) for speed. To make this data permanent, it must be written to a file on your hard drive.
 
--   `gaze_data_buffer` simultaneously becomes a fresh, empty list
+There are two ways to do this:
 
--   The same happens for our Events
+### The Standard Way: Save at the End
 
-**Why this works**: This happens instantly in one step, so we don't lose any data. While we're saving the old samples, new samples keep getting collected in the fresh, empty list.
-
-Now we can safely process and save `saving_data` and `saving_events` while data collection continues uninterrupted in the background.
-
-### Align events and data
-
-Next, we need to match up our events with the eye tracking data. First, let's turn our lists into dataframes to make them easier to work with:
+The simplest approach is to save everything once your experiment finishes. When you are done, simply call:
 
 ```{python}
-# Convert lists to dataframes
-data_df = pd.DataFrame(saving_data)
-events_df = pd.DataFrame(saving_events)
+#| label: stop recording
+# Stop recording and save everything
+ET_controller.stop_recording()
 ```
 
-Now comes the tricky part: our events and eye tracking data have different timestamps, but we want to know what event was happening during each eye tracking sample.
+This function performs three critical tasks at once:
 
-Think of it like this: imagine you have a timeline of eye tracking samples (every few milliseconds) and a few event markers (like "stimulus appeared"). We need to figure out which eye tracking samples happened during each event.
+1.  Stops the data stream from the eye tracker.
+
+2.  **Saves** all data currently in memory to your file.
+
+3.  Safely disconnects from the device.
+
+You will see a confirmation message summarizing the session:
+
+``` markdown
+┌────────────── Recording Complete ───────────────┐
+│Data collection lasted approximately 4.02 seconds│
+│Data has been saved to testing.h5                │
+└─────────────────────────────────────────────────┘
+```
+
+### The "Safe" Way: Periodic Saving
+
+If your experiment is short, saving at the end is perfectly fine. However, for longer studies, we highly recommend saving **intermittently**.
+
+If your computer were to crash halfway through a long session, you would lose all the data currently sitting in memory. To prevent this, you can "flush" the data to the disk during quiet moments, such as an Inter-Stimulus Interval (ISI) or a break.
+
+Simply call this method whenever you want to secure the data collected so far:
 
 ```{python}
-# Find the closest eye tracking sample for each event
-idx = np.searchsorted(data_df['system_time_stamp'].values,
-                      events_df['system_time_stamp'].values,
-                      side='left')
-
-# Add event labels to our eye tracking data
-data_df['events'] = ''
-data_df.loc[idx, 'events'] = events_df['label'].values  
+#| label: save data
+# Append current data to file and clear memory
+ET_controller.save_data()
 ```
 
-The `searchsorted` function looks at all our eye tracking timestamps and finds where each event timestamp would fit in. It's like inserting event markers into our timeline of eye tracking data.
-
-Now each row of eye tracking data shows what was happening at that moment! This wasn't so hard, was it?
-
-I'd recommend putting this whole process in a function so you can easily save your data whenever needed:ù
-
-```{python}
-# Saving function
-def write_buffer_to_file(filename):
-    global gaze_data_buffer, Events
-
-    # Check if there are data
-    if not gaze_data_buffer:
-        return
-        
-    # Swap buffers - get current data and start fresh
-    saving_data, gaze_data_buffer = gaze_data_buffer, []
-    saving_events, Events = Events, []
-   
-    # Convert lists to dataframes
-    data_df = pd.DataFrame(saving_data)
-    events_df = pd.DataFrame(saving_events)
-   
-    # Match events with eye tracking data
-    idx = np.searchsorted(data_df['system_time_stamp'].values,
-                          events_df['system_time_stamp'].values,
-                          side='left')
-    # Add event labels to our eye tracking data
-    data_df['events'] = ''
-    data_df.loc[idx, 'events'] = events_df['label'].values
-   
-    # Save to CSV file (append mode so we don't overwrite previous saves)
-    data_df.to_csv(filename, mode='a', index=False, 
-                   header=not os.path.isfile(filename))
-```
-
-This function automatically grabs all the current data, swaps it with fresh empty lists, and saves everything. The `mode='a'` parameter tells pandas to append new data to the end of an existing file rather than overwriting it. This is perfect for our incremental saving approach since each time we save, we add new rows to our growing CSV file instead of losing previous data.
-
-The `header=not os.path.isfile(filename)` part is a clever trick that writes column headers only when creating a new file. This prevents duplicate headers from appearing throughout your data file every time you save.
+This takes whatever is in memory, **appends** it to your file, and clears the buffer to free up RAM.
 
 ::: callout-note
-You could also save gaze data and events as separate CSV files during collection, then align and merge them during analysis.
-
-However, we prefer combining them immediately for two reasons: it eliminates an extra step later, and it creates cleaner data files for the upcoming tutorials. Both approaches are perfectly valid - choose whichever fits your workflow better. If you're just starting out, combining them now will make your life easier down the road.
+**Note**: Even if you use save_data() periodically, you must still call `stop_recording()` at the very end of your experiment to save the final chunk of data and disconnect from the eye-tracker.
 :::
-
-## Clean and Prepare Your Data
-
-Great! Now you know how to collect eye tracking data and save it with events. Let's add a few steps that will make your data much easier to work with and analyze.
-
-## Split Gaze Coordinates into Separate Columns
-
-When we save gaze data, coordinate pairs like `'left_gaze_point_on_display_area': (0.463, 0.487)` become single columns containing tuples. This makes analysis difficult - you can't easily plot or calculate with x and y values when they're stuck together. We need separate columns for x and y coordinates for each eye.
-
-Let's update our save function:
-
-```{python}
-# Save function
-def write_buffer_to_file(filename):
-    global gaze_data_buffer, Events
-
-    # Check if there are data
-    if not gaze_data_buffer:
-        return
-   
-    # Swap buffers - get current data and start fresh
-    saving_data, gaze_data_buffer = gaze_data_buffer, []
-    saving_events, Events = Events, []
-   
-    # Convert lists to dataframes
-    data_df = pd.DataFrame(saving_data)
-    events_df = pd.DataFrame(saving_events)
-   
-    # Match events with eye tracking data
-    idx = np.searchsorted(data_df['system_time_stamp'].values,
-                          events_df['system_time_stamp'].values,
-                          side='left')
-    data_df['events'] = ''
-    data_df.loc[idx, 'events'] = events_df['label'].values
-   
-    # Split coordinate tuples into separate columns
-    data_df[['left_x', 'left_y']] = data_df['left_gaze_point_on_display_area'].tolist()
-    data_df[['right_x', 'right_y']] = data_df['right_gaze_point_on_display_area'].tolist()
-   
-    # Save to CSV
-    data_df.to_csv(filename, mode='a', index=False, 
-                   header=not os.path.isfile(filename))
-```
-
-Perfect! Now we have separate x and y columns for both eyes, making analysis much easier.
-
-### Adjust the Data
-
-The Tobii eye tracker gives us coordinates from 0 to 1, where (0, 0) is the top-left corner of the screen and (1, 1) is the bottom-right corner.
-
-While this works fine, it can be confusing during analysis because most plotting systems expect the origin in the bottom-left corner, not the top-left. The image below shows this difference:
-
-![](/images/CreateAnEyetrackingExperiment/Origins.png){fig-align="center" width="419"}
-
-Let's adjust our data to make it more analysis-friendly:
-
--   **Flip the y-axis**: Move the origin to bottom-left by flipping y coordinates
-
--   **Convert to pixels**: Change from 0-1 coordinates to actual pixel positions
-
--   **Simplify timestamps**: Convert from microseconds to milliseconds
-
--   **Clean up column names**: Make them shorter and more intuitive
-
-Here's our updated function:
-
-```{python}
-# Screen dimensions (replace with your actual screen size)
-winsize = [1920, 1080]  # width, height in pixels
-
-def write_buffer_to_file(filename):
-    global gaze_data_buffer, Events
-
-    # Check if there are data
-    if not gaze_data_buffer:
-        return
-   
-    # Swap buffers - get current data and start fresh
-    saving_data, gaze_data_buffer = gaze_data_buffer, []
-    saving_events, Events = Events, []
-   
-    # Convert lists to dataframes
-    data_df = pd.DataFrame(saving_data)
-    events_df = pd.DataFrame(saving_events)
-   
-    # Match events with eye tracking data
-    idx = np.searchsorted(data_df['system_time_stamp'].values,
-                          events_df['system_time_stamp'].values,
-                          side='left')
-    data_df['events'] = ''
-    data_df.loc[idx, 'events'] = events_df['label'].values
-   
-    # Split coordinate tuples into separate columns
-    data_df[['left_x', 'left_y']] = data_df['left_gaze_point_on_display_area'].tolist()
-    data_df[['right_x', 'right_y']] = data_df['right_gaze_point_on_display_area'].tolist()
-   
-    # Convert and adjust coordinates
-    data_df['time'] = data_df['system_time_stamp'] / 1000.0
-    data_df['left_x'] = data_df['left_x'] * winsize[0]
-    data_df['left_y'] = winsize[1] - data_df['left_y'] * winsize[1]  # Flip y-axis
-    data_df['right_x'] = data_df['right_x'] * winsize[0]
-    data_df['right_y'] = winsize[1] - data_df['right_y'] * winsize[1]  # Flip y-axis
-   
-    # Rename columns for clarity
-    data_df = data_df.rename(columns={
-        'left_gaze_point_validity': 'left_valid',
-        'right_gaze_point_validity': 'right_valid',
-        'left_pupil_diameter': 'left_pupil',
-        'right_pupil_diameter': 'right_pupil',
-        'left_pupil_validity': 'left_pupil_valid',
-        'right_pupil_validity': 'right_pupil_valid'
-    })
-   
-    # Keep only essential columns
-    data_df = data_df[['time', 'left_x', 'left_y', 'left_valid', 'left_pupil', 'left_pupil_valid',
-                       'right_x', 'right_y', 'right_valid', 'right_pupil', 'right_pupil_valid', 'events']]
-   
-    # Save to CSV
-    data_df.to_csv(filename, mode='a', index=False, 
-                   header=not os.path.isfile(filename))
-```
-
-Now our data is in pixel coordinates with the origin at the bottom-left, making it much easier to analyze and visualize!
 
 # Create the Actual Experiment
 
-Now we have two functions: one to collect eye tracking data and another to save it to CSV. Let's see how to use these in our actual study.
+Now that we have seen how to record and save data, let's see how to combine these pieces into a complete study.
 
 ## Short Recap of the Paradigm
 
@@ -420,86 +207,19 @@ Here's a brief summary: After a fixation cross, participants see either a circle
 
 Let's build the complete experiment step by step.
 
-### Import Libraries and Define Functions
+### Import Libraries and load the Stimuli
 
-First, let's import our libraries and define the functions we created earlier:
+First, we need to import our libraries, create the window, initialize the eye tracker, and load our stimuli.
+
+Again this part is identical to our previous PsychoPy tutorial:
 
 ```{python}
+#| label: study prep
 import os
 from pathlib import Path
-import pandas as pd
-import numpy as np
+from psychopy import core, event, visual,sound
+from DeToX import ETracker
 
-# Import PsychoPy libraries
-from psychopy import core, event, visual, sound
-
-import tobii_research as tr
-
-#%% Functions
-
-# Screen dimensions
-winsize = [1920, 1080]  # width, height in pixels
-
-# This will be called every time there is new gaze data
-def gaze_data_callback(gaze_data):
-    global gaze_data_buffer
-    gaze_data_buffer.append(gaze_data)
-
-def write_buffer_to_file(filename):
-    global gaze_data_buffer, Events
-   
-    if not gaze_data_buffer:
-        return
-   
-    # Swap buffers - get current data and start fresh
-    saving_data, gaze_data_buffer = gaze_data_buffer, []
-    saving_events, Events = Events, []
-   
-    # Convert lists to dataframes
-    data_df = pd.DataFrame(saving_data)
-    events_df = pd.DataFrame(saving_events)
-   
-    # Match events with eye tracking data
-    idx = np.searchsorted(data_df['system_time_stamp'].values,
-                          events_df['system_time_stamp'].values,
-                          side='left')
-    data_df['events'] = ''
-    data_df.loc[idx, 'events'] = events_df['label'].values
-    
-    # Split coordinate tuples into separate columns
-    data_df[['left_x', 'left_y']] = data_df['left_gaze_point_on_display_area'].tolist()
-    data_df[['right_x', 'right_y']] = data_df['right_gaze_point_on_display_area'].tolist()
-    
-    # Convert and adjust coordinates
-    data_df['time'] = data_df['system_time_stamp'] / 1000.0
-    data_df['left_x'] = data_df['left_x'] * winsize[0]
-    data_df['left_y'] = winsize[1] - data_df['left_y'] * winsize[1]  # Flip y-axis
-    data_df['right_x'] = data_df['right_x'] * winsize[0]
-    data_df['right_y'] = winsize[1] - data_df['right_y'] * winsize[1]  # Flip y-axis
-    
-    # Rename columns for clarity
-    data_df = data_df.rename(columns={
-        'left_gaze_point_validity': 'left_valid',
-        'right_gaze_point_validity': 'right_valid',
-        'left_pupil_diameter': 'left_pupil',
-        'right_pupil_diameter': 'right_pupil',
-        'left_pupil_validity': 'left_pupil_valid',
-        'right_pupil_validity': 'right_pupil_valid'
-    })
-    
-    # Keep only essential columns
-    data_df = data_df[['time', 'left_x', 'left_y', 'left_valid', 'left_pupil', 'left_pupil_valid',
-                       'right_x', 'right_y', 'right_valid', 'right_pupil', 'right_pupil_valid', 'events']]
-    
-    # Save to CSV
-    data_df.to_csv(filename, mode='a', index=False, header=not os.path.isfile(filename))
-```
-
-### Load the Stimuli
-
-Now let's set up our experiment window and load all the stimuli. This part is identical to our previous PsychoPy tutorial:
-
-```{python}
 #%% Load and prepare stimuli
 
 # Setting the directory of our experiment
@@ -528,92 +248,106 @@ Trials = [0, 1, 0, 0, 1, 0, 1, 1, 0, 1 ]
 
 ### Start recording
 
-Now we're ready to find eye trackers connected to the computer and start collecting data. We'll use the first eye tracker we find and launch our callback function to begin data collection.
+Now we are ready to connect to the eye tracker and start collecting data. With DeToX, this is just two lines of code: one to initialize the connection and one to start the recording stream.
 
 ```{python}
+#| label: start rec 
 #%% Record the data
 
-# Find all connected eye trackers
-found_eyetrackers = tr.find_all_eyetrackers()
-
-# We will just use the first one
-Eyetracker = found_eyetrackers[0]
-
-# Create our data buffers
-gaze_data_buffer = []
-Events = []
+# Connect to the eye tracker
+ET_controller = ETracker(win)
 
 # Start recording
-Eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)
+# DeToX will automatically create this file and start saving data to it
+ET_controller.start_recording(filename="testing.h5")
 ```
 
 ### Present Our Stimuli
 
-The eye tracking is running! Let's show our participant something!
+The eye tracking is running! Now we can loop through our trials and show the participant our stimuli.
 
-Notice that after each time we flip our window (which actually displays what we drew), we add an event to our Events list with a timestamp and label. This marks exactly when each stimulus appeared.
+The most critical step here is to mark exactly **when** a stimulus appears on the screen. We do this by sending an "event marker" to the data file. With DeToX, this is incredibly simple: immediately after `win.flip()` (which updates the screen), we call `ET_controller.record_event('Label')`.
+
+You will also notice the special trick we use during the Inter-Stimulus Interval (ISI) to save our data safely without disrupting the experiment timing.
 
 ```{python}
+#| label: Trials
 #%% Trials
 for trial in Trials:
 
-    ### Present the fixation
-    win.flip()  # Clear the window
-    
+    ### 1. Present the Fixation
     fixation.draw()
-    win.flip()
-    Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Fixation'})
-    core.wait(1)  # Wait for 1 second
+    win.flip()                 # Stimulus appears
+    ET_controller.record_event('Fixation') # Log event immediately
+    
+    core.wait(1)
 
-    ### Present the cue
+    ### 2. Present the Cue
     cues[trial].draw()
     win.flip()
+    
+    # Log specific cue type
     if trial == 0:
-        Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Circle'})
+        ET_controller.record_event('Circle')
     else:
-        Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Square'})
-    core.wait(3)  # Wait for 3 seconds
+        ET_controller.record_event('Square')
+        
+    core.wait(3)
 
-    ### Wait for saccadic latency
+    ### 3. Wait for Saccadic Latency
     win.flip()
     core.wait(0.75)
 
-    ### Present the target
+    ### 4. Present the Target
     targets[trial].draw()
     win.flip()
+    
     if trial == 0:
-        Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Complex'})
+        ET_controller.record_event('Complex')
     else:
-        Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Simple'})
+        ET_controller.record_event('Simple')
 
     presentation_sound.play()
-    core.wait(2)  # Wait for 2 seconds
+    core.wait(2)
     
-    ### ISI and save data
+    ### 5. ISI and Smart Saving
     win.flip()
-    clock = core.Clock()  # start the clock
-    write_buffer_to_file(gaze_data_buffer, Path('DATA') / 'RAW' / (Sub + '.csv'))
-    core.wait(1 - clock.getTime()) # wait for remaining time
+    ET_controller.record_event('ISI')
+    
+    # Start a clock to measure our ISI duration
+    clock = core.Clock() 
+    
+    # --- SAVE DATA ---
+    # Flush the data currently in memory to the disk
+    ET_controller.save_data()
+    
+    # Wait for whatever time is left in the 1-second ISI
+    # This ensures the ISI is exactly 1s, even if saving took 0.1s
+    core.wait(1 - clock.getTime()) 
     
     ### Check for escape key to exit
     keys = event.getKeys()
     if 'escape' in keys:
+        ET_controller.stop_recording()
         win.close()
-        Eyetracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)
         core.quit()
 ```
 
-As we said before in \[Save the data\], it's best to save data during our study to avoid potential data loss. It's better to do this when there are things of minor interest, such as during the ISI. If you remember from the previous tutorial [Getting started with Psychopy](/CONTENT/GettingStarted/GettingStartedWithPsychopy.qmd), we created the ISI in a different way than just using `core.wait()`, and we said that this different method would come in handy later on. This is the moment!
+#### A Note on Smart Saving
 
-Our ISI starts the clock and saves the data immediately. After saving, we calculate how much time remains to reach the full 1-second duration and use core.wait() for any remaining time. This ensures we wait for exactly 1 second total, accounting for the time spent saving data.
+Did you catch the logic inside the **ISI** section?
 
-```{python}
-### ISI and save data
-win.flip()
-clock = core.Clock()  # start the clock
-write_buffer_to_file(gaze_data_buffer, Path('DATA') / 'RAW' / (Sub + '.csv'))
-core.wait(1 - clock.getTime()) # wait for remaining time
-```
+As we mentioned in [Save data], it is best to save your data intermittently to avoid loss if the computer crashes. The ISI is the perfect moment for this because the participant is just looking at a blank screen.
+
+If you remember from our *Getting Started with PsychoPy* tutorial, we used a `core.Clock()` for the ISI instead of a simple `core.wait()`. This is exactly why!
+
+1.  **Start Clock:** We start a timer immediately when the ISI begins.
+
+2.  **Save Data:** We call `ET_controller.save_data()`. This might take 10ms or 50ms depending on your computer.
+
+3.  **Wait for Remainder:** We calculate `1 - clock.getTime()`.
+
+This subtraction is the "cool" part. It ensures that the total ISI is exactly 1 second, automatically subtracting the time it took to save the data. If we just used `core.wait(1)` **after** saving, our ISI would be too long (1s + saving time).
 
 ::: callout-warning
 Careful!!!\
@@ -625,12 +359,11 @@ If saving the data takes more than 1 second, your ISI will also be longer. How
 Almost done! We've collected data, sent events, and saved everything. The final step is to stop data collection (otherwise Python will keep getting endless data from the eye tracker!). We simply unsubscribe from the eye tracker:
 
 ```{python}
-# Final save to catch any remaining data
-write_buffer_to_file(Path('DATA') / 'RAW' / (Sub + '.csv'))
-      
-win.close()  # Close the window
-Eyetracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)  # Stop eye tracking
-core.quit()  # End the study
+#| label: stop experiment
+# --- End Experiment ---
+ET_controller.stop_recording() # Save remaining data and disconnect
+win.close()
+core.quit()
 ```
 
 Note that we also closed the Psychopy window, so that the stimulus presentation is also officially over. Well done!!! Now go and get your data!!! We'll see you back when it's time to analyze it.
@@ -640,175 +373,119 @@ Note that we also closed the Psychopy window, so that the stimulus presentation 
 Great job getting to here!! it want easy but you did it. Here is all the code we made together.
 
 ```{python}
+#| label: Total script
 import os
 from pathlib import Path
-import pandas as pd
-import numpy as np
-
-# Import PsychoPy libraries
 from psychopy import core, event, visual, sound
+from DeToX import ETracker
 
-import tobii_research as tr
-
-#%% Functions
+#%% Setup and Imports
 
 # Screen dimensions
-winsize = [1920, 1080]  # width, height in pixels
-
-# This will be called every time there is new gaze data
-def gaze_data_callback(gaze_data):
-    global gaze_data_buffer
-    gaze_data_buffer.append(gaze_data)
-
-def write_buffer_to_file(filename):
-    global gaze_data_buffer, Events
-
-    # Check if there are data
-    if not gaze_data_buffer:
-        return
-   
-    # Swap buffers - get current data and start fresh
-    saving_data, gaze_data_buffer = gaze_data_buffer, []
-    saving_events, Events = Events, []
-   
-    # Convert lists to dataframes
-    data_df = pd.DataFrame(saving_data)
-    events_df = pd.DataFrame(saving_events)
-   
-    # Match events with eye tracking data
-    idx = np.searchsorted(data_df['system_time_stamp'].values,
-                          events_df['system_time_stamp'].values,
-                          side='left')
-    data_df['events'] = ''
-    data_df.loc[idx, 'events'] = events_df['label'].values
-    
-    # Split coordinate tuples into separate columns
-    data_df[['left_x', 'left_y']] = data_df['left_gaze_point_on_display_area'].tolist()
-    data_df[['right_x', 'right_y']] = data_df['right_gaze_point_on_display_area'].tolist()
-    
-    # Convert and adjust coordinates
-    data_df['time'] = data_df['system_time_stamp'] / 1000.0
-    data_df['left_x'] = data_df['left_x'] * winsize[0]
-    data_df['left_y'] = winsize[1] - data_df['left_y'] * winsize[1]  # Flip y-axis
-    data_df['right_x'] = data_df['right_x'] * winsize[0]
-    data_df['right_y'] = winsize[1] - data_df['right_y'] * winsize[1]  # Flip y-axis
-    
-    # Rename columns for clarity
-    data_df = data_df.rename(columns={
-        'left_gaze_point_validity': 'left_valid',
-        'right_gaze_point_validity': 'right_valid',
-        'left_pupil_diameter': 'left_pupil',
-        'right_pupil_diameter': 'right_pupil',
-        'left_pupil_validity': 'left_pupil_valid',
-        'right_pupil_validity': 'right_pupil_valid'
-    })
-    
-    # Keep only essential columns
-    data_df = data_df[['time', 'left_x', 'left_y', 'left_valid', 'left_pupil', 'left_pupil_valid',
-                       'right_x', 'right_y', 'right_valid', 'right_pupil', 'right_pupil_valid', 'events']]
-    
-    # Save to CSV
-    data_df.to_csv(filename, mode='a', index=False, header=not os.path.isfile(filename))
-
-#%% Load and prepare stimuli
+winsize = [1920, 1080]
 
 # Setting the directory of our experiment
 os.chdir(r'<<< YOUR PATH >>>>')
 
-# Now create a Path object for the stimuli directory
+# Create Paths
 stimuli_dir = Path('EXP') / 'Stimuli'
+data_dir = Path('DATA') / 'RAW'
 
-# Create a window
+# 1. Create the Window
+# We need this first so DeToX can measure pixels correctly
 win = visual.Window(size=winsize, fullscr=True, units="pix", pos=(0,30), screen=1)
+
+# 2. Initialize DeToX
+# This automatically connects to the eye tracker
+ET_controller = ETracker(win)
+
+#%% Load Stimuli
 
 # Load images 
 fixation = visual.ImageStim(win, image=str(stimuli_dir / 'fixation.png'), size=(200, 200))
 circle = visual.ImageStim(win, image=str(stimuli_dir / 'circle.png'), size=(200, 200))
 square = visual.ImageStim(win, image=str(stimuli_dir / 'square.png'), size=(200, 200))
-complex = visual.ImageStim(win, image=str(stimuli_dir / 'complex.png'), size=(200, 200), pos=(250, 0))
-simple = visual.ImageStim(win, image=str(stimuli_dir / 'simple.png'), size=(200, 200), pos=(-250, 0))
+
+# Note positions for targets
+complex_stim = visual.ImageStim(win, image=str(stimuli_dir / 'complex.png'), size=(200, 200), pos=(250, 0))
+simple_stim = visual.ImageStim(win, image=str(stimuli_dir / 'simple.png'), size=(200, 200), pos=(-250, 0))
 
 # Load sound 
 presentation_sound = sound.Sound(str(stimuli_dir / 'presentation.wav'))
 
 # List of stimuli
-cues = [circle, square] # put both cues in a list
-targets = [complex, simple] # put both rewards in a list
+cues = [circle, square]
+targets = [complex_stim, simple_stim]
 
-# Create a list of trials in which 0 means winning and 1 means losing
+# Create a list of trials (0 = Circle/Complex, 1 = Square/Simple)
 Trials = [0, 1, 0, 0, 1, 0, 1, 1, 0, 1]
-
-#%% Record the data
-
-# Define the subject name
 Sub = 'S001'
 
-# Find all connected eye trackers
-found_eyetrackers = tr.find_all_eyetrackers()
+#%% Start Recording
 
-# We will just use the first one
-Eyetracker = found_eyetrackers[0]
+# Start recording to an HDF5 file
+# DeToX creates the file and starts the stream immediately
+ET_controller.start_recording(filename=str(data_dir / f"{Sub}.h5"))
 
-# Create our data buffers
-gaze_data_buffer = []
-Events = []
-
-# Start recording
-Eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)
-
-#%% Trials
+#%% Run Trials
 
 for trial in Trials:
 
-    ### Present the fixation
-    win.flip() # we flip to clean the window
-    
+    ### 1. Present the Fixation
     fixation.draw()
     win.flip()
-    Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Fixation'})
-    core.wait(1)  # wait for 1 second
+    ET_controller.record_event('Fixation') # Log event
+    core.wait(1)
 
-    ### Present the cue
+    ### 2. Present the Cue
     cues[trial].draw()
     win.flip()
+    
     if trial == 0:
-        Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Circle'})
+        ET_controller.record_event('Circle')
     else:
-        Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Square'})
-    core.wait(3)  # wait for 3 seconds
+        ET_controller.record_event('Square')
+        
+    core.wait(3)
 
-    ### Wait for saccadic latency
+    ### 3. Wait for Saccadic Latency
     win.flip()
     core.wait(0.75)
 
-    ### Present the targets
+    ### 4. Present the Target
     targets[trial].draw()
     win.flip()
+    
     if trial == 0:
-        Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Complex'})
+        ET_controller.record_event('Complex')
     else:
-        Events.append({'system_time_stamp': tr.get_system_time_stamp(), 'label': 'Simple'})
+        ET_controller.record_event('Simple')
 
     presentation_sound.play()
-    core.wait(2)  # wait for 2 seconds
+    core.wait(2)
     
-    ### ISI and save data
+    ### 5. ISI and Smart Saving
     win.flip()
-    clock = core.Clock()  # start the clock
-    write_buffer_to_file(gaze_data_buffer, Path('DATA') / 'RAW' / (Sub + '.csv'))
-    core.wait(1 - clock.getTime()) # wait for remaining time
+    ET_controller.record_event('ISI')
     
-    ### Check for closing experiment
-    keys = event.getKeys() # collect list of pressed keys
+    # Start timer for ISI
+    clock = core.Clock() 
+    
+    # Save data to disk safely
+    ET_controller.save_data()
+    
+    # Wait for the remainder of the 1-second ISI
+    core.wait(1 - clock.getTime()) 
+    
+    ### Check for escape key
+    keys = event.getKeys()
     if 'escape' in keys:
-        win.close()  # close window
-        Eyetracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)
-        core.quit()  # stop study
+        ET_controller.stop_recording() # Stop safely
+        win.close()
+        core.quit()
 
-# Final save to catch any remaining data
-write_buffer_to_file(Path('DATA') / 'RAW' / (Sub + '.csv'))
-      
-win.close() # close window
-Eyetracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA, gaze_data_callback) # unsubscribe eyetracking
-core.quit() # stop study
+# --- End Experiment ---
+ET_controller.stop_recording() # Save remaining data and disconnect
+win.close()
+core.quit()
 ```

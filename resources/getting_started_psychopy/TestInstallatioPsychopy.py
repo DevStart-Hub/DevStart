@@ -1,11 +1,47 @@
-from psychopy import visual, core, sound
 import sys
+import random
 
 print("🧪 Testing PsychoPy installation...")
 print("This will open a window with a countdown and celebration message!")
 
+# --- STEP 1: CRITICAL IMPORTS (Visual & Core) ---
 try:
-    # Create a window with better settings
+    # We import event separately as it's often needed for keypresses
+    from psychopy import visual, core, event
+    print("✅ Critical modules (visual, core, event) imported successfully.")
+except ImportError as e:
+    print(f"\n❌ CRITICAL ERROR: Could not import basic PsychoPy modules.")
+    print(f"Error details: {e}")
+    sys.exit(1)
+
+# --- STEP 2: OPTIONAL SOUND IMPORT ---
+# We try to import and initialize sound separately. 
+# If this fails, we just disable sound but keep running.
+sound_working = False
+beep_sound = None
+success_sound = None
+
+try:
+    from psychopy import sound
+    print("✅ Sound module imported.")
+    
+    # Try to initialize a dummy sound to test the audio backend
+    # This catches errors where the module imports but the driver fails
+    test_sound = sound.Sound('C', secs=0.1)
+    
+    # If we got here, sound is safe to use
+    sound_working = True
+    print("✅ Audio backend initialized successfully.")
+    
+except Exception as e:
+    print(f"⚠️  SOUND WARNING: Sound system encountered an error.")
+    print(f"   Error details: {e}")
+    print("   -> Continuing without sound (Visuals will still work!)")
+    sound_working = False
+
+# --- STEP 3: THE EXPERIMENT LOOP ---
+try:
+    # Create a window
     win = visual.Window(
         size=(800, 600),
         color='lightgray',
@@ -16,47 +52,32 @@ try:
     
     # Create title text
     title_text = visual.TextStim(
-        win,
-        text='PsychoPy Test',
-        color='darkblue',
-        height=60,
-        pos=(0, 200),
-        bold=True
+        win, text='PsychoPy Test', color='darkblue',
+        height=60, pos=(0, 200), bold=True
     )
     
     # Create the countdown text stimulus
     countdown_text = visual.TextStim(
-        win,
-        text='',
-        color='red',
-        height=120,
-        pos=(0, 0),
-        bold=True
+        win, text='', color='red',
+        height=120, pos=(0, 0), bold=True
     )
     
     # Create instruction text
     instruction_text = visual.TextStim(
-        win,
-        text='Get ready...',
-        color='black',
-        height=30,
-        pos=(0, -150)
+        win, text='Get ready...', color='black',
+        height=30, pos=(0, -150)
     )
     
-    # Create sounds (using built-in sounds that should work on most systems)
-    try:
-        # Countdown beep sound
-        beep_sound = sound.Sound('C', secs=0.2, hamming=True)
-        # Success sound (higher pitch)
-        success_sound = sound.Sound('A', secs=0.5, hamming=True)
-        sounds_available = True
-        print("✅ Sound system working!")
-    except Exception as sound_error:
-        print(f"⚠️  Sound not available: {sound_error}")
-        print("   (This is okay - continuing without sound)")
-        sounds_available = False
+    # Initialize Sounds (Only if the import/test above worked)
+    if sound_working:
+        try:
+            beep_sound = sound.Sound('C', secs=0.2, hamming=True)
+            success_sound = sound.Sound('A', secs=0.5, hamming=True)
+        except:
+            # Fallback if sound fails during creation
+            sound_working = False
     
-    # Show title and instructions first
+    # Show title and instructions
     title_text.draw()
     instruction_text.draw()
     win.flip()
@@ -64,33 +85,24 @@ try:
     
     # Show countdown from 3 to 1
     for i in range(3, 0, -1):
-        # Clear and draw title
         title_text.draw()
         
-        # Draw countdown number
         countdown_text.text = str(i)
+        
+        if i == 3: countdown_text.color = 'red'
+        elif i == 2: countdown_text.color = 'orange'
+        else: countdown_text.color = 'green'
+        
         countdown_text.draw()
-        
-        # Add some visual flair - change color for each number
-        if i == 3:
-            countdown_text.color = 'red'
-        elif i == 2:
-            countdown_text.color = 'orange'
-        else:
-            countdown_text.color = 'green'
-        
         win.flip()
         
-        # Play countdown sound
-        if sounds_available:
+        if sound_working:
             beep_sound.play()
         
         core.wait(1)
     
-    # Create celebration visual effects
-    # Create multiple colored circles for confetti effect
+    # Celebration Confetti
     circles = []
-    import random
     colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink']
     
     for i in range(20):
@@ -103,87 +115,80 @@ try:
         )
         circles.append(circle)
     
-    # Create the final message text stimulus
+    # Success Message
+    msg = '🎉 FANTASTIC! 🎉\n\nVisuals are working perfectly!'
+    if not sound_working:
+        msg += '\n(Sound is disabled, but that is OK)'
+    
     success_message = visual.TextStim(
-        win,
-        text='🎉 FANTASTIC! 🎉\n\nYour PsychoPy installation\nis working perfectly!\n\nYou are ready for\nthe DevStart tutorials!',
-        color='darkgreen',
-        height=35,
-        pos=(0, 0),
-        bold=True
+        win, text=msg, color='darkgreen',
+        height=30, pos=(0, 0), bold=True
     )
     
-    # Create additional info text
+    # Info Text
+    status_msg = '✅ Visual stimuli: Working\n✅ Timing: Working\n'
+    if sound_working:
+        status_msg += '✅ Sound: Working'
+    else:
+        status_msg += '⚠️ Sound: Failed (Software/Driver issue)'
+        
     info_text = visual.TextStim(
-        win,
-        text='✅ Visual stimuli: Working\n✅ Timing: Working\n' + 
-             ('✅ Sound: Working' if sounds_available else '⚠️  Sound: Not available'),
-        color='black',
-        height=25,
-        pos=(0, -200)
+        win, text=status_msg, color='black',
+        height=25, pos=(0, -200)
     )
     
-    # Show celebration screen with effects
-    for frame in range(180):  # 3 seconds at 60fps
-        # Draw confetti circles
+    # Animation Loop
+    for frame in range(180):
         for circle in circles:
             circle.draw()
         
-        # Draw success message
         success_message.draw()
         info_text.draw()
-        
         win.flip()
         
-        # Play success sound once at the beginning
-        if frame == 0 and sounds_available:
+        if frame == 0 and sound_working:
             success_sound.play()
-        
-        # Small delay to control frame rate
-        core.wait(0.0167)  # ~60fps
+            
+        core.wait(0.0167)
     
-    # Final instruction
+    # Final cleanup instruction
     final_text = visual.TextStim(
-        win,
-        text='Press any key or wait 3 seconds to close...',
-        color='gray',
-        height=25,
-        pos=(0, -250)
+        win, text='Press any key to close...', color='gray',
+        height=25, pos=(0, -250)
     )
-    
     final_text.draw()
     success_message.draw()
     info_text.draw()
     win.flip()
     
-    # Wait for key press or timeout
-    keys = core.event.waitKeys(maxWait=3.0)
+    # Wait for key press
+    event.waitKeys()
     
-    print("\n🎉 SUCCESS! PsychoPy is working perfectly!")
-    print("✅ Window creation: Working")
-    print("✅ Text rendering: Working") 
-    print("✅ Visual stimuli: Working")
-    print("✅ Timing functions: Working")
-    sound_status = 'Working' if sounds_available else 'Not available (but that\'s okay)'
-    print(f"✅ Sound system: {sound_status}")
-    print("\n🚀 You're ready for PsychoPy experiments!")
+    # --- FINAL REPORT ---
+    print("\n" + "="*40)
+    print("       TEST RESULTS       ")
+    print("="*40)
+    print("✅ Visual System: WORKING")
+    print("✅ Event/Timing:  WORKING")
     
+    if sound_working:
+        print("✅ Sound System:  WORKING")
+        print("\n🎉 COMPLETELY SUCCESSFUL! You are 100% ready.")
+    else:
+        print("⚠️  Sound System:  NOT WORKING")
+        print("\n👉 DIAGNOSIS: The sound library failed to load.")
+        print("   HOWEVER: This is often just a driver issue.")
+        print("   FOR THE WORKSHOP: Don't worry! You can likely proceed.")
+        print("   (Most beginner tutorials focus on visual stimuli anyway).")
+    print("="*40 + "\n")
+
 except Exception as e:
-    print(f"\n❌ ERROR: PsychoPy test failed!")
+    print(f"\n❌ ERROR: Something went wrong during the test.")
     print(f"Error message: {e}")
-    print("\n🔧 Troubleshooting tips:")
-    print("1. Make sure PsychoPy is properly installed")
-    print("2. Try: pip install psychopy")
-    print("3. Check if your graphics drivers are up to date")
-    print("4. Make sure you're not running this in a headless environment")
-    print("5. Try restarting your Python environment")
 
 finally:
-    # Clean up
     try:
         win.close()
     except:
         pass
     core.quit()
-
-print("\n--- PsychoPy test completed ---")

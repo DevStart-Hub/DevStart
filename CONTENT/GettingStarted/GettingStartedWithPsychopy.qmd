@@ -52,7 +52,7 @@ You'll see that the parenthesis at the command line will change from (base) to (
 As mentioned before, we will use PsychoPy to create our experimental design!! So let's install it (and also let's install spyder-kernels that will help us interact with Spyder that we will cover later and tobii_research). Type:
 
 ``` bash
-pip install psychopy
+pip install psychopy dvst-detox
 ```
 
 Conda will think and download stuff for a while!! Do not worry if you see a lot of lines popping up! Give conda time and confirm if prompted. After a while, hopefully you will see that everything went well and now you have a nice psychopy environment with PsychoPy in it!!
@@ -78,7 +78,7 @@ You'll see that the parenthesis at the command line will change from (base) to (
 As mentioned before, we will use PsychoPy to create our experimental design!! So let's install it (and also let's install spyder-kernels that will help us interact with Spyder that we will cover later and tobii_research). Type:
 
 ``` bash
-pip install psychopy
+pip install psychopy dvst-detox
 ```
 
 Conda will think and download stuff for a while!! Do not worry if you see a lot of lines popping up! Give conda time and confirm if prompted. After a while, hopefully you will see that everything went well and now you have a nice psychopy environment with PsychoPy in it!!
@@ -104,7 +104,29 @@ FYI! It's important to note that PsychoPy offers two main ways to create experim
 
 -   The Coder: Designed for users who prefer to program their experiments from scratch.<br> ![](https://psychopy.org/_images/coder_small.gif){fig-align="center"}
 
-In our tutorials, we will focus on coding experiments directly. If you're using the PsychoPy standalone installer, **you'll need to follow along using the Coder interface**.
+In our tutorials, we will focus on coding experiments directly. If you're using the PsychoPy standalone installer, **you'll need to follow along using the Coder interface:**
+
+![](/images/GettingStartedWithPsychopy\Psychopy2.png){fig-align="left" width="350"}
+
+**Install DeToX** PsychoPy doesn't include DeToX by default, so we'll need to install it separately. The easiest way is through PsychoPy's built-in package manager:
+
+1.  Open PsychoPy
+
+2.  Switch to Coder View (the interface with the code editor)
+
+3.  Open the **Tools** menu
+
+4.  Select **"Plugins/package manager…"**
+
+5.  Click on the **"Packages"** tab at the top
+
+6.  Click the **"Open PIP terminal"** button
+
+7.  In the terminal, type: `pip install detox-eyetracking`
+
+8.  Press Enter and wait for the installation to complete
+
+That's it! You now have both PsychoPy and DeToX installed and ready to use for your eye-tracking studies..
 
 [Flowchart](DevStartSetupGuide.qmd#psychopy-standalone){.btn .btn-primary .btn-sm role="button" style="float: right;"}
 
