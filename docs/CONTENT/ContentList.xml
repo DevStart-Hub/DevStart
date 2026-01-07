@@ -16,7 +16,7 @@
 <height>167</height>
 <width>144</width>
 </image>
-<generator>quarto-1.5.47</generator>
+<generator>quarto-1.7.32</generator>
 <lastBuildDate>Tue, 03 Nov 2026 00:00:00 GMT</lastBuildDate>
 <item>
   <title>ModelEstimates</title>
@@ -22788,7 +22788,7 @@ font-style: inherit;">conda</span> activate psychpy</span></code></pre></div>
 <p>As mentioned before, we will use PsychoPy to create our experimental design!! So let’s install it (and also let’s install spyder-kernels that will help us interact with Spyder that we will cover later and tobii_research). Type:</p>
 <div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">pip</span> install psychopy</span></code></pre></div>
+font-style: inherit;">pip</span> install psychopy dvst-detox</span></code></pre></div>
 <p>Conda will think and download stuff for a while!! Do not worry if you see a lot of lines popping up! Give conda time and confirm if prompted. After a while, hopefully you will see that everything went well and now you have a nice psychopy environment with PsychoPy in it!!</p>
 </div>
 <div id="tabset-1-2" class="tab-pane" aria-labelledby="tabset-1-2-tab">
@@ -22807,7 +22807,7 @@ font-style: inherit;">conda</span> activate psychpy</span></code></pre></div>
 <p>As mentioned before, we will use PsychoPy to create our experimental design!! So let’s install it (and also let’s install spyder-kernels that will help us interact with Spyder that we will cover later and tobii_research). Type:</p>
 <div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">pip</span> install psychopy</span></code></pre></div>
+font-style: inherit;">pip</span> install psychopy dvst-detox</span></code></pre></div>
 <p>Conda will think and download stuff for a while!! Do not worry if you see a lot of lines popping up! Give conda time and confirm if prompted. After a while, hopefully you will see that everything went well and now you have a nice psychopy environment with PsychoPy in it!!</p>
 </div>
 </div>
@@ -22826,7 +22826,24 @@ font-style: inherit;">pip</span> install psychopy</span></code></pre></div>
 <li><p>The Builder: Ideal for those who prefer a graphical, point-and-click interface.<br> <img src="https://psychopy.org/_images/builder.png" class="img-fluid quarto-figure quarto-figure-center" width="343"></p></li>
 <li><p>The Coder: Designed for users who prefer to program their experiments from scratch.<br> <img src="https://psychopy.org/_images/coder_small.gif" class="img-fluid quarto-figure quarto-figure-center"></p></li>
 </ul>
-<p>In our tutorials, we will focus on coding experiments directly. If you’re using the PsychoPy standalone installer, <strong>you’ll need to follow along using the Coder interface</strong>.</p>
+<p>In our tutorials, we will focus on coding experiments directly. If you’re using the PsychoPy standalone installer, <strong>you’ll need to follow along using the Coder interface:</strong></p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><a href="../..\images/GettingStartedWithPsychopy\Psychopy2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPsychopy/Psychopy2.png" class="img-fluid quarto-figure quarto-figure-left figure-img" width="350"></a></p>
+</figure>
+</div>
+<p><strong>Install DeToX</strong> PsychoPy doesn’t include DeToX by default, so we’ll need to install it separately. The easiest way is through PsychoPy’s built-in package manager:</p>
+<ol type="1">
+<li><p>Open PsychoPy</p></li>
+<li><p>Switch to Coder View (the interface with the code editor)</p></li>
+<li><p>Open the <strong>Tools</strong> menu</p></li>
+<li><p>Select <strong>“Plugins/package manager…”</strong></p></li>
+<li><p>Click on the <strong>“Packages”</strong> tab at the top</p></li>
+<li><p>Click the <strong>“Open PIP terminal”</strong> button</p></li>
+<li><p>In the terminal, type: <code>pip install detox-eyetracking</code></p></li>
+<li><p>Press Enter and wait for the installation to complete</p></li>
+</ol>
+<p>That’s it! You now have both PsychoPy and DeToX installed and ready to use for your eye-tracking studies..</p>
 <p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#psychopy-standalone" class="btn btn-primary btn-sm" style="float: right;">Flowchart</a></p>
 </section>
 </section>
@@ -22844,7 +22861,7 @@ font-style: inherit;">pip</span> install psychopy</span></code></pre></div>
 <li><p>open Spyder</p></li>
 <li><p>Create a new console in the psychopy environment we created before:</p>
 <p><em>Select interpreter –&gt; Conda: psychopy</em></p>
-<p><a href="../..\images/GettingStartedWithPsychopy\CreateConsole.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPsychopy/CreateConsole.png" class="img-fluid" width="550"></a></p></li>
+<p><a href="../..\images/GettingStartedWithPsychopy\CreateConsole.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPsychopy/CreateConsole.png" class="img-fluid" width="550"></a></p></li>
 <li><p>Open the script you just downloaded (<code>TestInstallatioPsychopy.py</code>) in Positron ( use the open Icon or drag and drop the file on Positron)</p></li>
 <li><p>Press the play button on the left top corner.</p></li>
 <li><p>A window should appear and show a short countdown at the end of which it will tell you that you are ready for the workshop!</p></li>
@@ -22855,10 +22872,10 @@ font-style: inherit;">pip</span> install psychopy</span></code></pre></div>
 <ul>
 <li><p>Open Psychopy</p></li>
 <li><p>In <em>Window</em> select <em>Show coder</em></p>
-<p><a href="../..\images/GettingStartedWithPsychopy\Psychopy2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPsychopy/Psychopy2.png" class="img-fluid" width="550"></a></p></li>
+<p><a href="../..\images/GettingStartedWithPsychopy\Psychopy2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPsychopy/Psychopy2.png" class="img-fluid" width="550"></a></p></li>
 <li><p>Opend the downloaded file (<code>TestInstallatioPsychopy.py</code>) using the open button</p></li>
 <li><p>Press the green play button</p>
-<p><a href="../..\images/GettingStartedWithPsychopy\Psychopy3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPsychopy/Psychopy3.png" class="img-fluid" width="660"></a></p></li>
+<p><a href="../..\images/GettingStartedWithPsychopy\Psychopy3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPsychopy/Psychopy3.png" class="img-fluid" width="660"></a></p></li>
 <li><p>A window should appear and show a short countdown at the end of which it will tell you that you are ready for the workshop!</p></li>
 </ul>
 <p>Well done!!</p>
@@ -23198,7 +23215,17 @@ Additional Packages
 <p>Click it—and <em>voilà!</em>—you’ll get a list of all your Python environments plus any available R interpreter. Pretty neat, right?</p>
 <p>Just pick the one you want to work in (for example, your <strong>working</strong> environment), and the console at the bottom will instantly switch to that setup. From that moment on, any code you run in Positron will use the exact Python version and packages installed in the environment you selected.</p>
 <p>That’s it—now any code you run will execute within the environment you selected. Well done!<br>
-<img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPython/PositronEnvs.png" class="img-fluid" width="631"></p>
+<img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPython/PositronEnvs.png" class="img-fluid" width="400"></p>
+<p><strong>Final Step: Installing the H5Web Extension</strong></p>
+<p>Since we’ll be working with HDF5 files throughout this tutorial, we recommend installing a helpful extension. Extensions are add-ons that enhance your environment with additional features and functionality.</p>
+<p>We suggest installing <strong>H5Web</strong>, which allows you to preview HDF5 file contents directly in Positron without writing any code.</p>
+<p><strong>To install:</strong></p>
+<ol type="1">
+<li><p>Click the Extensions icon <img src="https://tommasoghilardi.github.io/DevStart/images/GettingStartedWithPython/ExtensioIcon.png" width="32" height="38"> in the primary sidebar (typically on the left side of VS Code)</p></li>
+<li><p>Search for “H5Web”</p></li>
+<li><p>Click Install</p></li>
+</ol>
+<p>That’s it—you’re all set!</p>
 <p><a href="../../CONTENT/GettingStarted/DevStartSetupGuide.html#python-and-psychopy" class="btn btn-primary btn-sm" style="float: right;">Flowchart</a></p>
 
 
@@ -23556,7 +23583,7 @@ Important
   <category>R</category>
   <category>Python</category>
   <guid>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/DevStartSetupGuide.html</guid>
-  <pubDate>Thu, 06 Nov 2025 13:23:02 GMT</pubDate>
+  <pubDate>Wed, 07 Jan 2026 16:03:33 GMT</pubDate>
 </item>
 </channel>
 </rss>
