@@ -3916,10 +3916,10 @@ font-style: inherit;">)</span></span></code></pre></div>
 </style>
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="6" class="gt_heading gt_title gt_font_normal gt_bottom_border">df (400 rows and 7 variables, 7 shown)</th>
 </tr>
-<tr class="odd gt_col_headings">
+<tr class="gt_col_headings even">
 <th id="ID" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">ID</th>
 <th id="Name" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Name</th>
 <th id="Type" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Type</th>
@@ -5443,7 +5443,7 @@ Note
 <p>So, if you notice something that doesn’t seem quite perfect at this stage, don’t worry! It’s all part of the plan. Our goal is to guide you step-by-step towards building the best model. Just remember, this process takes time!</p>
 <section id="import-data" class="level2"><h2 class="anchored" data-anchor-id="import-data">Import data</h2>
 <p>You can download the data that we will use in this tutorial from here:</p>
-<p><button class="btn btn-secondary downloadthis  " id="dnldts21689"><i class="bi bi-download"></i> Dataset.csv </button></p>
+<p><button class="btn btn-secondary downloadthis  " id="dnldts53267"><i class="bi bi-download"></i> Dataset.csv </button></p>
 <p>Once downloaded we need to import it in our R session. Here we read our csv and we print a small preview of it.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
@@ -6457,7 +6457,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 <col style="width: 50%">
 <col style="width: 50%">
 </colgroup>
-<thead><tr class="header gt_heading">
+<thead><tr class="gt_heading header">
 <th colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="text-align: center; font-family: 'Libre Franklin'; font-weight: 800;"><strong>Model Diagnostic Checks</strong></th>
 </tr></thead>
 <tbody class="gt_table_body">
@@ -6570,7 +6570,7 @@ Note
 <p>Before starting any type of analysis, let’s import the data and take a quick look at it.</p>
 <section id="import-data" class="level2"><h2 class="anchored" data-anchor-id="import-data">Import data</h2>
 <p>The data used in this tutorial comes from the pre-processing tutorial of pupil dilation. If you haven’t run that tutorial yet, it’s a good idea to check it out first to ensure your data is prepared and ready for analysis: <a href="../../CONTENT/EyeTracking/PupilPreprocessing.html">Pre-processing pupil data</a>. In case you did not save the result of the pre-processing you can download them from here :</p>
-<p><button class="btn btn-secondary downloadthis  " id="dnldts16586"><i class="bi bi-download"></i> Preprocessed_PupilData.csv </button></p>
+<p><button class="btn btn-secondary downloadthis  " id="dnldts25787"><i class="bi bi-download"></i> Preprocessed_PupilData.csv </button></p>
 <p>Now that you have the data, let’s import it along with the necessary libraries. We’ll also ensure that the <code>Event</code> and <code>Subjects</code> columns are properly set as factors (categorical for easier analysis. Here’s how:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;
@@ -8574,7 +8574,7 @@ Warning
   <link>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/PupilPreprocessing.html</link>
   <description><![CDATA[ <p>Welcome to your first step into the world of pupillometry! In this tutorial, we’ll walk you through how to preprocess pupil data using a handy R package called <a href="http://samforbes.me/PupillometryR/index.html">PupillometryR</a>. This package makes it simple to clean and even analyze your pupil data with just a few lines of R code.</p>
 <p>To keep things straightforward, we’ll be working with a simulated dataset that you can download right here:</p>
-<p><button class="btn btn-secondary downloadthis  " id="dnldts19384"><i class="bi bi-download"></i> PupilData.zip </button></p>
+<p><button class="btn btn-secondary downloadthis  " id="dnldts19830"><i class="bi bi-download"></i> PupilData.zip </button></p>
 <p>Download and unzip this folder. This dataset is based on the experimental design we introduced earlier in our eye-tracking series. If you’re not familiar with it or need a quick refresher, we recommend checking out the “<a href="../../CONTENT/EyeTracking/Intro_eyetracking.html">Introduction to eye-tracking</a>” guide before diving in.</p>
 <p>This tutorial serves as a foundation for understanding how to preprocess pupil data. Once you’ve grasped the essentials, we encourage you to explore the full range of functions and features <a href="http://samforbes.me/PupillometryR">PupillometryR</a> has to offer.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -10312,7 +10312,7 @@ font-style: inherit;">)</span> </span></code></pre></div>
 <p>As you can see, the data structure is now completely transformed. We’ve segmented the data into distinct time windows, with each segment starting at <strong>-0.1 seconds (-100 ms)</strong> and extending to <strong>2 seconds (2000 ms)</strong>. This new structure ensures consistency across all segments, making the data ready for further analysis.</p>
 </section><section id="make-pupillometryr-data" class="level3"><h3 class="anchored" data-anchor-id="make-pupillometryr-data">Make PupillometryR data</h3>
 <p>Ok, now it’s time to start working with <strong>PupillometryR</strong>! 🎉</p>
-<p>In the previous steps, we changed our event structure, and you might be wondering — why all that effort? Well, it’s because PupillometryR needs the data in this specific format to do its magic. To get started, we’ll pass our dataframe to the <code>make_pupillometryr_data()</code> function. If you’re already thinking, “Oh no, not another weird object type that’s hard to work with!” — don’t worry! The good news is that the main object it creates is just a regular dataframe. That means we can still interact with like we’re used to. This makes the pre-processing steps much less frustrating. Let’s get started!</p>
+<p>In the previous steps, we changed our event structure, and you might be wondering — why all that effort? Well, it’s because PupillometryR needs the data in this specific format to do its magic. To get started, we’ll pass our dataframe to the <code><a href="https://rdrr.io/pkg/PupillometryR/man/make_pupillometryr_data.html">make_pupillometryr_data()</a></code> function. If you’re already thinking, “Oh no, not another weird object type that’s hard to work with!” — don’t worry! The good news is that the main object it creates is just a regular dataframe. That means we can still interact with like we’re used to. This makes the pre-processing steps much less frustrating. Let’s get started!</p>
 <div class="cell">
 <div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
@@ -10320,7 +10320,7 @@ font-style: inherit;">PupilR_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">make_pupillometryr_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/make_pupillometryr_data.html">make_pupillometryr_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -10350,7 +10350,7 @@ font-style: inherit;">Event</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 </div>
-<p>Here, we’re simply using the <strong><code>make_pupillometryr_data()</code></strong> function to pass in our data and specify which columns contain the key information. This tells PupillometryR where to find the crucial details, like subject IDs, events, and pupil measurements, so it knows how to structure and process the data properly.</p>
+<p>Here, we’re simply using the <strong><code><a href="https://rdrr.io/pkg/PupillometryR/man/make_pupillometryr_data.html">make_pupillometryr_data()</a></code></strong> function to pass in our data and specify which columns contain the key information. This tells PupillometryR where to find the crucial details, like subject IDs, events, and pupil measurements, so it knows how to structure and process the data properly.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -10366,7 +10366,7 @@ Tip
 </div>
 </div>
 <section id="plot" class="level4"><h4 class="anchored" data-anchor-id="plot">Plot</h4>
-<p>One cool feature of the data created using <strong><code>make_pupillometryr_data()</code></strong> is that it comes with a simple, built-in <code>plot</code> function. This makes it super easy to visualize your data without needing to write tons of code. The plot function works by averaging the data over the <code>group</code> variable. So we can group over subject or condition. Here we use the <code>group</code> variable to focus on the <strong>condition</strong> and average over the subjects.</p>
+<p>One cool feature of the data created using <strong><code><a href="https://rdrr.io/pkg/PupillometryR/man/make_pupillometryr_data.html">make_pupillometryr_data()</a></code></strong> is that it comes with a simple, built-in <code>plot</code> function. This makes it super easy to visualize your data without needing to write tons of code. The plot function works by averaging the data over the <code>group</code> variable. So we can group over subject or condition. Here we use the <code>group</code> variable to focus on the <strong>condition</strong> and average over the subjects.</p>
 <p>In this example, we’re plotting the L_P (left pupil) data, grouped by condition. The <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function is actually just a ggplot2 wrapper, which means you can customize to a certain extent like any other ggplot. That’s why we can add elements to it, like <strong><code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw()</a></code></strong>, which gives the plot a cleaner, black-and-white look. Give it a go without adding anything and then learn to customize it!!</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -10500,7 +10500,7 @@ font-style: inherit;">Regressed_data</span> <span class="op" style="color: #5E5E
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">regress_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/regress_data.html">regress_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -10615,7 +10615,7 @@ font-style: inherit;">PupilR_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">make_pupillometryr_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/make_pupillometryr_data.html">make_pupillometryr_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -10653,7 +10653,7 @@ font-style: inherit;">Regressed_data</span> <span class="op" style="color: #5E5E
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">regress_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/regress_data.html">regress_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -10683,7 +10683,7 @@ font-style: inherit;">Mean_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">calculate_mean_pupil_size</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/calculate_mean_pupil_size.html">calculate_mean_pupil_size</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -10805,7 +10805,7 @@ font-style: inherit;">Filtered_data</span> <span class="op" style="color: #5E5E5
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">filter_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/filter_data.html">filter_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -10933,7 +10933,7 @@ font-style: inherit;">Missing_data</span> <span class="op" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">calculate_missing_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/calculate_missing_data.html">calculate_missing_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -10982,7 +10982,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 20 Subject_3      1  0.0587</code></pre>
 </div>
 </div>
-<p>This gives us a new dataframe that shows the amount of missing data for each subject and each trial. While we could manually decide which trials and subjects to keep or remove, PupillometryR makes it easier with the <strong><code>clean_missing_data()</code></strong> function.</p>
+<p>This gives us a new dataframe that shows the amount of missing data for each subject and each trial. While we could manually decide which trials and subjects to keep or remove, PupillometryR makes it easier with the <strong><code><a href="https://rdrr.io/pkg/PupillometryR/man/clean_missing_data.html">clean_missing_data()</a></code></strong> function.</p>
 <p>This function lets you set two % thresholds — one for trials and one for subjects. Here, we’ll set it to reject trials with more than 25% missing data (keep at least 75% of the data) and reject subjects with more than 25% missing data. This way, we ensure our analysis is based on clean, high-quality data.</p>
 <div class="cell">
 <div class="sourceCode" id="cb23" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
@@ -10991,7 +10991,7 @@ font-style: inherit;">Clean_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">clean_missing_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/clean_missing_data.html">clean_missing_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -11237,7 +11237,7 @@ font-style: inherit;">Int_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">interpolate_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/interpolate_data.html">interpolate_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -11460,7 +11460,7 @@ font-style: inherit;">Blink_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">detect_blinks_by_velocity</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/detect_blinks_by_velocity.html">detect_blinks_by_velocity</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span></span>
 <span>    <span class="va" style="color: #111111;
@@ -11683,7 +11683,7 @@ font-style: inherit;">Int_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">interpolate_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/interpolate_data.html">interpolate_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -11933,7 +11933,7 @@ font-style: inherit;">Downsampled_data</span> <span class="op" style="color: #5E
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">downsample_time_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/downsample_time_data.html">downsample_time_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -12061,7 +12061,7 @@ font-style: inherit;">Base_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">baseline_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/baseline_data.html">baseline_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -12097,7 +12097,7 @@ font-style: inherit;">Final_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">subset_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/subset_data.html">subset_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -13363,7 +13363,7 @@ font-style: inherit;">PupilR_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">make_pupillometryr_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/make_pupillometryr_data.html">make_pupillometryr_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -13494,7 +13494,7 @@ font-style: inherit;">Regressed_data</span> <span class="op" style="color: #5E5E
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">regress_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/regress_data.html">regress_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -13525,7 +13525,7 @@ font-style: inherit;">Mean_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">calculate_mean_pupil_size</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/calculate_mean_pupil_size.html">calculate_mean_pupil_size</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -13647,7 +13647,7 @@ font-style: inherit;">filtered_data</span> <span class="op" style="color: #5E5E5
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">filter_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/filter_data.html">filter_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -13794,7 +13794,7 @@ font-style: inherit;">Downsampled_data</span> <span class="op" style="color: #5E
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">downsample_time_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/downsample_time_data.html">downsample_time_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -13921,7 +13921,7 @@ font-style: inherit;">Missing_data</span> <span class="op" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">calculate_missing_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/calculate_missing_data.html">calculate_missing_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -13942,7 +13942,7 @@ font-style: inherit;">Clean_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">clean_missing_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/clean_missing_data.html">clean_missing_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -14149,7 +14149,7 @@ font-style: inherit;">Blink_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">detect_blinks_by_velocity</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/detect_blinks_by_velocity.html">detect_blinks_by_velocity</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span></span>
 <span>  <span class="va" style="color: #111111;
@@ -14360,7 +14360,7 @@ font-style: inherit;">Int_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">interpolate_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/interpolate_data.html">interpolate_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -14564,7 +14564,7 @@ font-style: inherit;">Base_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">baseline_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/baseline_data.html">baseline_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -14600,7 +14600,7 @@ font-style: inherit;">Final_data</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">subset_data</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/pkg/PupillometryR/man/subset_data.html">subset_data</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -23038,7 +23038,7 @@ Important
   <category>R</category>
   <category>Python</category>
   <guid>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/DevStartSetupGuide.html</guid>
-  <pubDate>Sat, 10 Jan 2026 13:30:14 GMT</pubDate>
+  <pubDate>Sat, 10 Jan 2026 16:15:53 GMT</pubDate>
 </item>
 </channel>
 </rss>

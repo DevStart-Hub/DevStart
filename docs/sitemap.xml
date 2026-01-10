@@ -2,15 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/index.html</loc>
-    <lastmod>2025-10-12T14:35:34.940Z</lastmod>
+    <lastmod>2025-10-12T14:35:34.000Z</lastmod>
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/Workshops/BCCCD2024.html</loc>
-    <lastmod>2025-08-27T19:03:43.711Z</lastmod>
+    <lastmod>2025-08-27T19:03:43.000Z</lastmod>
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels.html</loc>
-    <lastmod>2025-11-06T13:21:51.686Z</lastmod>
+    <lastmod>2025-11-06T13:21:51.000Z</lastmod>
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels.html</loc>
@@ -22,15 +22,15 @@
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/DevStartSetupGuide.html</loc>
-    <lastmod>2025-09-02T10:49:03.527Z</lastmod>
+    <lastmod>2025-09-02T10:49:03.000Z</lastmod>
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/PupilPreprocessing.html</loc>
-    <lastmod>2025-08-27T19:03:43.700Z</lastmod>
+    <lastmod>2025-08-27T19:03:43.000Z</lastmod>
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/Intro_eyetracking.html</loc>
-    <lastmod>2025-08-27T19:03:43.697Z</lastmod>
+    <lastmod>2025-08-27T19:03:43.000Z</lastmod>
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/FromFixationsToData.html</loc>
@@ -54,7 +54,7 @@
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/PupilDataAnalysis.html</loc>
-    <lastmod>2025-08-27T19:03:43.698Z</lastmod>
+    <lastmod>2025-08-27T19:03:43.000Z</lastmod>
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/CreateYourFirstParadigm.html</loc>
@@ -70,7 +70,7 @@
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearMixedModels.html</loc>
-    <lastmod>2025-11-06T13:21:51.685Z</lastmod>
+    <lastmod>2025-11-06T13:21:51.000Z</lastmod>
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates.html</loc>
@@ -78,6 +78,6 @@
   </url>
   <url>
     <loc>https://tommasoghilardi.github.io/DevStart/CONTENT/Workshops/GAP_2024.html</loc>
-    <lastmod>2025-05-05T17:29:05.253Z</lastmod>
+    <lastmod>2025-05-05T17:29:05.000Z</lastmod>
   </url>
 </urlset>
