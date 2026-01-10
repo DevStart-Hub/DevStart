@@ -13,19 +13,39 @@ categories:
   - Python
 ---
 
-This page will show you how to collect eye-tracking data in a simple Psychopy paradigm using [DeToX](https://devstart.org/DeToX). We will use the same paradigm that we built together in the [Getting started with Psychopy](/CONTENT/GettingStarted/GettingStartedWithPsychopy.qmd) tutorial. If you have not done that tutorial yet, please go through it first.
+This page will show you how to collect eye-tracking data in a simple PsychoPy paradigm. We will build upon the exact same paradigm we created in the [Getting started with Psychopy](/CONTENT/GettingStarted/GettingStartedWithPsychopy.qmd) tutorial. If you have not completed that tutorial yet, please go through it first, as we will be modifying that existing code.
+
+### The Tool: DeToX
+
+For this tutorial, we will be using [DeToX ("Detoxify your Eye Tracking")](https://devstart.org/DeToX).
+
+**Why DeToX?** In previous versions of this tutorial, we used the raw `tobii_research` library. While powerful, using the raw SDK required writing complex "callback functions," managing memory buffers manually, and performing difficult timestamp synchronizations between the computer clock and the eye-tracker clock.
 
 ::: callout-caution
 **Tobii eye-tracker**
 
-Note that this tutorial is specific for using **Tobii eye-trackers**. The general steps and idea are obviously applicable to other eye-trackers, but the specific code and packages may vary.
+This tutorial is specifically designed for **Tobii eye-trackers**. While the general logic of eye-tracking (calibration, recording, event logging) applies to any hardware, the specific code and installation steps here are for Tobii devices.
 :::
 
-### Why DeToX?
+DeToX is a wrapper library we built to handle all that heavy lifting for you. It simplifies the workflow by:
 
-In previous versions of this tutorial, we used the raw `tobii_research` library. While powerful, it required writing complex "callback functions," managing memory buffers manually, and performing difficult timestamp synchronizations.
+-   Automatically handling the connection to the tracker.
 
-[DeToX ("Detoxify your Eye Tracking")](https://devstart.org/DeToX) is a wrapper we built to handle all that heavy lifting for you. It handles the connections, saves the data, and automatically synchronizes your event markers with the eye-tracking data.
+-   Managing data streams and saving files (HDF5).
+
+-   Synchronizing your event markers (e.g., "Stimulus Onset") with the eye-tracking timestamps.
+
+This page will show you how to collect eye-tracking data in a simple Psychopy paradigm using [DeToX](https://devstart.org/DeToX). We will use the same paradigm that we built together in the [Getting started with Psychopy](/CONTENT/GettingStarted/GettingStartedWithPsychopy.qmd) tutorial. If you have not done that tutorial yet, please go through it first.
+
+::: callout-tip
+### Other Tools Available
+
+While we created DeToX to be simple and infant friendly, it is not the only tool out there! You might also want to check:
+
+-   [**Titta**](https://github.com/marcus-nystrom/Titta)**:** A toolbox for Matlab and Python that also interfaces with Tobii trackers.
+
+-   [**PsychoPy's Built-in I/O**](https://psychopy.org/hardware/eyeTracking.html)**:** PsychoPy has its own `iohub` module that supports various eye-trackers (SR Research Eyelink, Tobii, Gazepoint, etc.).
+:::
 
 ## Preparation
 

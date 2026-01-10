@@ -7,259 +7,459 @@ jupyter:
   kernel: "python3"
   
 author-meta: "Tommaso Ghilardi"
-description-meta: "Learn how to extract different eye-tracking measures from the collected data"
-keywords: "eye-tracking, calibration, tobii, psychopy, tobii infant, experimental psychology, tutorial, experiment, DevStart, developmental science"
+description-meta: "Learn how to use DeToX to perform calibration to ensure the best data quality"
+keywords: "eye-tracking, calibration, tobii, psychopy, DeToX, experimental psychology, tutorial, experiment, DevStart, developmental science"
 categories:
   - Eye-tracking
   - Python
 ---
 
-# Calibration
+# Calibration: The Basics
 
-Before running an eye-tracking study, we usually need to do a calibration. What is a calibration you ask??
+Before running an eye-tracking study, we usually need to do a calibration. What is a calibration, you ask?
 
-Well, an eye-tracker works by using illuminators to emit near-infrared light towards the eye. This light reflects off the cornea, creating a visible glint or reflection that the eye-tracker's sensors can detect. By capturing this reflection, the eye-tracker can determine the position of the eye relative to a screen, allowing it to pinpoint where the user is looking, known as the gaze point.
+Well, an eye-tracker works by using illuminators to emit **near-infrared light** towards the eye. This light reflects off the cornea, creating a visible glint or reflection that the eye-tracker’s sensors can detect. By capturing this reflection, the eye-tracker can determine the position of the eye relative to a screen, allowing it to pinpoint exactly where the user is looking.
 
-[![Image from the tobii website](https://help.tobii.com/hc/article_attachments/360036648293/How_DoesEyetrackingWork_ScreenBased.jpg){fig-align="center" width="528"}](https://help.tobii.com/hc/en-us/articles/360023794433-How-does-the-calibration-work)
+But why is this step necessary?
 
-There are different ways to run a calibration using tobii eye-trackers. Here below the ones we have used:
+Every eye is unique. Calibration allows the software to build a custom mathematical model for each participant, accounting for individual differences in eye shape, size, and how the light reflects off their specific cornea. Without this step, the eye-tracker’s gaze estimation will lack precision and accuracy, potentially introducing significant offsets in your data.
 
-## Tobii pro
+![Image from the tobii website](https://help.tobii.com/hc/article_attachments/360036648293/How_DoesEyetrackingWork_ScreenBased.jpg){fig-align="center" width="528"}
 
-Tobii offers a nice software called Tobii Pro, which allows you to run calibrations with considerable flexibility. However, Tobii Pro requires a paid license, which may not always be available to you. If you're fortunate enough to have a paid license for Tobii Pro, by all means, take advantage of it. But if you don't, don't worry! Keep reading, as we have alternative solutions to share with you.
+This process is essential for data quality. Good eye-tracking data starts long before you present your first stimulus—it begins with proper setup and calibration. This is particularly critical when testing **infants and children**, where data quality can be challenging even under ideal conditions.
 
-## Tobii pro eye-tracker manager
+## How do we run it?
 
-Another possibility is to use [Tobii pro eye-tracker manager](https://connect.tobii.com/s/etm-downloads?language=en_US), an alternative software from Tobii. Unlike Tobii Pro, this application is free to use, though its features are more limited. If you're looking to use Tobii software and don't require advanced calibration options, this could be a suitable choice.
+You have a couple of options to perform this crucial step:
 
-## Psychopy tobii infant
+1.  **Tobii Pro Eye Tracker Manager:** This is a free software from Tobii. It is reliable and easy to use. The main problem is that the calibration is not really "infant-friendly"—it usually involves very small moving dots that might not capture a baby's attention effectively.
 
-Finally, if you are broke (like us!) and/or you want flexibility in running your calibration, one of the best option is to use the Tobii SDK that allows us to interact with the eyetrackers using Python. However, running a calibration using the SDK is pretty complex. We are trying to write a nice script to make it easier but in the meantime we have another solution.... We can use !! Psychopy tobii infants is a nice python code that wraps around the Tobii SDK making it easy to run a calibration, especailly an infant friendly one!! This code collection allows us to use the Tobii SDK with the Psychopy library.
+2.  **DeToX (via Tobii SDK):** We can use DeToX to do just that! We created this library to wrap around PsychoPy and the Tobii SDK, allowing you to run flexible, infant-friendly calibrations (using fun images and sounds!) without the headache of coding it all from scratch.
 
-Finally, if you are broke and you want flexibility in running your calibration, one of the best options is to use the Tobii SDK. How we explained in previous tutorials ([Create an eye-tracking experiment](CreateAnEyetrackingExperiment.qmd)), this SDK allows the interaction with eye-trackers using Python. However, implementing a calibration using the SDK can be quite challenging....... We're are trying to write an easy to explain and run code to perform calibrations, but in the meantime, we have an alternative solution!!
+In this tutorial, we will use DeToX to handle the heavy lifting. We'll focus on two essential steps:
 
-Enter [Psychopy_tobii_infant](https://github.com/yh-luo/psychopy_tobii_infant)! This is a series of python functions that effectively wraps around the Tobii SDK, making it much easier to run calibrations, particularly those designed for infants. This code collection enables us to use the Tobii SDK in conjunction with the PsychoPy library, offering a more accessible approach to eye-tracking calibration!!
+1.  **Positioning your participant** in the eye tracker's optimal tracking zone.
 
-In the following paragraph we will see together how to prepare and use Psychopy tobii infant to run a nice and infant friendly calibration.
+2.  **Running the calibration** procedure.
 
-::: callout-note
-Use Psychopy tobii infant to run studies
+Get these right, and everything else falls into place.
 
-One question that you could ask yourself is... can I use Psychopy tobii infants to run my eye-tracking studies?? Well yes!! We have actually used it for few of our studies. Psychopy tobii infants provides an easy intarface between tobii eye-trackers and psychopy.
+## Part 1: Positioning Your Participant
 
-Over the years we have personally move away from it but we often come back to it for some of its handy functionalities (e.g. the calibration).
-:::
+### Understanding the "Track Box"
 
-### Download
+Every eye tracker has a **track box**—an invisible 3D zone in front of the screen where it can accurately detect eyes. Step outside this zone, and your tracking quality drops fast!
 
-Ok, let's get started!! First thing first we need to download the codes of Psychopy tobii infant. You can find them here on GitHub: <https://github.com/yh-luo/psychopy_tobii_infant>.
+While we try to seat everyone consistently, even small differences in posture or chair height can matter. The goal is simple but crucial: **center the participant’s eyes** on the screen and ensure their gaze is **perpendicular** to it.
 
-On this page, you can click on ***\<\>Code*** and then on ***Download ZIP*** as shown below:
-
-[![](/images/CreateAnEyetrackingExperiment/DowloadPsychopyTobiiInfant.jpg){fig-align="center"}](https://github.com/yh-luo/psychopy_tobii_infant)
-
-Perfect!! Now that we have downloaded the code as a zip file we need to:
-
--   extract the file
-
--   identify the folder *"psychopy_tobii_infant"*
-
--   copy this folder in the same location of your eye-tracking experiment script
-
-You should end up like with something like this:
-
-![](/images/CreateAnEyetrackingExperiment/FinalConfTobiiInfant.png){fig-align="center"}
-
-**Now we are all set and ready to go !!!!!!!!!!**
-
-### Importing the functions
-
-We'll now import the required libraries and custom functions. First, we'll set the working directory to where our stimuli and the psychopy_tobii_infant folder are located. This allows Python to access these resources. Once set, we can easily import the necessary libraries and the custom functions from psychopy_tobii_infant for our eye-tracking experiment.
-
-```{python}
-import os
-from psychopy import visual, sound
-
-os.chdir(r"<<< YOUR PATH >>>>")
-
-# import Psychopy tobii infant
-from psychopy_tobii_infant import TobiiInfantController
-```
-
-Done!! Now we can use its function to run our code.
-
-### Settings
-
-Before running our calibration we need to prepare a few things!
-
-First, we create a nice window. As we explained before, this is the canvas where we will draw our stimuli.
-
-```{python}
-winsize = [1920, 1080]
-win = visual.Window(winsize, fullscr=True, allowGUI=False,screen = 1, color = "#a6a6a6", unit='pix')
-```
-
-Second we will import a few stimuli. I will explain later what we need them for, just trust me for now. If you want to follow along [these are the stimuli we have used](/resources/EyetrackingCalibration/CalibrationStim.zip). Just download them and unzip them.
-
-Once you have downloaded the stimuli we can use `glob` to find all the .png in the folder, read the video file and the audio file.
-
-The .pngs are images of cute cartoon animals that we will use in the calibration.
-
-![](/resources/EyetrackingCalibration/animals.jpg.png){fig-align="center" width="347"}
-
-Let's find them and put the in a list.
-
-```{python}
-# visual stimuli
-CALISTIMS = glob.glob("CalibrationStim\\*.png")
-
-# video
-VideoGrabber = visual.MovieStim(win, "CalibrationStim\\Attentiongrabber.mp4", loop=True, size=[800,450],volume =0.4, unit = 'pix')  
-
-# sound
-Sound = sound.Sound(directory + "CalibrationStim\\audio.wav")
-```
-
-Perfect we have found all the stimuli that we need.
-
-Now we will use the TobiiInfantController that we have imported before to connect to the eye-tracker. It is extremely simple:
-
-```{python}
-EyeTracker = TobiiInfantController(win)
-```
-
-Perfect we now even have our eye-tracker!!
-
-### Find the eyes
-
-The first step for a proper calibration involves centering the participant's eyes on the screen and ensuring their gaze is perpendicular to it. This positioning is crucial for accurate data collection.
-
-You can see here two classic scenarios of infants in front of a eye-tracker. Again, the important thing is that the head and gaze of the child is perpendicular to the screen
+You can see here two classic scenarios of infants in front of an eye-tracker. Whether they are in a high chair or on a parent's lap, the important thing is that the head and gaze of the child are aligned with the screen.
 
 ![](/resources/EyetrackingCalibration/Calibration.jpg){fig-align="center" width="753"}
 
-But how to do it?? We can eyeball it but it's not going to be easy. Luckily we can get some help!!
+**But ...how do we check it?**
 
-Using `EyeTracker.show_status()` we can see the eyes of the participant in relation to the screen. Therefore we can move either the eye-tracker or the infant to make sure the gaze is parallel to the screen. Sounds good doesn't it??!!?? However, most of the times infants won't look at the screen if nothing interesting is presented on it. Thus we need to capture their attention!!!!!
+We *could* just eyeball it, but "it looks about right" isn't exactly scientific rigor. The good news? DeToX makes checking the position as easy as calling a single method.
 
-We can use the video we imported before. We set it to autodraw (each time the window is flipped a new frame will be drawn automatically) and the we start it by calling `play()`.
+### Setup Code
 
-```{python}
-# set video playing
-VideoGrabber.setAutoDraw(True)
-VideoGrabber.play()
-
-# show the relative position of the subject to the eyetracker
-EyeTracker.show_status()
-```
-
-This is what we will see:
-
-![](/resources/EyetrackingCalibration/ShowStatus.jpg){fig-align="center" width="852"}
-
-In the center of the screen you will see the video we imported. In this case, a video of funny dancing fruits. But more importantly, at the top we can see the eyes of our participant. We need to make sure that we actually see the eyes and that they are centered in the screen. In addition is important to notice that under the eye position there is a green bar. The black line on it represents the distance of the participant head from the eye-tracker (the more on the right, the further from the screen; the more on the left, the closer to it). Ideally the black line should be in the center (overlapping the white thick line). This would indicate that the head of the participant is at an ideal distance (usually 65cm).
-
-Once we are satisfied with the position of the eye-tracker and the infant we can press `spacebar` to proceed to the next step!! Before doing that we will stop the presentation of
+First, let's get our script running. We will follow the same steps from the previous tutorial to set up our window and connect to the tracker.
 
 ```{python}
-# stop the attention grabber
-VideoGrabber.setAutoDraw(False)
-VideoGrabber.stop()
+#| label: Libraries
+#| eval: false
+from psychopy import visual, core
+from DeToX import ETracker
+
+# 1. Create the Window
+# This is where all our stimuli (and the calibration points) will appear
+win = visual.Window(
+    size=[1920, 1080],  # Window dimensions in pixels
+    fullscr=True,       # Expand to fill the entire screen
+    units='pix'         # Use pixels as the measurement unit
+)
+
+# 2. Connect to the Eye Tracker
+# We create an ETracker object which automatically finds and connects to the device
+ET_controller = ETracker(win)
 ```
 
-### Calibration
+**What is happening here?**
 
-Ok, now that we are happy with the setup let's actually run the calibration. It only takes two steps.
+1.  We import the necessary librarires.
 
-First, we need to define the amount and the position of the points where we will present our stimuli. In infant studies we usually rely on 5 points. Four on the corners of the screen and one in the center.
+2.  We create a standard PsychoPy window.
 
-The easiest way to define them is by using Psychopy's normalized unit.
+3.  We initialize `ET_controller`. This one line does a lot of heavy lifting: it searches for connected Tobii devices, establishes communication, and links the tracker to your window.
+
+If everything is working, you will see connection details printed in your console. Now, our `ET_controller` object is ready to take command!
+
+### Checking Position in Real-Time
+
+Now for the magic—visualizing where your participant's eyes are in the track box:
 
 ```{python}
-CALINORMP = [(-0.4, 0.4), (-0.4, -0.4), (0.0, 0.0), (0.4, 0.4), (0.4, -0.4)]
+ET_controller.show_status()
 ```
 
-As we usually like to work in pixel units, we could define them in pixels or just transform our `CALINORMP` using the dimension of our window.
+### What You'll See
 
-```{python}
-CALIPOINTS = [(x * winsize[0], y * winsize[1]) for x, y in CALINORMP]
-```
+When you call `show_status()`, an animated video of animals appears to keep infants engaged. Overlaid on the video are two colored circles—🔵 **light blue** and 🔴 **pink** —showing where the tracker detects your participant's eyes in real-time. A black rectangle marks the track box boundaries where tracking works best.
 
-Perfect! Now we run our calibration by running
+Below the rectangle, a green bar with a moving black line indicates distance from the screen. The line should be centered on the bar (about 65 cm distance).
 
-```{python}
-success = controller.run_calibration(CALIPOINTS, CALISTIMS, audio = Sound)
-```
+![](/resources/EyetrackingCalibration\ShowStatus.gif){fig-align="center" width="781"}
 
-Ok, but what is going to happen??? After running this line we will start our calibration. Using the numbers on our keyboard (use 1\~9 (depending on the number of calibration points) to present) we will show 1 of the `.png` stimuli that we have listed in `CALISTIMS` in the selected position. The presentation of the cartoon will be accompanied by the sound passed with `Sound`. The cartoon will start to zoom in and out in the attempt to capture the attention of the infant.
+::: callout-important
+### Simulation Mode
 
-![](/resources/EyetrackingCalibration/ZoomingStim.jpg){fig-align="center" width="852"}
-
-Once we are confident that the infant is looking at the cartoon zooming in and out you can press **Space** to collect the first calibration sample. Once that's been done, we can move to the following points. Once all point are done we can press **Enter**. This will show the result of our calibration, e.g:
-
-![](/resources/EyetrackingCalibration/CalibrationResults.jpg){fig-align="center" width="852"}
-
-The red and green lines represent the gaze data from the left and right eyes, respectively. Each cluster of lines corresponds to a calibration point, with the central cluster indicating the main fixation point. Tight convergence of the lines within each cluster signifies high calibration accuracy and precision, while any significant discrepancies or spread indicate potential calibration issues.
-
-As you may have noticed, the bottom right corner shows no data. What happened?? Well probably the infant was not looking when we pressed the **Spacebar**. How to fix it? We can simply press the number on the keyboard related to the point that failed and then press **Spacebar**. This will restart the calibration for only that point. So we can focus on getting more data for this point to add to our already collected.
-
-In case more points are without data –or the data is just bad– we can select multiple points or even all of them (pressing 0). If we are happy with our calibration we can just press the **Spacebar** without selecting any points.
-
-::: callout-tip
-The match between the infant eye and the position on the screen is made in the exact moment you press the Space button. If you wait too long to press it, the infant might look away and beat you to it! It may appear counterintuitive, but we usually prefer to be quite fast in our calibration process. Since duration doesn't matter but timing does, you will get better results! The fast switching seems to also capture infants' attention better, meaning that they are more likely to follow the location of the cartoon with their gaze.
-
-Remember, infants can easily get bored with our stimuli. Thus, being rapid and sudden in showing them may work to our advantage.
+If you're running with `simulate=True`, the positioning interface uses your mouse instead of real eye tracker data. Move the mouse around to see the eye circles follow, and use the **scroll wheel** to simulate moving closer to or further from the screen.
 :::
 
-Well done!! Calibration is done!!!!
+Center both colored circles within the black rectangle. If they're drifting toward the edges, ask the participant to lean in the needed direction, or adjust the eye tracker mount if possible.
 
-Now we can start with our eye-tracking study!
+For distance, watch the black line on the green bar. Too far left means too close (move back), too far right means too far (move forward). Aim for the center.
 
-Here below the entire code.
+Press **SPACE** when positioning looks good—you're ready for calibration!
+
+::: Advanced
+### Customizing the Positioning Display
+
+By default, `show_status()` displays an animated video of animals to keep infants engaged while you adjust their position. However, you can customize this behavior using the `video_help` parameter:
+
+**`video_help=True`**: Uses the built-in instructional video included with DeToX (default). This is the easiest option and works well for most studies.
+
+**`video_help=False`**: Disables the video entirely, showing only the eye position circles and track box. Useful if you prefer a minimal display or if video playback causes performance issues.
+
+**`video_help=visual.MovieStim(...)`**: Uses your own custom video. You'll need to pre-load and configure the MovieStim object yourself, including setting the appropriate size and position for your display layout.
+:::
+
+## Part 2: Running the Calibration
+
+Now that your participant is perfectly positioned, it’s showtime.
+
+In standard scripts, this is the part where you might have to write a complex loop to handle dot positions, keyboard inputs, and validation. In **DeToX**, it’s a single function call.
+
+### Launching Calibration
+
+Here is the command to start the full procedure:
 
 ```{python}
+ET_controller.calibrate(
+    calibration_points=5,
+    shuffle=True,
+    audio=True,
+    anim_type='zoom',
+    visualization_style='circles'
+)
+```
+
+Let's break down what these arguments actually do:
+
+-   **`calibration_points=5`**: This sets a standard 5-point pattern (4 corners + center). It is the industry standard and works well for most studies. You can bump this up to `9` for higher precision, or even pass a custom list of coordinates if you are feeling fancy.
+
+-   **`shuffle=True`**: Randomizes the order of the points. This is crucial for infants—it prevents them from predicting the next spot and getting bored.
+
+-   **`audio=True`**: Plays a fun, attention-getting sound along with the visual stimulus.
+
+-   **`anim_type='zoom'`**: Makes the stimuli gently pulse in size to catch the eye. You can also use `'trill'` for a rotating animation.
+
+-   **`visualization_style='circles'`**: Determines how the results are shown. `'circles'` draws dots where the eye looked. `'lines'` draws a line connecting the target to the gaze point (visualizing the error).
+
+::: callout-note
+**A quick heads-up:** These are actually the **default settings**. This means you could more simply call `ET_controller.calibrate()` and get the exact same behavior! We have shown all the settings here just so you can see what you are implicitly passing. For more information and details about all the possibilities, we suggest looking at the [DeToX](devstart.org/DeToX) **website**.
+:::
+
+### The Workflow
+
+Once you run that code, DeToX takes over the screen. Here is how the process flows:
+
+#### 1. The Controls
+
+First, you will see a control panel. You (the experimenter) drive this process using the keyboard.
+
+``` markdown
+┌──────────────────── Calibration Setup ─────────────────────┐
+│Mouse-Based Calibration Setup:                              │
+│                                                            │
+│    - Press number keys (1-5) to select calibration points  │
+│    - Move your mouse to the animated stimulus              │
+│    - Press SPACE to collect samples at the selected point  │
+│    - Press ENTER to finish collecting and see results      │
+│    - Press ESCAPE to exit calibration                      │
+│                                                            │
+│    Any key will start calibration immediately!             │
+└────────────────────────────────────────────────────────────┘
+```
+
+#### 2. Collecting the Data
+
+Press any key to enter the active mode. You will see a thin red border indicating that calibration is live.
+
+1.  **Select a Point:** Press a number key (e.g., `1`). The animated stimulus will appear at that location.
+
+2.  **Wait for the Gaze:** Watch the participant. Wait for them to actually look at the pulsing animation.
+
+3.  **Capture:** When you are confident they are fixating on the target, press **SPACE**.
+
+    -   The system pauses briefly (0.25s) to ensure stability, records the data, and then hides the point.
+
+4.  **Repeat:** Do this for all points. You don't need to follow a specific order—follow the infant's attention!
+
+#### 3. The Verdict (Review)
+
+Once you have collected data for all points (or as many as you could get), press **ENTER**. DeToX will compute the math and show you the results visually.
+
+You will see the targets on the screen, along with marks showing where the participant *actually* looked.
+
+``` markdown
+┌────────────── Calibration Results ───────────────┐
+│Review calibration results above.                 │
+│                                                  │
+│    - Press ENTER to accept calibration           │
+│    - Press Numbers → SPACE to retry some points  │
+│    - Press ESCAPE to restart calibration         │
+│                                                  │
+└──────────────────────────────────────────────────┘
+```
+
+At this stage, you have three choices:
+
+1.  **Accept (`ENTER`):** If the dots align nicely with the targets, you are good to go!
+
+2.  **Start Over (`ESCAPE`):** If the data is a mess (the baby was crying, the tracker was bumped), discard it and restart.
+
+3.  **Retry Specific Points (Number Keys):** *This is the superpower of DeToX.*
+
+    -   Often, a calibration is perfect except for *one* point where the baby looked away.
+
+    -   Instead of redoing the whole thing, just press the number for that specific point (it will highlight yellow).
+
+    -   Press **SPACE**, and you can recollect data for *just that point*. This saves massive amounts of time and patience!
+
+### Calibration Complete!
+
+Congratulations! You've successfully positioned your participant and completed the calibration procedure using DeToX. With accurate calibration in place, you're now ready to present your experimental stimuli and collect high-quality eye tracking data.
+
+Here's a video demonstrating the entire calibration workflow from start to finish:
+
+```{=html}
+<div style="padding:56.25% 0 0 0;position:relative;">
+    <iframe src="[https://player.vimeo.com/video/1139719474?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479](https://player.vimeo.com/video/1139719474?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479)" 
+    frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+    referrerpolicy="strict-origin-when-cross-origin" 
+    style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+    title="Calibration procedure using DeToX"></iframe>
+</div>
+<script src="[https://player.vimeo.com/api/player.js](https://player.vimeo.com/api/player.js)"></script>
+```
+
+::: details
+## Save and Load calibration
+
+While we recommend performing calibration at the start of each session to ensure optimal accuracy, DeToX also allows you to save and load calibration data for convenience. In our opinion, this should only be used in special circumstances where there is a headrest and little to no chance of movement between sessions. However, if you need to save and reuse calibration data, here's how:
+
+### Saving Calibration
+
+After completing a successful calibration, you can save the calibration data to a file:
+
+``` python
+# Save with custom filename
+ET_controller.save_calibration(filename="S01_calibration.dat")
+```
+
+``` markdown
+┌────── Calibration Saved ─────┐
+│Calibration data saved to:    │
+│S01_calibration.dat           │
+└──────────────────────────────┘
+```
+
+The calibration data is saved as a binary file (`.dat` format) that can be reloaded in future sessions. If you don't specify a filename, DeToX automatically generates a timestamped name like `2024-01-15_14-30-00_calibration.dat`.
+
+you can also choose to use a GUI file dialog to select the save location:
+
+``` python
+# Save with GUI file dialog
+ET.save_calibration(use_gui=True)
+```
+
+### Loading Calibration
+
+To reuse a previously saved calibration in a new session:
+
+``` python
+# Load from specific file
+ET.load_calibration(filename="S01_calibration.dat")
+```
+
+``` markdown
+┌───── Calibration Loaded ──────┐
+│Calibration data loaded from:  │
+│S01_calibration.dat            │
+└───────────────────────────────┘
+```
+
+or again, use a GUI file dialog to select the file:
+
+``` python
+# Load with GUI file dialog
+ET.load_calibration(use_gui=True)
+```
+:::
+
+# Putting It All Together
+
+**Well Done!!** You have seen how to set up the eye-tracker and run a calibration!! Great job!!
+
+Now that we know *how* to do it, we need to include the setup and calibration in our actual experimental script.
+
+In the previous tutorials ([Create your first paradigm](..\GettingStarted\CreateYourFirstParadigm.qmd) and [Create an eye-tracking experiment](CreateAnEyetrackingExperiment.qmd)), we built a simple study and added basic eye-tracking controls. Now, we will see exactly where the calibration fits into that flow.
+
+### The Logic of the Script
+
+To integrate calibration effectively, we structure the script into four logical phases:
+
+1.  **Initialization & Setup:** Here we import the necessary libraries, configure the PsychoPy window, and establish the connection with the eye-tracker.
+
+2.  **Calibration & Positioning:** *This is the new addition.* Before recording any experimental data, we must verify the participant's position and run the calibration routine to ensure gaze accuracy.
+
+3.  **The Experimental Loop:** This is the core of the study. We iterate through the trials, present stimuli (Fixation -\> Cue -\> Target), and send event markers to the eye-tracker.
+
+4.  **Termination & Cleanup:** Finally, we stop the recording, ensure all data is safely saved to the disk, and close the connection and windows.
+
+Here is the complete script. Notice how we inserted the **Positioning** and **Calibration** steps right after the setup but before the recording starts.
+
+```{python}
+#| label: Total script
 import os
-from psychopy import visual, sound
+from pathlib import Path
+from psychopy import core, event, visual, sound
+from DeToX import ETracker
 
-# import Psychopy tobii infant
-os.chdir(r"<<< YOUR PATH >>>>")
-from psychopy_tobii_infant import TobiiInfantController
+#%% Setup and Imports
 
-
-#%% window and stimuli
+# Screen dimensions
 winsize = [1920, 1080]
-win = visual.Window(winsize, fullscr=True, allowGUI=False,screen = 1, color = "#a6a6a6", unit='pix')
 
-# visual stimuli
-CALISTIMS = glob.glob("CalibrationStim\\*.png")
+# Setting the directory of our experiment
+os.chdir(r'<<< YOUR PATH >>>>')
 
-# video
-VideoGrabber = visual.MovieStim(win, "CalibrationStim\\Attentiongrabber.mp4", loop=True, size=[800,450],volume =0.4, unit = 'pix')  
+# Create Paths
+stimuli_dir = Path('EXP') / 'Stimuli'
+data_dir = Path('DATA') / 'RAW'
 
-# sound
-Sound = sound.Sound(directory + "CalibrationStim\\audio.wav")
+# 1. Create the Window
+# We need this first so DeToX can measure pixels correctly
+win = visual.Window(size=winsize, fullscr=True, units="pix", pos=(0,30), screen=1)
 
+# 2. Initialize DeToX
+# This automatically connects to the eye tracker
+ET_controller = ETracker(win)
 
-#%% Center face - screen
+#%% Load Stimuli
 
-# set video playing
-VideoGrabber.setAutoDraw(True)
-VideoGrabber.play()
+# Load images 
+fixation = visual.ImageStim(win, image=str(stimuli_dir / 'fixation.png'), size=(200, 200))
+circle = visual.ImageStim(win, image=str(stimuli_dir / 'circle.png'), size=(200, 200))
+square = visual.ImageStim(win, image=str(stimuli_dir / 'square.png'), size=(200, 200))
 
-# show the relative position of the subject to the eyetracker
-EyeTracker.show_status()
+# Note positions for targets
+complex_stim = visual.ImageStim(win, image=str(stimuli_dir / 'complex.png'), size=(200, 200), pos=(250, 0))
+simple_stim = visual.ImageStim(win, image=str(stimuli_dir / 'simple.png'), size=(200, 200), pos=(-250, 0))
 
-# stop the attention grabber
-VideoGrabber.setAutoDraw(False)
-VideoGrabber.stop()
+# Load sound 
+presentation_sound = sound.Sound(str(stimuli_dir / 'presentation.wav'))
+
+# List of stimuli
+cues = [circle, square]
+targets = [complex_stim, simple_stim]
+
+# Create a list of trials (0 = Circle/Complex, 1 = Square/Simple)
+Trials = [0, 1, 0, 0, 1, 0, 1, 1, 0, 1]
+Sub = 'S001'
 
 
 #%% Calibration
 
-# define calibration points
-CALINORMP = [(-0.4, 0.4), (-0.4, -0.4), (0.0, 0.0), (0.4, 0.4), (0.4, -0.4)]
-CALIPOINTS = [(x * winsize[0], y * winsize[1]) for x, y in CALINORMP]
+# 1. Center participant
+ET_controller.show_status()
 
-success = controller.run_calibration(CALIPOINTS, CALISTIMS, audio = Sound)
-win.flip()
+# 2. Calibration
+ET_controller.calibrate(
+    calibration_points=5,
+    shuffle=True,
+    audio=True,
+    anim_type='zoom',
+    visualization_style='circles'
+)
+
+core.wait(1)
+
+#%% Start Recording
+
+# Start recording to an HDF5 file
+# DeToX creates the file and starts the stream immediately
+ET_controller.start_recording(filename=str(data_dir / f"{Sub}.h5"))
+
+#%% Run Trials
+
+for trial in Trials:
+
+    ### 1. Present the Fixation
+    fixation.draw()
+    win.flip()
+    ET_controller.record_event('Fixation') # Log event
+    core.wait(1)
+
+    ### 2. Present the Cue
+    cues[trial].draw()
+    win.flip()
+    
+    if trial == 0:
+        ET_controller.record_event('Circle')
+    else:
+        ET_controller.record_event('Square')
+        
+    core.wait(3)
+
+    ### 3. Wait for Saccadic Latency
+    win.flip()
+    core.wait(0.75)
+
+    ### 4. Present the Target
+    targets[trial].draw()
+    win.flip()
+    
+    if trial == 0:
+        ET_controller.record_event('Complex')
+    else:
+        ET_controller.record_event('Simple')
+
+    presentation_sound.play()
+    core.wait(2)
+    
+    ### 5. ISI and Smart Saving
+    win.flip()
+    ET_controller.record_event('ISI')
+    
+    # Start timer for ISI
+    clock = core.Clock() 
+    
+    # Save data to disk safely
+    ET_controller.save_data()
+    
+    # Wait for the remainder of the 1-second ISI
+    core.wait(1 - clock.getTime()) 
+    
+    ### Check for escape key
+    keys = event.getKeys()
+    if 'escape' in keys:
+        ET_controller.stop_recording() # Stop safely
+        win.close()
+        core.quit()
+
+# --- End Experiment ---
+ET_controller.stop_recording() # Save remaining data and disconnect
+win.close()
+core.quit()
 ```
