@@ -122,7 +122,7 @@ In our tutorials, we will focus on coding experiments directly. If you're using 
 
 6.  Click the **"Open PIP terminal"** button
 
-7.  In the terminal, type: `pip install dvst-detox`
+7.  In the terminal, type: `install dvst-detox`
 
 8.  Press Enter and wait for the installation to complete
 

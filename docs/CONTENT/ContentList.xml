@@ -22296,7 +22296,7 @@ font-style: inherit;">pip</span> install psychopy dvst-detox</span></code></pre>
 <li><p>Select <strong>“Plugins/package manager…”</strong></p></li>
 <li><p>Click on the <strong>“Packages”</strong> tab at the top</p></li>
 <li><p>Click the <strong>“Open PIP terminal”</strong> button</p></li>
-<li><p>In the terminal, type: <code>pip install dvst-detox</code></p></li>
+<li><p>In the terminal, type: <code>install dvst-detox</code></p></li>
 <li><p>Press Enter and wait for the installation to complete</p></li>
 </ol>
 <p>That’s it! You now have both PsychoPy and DeToX installed and ready to use for your eye-tracking studies..</p>
@@ -23038,7 +23038,7 @@ Important
   <category>R</category>
   <category>Python</category>
   <guid>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/DevStartSetupGuide.html</guid>
-  <pubDate>Sat, 10 Jan 2026 16:15:53 GMT</pubDate>
+  <pubDate>Sun, 11 Jan 2026 07:48:09 GMT</pubDate>
 </item>
 </channel>
 </rss>
