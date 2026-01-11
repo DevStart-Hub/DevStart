@@ -125,7 +125,7 @@ Occasionally, conda may encounter difficulties locating the precise package you 
 Let's consider I2MC, an exceptional package processing eye-tracking data. With pip, installation is a breeze. Simply use the following command:
 
 ``` bash
-pip install I2MC
+pip install I2MC ipykernel
 ```
 
 ## Mac
@@ -143,7 +143,7 @@ Occasionally, conda may encounter difficulties locating the precise package you 
 Let's consider I2MC, an exceptional package processing eye-tracking data. With pip, installation is a breeze. Simply use the following command:
 
 ``` bash
-pip install I2MC
+pip install I2MC ipykernel
 ```
 :::
 

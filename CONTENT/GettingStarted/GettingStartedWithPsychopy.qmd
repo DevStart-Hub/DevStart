@@ -52,7 +52,7 @@ You'll see that the parenthesis at the command line will change from (base) to (
 As mentioned before, we will use PsychoPy to create our experimental design!! So let's install it (and also let's install DeToX, our package to run eye-tracking studies). Type:
 
 ``` bash
-pip install psychopy dvst-detox
+pip install psychopy dvst-detox ipykernel
 ```
 
 Conda will think and download stuff for a while!! Do not worry if you see a lot of lines popping up! Give conda time and confirm if prompted. After a while, hopefully you will see that everything went well and now you have a nice psychopy environment with PsychoPy in it!!
@@ -78,7 +78,7 @@ You'll see that the parenthesis at the command line will change from (base) to (
 As mentioned before, we will use PsychoPy to create our experimental design!! So let's install it (and also let's install DeToX, our package to run eye-tracking studies). Type:
 
 ``` bash
-pip install psychopy dvst-detox
+pip install psychopy dvst-detox ipykernel
 ```
 
 Conda will think and download stuff for a while!! Do not worry if you see a lot of lines popping up! Give conda time and confirm if prompted. After a while, hopefully you will see that everything went well and now you have a nice psychopy environment with PsychoPy in it!!
