@@ -22244,7 +22244,7 @@ font-style: inherit;">conda</span> activate psychpy</span></code></pre></div>
 <p>As mentioned before, we will use PsychoPy to create our experimental design!! So let’s install it (and also let’s install DeToX, our package to run eye-tracking studies). Type:</p>
 <div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">pip</span> install psychopy dvst-detox</span></code></pre></div>
+font-style: inherit;">pip</span> install psychopy dvst-detox ipykernel</span></code></pre></div>
 <p>Conda will think and download stuff for a while!! Do not worry if you see a lot of lines popping up! Give conda time and confirm if prompted. After a while, hopefully you will see that everything went well and now you have a nice psychopy environment with PsychoPy in it!!</p>
 </div>
 <div id="tabset-1-2" class="tab-pane" aria-labelledby="tabset-1-2-tab">
@@ -22263,7 +22263,7 @@ font-style: inherit;">conda</span> activate psychpy</span></code></pre></div>
 <p>As mentioned before, we will use PsychoPy to create our experimental design!! So let’s install it (and also let’s install DeToX, our package to run eye-tracking studies). Type:</p>
 <div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">pip</span> install psychopy dvst-detox</span></code></pre></div>
+font-style: inherit;">pip</span> install psychopy dvst-detox ipykernel</span></code></pre></div>
 <p>Conda will think and download stuff for a while!! Do not worry if you see a lot of lines popping up! Give conda time and confirm if prompted. After a while, hopefully you will see that everything went well and now you have a nice psychopy environment with PsychoPy in it!!</p>
 </div>
 </div>
@@ -22619,7 +22619,7 @@ font-style: inherit;">conda</span> install pandas numpy matplotlib seaborn</span
 <p>Let’s consider I2MC, an exceptional package processing eye-tracking data. With pip, installation is a breeze. Simply use the following command:</p>
 <div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">pip</span> install I2MC</span></code></pre></div>
+font-style: inherit;">pip</span> install I2MC ipykernel</span></code></pre></div>
 </div>
 <div id="tabset-3-2" class="tab-pane" aria-labelledby="tabset-3-2-tab">
 <p>Open your terminal and type :</p>
@@ -22631,7 +22631,7 @@ font-style: inherit;">conda</span> install pandas numpy matplotlib seaborn</span
 <p>Let’s consider I2MC, an exceptional package processing eye-tracking data. With pip, installation is a breeze. Simply use the following command:</p>
 <div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">pip</span> install I2MC</span></code></pre></div>
+font-style: inherit;">pip</span> install I2MC ipykernel</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -23038,7 +23038,7 @@ Important
   <category>R</category>
   <category>Python</category>
   <guid>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/DevStartSetupGuide.html</guid>
-  <pubDate>Sun, 11 Jan 2026 07:48:09 GMT</pubDate>
+  <pubDate>Sun, 11 Jan 2026 09:20:47 GMT</pubDate>
 </item>
 </channel>
 </rss>
