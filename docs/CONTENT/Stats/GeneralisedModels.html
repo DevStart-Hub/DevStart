@@ -333,7 +333,7 @@ div.callout-details.callout-style-default .callout-icon::before, div.callout-det
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CONTENT/Stats/ModelEstimates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ModelEstimates</span></a>
+ <span class="menu-text">Model Estimates</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -399,7 +399,8 @@ div.callout-details.callout-style-default .callout-icon::before, div.callout-det
 
 
 </header><p>If you’ve been following our statistical journey, you’re already familiar with our adventures in <a href="../../CONTENT/Stats/LinearModels.html"><strong>linear models</strong></a> and the exciting world of <a href="../../CONTENT/Stats/LinearMixedModels.html"><strong>linear mixed-effect models</strong></a>!!! Now it’s time to level UP our statistical toolkit with something even MORE POWERFUL: <strong>Generalised Linear Mixed-Effects Models (GLMMs)</strong>!!! 🎉</p>
-<p>In this tutorial, we’ll tackle those variables that just WON’T behave normally! Our focus will be on <strong>Reaction Time</strong>!!! Remember that eye-tracking dataset we’ve been playing with? It doesn’t just have Looking Time—but also saccadic reaction times we’ve been ignoring! These reaction times indicate how quickly participants directed their gaze to the stimuli when they appeared on screen.</p>
+<p>In this tutorial, we’ll tackle those variables that just WON’T behave normally! Our focus will be on <strong>Reaction Time</strong>. Remember the initial hypotheses for our study? (if not, you can find an in-depth description of the experimental paradigm in our <a href="Intro_eyetracking.qmd">intro tutorial</a>) They were not only about Looking Time, but also saccadic reaction times! These reaction times indicate how quickly participants direct their gaze to the target stimuli when they appeared on screen.</p>
+<p>We took faster/shorter saccadic reaction times as an index of learning. Based on this, we predicted that participants would learn to predict the location of both the Complex and the Simple stimulus, which should result in a significant decrease in saccadic reaction times over trials.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -484,9 +485,9 @@ Why distribution matters
 </div>
 </div>
 </div>
-<p>This does not look too great. The linearity is not really flat…it seems U shaped. The homogeneity of variance as well! In addition we have influential observations (red outliers) and also the normality of residuals is not too great!!</p>
-<p>However, the plot I want you to focus on actually is the first one, the posterior predictive check. Do you note anything weird?? As you can see, the model believes there are values below 200ms…but that as we saw earlier is IMPOSSIBLE!! No participant can respond that quickly in our dataset!</p>
-<p>All these indications and incoherences tell us that the model is fitting poorly!!! Our linear model is struggling to capture the true nature of reaction time data. The model is trying to force our non-normal data into a normal distribution, and it’s clearly not working!</p>
+<p>This does not look too great. The linearity is not really flat… It seems U shaped. The homogeneity of variance as well! In addition we have influential observations (red outliers) and also the normality of residuals is not too great!!</p>
+<p>However, the plot I want you to focus on actually is the first one, the posterior predictive check. Do you note anything weird?? As you can see, the model believes there are values below 200ms, but that as we saw earlier is IMPOSSIBLE!! No participant can respond that quickly in our dataset!</p>
+<p>All these indicators tell us that the model is fitting poorly!!! Our linear model is struggling to capture the true nature of reaction time data. The model is trying to force our non-normal data into a normal distribution, and it’s clearly not working!</p>
 </section><section id="finding-a-better-family" class="level2"><h2 class="anchored" data-anchor-id="finding-a-better-family">Finding a better family</h2>
 <p>So what’s the solution to this mess? If normal distributions don’t work for our data, we need to find a distribution family that better matches reaction times! This is exactly where Generalized Linear Mixed Models (GLMMs) come to the rescue - they allow us to specify different distribution families beyond just Gaussian.</p>
 <p>But which distribution should we use? The more you get familiarised with distributions, the more you will learn to recognise them. But since we’re not black belt of statistics yet, let’s use the Cullen and Frey graph instead! For this, we will use the fitdistrplus package:</p>
@@ -514,7 +515,7 @@ estimated skewness:  1.694027
 estimated kurtosis:  7.483638 </code></pre>
 </div>
 </div>
-<p>The Cullen and Frey graph reveals which distribution best matches our data by plotting skewness against kurtosis. Looking at our reaction time data (red dot), we can immediately see it falls far from the normal distribution (asterisk) and instead sits near both the gamma (dashed line) and lognormal (dotted line) distributions, within the gray beta distribution area. The yellow circles represent bootstrap samples that help us assess uncertainty in our estimate. Since these bootstrap points tend to closely follow the gamma distribution line, we have strong evidence to select gamma as our distribution family! This explains why our linear model (which assumes normality) performed so poorly and gives us a clear direction for building a more appropriate model.</p>
+<p>The Cullen and Frey graph reveals which distribution best matches our data by plotting skewness against kurtosis. Looking at our reaction time data (red dot), we can immediately see it falls far from the normal distribution (asterisk) and instead sits near the gamma distribution (dashed line). The yellow circles represent bootstrapped samples that help us assess uncertainty in our estimate. Since these bootstrapped points tend to closely follow the gamma distribution line, we have strong evidence to select gamma as our distribution family! This explains why our linear model (which assumes normality) performed so poorly and gives us a clear direction for building a more appropriate model.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -529,8 +530,8 @@ Caution
 </div>
 </div>
 </section></section><section id="generalized-model" class="level1"><h1>Generalized Model</h1>
-<p>Now that we know that our data is not normally distributed and we should try a Gamma distribution, we can update our mixed effect model, making it generalised! It is super simple!!!</p>
-<p>All this means is that we specify a distribution different from a gaussian and instead of using <code><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer()</a></code> we switch to <code><a href="https://rdrr.io/pkg/lme4/man/glmer.html">glmer()</a></code></p>
+<p>Now that we know that our data is not normally distributed and we should try a Gamma distribution, we can update our mixed effect model, making it generalised!</p>
+<p>We just need to tweak a couple things. First, instead of using <code><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer()</a></code> we switch to <code><a href="https://rdrr.io/pkg/lme4/man/glmer.html">glmer()</a></code>. Then, we directly specify a distribution which is different from the default Gaussian:</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Fit a GLMM with Gamma distribution</span></span>
 <span><span class="va">mod_gamma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/glmer.html">glmer</a></span><span class="op">(</span></span>
@@ -549,7 +550,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You might have noticed we added link = “log” in our model: that’s a link function! A link function puts your independent variables on the right scale for your data. For a Gamma model, we often use a <strong>log link</strong> because our outcome can only be <strong>positive</strong>. By taking the exponent of the independent variables and their beta coefficients, the predicted values are <strong>always above zero</strong>—perfect for modeling things like reaction times or any strictly positive measure.</p>
+<p>You might have noticed we added link = “log” in our model: that’s a link function! A link function puts your independent variables on the right scale for your data. For a Gamma model, we often use a <strong>log link</strong> because our outcome can only be <strong>positive</strong>. By taking the exponent of the independent variables and their beta coefficients, the predicted values are <strong>always above zero</strong>, perfect for modeling things like reaction times or any strictly positive measure.</p>
 </div>
 </div>
 <p>Now that we have run the model, let’s do our checks:</p>
@@ -564,7 +565,7 @@ Note
 </div>
 <p>Look at our diagnostic plots now - there is improvement!!</p>
 <p>First and most importantly, our <strong>posterior predictive check</strong> is now properly aligned with reality. The model’s predictions respect the natural lower boundary of our reaction time data and follow the actual distribution shape much more faithfully. The <strong>influential observations</strong> plot shows we’ve eliminated those problematic outliers that were throwing off our linear model. By using a distribution that naturally accommodates right-skewed data, points that seemed extreme before are now well within expectations.</p>
-<p>The homogeinity of variance and unifromity of residuals could definetly be better…but remember, it’s probably impossible to find a model that fits your data perfectly!!! However, we can get much closer to reality by using what we <strong>KNOW</strong> about our data - like the fact that reaction times are skewed and never go below 200ms. This knowledge helped us choose the Gamma distribution with a log link, which naturally respects these constraints.</p>
+<p>The homogeneity of variance and uniformity of residuals could definitely be better… But remember, it’s probably impossible to find a model that fits your data perfectly!!! However, we can get much closer to reality by using what we <strong>KNOW</strong> about our data - like the fact that reaction times are skewed and never go below 200ms. This knowledge helped us choose the Gamma distribution with a log link, which naturally respects these constraints.</p>
 <p>That’s the real power of GLMMs!!! They let us work <strong>WITH</strong> our data’s natural properties instead of trying to force everything into a normal distribution box where it doesn’t belong!!!</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1138,8 +1139,8 @@ Type of slope was dY/dX</code></pre>
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../../CONTENT/Stats/ModelEstimates.html" class="pagination-link" aria-label="ModelEstimates">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">ModelEstimates</span>
+      <a href="../../CONTENT/Stats/ModelEstimates.html" class="pagination-link" aria-label="Model Estimates">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Model Estimates</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -1159,261 +1160,263 @@ Type of slope was dY/dX</code></pre>
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>If you've been following our statistical journey, you're already familiar with our adventures in <span class="co">[</span><span class="ot">**linear models**</span><span class="co">](LinearModels.qmd)</span> and the exciting world of <span class="co">[</span><span class="ot">**linear mixed-effect models**</span><span class="co">](LinearMixedModels.qmd)</span>!!! Now it's time to level UP our statistical toolkit with something even MORE POWERFUL: **Generalised Linear Mixed-Effects Models (GLMMs)**!!! 🎉</span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>In this tutorial, we'll tackle those variables that just WON'T behave normally! Our focus will be on **Reaction Time**!!! Remember that eye-tracking dataset we've been playing with? It doesn't just have Looking Time—but also saccadic reaction times we've been ignoring! These reaction times indicate how quickly participants directed their gaze to the stimuli when they appeared on screen.</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>In this tutorial, we'll tackle those variables that just WON'T behave normally! Our focus will be on **Reaction Time**. Remember the initial hypotheses for our study? (if not, you can find an in-depth description of the experimental paradigm in our <span class="co">[</span><span class="ot">intro tutorial</span><span class="co">](Intro_eyetracking.qmd)</span>) They were not only about Looking Time, but also saccadic reaction times! These reaction times indicate how quickly participants direct their gaze to the target stimuli when they appeared on screen.</span>
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why distribution matters</span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>Before diving in, let's remember: linear models assume our data follows a normal (Gaussian) distribution. But reaction times often don't play by these rules - they tend to be right-skewed with a lower bound (you can't have negative reaction times!).</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="fu"># Prepare the data</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>We took faster/shorter saccadic reaction times as an index of learning. Based on this, we predicted that participants would learn to predict the location of both the Complex and the Simple stimulus, which should result in a significant decrease in saccadic reaction times over trials.</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why distribution matters</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>Before diving in, let's remember: linear models assume our data follows a normal (Gaussian) distribution. But reaction times often don't play by these rules - they tend to be right-skewed with a lower bound (you can't have negative reaction times!).</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>Let's start by importing the packages we need, the dataset and fixing some of the variables we will need.</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="fu"># Prepare the data</span></span>
 <span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(easystats)</span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the data</span></span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"resources/Stats/Dataset.csv"</span>)</span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Id <span class="ot">=</span> <span class="fu">factor</span>(df<span class="sc">$</span>Id) <span class="co"># make sure subject_id is a factor</span></span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>StandardTrialN <span class="ot">=</span> <span class="fu">standardize</span>(df<span class="sc">$</span>TrialN) <span class="co"># standardize the continuous variable</span></span>
-<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>Step one in ANY statistical analysis: **look at your data**! Let's create a histogram with a density curve to see what we're working with:</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>Let's start by importing the packages we need, the dataset and fixing some of the variables we will need.</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(easystats)</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the data</span></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"resources/Stats/Dataset.csv"</span>)</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Id <span class="ot">=</span> <span class="fu">factor</span>(df<span class="sc">$</span>Id) <span class="co"># make sure subject_id is a factor</span></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>StandardTrialN <span class="ot">=</span> <span class="fu">standardize</span>(df<span class="sc">$</span>TrialN) <span class="co"># standardize the continuous variable</span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5.5</span></span>
-<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
-<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribution with histograma and density</span></span>
-<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> SaccadicRT)) <span class="sc">+</span></span>
-<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..),<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">"#00b3b3"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">lwd =</span> <span class="fl">1.2</span>)<span class="sc">+</span></span>
-<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">20</span>)<span class="sc">+</span></span>
-<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">100</span>, <span class="dv">800</span>, <span class="dv">100</span>))</span>
-<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>Notice something interesting? Our reaction time data is:</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>Step one in ANY statistical analysis: **look at your data**! Let's create a histogram with a density curve to see what we're working with:</span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5.5</span></span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribution with histograma and density</span></span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> SaccadicRT)) <span class="sc">+</span></span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..),<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">"#00b3b3"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">lwd =</span> <span class="fl">1.2</span>)<span class="sc">+</span></span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">20</span>)<span class="sc">+</span></span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">100</span>, <span class="dv">800</span>, <span class="dv">100</span>))</span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Right-skewed**: Most values cluster on the left with a long tail to the right</span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>Notice something interesting? Our reaction time data is:</span>
 <span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Bounded**: Nothing below \~200ms (makes sense - humans can't respond faster than a certain limit!)</span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Right-skewed**: Most values cluster on the left with a long tail to the right</span>
 <span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Definitely not normal**: That bell-shaped curve? Nowhere to be found!</span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Bounded**: Nothing below \~200ms (makes sense - humans can't respond faster than a certain limit!)</span>
 <span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>Now that we've looked at the overall distribution, let's use violin plots and boxplots to compare our experimental conditions. These visualization tools are SUPER helpful because **violin plots** show us the full distribution shape for each condition while **boxplots** reveal the median, quartiles, and potential outliers. Together, they give us a complete picture of how our data behaves across conditions!</span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Definitely not normal**: That bell-shaped curve? Nowhere to be found!</span>
 <span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: ViolinPlot</span></span>
-<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5.5</span></span>
-<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
-<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> Event, <span class="at">y =</span> SaccadicRT)) <span class="sc">+</span></span>
-<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Event), <span class="at">alpha =</span> .<span class="dv">5</span>, <span class="at">color =</span> <span class="st">'transparent'</span>) <span class="sc">+</span></span>
-<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">outlier.color =</span> <span class="st">"darkred"</span>, <span class="at">width =</span> .<span class="dv">2</span>, <span class="at">lwd =</span> <span class="fl">1.2</span>, <span class="at">outlier.size =</span><span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'Simple'</span> <span class="ot">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Complex'</span> <span class="ot">=</span> <span class="st">'#E2725A'</span>)) <span class="sc">+</span></span>
-<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">20</span>)<span class="sc">+</span></span>
-<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'bottom'</span>)</span>
-<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>These plots confirm our suspicions: the distribution is positively skewed in both conditions. We have some potential outliers (those red dots above the boxplots). Sooo what does this mean?? Well that Fitting a linear model won't probably work in this context.</span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>Now that we've looked at the overall distribution, let's use violin plots and boxplots to compare our experimental conditions. These visualization tools are SUPER helpful because **violin plots** show us the full distribution shape for each condition while **boxplots** reveal the median, quartiles, and potential outliers. Together, they give us a complete picture of how our data behaves across conditions!</span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: ViolinPlot</span></span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5.5</span></span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> Event, <span class="at">y =</span> SaccadicRT)) <span class="sc">+</span></span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Event), <span class="at">alpha =</span> .<span class="dv">5</span>, <span class="at">color =</span> <span class="st">'transparent'</span>) <span class="sc">+</span></span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">outlier.color =</span> <span class="st">"darkred"</span>, <span class="at">width =</span> .<span class="dv">2</span>, <span class="at">lwd =</span> <span class="fl">1.2</span>, <span class="at">outlier.size =</span><span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'Simple'</span> <span class="ot">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Complex'</span> <span class="ot">=</span> <span class="st">'#E2725A'</span>)) <span class="sc">+</span></span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">20</span>)<span class="sc">+</span></span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'bottom'</span>)</span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>You don't believe me???? Let's just do it then...</span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>These plots confirm our suspicions: the distribution is positively skewed in both conditions. We have some potential outliers (those red dots above the boxplots). Sooo what does this mean?? Well that Fitting a linear model won't probably work in this context.</span>
 <span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a><span class="fu">## Linear model</span></span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>You don't believe me???? Let's just do it then...</span>
 <span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>Following what we have learned in the previous tutorial we will fit a linear mixed effect model including a random intercept and random slope:</span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a><span class="fu">## Linear model</span></span>
 <span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: LinearMixedModel</span></span>
-<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a>mod_lm <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
-<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a>  SaccadicRT <span class="sc">~</span> StandardTrialN <span class="sc">*</span> Event <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> StandardTrialN <span class="sc">|</span> Id),</span>
-<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df</span>
-<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a>Now, before even looking at the summary, let's check whether the model follows the model assumptions. For that, we can use the function <span class="in">`check_model()`</span> as we explained in the tutorial on linear models:</span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a>Following what we have learned in the previous tutorial we will fit a linear mixed effect model including a random intercept and random slope:</span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: LinearMixedModel</span></span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a>mod_lm <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a>  SaccadicRT <span class="sc">~</span> StandardTrialN <span class="sc">*</span> Event <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> StandardTrialN <span class="sc">|</span> Id),</span>
+<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df</span>
+<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: PlotCheck</span></span>
-<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-dpi: 300</span></span>
-<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 11</span></span>
-<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 14</span></span>
-<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(mod_lm)</span>
-<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a>This does not look too great. The linearity is not really flat...it seems U shaped. The homogeneity of variance as well! In addition we have influential observations (red outliers) and also the normality of residuals is not too great!!</span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>Now, before even looking at the summary, let's check whether the model follows the model assumptions. For that, we can use the function <span class="in">`check_model()`</span> as we explained in the tutorial on linear models:</span>
+<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: PlotCheck</span></span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-dpi: 300</span></span>
+<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 11</span></span>
+<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 14</span></span>
+<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(mod_lm)</span>
+<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a>However, the plot I want you to focus on actually is the first one, the posterior predictive check. Do you note anything weird?? As you can see, the model believes there are values below 200ms...but that as we saw earlier is IMPOSSIBLE!! No participant can respond that quickly in our dataset!</span>
+<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a>This does not look too great. The linearity is not really flat... It seems U shaped. The homogeneity of variance as well! In addition we have influential observations (red outliers) and also the normality of residuals is not too great!!</span>
 <span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a>All these indications and incoherences tell us that the model is fitting poorly!!! Our linear model is struggling to capture the true nature of reaction time data. The model is trying to force our non-normal data into a normal distribution, and it's clearly not working!</span>
+<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a>However, the plot I want you to focus on actually is the first one, the posterior predictive check. Do you note anything weird?? As you can see, the model believes there are values below 200ms, but that as we saw earlier is IMPOSSIBLE!! No participant can respond that quickly in our dataset!</span>
 <span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a><span class="fu">## Finding a better family</span></span>
+<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a>All these indicators tell us that the model is fitting poorly!!! Our linear model is struggling to capture the true nature of reaction time data. The model is trying to force our non-normal data into a normal distribution, and it's clearly not working!</span>
 <span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a>So what's the solution to this mess? If normal distributions don't work for our data, we need to find a distribution family that better matches reaction times! This is exactly where Generalized Linear Mixed Models (GLMMs) come to the rescue - they allow us to specify different distribution families beyond just Gaussian.</span>
+<span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a><span class="fu">## Finding a better family</span></span>
 <span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a>But which distribution should we use? The more you get familiarised with distributions, the more you will learn to recognise them. But since we're not black belt of statistics yet, let's use the Cullen and Frey graph instead! For this, we will use the fitdistrplus package:</span>
+<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a>So what's the solution to this mess? If normal distributions don't work for our data, we need to find a distribution family that better matches reaction times! This is exactly where Generalized Linear Mixed Models (GLMMs) come to the rescue - they allow us to specify different distribution families beyond just Gaussian.</span>
 <span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-137"><a href="#cb16-137" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: FitDistrPlus</span></span>
-<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb16-140"><a href="#cb16-140" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-dpi: 300</span></span>
-<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 6</span></span>
-<span id="cb16-142"><a href="#cb16-142" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 7</span></span>
-<span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fitdistrplus)</span>
-<span id="cb16-144"><a href="#cb16-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a><span class="co"># first we need to remove NAs:</span></span>
-<span id="cb16-146"><a href="#cb16-146" aria-hidden="true" tabindex="-1"></a>RTs <span class="ot">=</span> <span class="fu">as.vector</span>(<span class="fu">na.omit</span>(df<span class="sc">$</span>SaccadicRT))</span>
-<span id="cb16-147"><a href="#cb16-147" aria-hidden="true" tabindex="-1"></a><span class="co"># then we can plot</span></span>
-<span id="cb16-148"><a href="#cb16-148" aria-hidden="true" tabindex="-1"></a><span class="fu">descdist</span>(RTs, <span class="at">discrete =</span> <span class="cn">FALSE</span>, <span class="at">boot =</span> <span class="dv">500</span>)</span>
-<span id="cb16-149"><a href="#cb16-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-150"><a href="#cb16-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-151"><a href="#cb16-151" aria-hidden="true" tabindex="-1"></a>The Cullen and Frey graph reveals which distribution best matches our data by plotting skewness against kurtosis. Looking at our reaction time data (red dot), we can immediately see it falls far from the normal distribution (asterisk) and instead sits near both the gamma (dashed line) and lognormal (dotted line) distributions, within the gray beta distribution area. The yellow circles represent bootstrap samples that help us assess uncertainty in our estimate. Since these bootstrap points tend to closely follow the gamma distribution line, we have strong evidence to select gamma as our distribution family! This explains why our linear model (which assumes normality) performed so poorly and gives us a clear direction for building a more appropriate model.</span>
+<span id="cb16-134"><a href="#cb16-134" aria-hidden="true" tabindex="-1"></a>But which distribution should we use? The more you get familiarised with distributions, the more you will learn to recognise them. But since we're not black belt of statistics yet, let's use the Cullen and Frey graph instead! For this, we will use the fitdistrplus package:</span>
+<span id="cb16-135"><a href="#cb16-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: FitDistrPlus</span></span>
+<span id="cb16-140"><a href="#cb16-140" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-142"><a href="#cb16-142" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-dpi: 300</span></span>
+<span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 6</span></span>
+<span id="cb16-144"><a href="#cb16-144" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 7</span></span>
+<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fitdistrplus)</span>
+<span id="cb16-146"><a href="#cb16-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-147"><a href="#cb16-147" aria-hidden="true" tabindex="-1"></a><span class="co"># first we need to remove NAs:</span></span>
+<span id="cb16-148"><a href="#cb16-148" aria-hidden="true" tabindex="-1"></a>RTs <span class="ot">=</span> <span class="fu">as.vector</span>(<span class="fu">na.omit</span>(df<span class="sc">$</span>SaccadicRT))</span>
+<span id="cb16-149"><a href="#cb16-149" aria-hidden="true" tabindex="-1"></a><span class="co"># then we can plot</span></span>
+<span id="cb16-150"><a href="#cb16-150" aria-hidden="true" tabindex="-1"></a><span class="fu">descdist</span>(RTs, <span class="at">discrete =</span> <span class="cn">FALSE</span>, <span class="at">boot =</span> <span class="dv">500</span>)</span>
+<span id="cb16-151"><a href="#cb16-151" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-152"><a href="#cb16-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-153"><a href="#cb16-153" aria-hidden="true" tabindex="-1"></a>::: callout-caution</span>
-<span id="cb16-154"><a href="#cb16-154" aria-hidden="true" tabindex="-1"></a>Beware! this plot only shows 7 or 8 distributions, and many more exist! For example, do you know what a bernoulli or a binary distribution are? If not we advise you check out <span class="ot">&lt;https://distribution-explorer.github.io/index.html&gt;</span></span>
-<span id="cb16-155"><a href="#cb16-155" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb16-156"><a href="#cb16-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-157"><a href="#cb16-157" aria-hidden="true" tabindex="-1"></a><span class="fu"># Generalized Model</span></span>
+<span id="cb16-153"><a href="#cb16-153" aria-hidden="true" tabindex="-1"></a>The Cullen and Frey graph reveals which distribution best matches our data by plotting skewness against kurtosis. Looking at our reaction time data (red dot), we can immediately see it falls far from the normal distribution (asterisk) and instead sits near the gamma distribution (dashed line). The yellow circles represent bootstrapped samples that help us assess uncertainty in our estimate. Since these bootstrapped points tend to closely follow the gamma distribution line, we have strong evidence to select gamma as our distribution family! This explains why our linear model (which assumes normality) performed so poorly and gives us a clear direction for building a more appropriate model.</span>
+<span id="cb16-154"><a href="#cb16-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-155"><a href="#cb16-155" aria-hidden="true" tabindex="-1"></a>::: callout-caution</span>
+<span id="cb16-156"><a href="#cb16-156" aria-hidden="true" tabindex="-1"></a>Beware! this plot only shows 7 or 8 distributions, and many more exist! For example, do you know what a bernoulli or a binary distribution are? If not we advise you check out <span class="ot">&lt;https://distribution-explorer.github.io/index.html&gt;</span></span>
+<span id="cb16-157"><a href="#cb16-157" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb16-158"><a href="#cb16-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-159"><a href="#cb16-159" aria-hidden="true" tabindex="-1"></a>Now that we know that our data is not normally distributed and we should try a Gamma distribution, we can update our mixed effect model, making it generalised! It is super simple!!!</span>
+<span id="cb16-159"><a href="#cb16-159" aria-hidden="true" tabindex="-1"></a><span class="fu"># Generalized Model</span></span>
 <span id="cb16-160"><a href="#cb16-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-161"><a href="#cb16-161" aria-hidden="true" tabindex="-1"></a>All this means is that we specify a distribution different from a gaussian and instead of using <span class="in">`lmer()`</span> we switch to <span class="in">`glmer()`</span></span>
+<span id="cb16-161"><a href="#cb16-161" aria-hidden="true" tabindex="-1"></a>Now that we know that our data is not normally distributed and we should try a Gamma distribution, we can update our mixed effect model, making it generalised!</span>
 <span id="cb16-162"><a href="#cb16-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-165"><a href="#cb16-165" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-166"><a href="#cb16-166" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: GLMM</span></span>
-<span id="cb16-167"><a href="#cb16-167" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb16-168"><a href="#cb16-168" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb16-169"><a href="#cb16-169" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a GLMM with Gamma distribution</span></span>
-<span id="cb16-170"><a href="#cb16-170" aria-hidden="true" tabindex="-1"></a>mod_gamma <span class="ot">&lt;-</span> <span class="fu">glmer</span>(</span>
-<span id="cb16-171"><a href="#cb16-171" aria-hidden="true" tabindex="-1"></a>  SaccadicRT <span class="sc">~</span> StandardTrialN <span class="sc">*</span> Event <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> StandardTrialN<span class="sc">|</span> Id),</span>
-<span id="cb16-172"><a href="#cb16-172" aria-hidden="true" tabindex="-1"></a>  <span class="at">data   =</span> df,</span>
-<span id="cb16-173"><a href="#cb16-173" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">"log"</span>)</span>
-<span id="cb16-174"><a href="#cb16-174" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-175"><a href="#cb16-175" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-176"><a href="#cb16-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-177"><a href="#cb16-177" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb16-178"><a href="#cb16-178" aria-hidden="true" tabindex="-1"></a>You might have noticed we added link = "log" in our model: that's a link function! A link function puts your independent variables on the right scale for your data. For a Gamma model, we often use a **log link** because our outcome can only be **positive**. By taking the exponent of the independent variables and their beta coefficients, the predicted values are **always above zero**—perfect for modeling things like reaction times or any strictly positive measure.</span>
-<span id="cb16-179"><a href="#cb16-179" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb16-180"><a href="#cb16-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-181"><a href="#cb16-181" aria-hidden="true" tabindex="-1"></a>Now that we have run the model, let's do our checks:</span>
+<span id="cb16-163"><a href="#cb16-163" aria-hidden="true" tabindex="-1"></a>We just need to tweak a couple things. First, instead of using <span class="in">`lmer()`</span> we switch to <span class="in">`glmer()`</span>. Then, we directly specify a distribution which is different from the default Gaussian:</span>
+<span id="cb16-164"><a href="#cb16-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-167"><a href="#cb16-167" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-168"><a href="#cb16-168" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: GLMM</span></span>
+<span id="cb16-169"><a href="#cb16-169" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb16-170"><a href="#cb16-170" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-171"><a href="#cb16-171" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a GLMM with Gamma distribution</span></span>
+<span id="cb16-172"><a href="#cb16-172" aria-hidden="true" tabindex="-1"></a>mod_gamma <span class="ot">&lt;-</span> <span class="fu">glmer</span>(</span>
+<span id="cb16-173"><a href="#cb16-173" aria-hidden="true" tabindex="-1"></a>  SaccadicRT <span class="sc">~</span> StandardTrialN <span class="sc">*</span> Event <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> StandardTrialN<span class="sc">|</span> Id),</span>
+<span id="cb16-174"><a href="#cb16-174" aria-hidden="true" tabindex="-1"></a>  <span class="at">data   =</span> df,</span>
+<span id="cb16-175"><a href="#cb16-175" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">"log"</span>)</span>
+<span id="cb16-176"><a href="#cb16-176" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-177"><a href="#cb16-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-178"><a href="#cb16-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-179"><a href="#cb16-179" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb16-180"><a href="#cb16-180" aria-hidden="true" tabindex="-1"></a>You might have noticed we added link = "log" in our model: that's a link function! A link function puts your independent variables on the right scale for your data. For a Gamma model, we often use a **log link** because our outcome can only be **positive**. By taking the exponent of the independent variables and their beta coefficients, the predicted values are **always above zero**, perfect for modeling things like reaction times or any strictly positive measure.</span>
+<span id="cb16-181"><a href="#cb16-181" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb16-182"><a href="#cb16-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-185"><a href="#cb16-185" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-186"><a href="#cb16-186" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: GLMM_check</span></span>
-<span id="cb16-187"><a href="#cb16-187" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb16-188"><a href="#cb16-188" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb16-189"><a href="#cb16-189" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-dpi: 300</span></span>
-<span id="cb16-190"><a href="#cb16-190" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 11</span></span>
-<span id="cb16-191"><a href="#cb16-191" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 14</span></span>
-<span id="cb16-192"><a href="#cb16-192" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(mod_gamma)</span>
-<span id="cb16-193"><a href="#cb16-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-194"><a href="#cb16-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a>Look at our diagnostic plots now - there is improvement!!</span>
+<span id="cb16-183"><a href="#cb16-183" aria-hidden="true" tabindex="-1"></a>Now that we have run the model, let's do our checks:</span>
+<span id="cb16-184"><a href="#cb16-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-187"><a href="#cb16-187" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-188"><a href="#cb16-188" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: GLMM_check</span></span>
+<span id="cb16-189"><a href="#cb16-189" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb16-190"><a href="#cb16-190" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-191"><a href="#cb16-191" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-dpi: 300</span></span>
+<span id="cb16-192"><a href="#cb16-192" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 11</span></span>
+<span id="cb16-193"><a href="#cb16-193" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 14</span></span>
+<span id="cb16-194"><a href="#cb16-194" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(mod_gamma)</span>
+<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-196"><a href="#cb16-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-197"><a href="#cb16-197" aria-hidden="true" tabindex="-1"></a>First and most importantly, our **posterior predictive check** is now properly aligned with reality. The model's predictions respect the natural lower boundary of our reaction time data and follow the actual distribution shape much more faithfully. The **influential observations** plot shows we've eliminated those problematic outliers that were throwing off our linear model. By using a distribution that naturally accommodates right-skewed data, points that seemed extreme before are now well within expectations.</span>
+<span id="cb16-197"><a href="#cb16-197" aria-hidden="true" tabindex="-1"></a>Look at our diagnostic plots now - there is improvement!!</span>
 <span id="cb16-198"><a href="#cb16-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-199"><a href="#cb16-199" aria-hidden="true" tabindex="-1"></a>The homogeinity of variance and unifromity of residuals could definetly be better...but remember, it's probably impossible to find a model that fits your data perfectly!!! However, we can get much closer to reality by using what we **KNOW** about our data - like the fact that reaction times are skewed and never go below 200ms. This knowledge helped us choose the Gamma distribution with a log link, which naturally respects these constraints.</span>
+<span id="cb16-199"><a href="#cb16-199" aria-hidden="true" tabindex="-1"></a>First and most importantly, our **posterior predictive check** is now properly aligned with reality. The model's predictions respect the natural lower boundary of our reaction time data and follow the actual distribution shape much more faithfully. The **influential observations** plot shows we've eliminated those problematic outliers that were throwing off our linear model. By using a distribution that naturally accommodates right-skewed data, points that seemed extreme before are now well within expectations.</span>
 <span id="cb16-200"><a href="#cb16-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-201"><a href="#cb16-201" aria-hidden="true" tabindex="-1"></a>That's the real power of GLMMs!!! They let us work **WITH** our data's natural properties instead of trying to force everything into a normal distribution box where it doesn't belong!!!</span>
+<span id="cb16-201"><a href="#cb16-201" aria-hidden="true" tabindex="-1"></a>The homogeneity of variance and uniformity of residuals could definitely be better... But remember, it's probably impossible to find a model that fits your data perfectly!!! However, we can get much closer to reality by using what we **KNOW** about our data - like the fact that reaction times are skewed and never go below 200ms. This knowledge helped us choose the Gamma distribution with a log link, which naturally respects these constraints.</span>
 <span id="cb16-202"><a href="#cb16-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-203"><a href="#cb16-203" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
-<span id="cb16-204"><a href="#cb16-204" aria-hidden="true" tabindex="-1"></a>As you may have realized, some of the assumption plots are different between linear models and generalized linear models. This is expected as they have different assumptions and ways to check them!</span>
-<span id="cb16-205"><a href="#cb16-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-206"><a href="#cb16-206" aria-hidden="true" tabindex="-1"></a>For example, the most noticeable difference is that GLMs don't need to follow linearity assumptions like regular linear models do! The <span class="in">`check_model()`</span> function is smart enough to select the tests and plots needed for your specific model type!! So you don't have to struggle too much changing them every time you switch between model types. This makes our lives so much easier - just fit your model and let <span class="in">`check_model()`</span> handle the appropriate diagnostics automatically!</span>
-<span id="cb16-207"><a href="#cb16-207" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb16-208"><a href="#cb16-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-209"><a href="#cb16-209" aria-hidden="true" tabindex="-1"></a><span class="fu">## Summary</span></span>
+<span id="cb16-203"><a href="#cb16-203" aria-hidden="true" tabindex="-1"></a>That's the real power of GLMMs!!! They let us work **WITH** our data's natural properties instead of trying to force everything into a normal distribution box where it doesn't belong!!!</span>
+<span id="cb16-204"><a href="#cb16-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-205"><a href="#cb16-205" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
+<span id="cb16-206"><a href="#cb16-206" aria-hidden="true" tabindex="-1"></a>As you may have realized, some of the assumption plots are different between linear models and generalized linear models. This is expected as they have different assumptions and ways to check them!</span>
+<span id="cb16-207"><a href="#cb16-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-208"><a href="#cb16-208" aria-hidden="true" tabindex="-1"></a>For example, the most noticeable difference is that GLMs don't need to follow linearity assumptions like regular linear models do! The <span class="in">`check_model()`</span> function is smart enough to select the tests and plots needed for your specific model type!! So you don't have to struggle too much changing them every time you switch between model types. This makes our lives so much easier - just fit your model and let <span class="in">`check_model()`</span> handle the appropriate diagnostics automatically!</span>
+<span id="cb16-209"><a href="#cb16-209" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb16-210"><a href="#cb16-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-211"><a href="#cb16-211" aria-hidden="true" tabindex="-1"></a>Once we are confident that the assumptions are respected, we can interpret the results:</span>
+<span id="cb16-211"><a href="#cb16-211" aria-hidden="true" tabindex="-1"></a><span class="fu">## Summary</span></span>
 <span id="cb16-212"><a href="#cb16-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-215"><a href="#cb16-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-216"><a href="#cb16-216" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: GLMsummary</span></span>
-<span id="cb16-217"><a href="#cb16-217" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb16-218"><a href="#cb16-218" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb16-219"><a href="#cb16-219" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_gamma)</span>
-<span id="cb16-220"><a href="#cb16-220" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-221"><a href="#cb16-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-222"><a href="#cb16-222" aria-hidden="true" tabindex="-1"></a>OMG, these results are AMAZING!!! 🎉 Look at that interaction between trial number and Event - it's significant! This is super important to note because when we have significant interactions, we need to focus on understanding THOSE rather than looking at the main effects in isolation.</span>
+<span id="cb16-213"><a href="#cb16-213" aria-hidden="true" tabindex="-1"></a>Once we are confident that the assumptions are respected, we can interpret the results:</span>
+<span id="cb16-214"><a href="#cb16-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-217"><a href="#cb16-217" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-218"><a href="#cb16-218" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: GLMsummary</span></span>
+<span id="cb16-219"><a href="#cb16-219" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb16-220"><a href="#cb16-220" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-221"><a href="#cb16-221" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_gamma)</span>
+<span id="cb16-222"><a href="#cb16-222" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-223"><a href="#cb16-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-224"><a href="#cb16-224" aria-hidden="true" tabindex="-1"></a>The interaction tells us that the effect of trial number on reaction time DEPENDS on which event condition we're in! To really grasp what this pattern means in practical terms, let's visualize this interaction:</span>
+<span id="cb16-224"><a href="#cb16-224" aria-hidden="true" tabindex="-1"></a>OMG, these results are AMAZING!!! 🎉 Look at that interaction between trial number and Event - it's significant! This is super important to note because when we have significant interactions, we need to focus on understanding THOSE rather than looking at the main effects in isolation.</span>
 <span id="cb16-225"><a href="#cb16-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-228"><a href="#cb16-228" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-229"><a href="#cb16-229" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: GLMPlot</span></span>
-<span id="cb16-230"><a href="#cb16-230" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb16-231"><a href="#cb16-231" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb16-232"><a href="#cb16-232" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb16-233"><a href="#cb16-233" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 8</span></span>
-<span id="cb16-234"><a href="#cb16-234" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 12</span></span>
-<span id="cb16-235"><a href="#cb16-235" aria-hidden="true" tabindex="-1"></a>is_pred <span class="ot">&lt;-</span> <span class="fu">estimate_expectation</span>(mod_gamma, <span class="at">include_random=</span>F)</span>
-<span id="cb16-236"><a href="#cb16-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-237"><a href="#cb16-237" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Plot the interaction between StandardTrialN and Event</span></span>
-<span id="cb16-238"><a href="#cb16-238" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(is_pred, <span class="fu">aes</span>(<span class="at">x =</span> StandardTrialN, </span>
-<span id="cb16-239"><a href="#cb16-239" aria-hidden="true" tabindex="-1"></a>                    <span class="at">y =</span> Predicted, </span>
-<span id="cb16-240"><a href="#cb16-240" aria-hidden="true" tabindex="-1"></a>                    <span class="at">color =</span> Event, </span>
-<span id="cb16-241"><a href="#cb16-241" aria-hidden="true" tabindex="-1"></a>                    <span class="at">group =</span> Event)) <span class="sc">+</span></span>
-<span id="cb16-242"><a href="#cb16-242" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span> </span>
-<span id="cb16-243"><a href="#cb16-243" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Predicted <span class="sc">-</span> SE, <span class="at">ymax =</span> Predicted <span class="sc">+</span> SE, <span class="at">fill =</span> Event),</span>
-<span id="cb16-244"><a href="#cb16-244" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"transparent"</span>) <span class="sc">+</span></span>
-<span id="cb16-245"><a href="#cb16-245" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Reaction Time (Predicted)"</span>, <span class="at">x =</span> <span class="st">"Scaled Trial #"</span>) <span class="sc">+</span></span>
-<span id="cb16-246"><a href="#cb16-246" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'Simple'</span> <span class="ot">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Complex'</span> <span class="ot">=</span> <span class="st">'#E2725A'</span>)) <span class="sc">+</span></span>
-<span id="cb16-247"><a href="#cb16-247" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'Simple'</span> <span class="ot">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Complex'</span> <span class="ot">=</span> <span class="st">'#E2725A'</span>))<span class="sc">+</span></span>
-<span id="cb16-248"><a href="#cb16-248" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">16</span>)</span>
-<span id="cb16-249"><a href="#cb16-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-250"><a href="#cb16-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-251"><a href="#cb16-251" aria-hidden="true" tabindex="-1"></a>Reaction times decrease much more across trials for the Complex than for the Simple condition! However, we don't have a complete picture yet. For example, we do not know whether the decrease in reaction times across trials is significant only for the Complex condition or also for the Simple condition. To find out, we can estimate the slopes as we did in the previous tutorial: <span class="co">[</span><span class="ot">Model Estimates</span><span class="co">](ModelEstimates.qmd)</span></span>
+<span id="cb16-226"><a href="#cb16-226" aria-hidden="true" tabindex="-1"></a>The interaction tells us that the effect of trial number on reaction time DEPENDS on which event condition we're in! To really grasp what this pattern means in practical terms, let's visualize this interaction:</span>
+<span id="cb16-227"><a href="#cb16-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-230"><a href="#cb16-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-231"><a href="#cb16-231" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: GLMPlot</span></span>
+<span id="cb16-232"><a href="#cb16-232" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb16-233"><a href="#cb16-233" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-234"><a href="#cb16-234" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb16-235"><a href="#cb16-235" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 8</span></span>
+<span id="cb16-236"><a href="#cb16-236" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 12</span></span>
+<span id="cb16-237"><a href="#cb16-237" aria-hidden="true" tabindex="-1"></a>is_pred <span class="ot">&lt;-</span> <span class="fu">estimate_expectation</span>(mod_gamma, <span class="at">include_random=</span>F)</span>
+<span id="cb16-238"><a href="#cb16-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-239"><a href="#cb16-239" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Plot the interaction between StandardTrialN and Event</span></span>
+<span id="cb16-240"><a href="#cb16-240" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(is_pred, <span class="fu">aes</span>(<span class="at">x =</span> StandardTrialN, </span>
+<span id="cb16-241"><a href="#cb16-241" aria-hidden="true" tabindex="-1"></a>                    <span class="at">y =</span> Predicted, </span>
+<span id="cb16-242"><a href="#cb16-242" aria-hidden="true" tabindex="-1"></a>                    <span class="at">color =</span> Event, </span>
+<span id="cb16-243"><a href="#cb16-243" aria-hidden="true" tabindex="-1"></a>                    <span class="at">group =</span> Event)) <span class="sc">+</span></span>
+<span id="cb16-244"><a href="#cb16-244" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span> </span>
+<span id="cb16-245"><a href="#cb16-245" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Predicted <span class="sc">-</span> SE, <span class="at">ymax =</span> Predicted <span class="sc">+</span> SE, <span class="at">fill =</span> Event),</span>
+<span id="cb16-246"><a href="#cb16-246" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"transparent"</span>) <span class="sc">+</span></span>
+<span id="cb16-247"><a href="#cb16-247" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Reaction Time (Predicted)"</span>, <span class="at">x =</span> <span class="st">"Scaled Trial #"</span>) <span class="sc">+</span></span>
+<span id="cb16-248"><a href="#cb16-248" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'Simple'</span> <span class="ot">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Complex'</span> <span class="ot">=</span> <span class="st">'#E2725A'</span>)) <span class="sc">+</span></span>
+<span id="cb16-249"><a href="#cb16-249" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'Simple'</span> <span class="ot">=</span> <span class="st">'#4A6274'</span>, <span class="st">'Complex'</span> <span class="ot">=</span> <span class="st">'#E2725A'</span>))<span class="sc">+</span></span>
+<span id="cb16-250"><a href="#cb16-250" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">16</span>)</span>
+<span id="cb16-251"><a href="#cb16-251" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-252"><a href="#cb16-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-255"><a href="#cb16-255" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-256"><a href="#cb16-256" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: Estimate slopes</span></span>
-<span id="cb16-257"><a href="#cb16-257" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb16-258"><a href="#cb16-258" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb16-259"><a href="#cb16-259" aria-hidden="true" tabindex="-1"></a><span class="fu">estimate_slopes</span>(mod_gamma, <span class="at">trend =</span> <span class="st">'StandardTrialN'</span>, <span class="at">by =</span> <span class="st">'Event'</span>)</span>
-<span id="cb16-260"><a href="#cb16-260" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-261"><a href="#cb16-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-262"><a href="#cb16-262" aria-hidden="true" tabindex="-1"></a>Nice !! This is confirming what we could already guess from the plot!!</span>
+<span id="cb16-253"><a href="#cb16-253" aria-hidden="true" tabindex="-1"></a>Reaction times decrease much more across trials for the Complex than for the Simple condition! However, we don't have a complete picture yet. For example, we do not know whether the decrease in reaction times across trials is significant only for the Complex condition or also for the Simple condition. To find out, we can estimate the slopes as we did in the previous tutorial: <span class="co">[</span><span class="ot">Model Estimates</span><span class="co">](ModelEstimates.qmd)</span></span>
+<span id="cb16-254"><a href="#cb16-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-257"><a href="#cb16-257" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-258"><a href="#cb16-258" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: Estimate slopes</span></span>
+<span id="cb16-259"><a href="#cb16-259" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb16-260"><a href="#cb16-260" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-261"><a href="#cb16-261" aria-hidden="true" tabindex="-1"></a><span class="fu">estimate_slopes</span>(mod_gamma, <span class="at">trend =</span> <span class="st">'StandardTrialN'</span>, <span class="at">by =</span> <span class="st">'Event'</span>)</span>
+<span id="cb16-262"><a href="#cb16-262" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-263"><a href="#cb16-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-264"><a href="#cb16-264" aria-hidden="true" tabindex="-1"></a>that there is an change in the effect of the complex with the number of trials but there for the complex shape is</span>
+<span id="cb16-264"><a href="#cb16-264" aria-hidden="true" tabindex="-1"></a>Nice !! This is confirming what we could already guess from the plot!!</span>
 <span id="cb16-265"><a href="#cb16-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-266"><a href="#cb16-266" aria-hidden="true" tabindex="-1"></a>Although we've been focusing on the main effects, remember that we also had random intercepts and slopes in our model! We can have a look at the random effects as well:</span>
+<span id="cb16-266"><a href="#cb16-266" aria-hidden="true" tabindex="-1"></a>that there is an change in the effect of the complex with the number of trials but there for the complex shape is</span>
 <span id="cb16-267"><a href="#cb16-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-270"><a href="#cb16-270" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-271"><a href="#cb16-271" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: GLMMRandomPlot</span></span>
-<span id="cb16-272"><a href="#cb16-272" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb16-273"><a href="#cb16-273" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb16-274"><a href="#cb16-274" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb16-275"><a href="#cb16-275" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 8</span></span>
-<span id="cb16-276"><a href="#cb16-276" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 12</span></span>
-<span id="cb16-277"><a href="#cb16-277" aria-hidden="true" tabindex="-1"></a>is_pred_random <span class="ot">=</span> <span class="fu">estimate_expectation</span>(mod_gamma, <span class="at">include_random =</span>T)</span>
-<span id="cb16-278"><a href="#cb16-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-279"><a href="#cb16-279" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(is_pred_random, <span class="fu">aes</span>(<span class="at">x=</span> StandardTrialN, <span class="at">y=</span> Predicted, <span class="at">color=</span> Id, <span class="at">shape =</span> Event))<span class="sc">+</span></span>
-<span id="cb16-280"><a href="#cb16-280" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">y=</span> SaccadicRT, <span class="at">color=</span> Id), <span class="at">position=</span> <span class="fu">position_jitter</span>(<span class="at">width=</span><span class="fl">0.2</span>))<span class="sc">+</span></span>
-<span id="cb16-281"><a href="#cb16-281" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb16-282"><a href="#cb16-282" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>Predicted<span class="sc">-</span>SE, <span class="at">ymax=</span>Predicted<span class="sc">+</span>SE, <span class="at">fill =</span> Id),<span class="at">color=</span> <span class="st">'transparent'</span>, <span class="at">alpha=</span><span class="fl">0.1</span>)<span class="sc">+</span></span>
-<span id="cb16-283"><a href="#cb16-283" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y=</span><span class="st">'Reaction time'</span>, <span class="at">x=</span><span class="st">'# trial'</span>)<span class="sc">+</span></span>
-<span id="cb16-284"><a href="#cb16-284" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">20</span>)<span class="sc">+</span></span>
-<span id="cb16-285"><a href="#cb16-285" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'none'</span>)<span class="sc">+</span></span>
-<span id="cb16-286"><a href="#cb16-286" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>Event)</span>
-<span id="cb16-287"><a href="#cb16-287" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-288"><a href="#cb16-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-289"><a href="#cb16-289" aria-hidden="true" tabindex="-1"></a>The variability is impressive! For example, looking at the Simple condition, we can see that Reaction times are getting slower over time for some infants, but they are getting faster for others! These participants are probably loosing interest in the Simple condition, because they learn across time that nothing interesting is going to appear on the screen after the cue! It's also really interesting to see how, from the group level estimates, it seemed that the Simple effect was simply weaker than the Complex effect, while there's something more going on: there seem to be more variability in the Simpe condition, with a subgroup of infants being especially uninterested in this specific condition only!</span>
+<span id="cb16-268"><a href="#cb16-268" aria-hidden="true" tabindex="-1"></a>Although we've been focusing on the main effects, remember that we also had random intercepts and slopes in our model! We can have a look at the random effects as well:</span>
+<span id="cb16-269"><a href="#cb16-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-272"><a href="#cb16-272" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-273"><a href="#cb16-273" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: GLMMRandomPlot</span></span>
+<span id="cb16-274"><a href="#cb16-274" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb16-275"><a href="#cb16-275" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-276"><a href="#cb16-276" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb16-277"><a href="#cb16-277" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 8</span></span>
+<span id="cb16-278"><a href="#cb16-278" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 12</span></span>
+<span id="cb16-279"><a href="#cb16-279" aria-hidden="true" tabindex="-1"></a>is_pred_random <span class="ot">=</span> <span class="fu">estimate_expectation</span>(mod_gamma, <span class="at">include_random =</span>T)</span>
+<span id="cb16-280"><a href="#cb16-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-281"><a href="#cb16-281" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(is_pred_random, <span class="fu">aes</span>(<span class="at">x=</span> StandardTrialN, <span class="at">y=</span> Predicted, <span class="at">color=</span> Id, <span class="at">shape =</span> Event))<span class="sc">+</span></span>
+<span id="cb16-282"><a href="#cb16-282" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">y=</span> SaccadicRT, <span class="at">color=</span> Id), <span class="at">position=</span> <span class="fu">position_jitter</span>(<span class="at">width=</span><span class="fl">0.2</span>))<span class="sc">+</span></span>
+<span id="cb16-283"><a href="#cb16-283" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb16-284"><a href="#cb16-284" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>Predicted<span class="sc">-</span>SE, <span class="at">ymax=</span>Predicted<span class="sc">+</span>SE, <span class="at">fill =</span> Id),<span class="at">color=</span> <span class="st">'transparent'</span>, <span class="at">alpha=</span><span class="fl">0.1</span>)<span class="sc">+</span></span>
+<span id="cb16-285"><a href="#cb16-285" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y=</span><span class="st">'Reaction time'</span>, <span class="at">x=</span><span class="st">'# trial'</span>)<span class="sc">+</span></span>
+<span id="cb16-286"><a href="#cb16-286" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">20</span>)<span class="sc">+</span></span>
+<span id="cb16-287"><a href="#cb16-287" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'none'</span>)<span class="sc">+</span></span>
+<span id="cb16-288"><a href="#cb16-288" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>Event)</span>
+<span id="cb16-289"><a href="#cb16-289" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-290"><a href="#cb16-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-291"><a href="#cb16-291" aria-hidden="true" tabindex="-1"></a>Aren't generalised mixed-effect models pretty cool!?? We get to pick the distribution that better resembles the data and we get to model random effects, and these things really improve the fit of our model! We often get to have stronger main effects (which is very often the main thing we are interested in) and we get the insane bonus of looking at individual differences and unique patterns that we would otherwise completely miss!</span>
+<span id="cb16-291"><a href="#cb16-291" aria-hidden="true" tabindex="-1"></a>The variability is impressive! For example, looking at the Simple condition, we can see that Reaction times are getting slower over time for some infants, but they are getting faster for others! These participants are probably loosing interest in the Simple condition, because they learn across time that nothing interesting is going to appear on the screen after the cue! It's also really interesting to see how, from the group level estimates, it seemed that the Simple effect was simply weaker than the Complex effect, while there's something more going on: there seem to be more variability in the Simpe condition, with a subgroup of infants being especially uninterested in this specific condition only!</span>
 <span id="cb16-292"><a href="#cb16-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-293"><a href="#cb16-293" aria-hidden="true" tabindex="-1"></a>We hope you'll get to use GLMMs a lot in your research, and that they will help you find super cool results just like we did here!!!!</span>
+<span id="cb16-293"><a href="#cb16-293" aria-hidden="true" tabindex="-1"></a>Aren't generalised mixed-effect models pretty cool!?? We get to pick the distribution that better resembles the data and we get to model random effects, and these things really improve the fit of our model! We often get to have stronger main effects (which is very often the main thing we are interested in) and we get the insane bonus of looking at individual differences and unique patterns that we would otherwise completely miss!</span>
+<span id="cb16-294"><a href="#cb16-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-295"><a href="#cb16-295" aria-hidden="true" tabindex="-1"></a>We hope you'll get to use GLMMs a lot in your research, and that they will help you find super cool results just like we did here!!!!</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

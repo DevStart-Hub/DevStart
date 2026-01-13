@@ -21,7 +21,7 @@
 <item>
   <title>ModelEstimates</title>
   <dc:creator>Tommaso Ghilardi</dc:creator>
-  <link>https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates.html</link>
+  <link>https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelContrasts.html</link>
   <description><![CDATA[ <p>Welcome back, stats adventurer! 👋 If you are here, it means you have already gone through our tutorial on: <a href="../../CONTENT/Stats/LinearModels.html">Linear models</a>, <a href="../../CONTENT/Stats/LinearMixedModels.html">Linear mixed effect models</a> and <a href="../../CONTENT/Stats/GeneralisedModels.html">Generalized linear models</a>. Well done!! You are nearly there, my young stats padawan. <img src="https://tommasoghilardi.github.io/DevStart/images/Stats/ModelEstimates/Padawan.png" class="img-fluid" style="margin-right:10px;margin-bottom:10px;" width="144"></p>
 <p>In this tutorial, we’re going to take our analysis skills to the next level. One of the coolest and most important aspects of linear models (in my opinion!) isn’t just the p-values you get for each predictor. Don’t get me wrong—those are important and tell you where there is an effect. But after knowing <em>where</em> the effect is, the exciting part is trying to understand <em>what</em> our effect actually is. In other words, how can it be described?</p>
 <p>Be ready!! We’ll explore how to extract and interpret predictions from your model, before learning how to transform these predictions into meaningful statistical insights that tell the complete story of your eyetracking data.</p>
@@ -250,12 +250,12 @@ Event [Simple] × SES [medium]                    |       17.12 |  15.39 | [ -13
 
 # Random Effects
 
-Parameter                          | Coefficient
-------------------------------------------------
-SD (Intercept: Id)                 |      257.06
-SD (StandardTrialN: Id)            |      109.21
-Cor (Intercept~StandardTrialN: Id) |        0.44
-SD (Residual)                      |       57.56</code></pre>
+Parameter                          | Coefficient |    SE |           95% CI
+---------------------------------------------------------------------------
+SD (Intercept: Id)                 |      257.06 | 44.20 | [183.51, 360.09]
+SD (StandardTrialN: Id)            |      109.21 | 19.00 | [ 77.65, 153.60]
+Cor (Intercept~StandardTrialN: Id) |        0.44 |  0.27 | [ -0.17,   0.81]
+SD (Residual)                      |       57.56 |  2.23 | [ 53.36,  62.10]</code></pre>
 </div>
 </div>
 </section><section id="beyond-p-values-understanding-your-effects" class="level1"><h1>Beyond p-values: Understanding Your Effects</h1>
@@ -338,7 +338,7 @@ Variable predicted: LookingTime</code></pre>
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="ModelEstimates_files/figure-html/PlotRawPredicted-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotRawPredicted-1.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="ModelContrasts_files/figure-html/PlotRawPredicted-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelContrasts_files/figure-html/PlotRawPredicted-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -669,7 +669,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="ModelEstimates_files/figure-html/PlotPred-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotPred-1.png" class="img-fluid figure-img" width="768"></a></p>
+<figure class="figure"><p><a href="ModelContrasts_files/figure-html/PlotPred-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelContrasts_files/figure-html/PlotPred-1.png" class="img-fluid figure-img" width="768"></a></p>
 </figure>
 </div>
 </div>
@@ -796,7 +796,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="ModelEstimates_files/figure-html/PlotEstMean-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotEstMean-1.png" class="img-fluid figure-img" width="768"></a></p>
+<figure class="figure"><p><a href="ModelContrasts_files/figure-html/PlotEstMean-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelContrasts_files/figure-html/PlotEstMean-1.png" class="img-fluid figure-img" width="768"></a></p>
 </figure>
 </div>
 </div>
@@ -982,7 +982,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="ModelEstimates_files/figure-html/PlotContrasts-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotContrasts-1.png" class="img-fluid figure-img" width="768"></a></p>
+<figure class="figure"><p><a href="ModelContrasts_files/figure-html/PlotContrasts-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelContrasts_files/figure-html/PlotContrasts-1.png" class="img-fluid figure-img" width="768"></a></p>
 </figure>
 </div>
 </div>
@@ -1058,7 +1058,7 @@ Important
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="ModelEstimates_files/figure-html/PlotContrastInteraction-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotContrastInteraction-1.png" class="img-fluid figure-img" width="816"></a></p>
+<figure class="figure"><p><a href="ModelContrasts_files/figure-html/PlotContrastInteraction-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelContrasts_files/figure-html/PlotContrastInteraction-1.png" class="img-fluid figure-img" width="816"></a></p>
 </figure>
 </div>
 </div>
@@ -1243,7 +1243,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="ModelEstimates_files/figure-html/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="ModelContrasts_files/figure-html/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelContrasts_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -1608,7 +1608,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="ModelEstimates_files/figure-html/PlotGrid-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotGrid-1.png" class="img-fluid figure-img" width="960"></a></p>
+<figure class="figure"><p><a href="ModelContrasts_files/figure-html/PlotGrid-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelContrasts_files/figure-html/PlotGrid-1.png" class="img-fluid figure-img" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -1622,6 +1622,1017 @@ font-style: inherit;">)</span></span></code></pre></div>
   <category>Stats</category>
   <category>R</category>
   <category>linear models</category>
+  <guid>https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelContrasts.html</guid>
+  <pubDate>Tue, 03 Nov 2026 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Model Estimates</title>
+  <dc:creator>Tommaso Ghilardi</dc:creator>
+  <link>https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates.html</link>
+  <description><![CDATA[ <p>Welcome back, stats adventurer! 👋 If you are here, it means you have already gone through our tutorial on: <a href="../../CONTENT/Stats/LinearModels.html">Linear models</a>, <a href="../../CONTENT/Stats/LinearMixedModels.html">Linear mixed effect models</a>. Well done!! You are nearly there, my young stats padawan. <img src="https://tommasoghilardi.github.io/DevStart/images/Stats/ModelEstimates/Padawan.png" class="img-fluid" style="margin-right:10px;margin-bottom:10px;" width="144"></p>
+<p>You might think that once you’ve fit the model, you’re basically done: check the summary, look for stars, write the results. But there’s a catch: If we just look at <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>, we will know whether effects exist <em>(yes or no)</em>, but we still won’t be able to <em>describe</em> them in detail.</p>
+<p>For example, if we find a significant interaction, we still don’t know the pattern that produced it. This is exactly what happened in our previous tutorial on mixed-effect models. Our hypothesis was simple: <strong>looking time differs across conditions</strong> (Simple vs Complex) but this difference <strong>might change over trials</strong>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Need a refresher?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Need a refresher?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In our example paradigm, we designed a task where infants were presented with either a Simple or a Complex shape, and each shape was presented multiple times (that is, in multiple trials). We wanted to see if infants would look longer at the Complex shape, which would indicate increase interest for it over the Simple one. However, we were also mindful that this relationship might change (either get stronger or weaker) across trials. You can find an in-depth description of the experimental paradigm in our <a href="../../CONTENT/EyeTracking/Intro_eyetracking.html">intro tutorial</a>.</p>
+</div>
+</div>
+<p>Even if we find a significant interaction between Condition (Simple vs Complex) and Trial Number, we still don’t know what exactly is happening: is looking time significantly decreasing over trials in the Simple condition? Or is it increasing in the Complex condition? Or is looking time changing in both condition, but at different rates? Let’s formulate our questions a bit more clearly:</p>
+<ul>
+<li>
+<em>What is the difference in Looking Time between Simple and Complex condition?</em> ❓</li>
+<li>
+<em>At which trials are the conditions reliably different?</em> ❓</li>
+<li>
+<em>Are the slopes across trials significantly different between conditions?</em> ❓</li>
+<li>
+<em>Is the change in looking time over trials significant for both conditions?</em> ❓</li>
+</ul>
+<p>Luckily for us, there is a solution to this: we can further <em>describe</em> what the main and interaction effects look like, and we can even confidently say - backed by statistics - which differences are significant.</p>
+<p>That’s the goal of this next tutorial. We will show how to <strong>visualise and test</strong> the specific effects you care about using model-based <strong>estimated means, contrasts, and slopes</strong>, so you can make clear statements about <em>where</em> and <em>how</em> conditions differ!</p>
+<section id="setting-things-up" class="level2"><h2 class="anchored" data-anchor-id="setting-things-up">Setting things up</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p>First let’s set things up to re-run our model. We import relevant libraries, read the data, set categorical variables as factors, standardize the continuous variables, and finally run our model.</p>
+<p><strong>Wait a sec, we just got an email…</strong></p>
+<p>I guess we have to listen to Reviewer #2 this time. Let’s include an additional interaction with SES (Socio-Economic Status) in our model. This variable is a factor with 3 levels: high, medium, and low. The serendipitous thing is that this complex model will be useful to fully understand how model’s predictions and estimates work, even when things get more complicated.</p>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:40%;">
+<div class="callout callout-style-default callout-note callout-titled" title="Inbox">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Inbox
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="../..\images/Stats/ModelEstimates/reviewer2.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/images/Stats/ModelEstimates/reviewer2.jpg" class="img-fluid"></a></p>
+</div>
+</div>
+</div>
+</div>
+<p>Here’s our new model:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;"><a href="https://github.com/lme4/lme4/">lme4</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;"><a href="https://github.com/runehaubo/lmerTestR">lmerTest</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;"><a href="https://easystats.github.io/easystats/">easystats</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">df</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"resources/Stats/Dataset.csv"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">df</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Id</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">df</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Id</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># make sure subject_id is a factor</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">df</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">SES</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">df</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">SES</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># make sure subject_id is a factor</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">df</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Event</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">df</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Event</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># make sure subject_id is a factor</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">df</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">StandardTrialN</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">standardize</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">df</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">TrialN</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># create standardize trial column</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">mod</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">LookingTime</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">StandardTrialN</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Event</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">SES</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">StandardTrialN</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Id</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span>, data<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">df</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">parameters</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">mod</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Fixed Effects
+
+Parameter                                        | Coefficient |     SE |             95% CI |   t(364) |      p
+----------------------------------------------------------------------------------------------------------------
+(Intercept)                                      |     1397.79 | 105.24 | [1190.84, 1604.74] |    13.28 | &lt; .001
+StandardTrialN                                   |      -59.32 |  45.38 | [-148.56,   29.91] |    -1.31 | 0.192 
+Event [Simple]                                   |     -282.56 |  10.89 | [-303.98, -261.14] |   -25.94 | &lt; .001
+SES [low]                                        |       65.99 | 139.22 | [-207.78,  339.77] |     0.47 | 0.636 
+SES [medium]                                     |        3.67 | 148.81 | [-288.97,  296.30] |     0.02 | 0.980 
+StandardTrialN × Event [Simple]                  |      -85.35 |  11.14 | [-107.25,  -63.45] |    -7.66 | &lt; .001
+StandardTrialN × SES [low]                       |       -8.39 |  59.96 | [-126.30,  109.51] |    -0.14 | 0.889 
+StandardTrialN × SES [medium]                    |       36.97 |  64.04 | [ -88.96,  162.90] |     0.58 | 0.564 
+Event [Simple] × SES [low]                       |        2.43 |  14.59 | [ -26.26,   31.11] |     0.17 | 0.868 
+Event [Simple] × SES [medium]                    |       17.12 |  15.39 | [ -13.15,   47.39] |     1.11 | 0.267 
+(StandardTrialN × Event [Simple]) × SES [low]    |        5.16 |  14.91 | [ -24.15,   34.48] |     0.35 | 0.729 
+(StandardTrialN × Event [Simple]) × SES [medium] |        0.09 |  15.59 | [ -30.56,   30.74] | 5.86e-03 | 0.995 
+
+# Random Effects
+
+Parameter                          | Coefficient |    SE |           95% CI
+---------------------------------------------------------------------------
+SD (Intercept: Id)                 |      257.06 | 44.20 | [183.51, 360.09]
+SD (StandardTrialN: Id)            |      109.21 | 19.00 | [ 77.65, 153.60]
+Cor (Intercept~StandardTrialN: Id) |        0.44 |  0.27 | [ -0.17,   0.81]
+SD (Residual)                      |       57.56 |  2.23 | [ 53.36,  62.10]</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We now have three variables interacting with each other (a three-way interaction). Be careful when adding too many interactions! As explained in this <a href="https://datacolada.org/17">blog post</a>, the sample size you need increases very quickly when you do that.</p>
+<p>Luckily for us, we are working on simulated data and, at least for these tutorials, we can get as much data as we want (* evil laugh *)</p>
+</div>
+</div>
+</section><section id="model-predictions" class="level2"><h2 class="anchored" data-anchor-id="model-predictions">Model predictions</h2>
+<p>Remember how easy it was to draw lines in the first tutorial on linear models!? Back then, a model with one or two predictors was something you could sketch by hand. But now, with <strong>multiple interactions</strong> and <strong>random effects</strong>, trying to “draw the model” with would quickly become a mess.</p>
+<p>Luckily, instead of pen and paper, we can ask the model to make <strong>predictions</strong> for us. That way, the model draws the lines while we sit back and relax. 😌</p>
+<p>Predictions are simply the values of <code>LookingTime</code> that the model expects under specific conditions (e.g., Simple vs Complex Condition, early vs late trials).</p>
+<p>We’ll use <code><a href="https://easystats.github.io/modelbased/reference/estimate_expectation.html">estimate_expectation()</a></code> (from <strong>modelbased</strong>) to get predicted values directly from the fitted model. If we want to ask for predictions across Conditions and Trials, we can specify the following in the argument <code>by</code> (<code>length</code> tells how many values of the continuous predictor(s) to use):</p>
+<div class="cell">
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;"><a href="https://easystats.github.io/modelbased/">modelbased</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">pred</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://easystats.github.io/modelbased/reference/estimate_expectation.html">estimate_expectation</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">mod</span>, by <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"StandardTrialN"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Event"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span>, length <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">15</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">pred</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Model-based Predictions
+
+StandardTrialN | Event   | Predicted |    SE |                 CI
+-----------------------------------------------------------------
+-1.64          | Complex |   1495.37 | 99.36 | [1299.97, 1690.77]
+-1.41          | Complex |   1481.43 | 96.76 | [1291.15, 1671.71]
+-1.18          | Complex |   1467.49 | 95.28 | [1280.11, 1654.87]
+-0.94          | Complex |   1453.55 | 94.99 | [1266.75, 1640.35]
+-0.70          | Complex |   1439.61 | 95.89 | [1251.04, 1628.18]
+-0.47          | Complex |   1425.67 | 97.95 | [1233.05, 1618.29]
+
+Variable predicted: LookingTime
+Predictors modulated: StandardTrialN, Event
+Predictors controlled: SES (high)</code></pre>
+</div>
+</div>
+<p>As you can see, we get a Predicted value of looking time for each trial and event value! All without doing any mental arithmetics. Now we can plot these predictions to visualise the model-implied lines:</p>
+<div class="cell">
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">pred</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>base_size <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">18</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>legend.position <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bottom"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="ModelEstimates_files/figure-html/predictions-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/predictions-plot-1.png" class="img-fluid figure-img" width="768"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Have you spotted anything odd in the previous output!??</p>
+<p>Well, look at the table with the model’s predictions. Just below it, we see the following:</p>
+<p><code>Predictors controlled: SES (high)</code></p>
+<p>We gotta be careful! These predictions do not apply for all SES levels! When we ask for predictions “by Event and Trial”, the model still needs to decide what to do with <em>everything else</em> in the model (like <code>SES</code>, and the random effects). By default, predictions are computed at specific values (e.g., reference levels for factors), so they may not represent the “mean” effect you want to report.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In this tutorial, we only introduce Prediction briefly because we care about means effects and contrasts more. However, you can always learn more on the <a href="https://easystats.github.io/modelbased/articles/estimate_slopes.html">modelbased website</a> !!</p>
+</div>
+</div>
+<p>Predictions help us <strong>describe</strong> patterns (“the lines diverge”, “one looks steeper”), but they don’t directly answer the questions about our initial hypothesis we care about:</p>
+<ul>
+<li>What is the average difference between Simple and Complex (overall, not at one SES level)? ❓</li>
+<li>At which trials are the conditions reliably different? ❓</li>
+<li>Are the slopes across trials significantly different between conditions? ❓</li>
+<li>Is the change in looking time over trials significant for both conditions? ❓</li>
+</ul>
+<p>For that, we need model-based <strong>estimates that are designed for inference</strong>: <strong>estimated means, contrasts, and slopes</strong> - with uncertainty (CIs) and tests.</p>
+<p>In the next section, we’ll start with <strong>estimated marginal means</strong> (averaged over the other predictors), and then use <strong>contrasts</strong> to formally test the specific differences we care about.</p>
+</section><section id="estimate-means" class="level1"><h1>Estimate means</h1>
+<p>As its name suggests, <code><a href="https://easystats.github.io/modelbased/reference/estimate_means.html">estimate_means()</a></code> allows you to extract estimated means from your model. But what does this actually mean? (Yes, lots of “means” in this explanation!)</p>
+<p>This function:</p>
+<ol type="1">
+<li><p>Generates predictions for all the reference levels of a model’s predictors</p></li>
+<li><p>Averages these predictions to keep only the predictors we are interested in</p></li>
+</ol>
+<p>Think of it as a streamlined way to answer the question: “What is the average looking time for each level of my factor, according to my model?” Let’s see it in action!!</p>
+<div class="cell">
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Est_means</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://easystats.github.io/modelbased/reference/estimate_means.html">estimate_means</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">mod</span>, by<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Event'</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Est_means</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Estimated Marginal Means
+
+Event   |    Mean |    SE |             95% CI | t(364)
+-------------------------------------------------------
+Complex | 1420.76 | 58.22 | [1306.27, 1535.25] |  24.40
+Simple  | 1144.30 | 58.22 | [1029.81, 1258.79] |  19.65
+
+Variable predicted: LookingTime
+Predictors modulated: Event
+Predictors averaged: StandardTrialN (0.005), SES, Id</code></pre>
+</div>
+</div>
+<p>Notice the information message! Previously, with <code><a href="https://easystats.github.io/modelbased/reference/estimate_expectation.html">estimate_expectation()</a></code>, we were setting SES to its reference level (“high”). <strong>Now instead, the function extracts predictions for all levels of SES and then averages across them!</strong>, giving you a comprehensive view of how Event influences looking behavior.<br>
+THIS IS WHAT WE WANTED!!! 🎉🎉🎉</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code><a href="https://easystats.github.io/modelbased/reference/estimate_expectation.html">estimate_expectation()</a></code> and <code><a href="https://easystats.github.io/modelbased/reference/estimate_means.html">estimate_means()</a></code> handle the random effect structure differently. By default, <code><a href="https://easystats.github.io/modelbased/reference/estimate_means.html">estimate_means()</a></code> gives us an average effect of the predictor for an average subject - exactly what we need when trying to understand overall patterns in our data. Learn more with <a href="https://easystats.github.io/modelbased/articles/mixed_models.html">this vignette</a></p>
+</div>
+</div>
+<section id="easy-plotting" class="level3"><h3 class="anchored" data-anchor-id="easy-plotting">Easy plotting</h3>
+<p>The <code><a href="https://easystats.github.io/modelbased/reference/estimate_means.html">estimate_means()</a></code> function also comes with its own built-in plotting capability, automatically generating a clean ggplot visualization of your estimated means.</p>
+<div class="cell">
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Est_means</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>base_size <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>legend.position <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'bottom'</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="ModelEstimates_files/figure-html/PlotEstMean-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotEstMean-1.png" class="img-fluid figure-img" width="768"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section><section id="estimate-contrasts" class="level1"><h1>Estimate contrasts</h1>
+<p>We’ve successfully extracted and plotted the estimated means for our predictors - awesome job! 🎉</p>
+<p><strong>But there’s something important missing</strong>. While we now know the estimated looking times for each level, we don’t yet have formal statistical comparisons between these levels. For example, is the difference between mean values in Complex condition and Simple condition statistically significant?</p>
+<p>This is where <code><a href="https://easystats.github.io/modelbased/reference/estimate_contrasts.html">estimate_contrasts()</a></code> comes to the rescue! Let’s see it in action:</p>
+<div class="cell">
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Contrast</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://easystats.github.io/modelbased/reference/estimate_contrasts.html">estimate_contrasts</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">mod</span>, contrast <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Event'</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Contrast</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Marginal Contrasts Analysis
+
+Level1 | Level2  | Difference |   SE |             95% CI | t(364) |      p
+---------------------------------------------------------------------------
+Simple | Complex |    -276.46 | 6.07 | [-288.39, -264.53] | -45.58 | &lt; .001
+
+Variable predicted: LookingTime
+Predictors contrasted: Event
+Predictors averaged: StandardTrialN (0.005), SES, Id
+p-values are uncorrected.</code></pre>
+</div>
+</div>
+<p>What we’re doing here is simple but powerful:</p>
+<ol type="1">
+<li><p>We pass our model to the function</p></li>
+<li><p>We specify which predictor we want to compare (Event)</p></li>
+<li><p>The function returns the difference between the means of the predictors with statistical tests</p></li>
+</ol>
+<p>The results show us that the difference between Complex and Simple is positive (meaning looking time is higher for Complex) and the p-value indicates this difference is statistically significant! All of this with just one line of code - how convenient!</p>
+<p>In this example, Event has only 2 levels (Complex and Simple), so we already knew these levels differed significantly from examining our model summary. However, <code>estimate_contrast()</code> becomes particularly powerful when dealing with predictors that have multiple levels. With a predictor like <strong>SES</strong> (3 levels) - <code>estimate_contrast()</code> automatically calculates all possible pairwise comparisons between these levels.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember that if you have multiple levels in predictors you will need to adjust the <em>p-value</em> for multiple comparisons. You can do that by passing the argument <code>p_adjust = 'hochberg'</code> to the function. There are different adjustment methods and you can <a href="https://easystats.github.io/modelbased/reference/estimate_contrasts.html">check them here</a>.</p>
+</div>
+</div>
+<p>Let’s run it on SES!!</p>
+<div class="cell">
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://easystats.github.io/modelbased/reference/estimate_contrasts.html">estimate_contrasts</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">mod</span>, contrast <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'SES'</span>,p_adjust <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'hochberg'</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Marginal Contrasts Analysis
+
+Level1 | Level2 | Difference |     SE |            95% CI | t(364) |     p
+--------------------------------------------------------------------------
+low    | high   |      67.18 | 139.14 | [-206.45, 340.81] |   0.48 | 0.934
+medium | high   |      12.41 | 148.75 | [-280.10, 304.93] |   0.08 | 0.934
+medium | low    |     -54.76 | 139.14 | [-328.39, 218.86] |  -0.39 | 0.934
+
+Variable predicted: LookingTime
+Predictors contrasted: SES
+Predictors averaged: StandardTrialN (0.005), Event, Id
+p-value adjustment method: Hochberg (1988)</code></pre>
+</div>
+</div>
+<p>See?? We have all the comparison between the available level of SES. Ough, nothing is significant here - Reviewer #2 really made us work for nothing. Well, hopefully it’ll make them happy to know we listended to them. <strong>And on the upside, if we will even need to test differences between 3 or more groups, we’ll know exactly how to do that!</strong></p>
+<section id="almost-as-easy-plotting" class="level3"><h3 class="anchored" data-anchor-id="almost-as-easy-plotting">Almost-as-Easy plotting</h3>
+<p><code>estimate_contrast()</code> has a plotting function as well! However, it’s slightly more complex as the plot function requires both our estimated <strong>contrasts</strong> and <strong>means</strong>. If we pass both, the plot will show which level is different from the other using lighthouse plots - visualizations that highlight significant differences between groups.</p>
+<div class="cell">
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Contrast</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Est_means</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>base_size <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>legend.position <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'bottom'</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="ModelEstimates_files/figure-html/PlotContrasts-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotContrasts-1.png" class="img-fluid figure-img" width="768"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="interactions" class="level2"><h2 class="anchored" data-anchor-id="interactions">Interactions</h2>
+<p>We hope you are getting a hang of how <code>estimate_contrast()</code> works. It helped us testing the first part of our hypothesis (and even check the effect of SES), but if we look back at our questions, two more aspects are still unclear:</p>
+<ul>
+<li>What is the average difference between Simple and Complex (overall, not at one SES level)? ✅<strong>About 300ms, and the difference is significant!</strong>
+</li>
+<li>At which trials are the conditions reliably different? ❓</li>
+<li>Are the slopes across trials significantly different between conditions? ❓</li>
+<li>Is the change in looking time over trials significant for both conditions? ❓</li>
+</ul>
+<p>Luckily for us, <code>estimate_contrast()</code> really shines the most when examining interactions between categorical and continuous predictors - just what we want. More specifically, we care about whether the effect of Condition (<code>Event</code>), changes across Trials. So we can keep <code>contrast = Event</code>. But now we also want to compute that difference across trials! For that, we can use <code>by =</code>. Here’s how it works:</p>
+<ul>
+<li>
+<code>contrast =</code> tells the function <strong>what difference you want to compute</strong> (e.g., Complex vs Simple).</li>
+<li>
+<code>by =</code> tells it <strong>where to compute that difference</strong> (at different trial values).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">ContrastbyTrial</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://easystats.github.io/modelbased/reference/estimate_contrasts.html">estimate_contrasts</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">mod</span>, contrast <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Event'</span>, by <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'StandardTrialN'</span>, p_adjust <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'hochberg'</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">ContrastbyTrial</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Marginal Contrasts Analysis
+
+Level1 | Level2  | StandardTrialN | Difference |    SE |             95% CI | t(364) |      p
+---------------------------------------------------------------------------------------------
+Simple | Complex |          -1.64 |    -138.52 | 11.91 | [-161.95, -115.09] | -11.63 | &lt; .001
+Simple | Complex |          -1.28 |    -169.04 | 10.05 | [-188.79, -149.28] | -16.83 | &lt; .001
+Simple | Complex |          -0.91 |    -199.63 |  8.36 | [-216.08, -183.19] | -23.88 | &lt; .001
+Simple | Complex |          -0.55 |    -230.23 |  7.00 | [-244.00, -216.46] | -32.88 | &lt; .001
+Simple | Complex |          -0.18 |    -260.74 |  6.19 | [-272.92, -248.57] | -42.10 | &lt; .001
+Simple | Complex |           0.18 |    -291.34 |  6.15 | [-303.43, -279.25] | -47.40 | &lt; .001
+Simple | Complex |           0.55 |    -321.85 |  6.88 | [-335.38, -308.33] | -46.78 | &lt; .001
+Simple | Complex |           0.91 |    -352.45 |  8.19 | [-368.55, -336.35] | -43.05 | &lt; .001
+Simple | Complex |           1.28 |    -383.05 |  9.84 | [-402.41, -363.69] | -38.91 | &lt; .001
+Simple | Complex |           1.64 |    -413.56 | 11.70 | [-436.56, -390.56] | -35.36 | &lt; .001
+
+Variable predicted: LookingTime
+Predictors contrasted: Event
+Predictors averaged: SES, Id
+p-value adjustment method: Hochberg (1988)</code></pre>
+</div>
+</div>
+<p>This gives us the contrast between the levels of <code>Event</code> for a set of values of StandardTrialN. So we can check whether the difference between Complex and Simple actually changes over the course of trials!! We’ll plot it to make it simpler to understand:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="ModelEstimates_files/figure-html/PlotContrastInteraction-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/PlotContrastInteraction-1.png" class="img-fluid figure-img" width="816"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This plot shows that the two levels are always significantly different from each other (the confidence intervals never touch the dashed zero line) and that the difference is always positive - looking time for Complex is consistently higher than for Simple across all trial numbers. SUUPER COOL, EH!!?</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You <em>can</em> put multiple predictors in <code>contrast =</code> (it will compute lots of pairwise differences across combinations), but be careful: the number of tests can explode fast… and you’ll want p-value adjustment.</p>
+</div>
+</div>
+</section></section><section id="comparing-slopes" class="level1"><h1>Comparing slopes</h1>
+<p>Wow, it took a while to get here, but now we’re quickly answering all of our questions! We’re already half-way through:</p>
+<ul>
+<li>What is the average difference between Simple and Complex (overall, not at one SES level)? ✅<strong>About 300ms, and the difference is significant!</strong>
+</li>
+<li>At which trials are the conditions reliably different? ✅<strong>All of them!</strong>
+</li>
+<li>Are the slopes across trials significantly different between conditions? ❓</li>
+<li>Is the change in looking time over trials significant for both conditions? ❓</li>
+</ul>
+<p>To answer the next question, we can again use the <code>estimate_contrast()</code> function. However, we need to make a fundamental change. Before, we cared about how the effect of Condition changed across Trials. Now, we care about how the effect of Trial changes across conditions!</p>
+<p>Is that super confusing? It still is for us, sometimes. But remembering our question helps: Does the effect of time (Trial) change across Conditions? For that, our main interest is Trial Number, and we want to see how the experimental condition modulates it. So StandardTrialN moves to the contrast argument and Event goes to the by argument:</p>
+<div class="cell">
+<div class="sourceCode" id="cb16" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://easystats.github.io/modelbased/reference/estimate_contrasts.html">estimate_contrasts</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">mod</span>, contrast <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'StandardTrialN'</span>, by <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Event'</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Marginal Contrasts Analysis
+
+Level1 | Level2  | Difference |   SE |           95% CI | t(364) |      p
+-------------------------------------------------------------------------
+Simple | Complex |     -83.60 | 6.15 | [-95.70, -71.50] | -13.59 | &lt; .001
+
+Variable predicted: LookingTime
+Predictors contrasted: StandardTrialN
+Predictors averaged: StandardTrialN (0.005), SES, Id
+p-values are uncorrected.</code></pre>
+</div>
+</div>
+<p>This shows us that the effect of StandardTrialN is actually different between the two levels. This is something we already knew from the model summary (remember the significant interaction term?), but this approach gives us the precise difference between the two slopes while averaging over all other possible effects. This becomes particularly valuable when working with more complex models that have multiple predictors and interactions.</p>
+</section><section id="estimate-slopes" class="level1"><h1>Estimate Slopes</h1>
+<p>Yay, only one question left!!</p>
+<ul>
+<li>What is the average difference between Simple and Complex (overall, not at one SES level)? ✅<strong>About 300ms, and the difference is significant!</strong>
+</li>
+<li>At which trials are the conditions reliably different? ✅<strong>All of them!</strong>
+</li>
+<li>Are the slopes across trials significantly different between conditions? ✅<strong>Yes! (we new this already, actually)</strong>
+</li>
+<li>Is the change in looking time over trials significant for both conditions? ❓</li>
+</ul>
+<p>To answer this one, there’s one last very important function worth introducing: <code>estimate_slope()</code>. While <code><a href="https://easystats.github.io/modelbased/reference/estimate_means.html">estimate_means()</a></code> allows us to extract the means of predictions, <code>estimate_slope()</code> is designed specifically for understanding rates of change.</p>
+<p>This will help us understand <em>how quickly</em> looking time changes across trials in the two conditions. Here, the key argument is <code>trend =</code>. In our case, we are interested in changes across time, so we put trial number here:</p>
+<div class="cell">
+<div class="sourceCode" id="cb18" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://easystats.github.io/modelbased/reference/estimate_slopes.html">estimate_slopes</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">mod</span>, trend <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'StandardTrialN'</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Estimated Marginal Effects
+
+Slope  |    SE |            95% CI | t(364) |      p
+----------------------------------------------------
+-92.76 | 24.60 | [-141.13, -44.39] |  -3.77 | &lt; .001
+
+Marginal effects estimated for StandardTrialN
+Type of slope was dY/dX</code></pre>
+</div>
+</div>
+<p>This tells us that the average effect of StandardTrialN is -50.46 (negative) and it is significantly different from 0. This means the looking time doesn’t remain constant across trials but significantly decreases as trials progress.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You may be thinking… “Wait, isn’t this information already in the model summary? Why do I need <code><a href="https://easystats.github.io/modelbased/reference/estimate_slopes.html">estimate_slopes()</a></code>?” If you are asking yourself this question, think back to the <a href="../../CONTENT/Stats/LinearModels.html">Linear models</a> tutorial!!</p>
+<p><strong>What the model summary shows:</strong> The coefficient for StandardTrialN in the summary (-67.118) represents the slope specifically for the Simple condition. This is because in linear models, coefficients are in relation to the intercept, which is where all predictors are 0. For categorical variables, 0 means the reference level (Simple in this case).</p>
+<p><strong>What estimate_slopes() shows:</strong> The value from <code><a href="https://easystats.github.io/modelbased/reference/estimate_slopes.html">estimate_slopes()</a></code> (-50.46) gives us the average slope across both Event types (Complex and Simple).</p>
+<p>This is why the two values don’t match! One is the slope for a specific condition, while the other is the average slope across all conditions. Super COOL right??</p>
+</div>
+</div>
+<p>Remember! Our model indicated an interaction between StandardTrialN and Event, which means the rate of change (slope) should differ between the two Event types. However, from just knowing there’s an interaction, we can’t determine exactly what these slopes are doing. One condition might show a steeper decline than the other, one might be flat while the other decreases, or they might even go in opposite directions. The model just tells us they’re different, not how they’re different (or at least it is not so simple)</p>
+<p>To visualize exactly how these slopes differ (and answer our LAST QUESTION!), we can include <code>Event</code> with the <code>by=</code> argument:</p>
+<div class="cell">
+<div class="sourceCode" id="cb20" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Slopes</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://easystats.github.io/modelbased/reference/estimate_slopes.html">estimate_slopes</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">mod</span>, trend <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'StandardTrialN'</span>, by <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Event'</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Slopes</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Estimated Marginal Effects
+
+Event   |   Slope |    SE |            95% CI | t(364) |      p
+---------------------------------------------------------------
+Complex |  -49.79 | 25.03 | [ -99.02,  -0.57] |  -1.99 |  0.047
+Simple  | -133.39 | 25.01 | [-182.57, -84.21] |  -5.33 | &lt; .001
+
+Marginal effects estimated for StandardTrialN
+Type of slope was dY/dX</code></pre>
+</div>
+</div>
+<p>Now we get the average effect for both Events. So we see that both of the lines significantly decrease!</p>
+<p>We can also plot it with:</p>
+<div class="cell">
+<div class="sourceCode" id="cb22" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Slopes</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>yintercept <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, linetype <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'dashed'</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>base_size <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>legend.position <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'bottom'</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="ModelEstimates_files/figure-html/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Here we see that the slopes for both Conditions are negative (below zero) and that’s statistically significant (confidence intervals don’t cross the dashed zero line). This confirms that looking time reliably decreases as trials progress, regardless of whether it’s a Complex or Simple event.</p>
+</section><section id="wrapping-up" class="level1"><h1>Wrapping Up</h1>
+<p>Well, you did it! You’ve survived the wild jungle of model-based estimation! By breaking down the prediction process into customizable steps, you’ve gained complete control over how to extract and visualize the patterns in your eye-tracking data.</p>
+<p>If you’re feeling like this is too much… well, it is. It was overwhelming even to just write the tutorial. Be gentle with your progress and don’t expect to know everything right away. Go through some of the steps again if need be. And reach out to us if somethings doesn’t make sense!</p>
+<p>And most importantly: We hope it’s clear that any question you have about your data can be answered! It’s tricky or confusing at times, but you can follow this simple process:</p>
+<ul>
+<li>think precsely at what your <em>question</em> is</li>
+<li>think about what <em>model</em> would answer it</li>
+<li>think about what <em>contrasts</em> will test your question directly</li>
+</ul>
+<p>Don’t run models if your question is unclear, and don’t run contrasts on models you are not sure about.</p>
+<p>Now you have the tools to answer sophisticated research questions and present your findings beautifully. Happy modeling!</p>
+
+
+<!-- -->
+
+</section><a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+  <category>Stats</category>
+  <category>R</category>
+  <category>linear models</category>
   <guid>https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/ModelEstimates.html</guid>
   <pubDate>Tue, 03 Nov 2026 00:00:00 GMT</pubDate>
 </item>
@@ -1629,7 +2640,8 @@ font-style: inherit;">)</span></span></code></pre></div>
   <title>Generalised mixed-effect models</title>
   <link>https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels.html</link>
   <description><![CDATA[ <p>If you’ve been following our statistical journey, you’re already familiar with our adventures in <a href="../../CONTENT/Stats/LinearModels.html"><strong>linear models</strong></a> and the exciting world of <a href="../../CONTENT/Stats/LinearMixedModels.html"><strong>linear mixed-effect models</strong></a>!!! Now it’s time to level UP our statistical toolkit with something even MORE POWERFUL: <strong>Generalised Linear Mixed-Effects Models (GLMMs)</strong>!!! 🎉</p>
-<p>In this tutorial, we’ll tackle those variables that just WON’T behave normally! Our focus will be on <strong>Reaction Time</strong>!!! Remember that eye-tracking dataset we’ve been playing with? It doesn’t just have Looking Time—but also saccadic reaction times we’ve been ignoring! These reaction times indicate how quickly participants directed their gaze to the stimuli when they appeared on screen.</p>
+<p>In this tutorial, we’ll tackle those variables that just WON’T behave normally! Our focus will be on <strong>Reaction Time</strong>. Remember the initial hypotheses for our study? (if not, you can find an in-depth description of the experimental paradigm in our <a href="Intro_eyetracking.qmd">intro tutorial</a>) They were not only about Looking Time, but also saccadic reaction times! These reaction times indicate how quickly participants direct their gaze to the target stimuli when they appeared on screen.</p>
+<p>We took faster/shorter saccadic reaction times as an index of learning. Based on this, we predicted that participants would learn to predict the location of both the Complex and the Simple stimulus, which should result in a significant decrease in saccadic reaction times over trials.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2082,9 +3094,9 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 </div>
 </div>
-<p>This does not look too great. The linearity is not really flat…it seems U shaped. The homogeneity of variance as well! In addition we have influential observations (red outliers) and also the normality of residuals is not too great!!</p>
-<p>However, the plot I want you to focus on actually is the first one, the posterior predictive check. Do you note anything weird?? As you can see, the model believes there are values below 200ms…but that as we saw earlier is IMPOSSIBLE!! No participant can respond that quickly in our dataset!</p>
-<p>All these indications and incoherences tell us that the model is fitting poorly!!! Our linear model is struggling to capture the true nature of reaction time data. The model is trying to force our non-normal data into a normal distribution, and it’s clearly not working!</p>
+<p>This does not look too great. The linearity is not really flat… It seems U shaped. The homogeneity of variance as well! In addition we have influential observations (red outliers) and also the normality of residuals is not too great!!</p>
+<p>However, the plot I want you to focus on actually is the first one, the posterior predictive check. Do you note anything weird?? As you can see, the model believes there are values below 200ms, but that as we saw earlier is IMPOSSIBLE!! No participant can respond that quickly in our dataset!</p>
+<p>All these indicators tell us that the model is fitting poorly!!! Our linear model is struggling to capture the true nature of reaction time data. The model is trying to force our non-normal data into a normal distribution, and it’s clearly not working!</p>
 </section><section id="finding-a-better-family" class="level2"><h2 class="anchored" data-anchor-id="finding-a-better-family">Finding a better family</h2>
 <p>So what’s the solution to this mess? If normal distributions don’t work for our data, we need to find a distribution family that better matches reaction times! This is exactly where Generalized Linear Mixed Models (GLMMs) come to the rescue - they allow us to specify different distribution families beyond just Gaussian.</p>
 <p>But which distribution should we use? The more you get familiarised with distributions, the more you will learn to recognise them. But since we’re not black belt of statistics yet, let’s use the Cullen and Frey graph instead! For this, we will use the fitdistrplus package:</p>
@@ -2163,7 +3175,7 @@ estimated skewness:  1.694027
 estimated kurtosis:  7.483638 </code></pre>
 </div>
 </div>
-<p>The Cullen and Frey graph reveals which distribution best matches our data by plotting skewness against kurtosis. Looking at our reaction time data (red dot), we can immediately see it falls far from the normal distribution (asterisk) and instead sits near both the gamma (dashed line) and lognormal (dotted line) distributions, within the gray beta distribution area. The yellow circles represent bootstrap samples that help us assess uncertainty in our estimate. Since these bootstrap points tend to closely follow the gamma distribution line, we have strong evidence to select gamma as our distribution family! This explains why our linear model (which assumes normality) performed so poorly and gives us a clear direction for building a more appropriate model.</p>
+<p>The Cullen and Frey graph reveals which distribution best matches our data by plotting skewness against kurtosis. Looking at our reaction time data (red dot), we can immediately see it falls far from the normal distribution (asterisk) and instead sits near the gamma distribution (dashed line). The yellow circles represent bootstrapped samples that help us assess uncertainty in our estimate. Since these bootstrapped points tend to closely follow the gamma distribution line, we have strong evidence to select gamma as our distribution family! This explains why our linear model (which assumes normality) performed so poorly and gives us a clear direction for building a more appropriate model.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2178,8 +3190,8 @@ Caution
 </div>
 </div>
 </section></section><section id="generalized-model" class="level1"><h1>Generalized Model</h1>
-<p>Now that we know that our data is not normally distributed and we should try a Gamma distribution, we can update our mixed effect model, making it generalised! It is super simple!!!</p>
-<p>All this means is that we specify a distribution different from a gaussian and instead of using <code><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer()</a></code> we switch to <code><a href="https://rdrr.io/pkg/lme4/man/glmer.html">glmer()</a></code></p>
+<p>Now that we know that our data is not normally distributed and we should try a Gamma distribution, we can update our mixed effect model, making it generalised!</p>
+<p>We just need to tweak a couple things. First, instead of using <code><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer()</a></code> we switch to <code><a href="https://rdrr.io/pkg/lme4/man/glmer.html">glmer()</a></code>. Then, we directly specify a distribution which is different from the default Gaussian:</p>
 <div class="cell">
 <div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -2252,7 +3264,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You might have noticed we added link = “log” in our model: that’s a link function! A link function puts your independent variables on the right scale for your data. For a Gamma model, we often use a <strong>log link</strong> because our outcome can only be <strong>positive</strong>. By taking the exponent of the independent variables and their beta coefficients, the predicted values are <strong>always above zero</strong>—perfect for modeling things like reaction times or any strictly positive measure.</p>
+<p>You might have noticed we added link = “log” in our model: that’s a link function! A link function puts your independent variables on the right scale for your data. For a Gamma model, we often use a <strong>log link</strong> because our outcome can only be <strong>positive</strong>. By taking the exponent of the independent variables and their beta coefficients, the predicted values are <strong>always above zero</strong>, perfect for modeling things like reaction times or any strictly positive measure.</p>
 </div>
 </div>
 <p>Now that we have run the model, let’s do our checks:</p>
@@ -2275,7 +3287,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 <p>Look at our diagnostic plots now - there is improvement!!</p>
 <p>First and most importantly, our <strong>posterior predictive check</strong> is now properly aligned with reality. The model’s predictions respect the natural lower boundary of our reaction time data and follow the actual distribution shape much more faithfully. The <strong>influential observations</strong> plot shows we’ve eliminated those problematic outliers that were throwing off our linear model. By using a distribution that naturally accommodates right-skewed data, points that seemed extreme before are now well within expectations.</p>
-<p>The homogeinity of variance and unifromity of residuals could definetly be better…but remember, it’s probably impossible to find a model that fits your data perfectly!!! However, we can get much closer to reality by using what we <strong>KNOW</strong> about our data - like the fact that reaction times are skewed and never go below 200ms. This knowledge helped us choose the Gamma distribution with a log link, which naturally respects these constraints.</p>
+<p>The homogeneity of variance and uniformity of residuals could definitely be better… But remember, it’s probably impossible to find a model that fits your data perfectly!!! However, we can get much closer to reality by using what we <strong>KNOW</strong> about our data - like the fact that reaction times are skewed and never go below 200ms. This knowledge helped us choose the Gamma distribution with a log link, which naturally respects these constraints.</p>
 <p>That’s the real power of GLMMs!!! They let us work <strong>WITH</strong> our data’s natural properties instead of trying to force everything into a normal distribution box where it doesn’t belong!!!</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -2829,10 +3841,9 @@ Note
 <p>For the best experience, you should have already completed the <a href="../../CONTENT/Stats/LinearModels.html"><strong>previous tutorial on linear models</strong></a>. That foundation will make this tutorial much easier to follow and understand!</p>
 </div>
 </div>
-<p>This tutorial introduces the statistical concept of Hierarchical Modeling, often called Mixed Effects Modeling. This approach shines when dealing with nested data—situations where observations are grouped in meaningful ways, like students within schools or measurements across individuals.</p>
-<p>Sounds like a mouthful, right? Don’t worry! Let’s kick things off with something a little more fun: Simpson’s Paradox.</p>
-<p>Simpson’s Paradox is a statistical head-scratcher. It’s when a trend you see in your data suddenly flips—or even vanishes—when you split the data into groups. Ready to see it in action? Let’s dive in!</p>
-<p>Imagine we’re looking at how years of experience impact salary at a university. Here’s some simulated data to make it fun.</p>
+<p>This tutorial introduces the statistical concept of hierarchical modeling, often called mixed-effects modeling. This approach shines when dealing with nested data: situations where observations are grouped, like multiple classes within a school or multiple measurements for each individual.</p>
+<p>This might not mean a lot to you: why bother with understanding the structure of the data? Can’t we just run our simple linear models we’ve already learned about? Well well well, let us introduce you to the Simpson’s Paradox.</p>
+<p>Imagine we’re looking at how years of experience impact salary at a university:</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -3259,23 +4270,36 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 </div>
 </div>
-<p>Take a look at the first plot. Whoa, wait a minute—this says the more years of experience you have, the less you get paid! What kind of backwards world is this? Before you march into HR demanding answers, let’s look a little closer.</p>
-<p>Now, check out the second plot. Once we consider the departments—Informatics, English, Sociology, Biology, and Statistics—a different story emerges. Each department shows a positive trend between experience and salary. In other words, more experience does mean higher pay, as it should!</p>
-<p>So what happened? The first plot ignored the hierarchical structure of the data. By lumping all departments together, it completely missed the real relationship hiding in plain sight. This is why Hierarchical Modeling is so powerful—it helps us avoid embarrassing statistical blunders like this one. It allows us to correctly analyze data with nested structures and uncover the real patterns.</p>
-<p><strong>Now, this example is a bit of an extreme case.</strong> In real life, you’re less likely to find such wildly opposite effects. However, the influence of grouping structures on your analysis is very real—and often subtle. Ignoring them can lead to misleading conclusions.</p>
-<p>Ready to explore how Mixed Effects Modeling helps us account for these nested structures? Let’s dive in and get hands-on!</p>
-<section id="mixed-effects-models" class="level3"><h3 class="anchored" data-anchor-id="mixed-effects-models">Mixed effects models</h3>
-<p>So, why are they called <strong>mixed effects models</strong>? It’s because these models combine two types of effects: <strong>fixed effects</strong> and <strong>random effects</strong>……. And now you’re wondering what those are, don’t worry—I’ve got you! 😅</p>
-<p>Remember how departments (Informatics, English, Sociology, etc.) completely changed the story about experience and salary? That’s exactly where fixed and random effects come in.</p>
+<p>Take a look at the first plot. Whoa, wait a minute: this says the more years of experience you have, the less you get paid! What kind of backwards world is this? Before you march into HR demanding answers, let’s look a little closer.</p>
+<p>Now, check out the second plot. Once we consider the departments (Informatics, English, Sociology, Biology, and Statistics) a different story emerges. Each department shows a positive trend between experience and salary. In other words, more experience does mean higher pay, as it should!</p>
+<p>So what happened? Well, Simpson’s Paradox happened! By ignoring meaningful structure in the data (lumping all departments together), we might completely miss the real relationship hiding in plain sight. This is why hierarchical modeling is so powerful: it allows us to correctly analyze data with nested structures and uncover the real patterns within them.</p>
+<section id="a-mix-of-fixed-and-random-effects" class="level2"><h2 class="anchored" data-anchor-id="a-mix-of-fixed-and-random-effects">A Mix of fixed and random effects</h2>
+<p>So, why are they called <strong>mixed effects models</strong>? It’s because these models combine two types of effects: <strong>fixed effects</strong> and <strong>random effects</strong>. And now you’re wondering what those are….. Don’t worry, we’ve got you! 😅</p>
 <ul>
-<li><p><strong>Fixed effects</strong> capture the consistent, predictable trends in your data—like the relationship between experience and salary across all departments. These are the big-picture patterns you’re curious about and want to analyze.</p></li>
-<li><p><strong>Random effects</strong>, on the other hand, account for the variability within groups—like how salaries differ between departments. You’re not deeply analyzing these differences, but you know they’re there, and ignoring them could mess up your results.</p></li>
+<li>
+<p><strong>Fixed effects</strong> are the effects you actually want to interpret: the average, systematic relationship in the whole dataset (e.g., how salary changes with experience).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember when we looked at the effects of Condition (<code>Event</code> Simple vs Complex) and Trial Number (<code>TrialN)</code> in the <a href="../../CONTENT/Stats/LinearModels.html">previous tutorial on linear models</a>? Those were fixed effects!</p>
+</div>
+</div>
+</li>
+<li>
+<p><strong>Random effects</strong> tell the model that observations come in groups (departments, participants) and that each group can have its own quirks. You might not be interested in each group specifically, but modelling those groups keeps the fixed-effect estimates honest: Without accounting for random effects, it’s like assuming every department is exactly the same: and we’ve already seen how misleading that can be!</p>
+<p>Still confused? Let’s look at this from a different angle: our dataset has variability in it. For example, different departments vary in salary, different participants vary in their looking times. Random effects are a way to say to our model: hey, watch out, we should keep track of this variability!</p>
+</li>
 </ul>
-<p>Without accounting for random effects, it’s like assuming every department is exactly the same—and we’ve already seen how misleading that can be!</p>
-<p><strong>The model will estimate the fixed and random effects</strong> but don’t worry—the model won’t get super complex. The estimates and p-values will primarily focus on the <strong>fixed effects</strong>, but it will account for the <strong>random effects</strong> in the background to make sure the results are accurate. In other words, random effects are variables that you know contribute to the variance in your model, and you want to account for them, but you’re not directly interested in obtaining a result about each one.</p>
-<p>Got the gist? Great! Now enough with words…let’s dive into a real example and see these mixed effects in action!</p>
-</section><section id="settings-and-data" class="level2"><h2 class="anchored" data-anchor-id="settings-and-data">Settings and data</h2>
-<p>In this section, we’ll set up our working environment by loading the necessary libraries and importing the dataset. You’ll likely already have this dataset available if you completed the previous linear models tutorial. If not, don’t worry—you can easily download it using the link below:</p>
+<p>Got the gist? Great! Next, we will dive back into the same real example that accompanied us through previous tutorials to see mixed effects in action!</p>
+</section><section id="setting-things-up" class="level2"><h2 class="anchored" data-anchor-id="setting-things-up">Setting things up</h2>
+<p>In this section, we’ll set up our working environment by loading the necessary libraries and importing the dataset. You’ll likely already have this dataset available if you completed the previous linear models tutorial. If not, you can download it here:</p>
 
 <div class="cell">
 <div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;
@@ -3320,8 +4344,8 @@ font-style: inherit;"><a href="https://easystats.github.io/easystats/">easystats
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 </div>
-<p>The <code>lme4</code> package is the go-to library for running Linear Mixed Models (LMM) in R. To make your life easier, there’s also the <code>lmerTest</code> package, which enhances <code>lme4</code> by allowing you to extract p-values and providing extra functions to better understand your models. In my opinion, you should always use <code>lmerTest</code> alongside <code>lme4</code>—it just makes everything smoother!</p>
-<p>To run our Linear Mixed Effects Model, these are the key packages we’ll use. On top of that, the <code>tidyverse</code> suite will help with data wrangling and visualization, while <code>easystats</code> will let us easily extract and summarize the important details from our models. Let’s get started!</p>
+<p>The <code>lme4</code> package is the go-to library for running Linear Mixed Models (LMM) in R. To make your life easier, there’s also the <code>lmerTest</code> package, which enhances <code>lme4</code> by allowing you to extract p-values and providing extra functions to better understand your models. In our opinion, you should always use <code>lmerTest</code> alongside <code>lme4</code>, it just makes everything smoother!</p>
+<p>On top of these two packages, the <code>tidyverse</code> suite will help with data wrangling and visualization, while <code>easystats</code> will let us easily extract and summarize the important details from our models. Let’s get started!</p>
 <section id="read-the-data" class="level3"><h3 class="anchored" data-anchor-id="read-the-data">Read the data</h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
@@ -3386,8 +4410,8 @@ font-style: inherit;"># create standardize trial column</span></span></code></pr
 </details>
 </div>
 <p>After importing the data, we’ve ensured that Id is treated as a factor rather than a numerical column and that we have a standardized column of TrialN.</p>
-</section></section><section id="linear-model" class="level2"><h2 class="anchored" data-anchor-id="linear-model">Linear Model</h2>
-<p>While we have already seen how to run a linear model, we will rerun it here as a comparison to the next steps. In case something is not clear about this <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, please go back to the <a href="../../CONTENT/Stats/LinearModels.html"><strong>previous tutorial on linear models</strong></a><strong>.</strong></p>
+</section></section><section id="the-problem-with-simple-linear-models" class="level2"><h2 class="anchored" data-anchor-id="the-problem-with-simple-linear-models">The problem with simple linear models</h2>
+<p>While we have already seen how to run a linear model, we will rerun it here to directly compare it to a mixed-effect model.</p>
 <div class="cell">
 <div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
@@ -3447,7 +4471,7 @@ Multiple R-squared:  0.2892,    Adjusted R-squared:  0.2835
 F-statistic: 50.99 on 3 and 376 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>We won’t delve into the details of the model results in this tutorial, as we have already covered it in the previous one. However, we want to point out one thing about the data we run it on!!</p>
+<p>We won’t go too much into detail on the model results in this tutorial, as we have already covered it in the previous one. However, we want to point out one thing about the data we run it on!!</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -4094,27 +5118,24 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 </div>
 </div>
-<p>Wait a minute! Look at our data - we have an <strong>Id</strong> column! 👀 This column tells us which participant each trial belongs to. As each subject experienced all trial conditions, we have multiple data points per person. This is similar to the departments in the previous example… it’s a grouping variable</p>
-<p><strong>Wait..but then we should have taken it into consideration!!!</strong></p>
-<p>Instead, there was nothing about <strong>Id</strong> in our <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>…there is nothing in the formula about <strong>Id</strong>….</p>
-<p>Yes, we did not account for this grouping structure…let’s fix that!! But how do we do so? Well, at this point it’s obvious…with Mixed effects models!! Let’s dive in..</p>
-</section><section id="mixed-effects" class="level2"><h2 class="anchored" data-anchor-id="mixed-effects">Mixed Effects</h2>
-<section id="random-intercept" class="level3"><h3 class="anchored" data-anchor-id="random-intercept">Random Intercept</h3>
-<p>Alright, let’s start with <strong>Random Intercepts</strong>! What are they? Well, the name gives it away—they’re just intercepts…but with a twist! 🤔</p>
-<p>If you recall your knowledge of linear models, you’ll remember that each model has <strong>one intercept</strong>—the point where the model crosses the y-axis (when x=0).</p>
-<p>But what makes random intercepts special? They allow the model to have <strong>different intercepts for each grouping variable</strong>—in this case, the <strong>Id</strong>s. This means we’re letting the model assume that each subject may have a slightly different baseline performance.</p>
+<p>Wait a minute! Look at our data - we have an <strong>Id</strong> column! 👀 This column tells us which participant each trial belongs to. As each subject experienced all trial conditions, we have multiple data points per person. This is similar to the departments in the previous example… it’s a grouping variable!</p>
+<p>Instead, there was nothing about <strong>Id</strong> in our <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>…there is nothing in the formula about <strong>Id</strong>. <strong>Wait… but then we should have taken it into consideration!!!</strong> This is a problem for two reasons: First, there might be meaningful variability across participants (just as there was variability in salary across departments). Second, we are violating an assumption of linear regression: data points should be independent! In other words, each row in our dataframe should come from a different group. But here multiple rows come from the same participant! This is a BIG problem!</p>
+<p>In our <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, there was nothing about <code>Id</code>… the model is treating every row as if it were independent! That’s a problem for two reasons. First, participants often differ in meaningful ways (some have consistently longer looking times than others, just like departments differed in salary). Second, one of the assumptions of linear regression is that <strong>residuals are independent</strong>; with repeated measures, rows from the same participant tend to be correlated even after accounting for the predictors. If we ignore that grouping structure, the model can become overconfident (standard errors too small), and our conclusions can be misleading.</p>
+<p>Let’s fix that!! How do we do it? Well, at this point it’s obvious… with Mixed effects models!!</p>
+</section><section id="random-intercept" class="level2"><h2 class="anchored" data-anchor-id="random-intercept">Random Intercept</h2>
+<p>Even if there are two types of random effects, let’s introduce them one by one, starting with <strong>random intercepts</strong>! What are they? Well, the name gives it away… they’re just intercepts, but with a twist! 🤔</p>
+<p>If you recall your knowledge of linear models, you’ll remember that each model has <strong>one intercept</strong>: the point where the model crosses the y-axis (when x=0).</p>
+<p>But what makes random intercepts special? They allow the model to have <strong>different intercepts for each grouping variable</strong> (in this case, the <strong>ID</strong>s). This means we’re letting the model assume that each subject may have a slightly different baseline looking time.</p>
 <p>Here’s the idea:</p>
 <ul>
-<li><p>One person might naturally be a bit better.</p></li>
-<li><p>Someone else could be slightly worse.</p></li>
-<li><p>And me? Well, let’s just say I’m starting from rock bottom.</p></li>
+<li><p>One person might naturally be a bit faster at looking at stimuli.</p></li>
+<li><p>Someone else could be slightly slower.</p></li>
+<li><p>And us? Well, let’s just say we’re starting from rock bottom.</p></li>
 </ul>
-<p>However, even though we’re starting from different baselines, <strong>the rate of improvement over trials can still be consistent across subjects</strong>.</p>
-<p>This approach helps us capture <strong>variation in the starting performance</strong>, acknowledging that people are inherently different but might still follow a similar overall pattern of improvement. It’s a simple yet powerful way to model individual differences!</p>
 <p>Now, let’s look at how to include this in our mixed model.</p>
-<section id="model" class="level4"><h4 class="anchored" data-anchor-id="model">Model</h4>
-<p>To run a <strong>linear mixed-effects model</strong>, we’ll use the <code>lmer</code> function from the <strong>lme4</strong> package. It functions very similarly to the <code>lm</code> function we used before: you pass a formula and a dataset, but with one important addition: specifying the <strong>random intercept</strong>.</p>
-<p>The formula is nearly the same as a standard linear model, but we include <code>(1|subject_id)</code> to tell the model that each subject should have its own unique intercept. This accounts for variations in baseline performance across individuals.</p>
+<section id="run-the-model" class="level3"><h3 class="anchored" data-anchor-id="run-the-model">Run the model</h3>
+<p>To run a <strong>linear mixed-effects model</strong>, we’ll use the <code>lmer</code> function from the <strong>lme4</strong> package. It works very similarly to the <code>lm</code> function we used before: you pass a formula and a dataset, but with one important addition: w e must specify the <strong>random intercept</strong>.</p>
+<p>To do that, we simply add <code>(1|Id)</code> to the formula, to tell the model that each subject should have its own unique intercept. This accounts for variations in baseline looking time across individuals.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -4213,7 +5234,7 @@ EventSimple -0.113 -0.020
 StndrdTN:ES -0.003 -0.715 -0.008</code></pre>
 </div>
 </div>
-<p>Wow! Now the model is showing us something <strong>new</strong> compared to the simple linear model. We observe an <strong>interaction between Event and StandardTrialN</strong>. By letting the intercept vary for each subject, the model is able to capture nuances in the data that a standard linear model might miss.</p>
+<p>Wow! Now the model is showing us something <strong>new</strong> compared to the simple linear model. We observe an <strong>interaction between Event and StandardTrialN</strong>. By letting the intercept vary for each subject, the model is able to capture nuances in the data that a standard linear model had completely missed!</p>
 <p>To understand this interaction, let’s plot what the random intercept is doing.</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
@@ -4420,10 +5441,9 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 </div>
 <p>As you can see here, each color represents a different subject, and we’ve divided the plot into two panels - one for each type of event - to make visualization simpler.</p>
-<p>You can clearly see that our model is capturing the different intercepts that subjects have!! Cool isn’t it??.</p>
-<p>Now, you might be thinking, <em>“This looks interesting, but my plot is going to be a mess with all these individual estimates!”</em> Well, don’t worry! While what we’ve plotted is how the data is modeled by our mixed-effects model, the random effects are actually used to make more accurate estimates—but the model still returns an overall estimate.</p>
-<p>Think of it like this: the random effects allow the model to account for individual differences between subjects. But instead of just showing all the individual estimates in the plot, the model takes these individual estimates for each subject and returns the <em>average</em> of these estimates to give you a cleaner, more generalizable result.</p>
-<p>we can plot the actual estimate of the model:</p>
+<p>You can clearly see that our model is capturing the different intercepts that subjects have!! Cool, isn’t it??</p>
+<p>Now, this looks fancy, but where are our fixed effects, the ones we care about? While what we’ve plotted is how the data is modeled by our mixed-effects model, the random effects are actually used to make more accurate estimates <em>for the</em> <em>fixed effects</em>. That’s why our interaction is now significant.</p>
+<p>Instead of all these individual estimates we can plot their <em>average</em>:</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
@@ -4642,11 +5662,11 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 </div>
 </div>
-</section></section><section id="slope" class="level3"><h3 class="anchored" data-anchor-id="slope">Slope</h3>
-<p>Coool!!!!!!! So far, we’ve modeled a different intercept for each subject, which lets each subject have their own baseline level of performance. But here’s the catch: our model assumes that everyone improves over the trials in exactly the same way, with the same slope. That doesn’t sound quite right, does it? We know that some people may get better faster than others, or their learning might follow a different pattern.</p>
-<section id="model-1" class="level4"><h4 class="anchored" data-anchor-id="model-1">Model</h4>
-<p>This is where we can model <em>random slopes</em> to capture these individual differences in learning rates. By adding <code>(0 + StandardTrialN | Id)</code>, we’re telling the model that while the intercept (starting point) is the same for everyone, the rate at which each subject improves (the slope) can vary.</p>
-<p>This way, we’re allowing each subject to have their own slope in addition to their own intercept, making the model more flexible and reflective of real-world variations in learning!</p>
+<p>Pheew, that’s a relief! Not only we can look at unique individual differences in looking time, but we also get our main effects - just as we did with our simple linear model - new and improved! The significant interaction between Condition and Trial Number is reflected in the plot: It seems that looking times decrease for both Complex and Simple stimuli, but they decrease more for <em>Simple</em> ones!</p>
+</section></section><section id="random-slope" class="level2"><h2 class="anchored" data-anchor-id="random-slope">Random Slope</h2>
+<p>So far, we’ve modeled a different <strong>intercept</strong> for each subject, which lets each subject have their own baseline looking time. But here’s the catch: our model assumes that everyone changes over the trials in exactly the same way, with the same slope. But infants might differ in how long they look at the stimuli over time! Some of them might quickly get bored and look much less, while others might stay curious and keep looking at them.</p>
+<section id="run-the-model-1" class="level3"><h3 class="anchored" data-anchor-id="run-the-model-1">Run the model</h3>
+<p>This is where <strong>random slopes</strong> come in handy: they capture variability in the slopes. By adding <code>(0 + StandardTrialN | Id)</code>, we’re telling the model that while the intercept (starting point) is the same for everyone, the rate at which each subject changes (the slope) can vary.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -4950,13 +5970,13 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 </div>
 </div>
-<p>As you can see here we have an unique intercept ( all the lines pass trough the same point where x = 0) but the slope of each line is different. And…..I don’t have to tell you that what we are looking at dosen’t really make sense.</p>
-</section></section><section id="intercept-slope" class="level3"><h3 class="anchored" data-anchor-id="intercept-slope">Intercept + Slope</h3>
+<p>As you can see here we have an unique intercept ( all the lines pass trough the same point where x = 0) but the slope of each line is different. And….. I don’t have to tell you that what we are looking at dosen’t really make sense.</p>
+</section></section><section id="random-incercept-slope" class="level2"><h2 class="anchored" data-anchor-id="random-incercept-slope">Random Incercept &amp; Slope</h2>
 <p>That plot does look nuts, and it’s a clear signal that something is off. Why? Because by modeling only the random slopes while keeping the intercepts fixed, we’re essentially forcing all subjects to start from the same baseline. That’s clearly unrealistic for most real-world data.</p>
 <p>In real life, the intercept and slope often go hand-in-hand for each subject.</p>
-<section id="model-2" class="level4"><h4 class="anchored" data-anchor-id="model-2">Model</h4>
+<section id="run-the-model-2" class="level3"><h3 class="anchored" data-anchor-id="run-the-model-2">Run the model</h3>
 <p>To make the model more realistic, we can model both the random intercept and the random slope together. We simply modify the random effects part of the formula to <code>(trial_number | subject_id)</code>.</p>
-<p>Now, we are telling the model to estimate both a random intercept (baseline performance) and a random slope (rate of improvement). This captures the full variability in how each subject learns over time!</p>
+<p>Now, we are telling the model to estimate both a random intercept (baseline looking time) and a random slope (rate of change). This captures the full variability in each participant’s looking time over time!</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
@@ -5043,7 +6063,7 @@ EventSimple -0.055 -0.001
 StndrdTN:ES -0.001 -0.130 -0.026</code></pre>
 </div>
 </div>
-<p>Now, let’s visualize how the model is modeling the data:</p>
+<p>Now, let’s visualize how the model is fitting the data:</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb16" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
@@ -5248,10 +6268,10 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 </div>
 </div>
-<p>If you look closely, you’ll see each subject has their own intercept and slope now. That means we’re actually modeling the real differences between people—exactly what we wanted!</p>
-</section></section></section><section id="summary-of-mixed-models" class="level2"><h2 class="anchored" data-anchor-id="summary-of-mixed-models">Summary of mixed models</h2>
-<p>Now that we’ve seen how to run mixed-effects models, it’s time to focus on <strong>interpreting the summary output</strong>. While we’ve been building models, we haven’t delved into what the summary actually tells us or which parts of it deserve our attention. Let’s fix that!</p>
-<p>To start, we’ll use our <strong>final model</strong> and inspect its summary. This will give us a chance to break it down step by step and understand the key information it provides. Here’s how to check the summary:</p>
+<p>If you look closely, you’ll see each subject has their own intercept and slope now. That means we’re actually capturing the real differences between infants - exactly what we wanted!</p>
+</section></section><section id="a-better-look-at-the-models-output" class="level2"><h2 class="anchored" data-anchor-id="a-better-look-at-the-models-output">A better look at the model’s output</h2>
+<p>Now that we’ve seen how to <em>run</em> mixed-effects models, it’s time to focus on how to <strong><em>interpret</em></strong> <strong>the summary output</strong>. While we’ve been building models, we haven’t spent too much time on what the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function actually tells us or which parts of it deserve our attention. Let’s fix that!</p>
+<p>We’ll focus our <strong>final model</strong>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -5297,21 +6317,28 @@ EventSimple -0.055 -0.001
 StndrdTN:ES -0.001 -0.130 -0.026</code></pre>
 </div>
 </div>
-<p>The <strong>Random effects</strong> section in the model summary shows how variability is accounted for by the random effects. The <strong>Groups</strong> column indicates the grouping factor (e.g., subject), while the <strong>Name</strong> column lists the random effects (e.g., intercept and slope). The <strong>Variance</strong> column represents the variability for each random effect—higher values indicate greater variation in how the effect behaves across groups. The <strong>Std.Dev.</strong> column is simply the standard deviation of the variance, showing the spread in the same units as the data.</p>
+<p>The <strong>Random effects</strong> section in the model summary shows how variability is accounted for by the random effects. The <strong>Groups</strong> column indicates the grouping factor (e.g., ID), while the <strong>Name</strong> column lists the random effects (e.g., intercept and slope). The <strong>Variance</strong> column represents the variability for each random effect. Here, higher values indicate greater variation in how the effect behaves across groups. The <strong>Std.Dev.</strong> column is simply the standard deviation of the variance, showing the spread in the same units as the data.</p>
 <p>The <strong>Corr</strong> column reflects the correlation between random effects, telling us whether different aspects of the data (e.g., intercepts and slopes) tend to move together. A negative correlation would suggest that higher intercepts (starting points) are associated with smaller slopes (slower learning rates), while a positive correlation would suggest the opposite.</p>
 <p>The <strong>Residual</strong> section shows the unexplained variability after accounting for the fixed and random effects.</p>
-<p><strong>The key takeaway here is that random effects capture the variability in the data that can’t be explained by the fixed effects alone.</strong> If the variance for a random effect is low, it suggests the random effect isn’t adding much to the model and may be unnecessary. On the other hand, high variance indicates that the random effect is important for capturing group-level differences and improving the model’s accuracy.</p>
+<p><strong>The key takeaway here is that random effects capture variability in the data that can’t be explained by the fixed effects alone.</strong></p>
+<p>But how can we be sure the random effects are helping our model? One of the easiest ways is to check the variance explained by the random effects. If the variance for a random effect is low, it suggests the random effect isn’t adding much to the model and may be unnecessary. On the other hand, high variance indicates that the random effect is important for capturing group-level differences and improving the model’s accuracy.</p>
+<p>However, there is a better way to confidently adjudicate whether our fancy mixed-effect model with random intercept and slope is better: comparing models.</p>
 </section><section id="model-comparison" class="level2"><h2 class="anchored" data-anchor-id="model-comparison">Model comparison</h2>
-<p>But how can we be sure the random effects are helping our model? One of the easiest ways is to check the variance explained by the random effects.</p>
-<div class="info-box info-box-large">
-<div class="info-box-title">
-<p>Why AIC?</p>
+<p>There are many indices to compare model performance. One of the best indices is the Akaike Information Criterion (AIC). AIC gives a relative measure of how well a model fits the data, while penalizing the number of parameters in the model. Lower AIC values indicate better models, as they balance goodness-of-fit with model complexity.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Why AIC?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<p>AIC is great because it balances how well your model fits the data with how many predictors you’re using. It does this by penalizing models with more predictors—so you can’t just keep adding variables to improve fit. Without this penalty, you’d end up overfitting: your model would fit the current data perfectly but fail on new data.</p>
-<p>AIC by itself doesn’t mean much—it’s only useful as a relative measure for comparing different models against each other. When you do compare models, lower AIC values indicate better models.</p>
+<div class="callout-title-container flex-fill">
+Why AIC?
 </div>
-<p>As we said, if the variance related to the random effects is too small, it probably isn’t contributing much to the model. If it’s high, it’s likely helping the model by capturing important variability in the data.</p>
-<p>The best way to make this kind of decision is to compare the performance of different models. One of the best indices for this is the Akaike Information Criterion (AIC). AIC gives a relative measure of how well a model fits the data, while penalizing the number of parameters in the model. Lower AIC values indicate better models, as they balance goodness-of-fit with model complexity.</p>
+</div>
+<div class="callout-body-container callout-body">
+<p>AIC is great because it balances how well your model fits the data with how many predictors you’re using. If you just keep adding fixed or random effects, the fit will likely improve. Without any additional penalty, you’d end up overfitting: your model would fit the current data perfectly but fail on new data. AIC solves this problem by penalising models with more effects!</p>
+<p>The AIC score by itself doesn’t mean much. You usually get wacky values like 24’783. However, it is super useful as a <em>relative</em> measure, for comparing different models against each other. When you do compare models, lower AIC values indicate better models.</p>
+</div>
+</div>
 <p>You can compare the AIC of different models using the following:</p>
 <div class="cell">
 <div class="sourceCode" id="cb19" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
@@ -5320,11 +6347,7 @@ font-style: inherit;">compare_performance</span><span class="op" style="color: #
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">mod_lm</span>, <span class="va" style="color: #111111;
-background-color: null;
 font-style: inherit;">mod_rintercept</span>, <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">mod_rslope</span>, <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">mod_rinterraction</span>, metrics<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -5338,9 +6361,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 
 Name              |           Model |  AIC (weights)
 ----------------------------------------------------
-mod_lm            |              lm | 5333.9 (&lt;.001)
 mod_rintercept    | lmerModLmerTest | 4815.8 (&lt;.001)
-mod_rslope        | lmerModLmerTest | 5315.8 (&lt;.001)
 mod_rinterraction | lmerModLmerTest | 4364.8 (&gt;.999)</code></pre>
 </div>
 </div>
@@ -5410,9 +6431,37 @@ Warning
 <item>
   <title>Linear Models</title>
   <link>https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels.html</link>
-  <description><![CDATA[ <p>Welcome to the first tutorial on data analysis!!! Today we are going to talk about one of the most flexible statistical methods: Linear models.</p>
-<p>Let’s be clear, WE ARE NOT STATISTICIANS!!!!</p>
-<p>We’ll be discussing linear models in a very accessible and practical manner. Our explanations might not align with the rigorous definitions statisticians are accustomed to, and for that, we apologize in advance! However, our aim is to provide a stepping stone for you to grasp the concept of linear models and similar analyses. Let’s get started!</p>
+  <description><![CDATA[ <p>Welcome to the first tutorial on data analysis!!!</p>
+<p>In previous tutorials, we formulated our research hypotheses, designed an experimental task, collected data, and pre-processed it. Here, we’ll be working with a dataset containing (simulated) data from the same task.</p>
+<p>In this tutorial, we will use a linear model to test one of our initial hypotheses, so we suggest to go check them out <a href="../../CONTENT/EyeTracking/Intro_eyetracking.html">here</a> if you haven’t done so already. We want to test whether infants look longer at a Complex stimulus compared to a Simple stimulus. Given that infants see repeated presentations of the same stimuli, it might also be worth checking whether this effect changes over time! It might either get stronger or disappear…</p>
+<p>We’re going to begin with a very basic linear model, and in the upcoming tutorials, we’ll gradually increase both the complexity and accuracy of our approach.</p>
+<p>So, if you notice something that doesn’t seem quite perfect at this stage, don’t worry! It’s all part of the plan. Our goal is to guide you step-by-step towards building the best model. Just remember, this process takes time!</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>WE ARE NOT STATISTICIANS!!!!</p>
+<p>We’ll be discussing linear models in a very accessible and practical manner. Even if explanations might not align with the rigorous definitions statisticians are accustomed to, we provide a stepping stone for you to grasp the concept of linear models and similar analyses. Let’s get started!</p>
+</div>
+</div>
+<section id="what-is-a-linear-model" class="level1"><h1>What is a linear model?</h1>
+<p>A linear model is a simple statistical test that tries to find the best line that represent the relations between two variables ( or more).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*MtuQBTW0-XbjA2RrP2z3Kw.gif" class="img-fluid figure-img"></p>
+<figcaption>image found on towardsdatascience.com</figcaption></figure>
+</div>
+<p>What’s truly fascinating about linear models is their versatility. They start off incredibly simple, but their complexity can grow exponentially! This makes them a remarkably flexible tool in the world of data analysis.</p>
+<p>Think of linear models as the foundation of a house. <img src="https://tommasoghilardi.github.io/DevStart/images/Stats/Lm/House.png" class="img-fluid quarto-figure quarto-figure-right" style="float:left; margin-right:10px;margin-bottom:10px;" width="150"></p>
+<p>You can start with a basic structure, but with some clever modifications (like mixed effect models, generalized linear models or additive models), you can build anything from a cozy cottage to a multi-story mansion.</p>
+<p>Linear models offer a perfect balance: they’re accessible enough for beginners to grasp, yet powerful enough to satisfy the needs of advanced researchers. As we dive deeper into this topic, you’ll see just how these seemingly simple tools can unlock complex insights in your data.</p>
+</section><section id="hands-on" class="level1"><h1>Hands-on</h1>
+<p>Enough with the theory! Let’s get our hands dirty!</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -5424,26 +6473,12 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>and only R <a href="https://www.r-project.org/"><img src="https://www.r-project.org/Rlogo.png" style="float:left ; margin-right:10px;margin-bottom:10px;" width="31" height="21"></a></p>
-<p>In the tutorials regarding stats, we will use R (and R-Studio as the IDE). The concepts and procedures are the same in other programming languages (e.g., Python, Julia). However, we choose R for a simple reason. R is just better at most statistical things!!</p>
-<p>Deal with it!</p>
+<p>In the tutorials regarding stats, we will use R (and Positron as the IDE). The concepts and procedures are the same in other programming languages (e.g., Python, Julia). However, we choose R for a simple reason. R is just better at most statistical things!!</p>
 </div>
 </div>
-<section id="what-is-a-linear-model" class="level1"><h1>What is a linear model?</h1>
-<p>A linear model is a simple statistical test that tries to find the best line that represent the relations between two variables ( or more).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*MtuQBTW0-XbjA2RrP2z3Kw.gif" class="img-fluid figure-img"></p>
-<figcaption>image found on towardsdatascience.com</figcaption></figure>
-</div>
-<p>What’s truly fascinating about linear models is their versatility. They start off incredibly simple, but their complexity can grow exponentially! This makes them a remarkably flexible tool in the world of data analysis.</p>
-<p>Think of linear models as the foundation of a house. <img src="https://tommasoghilardi.github.io/DevStart/images/Stats/Lm/House.png" class="img-fluid quarto-figure quarto-figure-right" style="float:left; margin-right:10px;margin-bottom:10px;" width="150"></p>
-<p>You can start with a basic structure, but with some clever modifications (like mixed effect models, generalized linear models, quadratic models or additive models), you can build anything from a cozy cottage to a multi-story mansion.</p>
-<p>In essence, linear models offer a perfect balance: they’re accessible enough for beginners to grasp, yet powerful enough to satisfy the needs of advanced researchers. As we dive deeper into this topic, you’ll see just how these seemingly simple tools can unlock complex insights in your data.</p>
-</section><section id="hands-on" class="level1"><h1>Hands-on</h1>
-<p>OK, enough chitchat - let’s start with a practical example. We’ll be working with a data set we created specifically for this tutorial. As mentioned, we’re going to begin with a very basic model, and in the upcoming tutorials, we’ll gradually increase both the complexity and accuracy of our approach.</p>
-<p>So, if you notice something that doesn’t seem quite perfect at this stage, don’t worry! It’s all part of the plan. Our goal is to guide you step-by-step towards building the best model. Just remember, this process takes time!</p>
 <section id="import-data" class="level2"><h2 class="anchored" data-anchor-id="import-data">Import data</h2>
 <p>You can download the data that we will use in this tutorial from here:</p>
-<p><button class="btn btn-secondary downloadthis  " id="dnldts53267"><i class="bi bi-download"></i> Dataset.csv </button></p>
+<p><button class="btn btn-secondary downloadthis  " id="dnldts40003"><i class="bi bi-download"></i> Dataset.csv </button></p>
 <p>Once downloaded we need to import it in our R session. Here we read our csv and we print a small preview of it.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
@@ -5478,14 +6513,14 @@ font-style: inherit;">)</span></span></code></pre></div>
 6  1 Simple     12   234.9623    742.8035 high</code></pre>
 </div>
 </div>
-<p>You can see that the data is really simple! We have 4 columns:</p>
+<p>You can see that the data is really simple! We have 6 columns:</p>
 <ul>
-<li><p><code>Id</code> column that tell us form which participant the data was collected</p></li>
-<li><p><code>Event</code> represent which condition we were in</p></li>
-<li><p><code>TrialN</code> the sequential number of trials in the experiment</p></li>
-<li><p><code>ReactionTime</code> how quickly participants reacted to the stimuli. We will ignore this variable for now</p></li>
-<li><p><code>LookingTime</code>the variable of interest for today, the one that we want to model</p></li>
-<li><p><code>SES</code> represents socioeconomic status collected via questionnaire (high, medium, or low) for each participant - we’ll also ignore this for now</p></li>
+<li><p><code>Id</code> column that specifies the participant ID. You can see that each participant has multiple rows: that’s because they performed multiple trials of the same task.</p></li>
+<li><p><code>Event</code> specifies each trial’s condition. Trials either belong to the Simple or the Complex condition.</p></li>
+<li><p><code>TrialN</code> indicates the sequential number of trials in the experiment.</p></li>
+<li><p><code>ReactionTime</code> how quickly participants reacted to the stimulus in each trial. We will ignore this variable for now.</p></li>
+<li><p><code>LookingTime</code> is the variable of interest for today, the one that we want to model. It reports how long participants look at the stimulus on each trial.</p></li>
+<li><p><code>SES</code> represents socioeconomic status collected via questionnaire (high, medium, or low) for each participant - we’ll also ignore this for now.</p></li>
 </ul>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -5497,9 +6532,9 @@ Long format
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>One important information that we need to keep in mind is that to run <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> (and most models!!) in R we need the data in a long format and not a wide format.</p>
-<p>In long format, each row represents a single observation. Variables are organized in columns, with one column for the variable names and another for the values. This means that the column you want to model (in the example <code>LookingTime</code>) has 1 row for observation but the other columns usually have repeated entries ( e.g.&nbsp;<code>Id</code> , <code>TrialN</code>, <code>Event</code>)</p>
-<p>Wide format, on the other hand, has each row representing a subject or group, with multiple columns for different variables or time-points. While this can be visually appealing for humans, it’s not optimal for our linear modeling needs.</p>
+<p>One important piece of information that we need to keep in mind is that to run <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> (and most models!!) in R we need the data in a long format and not a wide format.</p>
+<p>In long format, each row represents a single observation. Variables are organized in columns, with one column for the variable names and another for the values. This means that the column you want to model (in the example <code>LookingTime</code>) has 1 row for observation but the other columns usually have repeated entries ( e.g.&nbsp;<code>Id</code> , <code>TrialN</code>, <code>Event</code>).</p>
+<p>In wide format, on the other hand, each row represents a subject or group, with multiple columns for different variables or time-points. While this can be visually appealing for humans, it’s not optimal for our linear modeling needs.</p>
 <p>Here a small comparison of the two formats:</p>
 <div class="columns">
 <div class="column" style="width:35%;">
@@ -5541,17 +6576,32 @@ Long format
 </div>
 </section><section id="formula" class="level2"><h2 class="anchored" data-anchor-id="formula">Formula</h2>
 <p>To run models in R we usually use formulas! Sounds complex doesn’t it?!? Well it is not, let me guide you through it.</p>
-<p>In R, model formulas follow a specific structure. On the left side of the formula, we place our dependent variable - the outcome we collected and we’re interested in studying. In this case, it’s the <code>LookingTime</code> column. Next, we use the tilde symbol <code>~</code>. This tilde tells R that we want to predict the variable on the left using the variables on the right side of the formula. On the right side, we list the independent variables (predictors) we believe may influence our dependent variable. To test whether <code>TrialN</code> predicts LookingTime, we can use the formula:</p>
+<p>In R, model formulas follow a specific structure. On the left side of the formula, we place our dependent variable - the outcome we collected and we’re interested in studying. In this case, it’s <code>LookingTime</code>. Next, we use the tilde symbol <code>~</code>. This tilde tells R that we want to predict the variable on the left using the variables on the right side of the formula. On the right side, we list the independent variables (predictors) we believe may influence our dependent variable. Do you remember what our hypothesis was!?? What shall we put here?</p>
+<p>Well, first off, we said that <code>LookingTime</code> might differ across conditions (Simple vs Complex, contained in <code>Event</code>):</p>
+<p>we can use the formula:</p>
 <ul>
 <li>
-<code>LookingTime ~ TrialN</code>. This basic structure allows us to examine a single predictor.</li>
+<code>LookingTime ~ Event</code>. This basic structure allows us to examine a single predictor.</li>
 </ul>
-<p>We can extend this model by adding another variable, such as <code>Event</code>, to see if it also predicts LookingTime:</p>
+<p>We also said that looking time might change over trials. To test whether also <code>TrialN</code> predicts LookingTime, can extend this model by adding another variable:</p>
 <ul>
 <li>
-<code>LookingTime ~ TrialN + Event</code>. This formulation tells the model to assess whether either <code>TrialN</code> and <code>Event</code> predicts <code>LookingTime</code>, treating them as independent predictors.</li>
+<code>LookingTime ~ Event + TrialN</code>. This formulation tells the model to assess whether either <code>TrialN</code> and <code>Event</code> predicts <code>LookingTime</code>, treating them as independent predictors.</li>
 </ul>
-<p>To examine the interaction between these variables, we use a slightly different syntax:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Adding <code>TrialN</code> also means we are controlling for it while estimate the effect of <code>Event</code>. In other words, the Simple–Complex difference is not allowed to “pick up” changes that are really just due to being earlier vs later in the experiment. This is what people mean when they say the model controls for a certain variable.</p>
+</div>
+</div>
+<p>We can also examine the interaction between these two variables in predicting <code>LookingTime</code>. This means that the effect of <code>TrialN</code> on <code>LookingTime</code> can be <strong>different for Simple vs Complex</strong>. So instead of assuming the two conditions follow the same trend over time, the interaction tests whether their trends are different. We use the following syntax:</p>
 <ul>
 <li>
 <code>LookingTime ~ TrialN : Event</code>. This instructs the model to evaluate whether the interaction between the two variables predicts <code>LookingTime</code>.</li>
@@ -5566,10 +6616,9 @@ Long format
 <li>
 <code>LookingTime ~ TrialN * Event</code> is equivalent to the longer version above, testing both main effects and the interaction in a more concise format.</li>
 </ul>
-<p>These formulas are for simple linear models. Different types of models add small and different pieces to this basic structure. We will see in the next tutorial how to handle these “add-ons”. Now that we have seen how to make a proper formula let’s use it in our model!!</p>
+<p>These formulas are for simple linear models. Different types of models add small and different pieces to this basic structure. We will see in the next tutorial how to handle these. Now that we have seen how to make a proper formula let’s use it in our model!!</p>
 </section><section id="run-the-model" class="level2"><h2 class="anchored" data-anchor-id="run-the-model">Run the model</h2>
-<p>OK, now we have our amazing data! Let’s run this Linear model.</p>
-<p>It’s extremely simple. We will use the function <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> and we will pass our data <code>df</code> and the formula we just made together!!</p>
+<p>Running a linear model is extremely simple. We will use the function <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> and we will pass our dataframe <code>df</code> and the formula we just made together!!</p>
 <p>After fitting the model we extract the summary of it. This is how we will get all the information we need.</p>
 <div class="cell">
 <div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
@@ -5630,9 +6679,10 @@ Multiple R-squared:  0.2892,    Adjusted R-squared:  0.2835
 F-statistic: 50.99 on 3 and 376 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>Woohoo! This was super simple!! 🎉 We can use the output of the model to understand whether the variables are predicting LookingTime. The magic number we’re looking for is the p-value, hiding in the last column of the <strong>Coefficients section</strong>. If the p-value is below 0.05, we’ve got ourselves an effect! If it’s above, sadly we don’t. <u><strong>AND YES, EVEN IF IT’S 0.051!!!</strong></u> Rules are rules in the p-value game!</p>
-<p>What can we spot here? First, our <strong>Intercept</strong> is significant (don’t worry, we’ll decode this mysterious value later!). Even more exciting, we’ve got a significant effect of <strong>TrialN</strong> – our continuous variable – (p = 0.0003) and of <strong>Event</strong> (p = 0.00218). However the interaction between <strong>TrialN</strong> and <strong>Event</strong> (p = 0.068) is playing hard to get.</p>
-<p>This is already pretty cool, right?!? But here’s the deal - when looking at model outputs, people often get hypnotized by p-values. <strong>However, there’s MUCH more to unpack in a model summary!</strong> The full story of our data is waiting to be discovered in the complete model output. Let’s dive in together and crack this statistical puzzle!</p>
+<p>That’s it!!! 🎉</p>
+<p>Now we can use the output of the model to understand whether the variables are predicting <strong>Looking Time</strong>. The magic number we’re looking for is the p-value, hiding in the last column of the <strong>Coefficients section</strong>. If the p-value is below 0.05, we’ve got ourselves an effect! If it’s above, sadly we don’t. <u><strong>AND YES, EVEN IF IT’S 0.051!!!</strong></u> Rules are rules in the p-value game!</p>
+<p>What can we spot here? First, our <strong>Intercept</strong> is significant (don’t worry, we’ll decode this mysterious value later!). Even more exciting, we’ve got a significant effect of <strong>TrialN</strong> (p = 0.0003) and of <strong>Event</strong> (p = 0.00218). However the interaction between <strong>TrialN</strong> and <strong>Event</strong> (p = 0.068) does not seem to be significant.</p>
+<p>This is already pretty cool, right?!? But here’s the deal - when looking at model outputs, people often get hypnotized by p-values. <strong>However, there’s MUCH more to unpack in a model summary!</strong> The full story of our data is waiting to be discovered in the complete model output. Let’s dive in together!</p>
 </section></section><section id="interpret-our-model" class="level1"><h1>Interpret our Model</h1>
 <p>Here what the summary is telling us!!</p>
 <ul>
@@ -5641,7 +6691,7 @@ F-statistic: 50.99 on 3 and 376 DF,  p-value: &lt; 2.2e-16</code></pre>
 </ul>
 <!-- --><ul>
 <li>
-<strong>Residuals</strong>: This section shows the leftovers of our model - the differences between what we observed and what our model predicted. Think of residuals as the “Hmm, that’s interesting” parts that our model couldn’t explain. We want these to be as small as possible! 🔍</li>
+<strong>Residuals</strong>: This section shows the leftovers of our model - the differences between what we observed and what our model predicted. Think of residuals as the bits that our model couldn’t explain. We want these to be as small as possible! 🔍</li>
 </ul>
 <!-- --><ul>
 <li>
@@ -5673,7 +6723,7 @@ Note
 <li>
 <p><strong>Model Fit</strong>: The final act of our statistical show! Here we find:</p>
 <ul>
-<li><p><strong>Residual standard error:</strong> The average miss by our prediction line ( lower scores are better).</p></li>
+<li><p><strong>Residual standard error:</strong> The average miss by our prediction line (lower scores are better).</p></li>
 <li><p><strong>Multiple R-Squared:</strong> The proportion of variance explained by our predictors. Ranges from 0 (no explanation) to 1 (perfect explanation).</p></li>
 <li><p><strong>Adjusted R-squared:</strong> A modified version of R-squared that accounts for the number of predictors in the model. Useful for comparing models with different numbers of variables.</p></li>
 <li><p><strong>F-statistics and p-value:</strong> Tests whether the model as a whole is statistically significant. If p &lt; 0.05, the model performs significantly better than using just the intercept.</p></li>
@@ -5687,7 +6737,7 @@ Note
 <p>The intercept often confuses people who approach linear models for the first time. What exactly is it? 🤔</p>
 <p>The (Intercept) represents the reference levels where all our predictors (<code>TrialN</code> and <code>Event</code>) are <strong>0</strong>. While <code>TrialN</code> is easy to understand when it’s 0 (<code>TrialN</code> 0 in our case would be the first trial), you may be scratching your head thinking…how can <code>Event</code> be 0? It’s a categorical variable, it can’t be 0!!!! <code>TrialN == 0</code>…sure….but <code>Event</code>??</p>
 <p>You are absolutely right! When a model encounters a categorical variable, it cleverly selects the first level of such variable as the reference level. If you take another look at our model summary, you can see that there’s information for the <strong>Simple Stimulus</strong> level of the <code>Event</code> variable but nothing about the <strong>Complex Stimulus</strong> level. This is because the <strong>Complex Stimulus</strong> level has been selected by the model as the reference level and is thus represented in the intercept value! 💡</p>
-<p>So our intercept (1390.1) actually represents the predicted <strong>LookingTime</strong> when:</p>
+<p>So our intercept (1390.1) actually represents the predicted <strong>Looking Time</strong> when:</p>
 <ol type="1">
 <li><p>We’re on the first trial (<code>TrialN</code> = 0)</p></li>
 <li><p>We’re in the <strong>Simple Stimulus</strong> condition</p></li>
@@ -5703,7 +6753,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Since the intercept has a significant p-value, it means that the estimate for the <strong>Simple</strong> condition at trial 0 is actually significantly different from 0. In other words, our participants are definitely looking at something during the <strong>Simple</strong> condition in the first trial – their <strong>LookingTime</strong> isn’t zero! This might seem obvious (of course they’re looking!), but statistically confirming this baseline is actually meaningful.</p>
+<p>Since the intercept has a significant p-value, it means that the estimate for the <strong>Simple</strong> condition at trial 0 is actually significantly different from 0. In other words, our participants are definitely looking at something during the <strong>Simple</strong> condition in the first trial: their <strong>LookingTime</strong> isn’t zero! This might seem obvious (of course they’re looking!), but statistically confirming this baseline is actually meaningful.</p>
 </div>
 </div>
 <p>Ok, all this explanation is great…but it’s much easier to visualize these Estimates!</p>
@@ -5715,7 +6765,7 @@ Tip
 </div>
 </div>
 </div>
-<p>As you can see, the intercept is pretty straightforward—it gives us the estimate when everything is set to 0, both for continuous and categorical variables. The intercept is the foundation of your model, where all the predictors are at their baseline value (in this case, <strong>Simple</strong> was cleverly selected as the reference or 0 level for the categorical variable).</p>
+<p>As you can see, the intercept is pretty straightforward: it gives us the estimate when everything is set to 0, both for continuous and categorical variables. The intercept is the foundation of your model, where all the predictors are at their baseline value (in this case, <strong>Simple</strong> was cleverly selected as the reference or 0 level for the categorical variable).</p>
 </section><section id="event" class="level3"><h3 class="anchored" data-anchor-id="event">Event</h3>
 <p>Awesome! Now that we’ve got the intercept down, let’s take a look at the rest of the model output. We’ll skip over the <strong>TrialN</strong> variable for now and focus on what’s happening with the <strong>Event</strong>.</p>
 <p>At first, the results for <code>Event [Complex]</code> might look like they’re giving us the value of looking time for the <strong>Complex Stimulus</strong>. Super easy, right?!?</p>
@@ -5733,7 +6783,7 @@ Tip
 </div>
 </section><section id="trialn" class="level3"><h3 class="anchored" data-anchor-id="trialn">TrialN</h3>
 <p>So, interpreting the coefficients for categorical variables wasn’t too tricky, right? But what about continuous variables like <code>TrialN</code>?</p>
-<p>No worries, it’s actually pretty straightforward! The coefficient for a continuous variable represents the slope, or the incline, of the line for that variable.</p>
+<p>No worries, it’s actually pretty straightforward! The coefficient for a continuous variable represents the slope of the line for that variable.</p>
 <p>In simpler terms, it shows how much the outcome (in this case, <code>LookingTime</code>) changes for each unit increase in the continuous variable (<code>TrialN</code>). So, in our case the coefficient for <code>TrialN</code> is -7.5, this means that for each unit increase in <code>TrialN</code>, the LookingTime is expected to decrease by 7.5 units (assuming all other variables stay the same).</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -5758,7 +6808,7 @@ Important
 </div>
 </div>
 </section><section id="interaction" class="level3"><h3 class="anchored" data-anchor-id="interaction">Interaction</h3>
-<p>Alright, now we’re getting to the final step! Let’s talk about the interaction between <code>TrialN</code> and <code>Event</code>! Now, we’re not just dealing with a single factor or continuous variable, but looking at how they interact with each other. Don’t worry—if you understood the previous steps, this will be a breeze!</p>
+<p>Alright, now we’re getting to the final step! Let’s talk about the interaction between <code>TrialN</code> and <code>Event</code>! Now, we’re not just dealing with a single factor or continuous variable, but looking at how they interact with each other. Don’t worry - if you understood the previous steps, this will be a breeze!</p>
 <p>We’ll take it step by step and look at the interaction in our model parameters. The interaction term between <code>TrialN</code> and <code>Event [Complex]</code> tells us how the relationship between <code>TrialN</code> and <code>LookingTime</code> changes when we switch from the reference Event (<strong>Simple</strong>) to the <strong>Complex</strong> condition.</p>
 <p>To put it simply:</p>
 <ul>
@@ -5804,7 +6854,19 @@ Important
 </div>
 </div>
 <p>I hope that by now you got a decent understanding on how to interpret what a linear model is telling you!! Different kinds of models will add small pieces of information here and there, but the main information will still be there. Thus, if you got here, you are a step closer to becoming a stats genius!!! 🧠📊</p>
-<p><strong>But wait, we’re not done yet!</strong> Now it’s time to check whether our model actually meets the assumptions of linear regression. Remember those plots we generated earlier? Let’s make sure our statistical foundation is solid before we draw any final conclusions!</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Don’t you dare leave the tutorial just yet! We just threw you into the pool so you could start swimming, but we skipped a couple of important steps.Two of them are below (centering predictors and checking the model’s assumptions) and more will follow in the next tutorials (accounting for the data structure with random effects, estimating contrasts, and more)</p>
+</div>
+</div>
 </section></section></section><section id="centering-predictors" class="level1"><h1>Centering Predictors</h1>
 <p>We’ve seen how both continuous and categorical predictors are set to 0 in the intercept, and then we interpret the model output based on the difference between these reference levels.</p>
 <p><strong>But here’s the thing</strong> - sometimes comparing to 0 for a continuous variable doesn’t make much sense! Imagine we’re talking about body weight as a predictor. A weight of 0 would be… well, pretty weird as a comparison level, right? 🤔 This is one of the main reasons why it’s often suggested to center continuous predictors. By centering (subtracting the mean from each value), we transform our values so they have a mean of 0! This means the intercept, being at 0, will actually reflect the mean of the predictor rather than some arbitrary or impossible value.</p>
@@ -5957,20 +7019,7 @@ F-statistic: 50.99 on 3 and 376 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>As you can see the plot is the same but now the data hits 0 at the mean of the data!!</p>
 <p>So there you have it - standardizing your predictors makes your model both more interpretable and more robust, all while keeping the fundamental relationships in your data intact. It’s one of those simple steps that can make a big difference in your statistical journey! 🌟</p>
 </section></section><section id="model-checks" class="level1"><h1>Model checks</h1>
-<p>So now we have run our model and seen the summary… That’s great but how can we know that our model actually is ok?? Linear models, like most statistical techniques require some data assumption to be run. These assumption need to be met otherwise even if our model could be showing amazing results it won’t be valid.</p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>As we mentioned at the beginning of our tutorial the model we have run in this tutorial is a very simple model that is not actually…correct!! We will see in the next tutorials how we should actually analyze this data and what we are missing here.</p>
-</div>
-</div>
+<p>We have run our model and we looked at the summary right away… We just couldn’t resist! But before doing that, we should’ve actually checked if our model was actually ok. Linear models, like most statistical techniques require some data assumption to be run. These assumption need to be met otherwise even if our model could be showing amazing results, it won’t be valid.</p>
 <p>What are these assumptions?? Well they depend a lot on the model you are running. We won’t go into much details as there are very good website that explain them<sup><a href="https://bookdown.org/pingapang9/linear_models_bookdown/assumptions.html">1</a></sup> ,<sup><a href="https://www.statology.org/linear-regression-assumptions/">2</a></sup>, in this simple linear mode they are:</p>
 <ol type="1">
 <li><p><strong>Linear relationship:</strong> There exists a linear relationship between the independent variable, x, and the dependent variable, y.</p></li>
@@ -5978,7 +7027,7 @@ Warning
 <li><p><strong>Homoscedasticity/Homogeneity of variance:</strong> The residuals have constant variance at every level of x.</p></li>
 <li><p><strong>Normality:</strong> The residuals of the model are normally distributed.</p></li>
 </ol>
-<p>Again this is not a theoretical tutorial. So we won’t go into details as which are the assumptions (please read some of the link provided tho!!) but we will show you how to actually check these assumptions.</p>
+<p>Again this is not a theoretical tutorial. So we won’t go into details as which are the assumptions (please read some of the link provided though!!) but we will show you how to actually check these assumptions.</p>
 <p>There is a super easy and convenient way we usually check these assumptions. Using the <a href="https://easystats.github.io/easystats/">easystats</a> library we can run the function <a href="https://easystats.github.io/performance/reference/check_model.html"><code>check_model()</code></a> to indeed check the model assumptions.</p>
 <div class="cell">
 <div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;
@@ -5997,29 +7046,29 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 </div>
 </div>
-<p>Perfect all done!! We have a plot of the model assumptions and we can check if they are met!! But what do these plot represent? Here below we created a table that mirrors each plot with it explanation in it. These are brief and simple explanations. If you want to understand more about the <a href="https://easystats.github.io/performance/reference/check_model.html"><code>check_model()</code></a> function we suggest you to read the documentation about it and also the <a href="https://easystats.github.io/performance/articles/check_model.html">very nice vignette</a> that the package provides.</p>
+<p>As easy as that!! We have a plot of the model assumptions and we can check if they are met!! But what do these plots represent? Here below we created a table that includes each plot with a brief explanation. If you want to understand more about the <a href="https://easystats.github.io/performance/reference/check_model.html"><code>check_model()</code></a> function we suggest you to read the documentation about it and also the <a href="https://easystats.github.io/performance/articles/check_model.html">very nice vignette</a> that the package provides.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="htywnblurp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="yovhzxfsme" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#htywnblurp table {
+#yovhzxfsme table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#htywnblurp thead, #htywnblurp tbody, #htywnblurp tfoot, #htywnblurp tr, #htywnblurp td, #htywnblurp th {
+#yovhzxfsme thead, #yovhzxfsme tbody, #yovhzxfsme tfoot, #yovhzxfsme tr, #yovhzxfsme td, #yovhzxfsme th {
   border-style: none;
 }
 
-#htywnblurp p {
+#yovhzxfsme p {
   margin: 0;
   padding: 0;
 }
 
-#htywnblurp .gt_table {
+#yovhzxfsme .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -6045,12 +7094,12 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-left-color: #000000;
 }
 
-#htywnblurp .gt_caption {
+#yovhzxfsme .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#htywnblurp .gt_title {
+#yovhzxfsme .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -6062,7 +7111,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-bottom-width: 0;
 }
 
-#htywnblurp .gt_subtitle {
+#yovhzxfsme .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -6074,7 +7123,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-top-width: 0;
 }
 
-#htywnblurp .gt_heading {
+#yovhzxfsme .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -6086,13 +7135,13 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#htywnblurp .gt_bottom_border {
+#yovhzxfsme .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#htywnblurp .gt_col_headings {
+#yovhzxfsme .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -6107,7 +7156,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#htywnblurp .gt_col_heading {
+#yovhzxfsme .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 12px;
@@ -6127,7 +7176,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   overflow-x: hidden;
 }
 
-#htywnblurp .gt_column_spanner_outer {
+#yovhzxfsme .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 12px;
@@ -6139,15 +7188,15 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 4px;
 }
 
-#htywnblurp .gt_column_spanner_outer:first-child {
+#yovhzxfsme .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#htywnblurp .gt_column_spanner_outer:last-child {
+#yovhzxfsme .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#htywnblurp .gt_column_spanner {
+#yovhzxfsme .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 1px;
   border-bottom-color: #334422;
@@ -6159,11 +7208,11 @@ font-style: inherit;">)</span></span></code></pre></div>
   width: 100%;
 }
 
-#htywnblurp .gt_spanner_row {
+#yovhzxfsme .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#htywnblurp .gt_group_heading {
+#yovhzxfsme .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6189,7 +7238,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   text-align: left;
 }
 
-#htywnblurp .gt_empty_group_heading {
+#yovhzxfsme .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -6204,15 +7253,15 @@ font-style: inherit;">)</span></span></code></pre></div>
   vertical-align: middle;
 }
 
-#htywnblurp .gt_from_md > :first-child {
+#yovhzxfsme .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#htywnblurp .gt_from_md > :last-child {
+#yovhzxfsme .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#htywnblurp .gt_row {
+#yovhzxfsme .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -6231,7 +7280,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   overflow-x: hidden;
 }
 
-#htywnblurp .gt_stub {
+#yovhzxfsme .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6244,7 +7293,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#htywnblurp .gt_stub_row_group {
+#yovhzxfsme .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6258,15 +7307,15 @@ font-style: inherit;">)</span></span></code></pre></div>
   vertical-align: top;
 }
 
-#htywnblurp .gt_row_group_first td {
+#yovhzxfsme .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#htywnblurp .gt_row_group_first th {
+#yovhzxfsme .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#htywnblurp .gt_summary_row {
+#yovhzxfsme .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6276,16 +7325,16 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#htywnblurp .gt_first_summary_row {
+#yovhzxfsme .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#htywnblurp .gt_first_summary_row.thick {
+#yovhzxfsme .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#htywnblurp .gt_last_summary_row {
+#yovhzxfsme .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6295,7 +7344,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#htywnblurp .gt_grand_summary_row {
+#yovhzxfsme .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6305,7 +7354,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#htywnblurp .gt_first_grand_summary_row {
+#yovhzxfsme .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6315,7 +7364,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-top-color: #D3D3D3;
 }
 
-#htywnblurp .gt_last_grand_summary_row_top {
+#yovhzxfsme .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6325,11 +7374,11 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#htywnblurp .gt_striped {
+#yovhzxfsme .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#htywnblurp .gt_table_body {
+#yovhzxfsme .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -6338,7 +7387,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-bottom-color: #FFFFFF;
 }
 
-#htywnblurp .gt_footnotes {
+#yovhzxfsme .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6352,7 +7401,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#htywnblurp .gt_footnote {
+#yovhzxfsme .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -6361,7 +7410,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#htywnblurp .gt_sourcenotes {
+#yovhzxfsme .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6375,7 +7424,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#htywnblurp .gt_sourcenote {
+#yovhzxfsme .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -6383,72 +7432,72 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#htywnblurp .gt_left {
+#yovhzxfsme .gt_left {
   text-align: left;
 }
 
-#htywnblurp .gt_center {
+#yovhzxfsme .gt_center {
   text-align: center;
 }
 
-#htywnblurp .gt_right {
+#yovhzxfsme .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#htywnblurp .gt_font_normal {
+#yovhzxfsme .gt_font_normal {
   font-weight: normal;
 }
 
-#htywnblurp .gt_font_bold {
+#yovhzxfsme .gt_font_bold {
   font-weight: bold;
 }
 
-#htywnblurp .gt_font_italic {
+#yovhzxfsme .gt_font_italic {
   font-style: italic;
 }
 
-#htywnblurp .gt_super {
+#yovhzxfsme .gt_super {
   font-size: 65%;
 }
 
-#htywnblurp .gt_footnote_marks {
+#yovhzxfsme .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#htywnblurp .gt_asterisk {
+#yovhzxfsme .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#htywnblurp .gt_indent_1 {
+#yovhzxfsme .gt_indent_1 {
   text-indent: 5px;
 }
 
-#htywnblurp .gt_indent_2 {
+#yovhzxfsme .gt_indent_2 {
   text-indent: 10px;
 }
 
-#htywnblurp .gt_indent_3 {
+#yovhzxfsme .gt_indent_3 {
   text-indent: 15px;
 }
 
-#htywnblurp .gt_indent_4 {
+#yovhzxfsme .gt_indent_4 {
   text-indent: 20px;
 }
 
-#htywnblurp .gt_indent_5 {
+#yovhzxfsme .gt_indent_5 {
   text-indent: 25px;
 }
 
-#htywnblurp .katex-display {
+#yovhzxfsme .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#htywnblurp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#yovhzxfsme div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -23038,7 +24087,7 @@ Important
   <category>R</category>
   <category>Python</category>
   <guid>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/DevStartSetupGuide.html</guid>
-  <pubDate>Sun, 11 Jan 2026 09:20:47 GMT</pubDate>
+  <pubDate>Tue, 13 Jan 2026 18:29:04 GMT</pubDate>
 </item>
 </channel>
 </rss>
