@@ -354,13 +354,15 @@ As mentioned at the start of this tutorial, one of the key metrics we want to ex
 
 If we know where our participant was *supposed* to look, we can easily find their first correct fixation.
 
-In our specific paradigm, the stimuli were always presented in fixed locations:
+\<\<\<\<\<\<\< HEAD In our specific paradigm, the stimuli were always presented in fixed locations:
 
 -   **Simple Stimulus:** Always on the Left (AOI Index `0`).
 
 -   **Complex Stimulus:** Always on the Right (AOI Index `1`).
 
-We can add this "ground truth" to our dataframe. Then, we simply compare it to where they *actually* looked (`Looked_AOI`). If the two match, it's a correct fixation!
+# We can add this "ground truth" to our dataframe. Then, we simply compare it to where they *actually* looked (`Looked_AOI`). If the two match, it's a correct fixation!
+
+In our paradigm, the Simple stimulus was always presented on the left (the first AOI we defined) and the Complex stimulus was always presented on the right (the second AOI we defined). Thus we can add this information to our dataframe and then use it to filter out the wrong fixations: \>\>\>\>\>\>\> TommasoGhilardi/issue26
 
 ```{python}
 #| warning: false

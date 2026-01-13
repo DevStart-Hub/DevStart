@@ -31,13 +31,11 @@ This tutorial offers a gentle introduction to running linear mixed-effects model
 For the best experience, you should have already completed the [**previous tutorial on linear models**](LinearModels.qmd). That foundation will make this tutorial much easier to follow and understand!
 :::
 
-This tutorial introduces the statistical concept of Hierarchical Modeling, often called Mixed Effects Modeling. This approach shines when dealing with nested data—situations where observations are grouped in meaningful ways, like students within schools or measurements across individuals.
+This tutorial introduces the statistical concept of hierarchical modeling, often called mixed-effects modeling. This approach shines when dealing with nested data: situations where observations are grouped, like multiple classes within a school or multiple measurements for each individual.
 
-Sounds like a mouthful, right? Don’t worry! Let’s kick things off with something a little more fun: Simpson’s Paradox.
+This might not mean a lot to you: why bother with understanding the structure of the data? Can't we just run our simple linear models we've already learned about? Well well well, let us introduce you to the Simpson’s Paradox.
 
-Simpson's Paradox is a statistical head-scratcher. It’s when a trend you see in your data suddenly flips—or even vanishes—when you split the data into groups. Ready to see it in action? Let’s dive in!
-
-Imagine we’re looking at how years of experience impact salary at a university. Here’s some simulated data to make it fun.
+Imagine we’re looking at how years of experience impact salary at a university:
 
 ```{r}
 #| label: SimsonParadox
@@ -79,35 +77,31 @@ two = ggplot(data, aes(x = V1, y = V2)) +
 (one / two)
 ```
 
-Take a look at the first plot. Whoa, wait a minute—this says the more years of experience you have, the less you get paid! What kind of backwards world is this? Before you march into HR demanding answers, let’s look a little closer.
+Take a look at the first plot. Whoa, wait a minute: this says the more years of experience you have, the less you get paid! What kind of backwards world is this? Before you march into HR demanding answers, let’s look a little closer.
 
-Now, check out the second plot. Once we consider the departments—Informatics, English, Sociology, Biology, and Statistics—a different story emerges. Each department shows a positive trend between experience and salary. In other words, more experience does mean higher pay, as it should!
+Now, check out the second plot. Once we consider the departments (Informatics, English, Sociology, Biology, and Statistics) a different story emerges. Each department shows a positive trend between experience and salary. In other words, more experience does mean higher pay, as it should!
 
-So what happened? The first plot ignored the hierarchical structure of the data. By lumping all departments together, it completely missed the real relationship hiding in plain sight. This is why Hierarchical Modeling is so powerful—it helps us avoid embarrassing statistical blunders like this one. It allows us to correctly analyze data with nested structures and uncover the real patterns.
+So what happened? Well, Simpson's Paradox happened! By ignoring meaningful structure in the data (lumping all departments together), we might completely miss the real relationship hiding in plain sight. This is why hierarchical modeling is so powerful: it allows us to correctly analyze data with nested structures and uncover the real patterns within them.
 
-**Now, this example is a bit of an extreme case.** In real life, you’re less likely to find such wildly opposite effects. However, the influence of grouping structures on your analysis is very real—and often subtle. Ignoring them can lead to misleading conclusions.
+## A Mix of fixed and random effects
 
-Ready to explore how Mixed Effects Modeling helps us account for these nested structures? Let’s dive in and get hands-on!
+So, why are they called **mixed effects models**? It’s because these models combine two types of effects: **fixed effects** and **random effects**. And now you’re wondering what those are..... Don’t worry, we've got you! 😅
 
-### Mixed effects models
+-   **Fixed effects** are the effects you actually want to interpret: the average, systematic relationship in the whole dataset (e.g., how salary changes with experience).
 
-So, why are they called **mixed effects models**? It’s because these models combine two types of effects: **fixed effects** and **random effects**....... And now you’re wondering what those are, don’t worry—I've got you! 😅
+    ::: callout-note
+    Remember when we looked at the effects of Condition (`Event` Simple vs Complex) and Trial Number (`TrialN)` in the [previous tutorial on linear models](LinearModels.qmd)? Those were fixed effects!
+    :::
 
-Remember how departments (Informatics, English, Sociology, etc.) completely changed the story about experience and salary? That’s exactly where fixed and random effects come in.
+-   **Random effects** tell the model that observations come in groups (departments, participants) and that each group can have its own quirks. You might not be interested in each group specifically, but modelling those groups keeps the fixed-effect estimates honest: Without accounting for random effects, it’s like assuming every department is exactly the same: and we’ve already seen how misleading that can be!
 
--   **Fixed effects** capture the consistent, predictable trends in your data—like the relationship between experience and salary across all departments. These are the big-picture patterns you’re curious about and want to analyze.
+    Still confused? Let's look at this from a different angle: our dataset has variability in it. For example, different departments vary in salary, different participants vary in their looking times. Random effects are a way to say to our model: hey, watch out, we should keep track of this variability!
 
--   **Random effects**, on the other hand, account for the variability within groups—like how salaries differ between departments. You’re not deeply analyzing these differences, but you know they’re there, and ignoring them could mess up your results.
+Got the gist? Great! Next, we will dive back into the same real example that accompanied us through previous tutorials to see mixed effects in action!
 
-Without accounting for random effects, it’s like assuming every department is exactly the same—and we’ve already seen how misleading that can be!
+## Setting things up
 
-**The model will estimate the fixed and random effects** but don’t worry—the model won’t get super complex. The estimates and p-values will primarily focus on the **fixed effects**, but it will account for the **random effects** in the background to make sure the results are accurate. In other words, random effects are variables that you know contribute to the variance in your model, and you want to account for them, but you’re not directly interested in obtaining a result about each one.
-
-Got the gist? Great! Now enough with words...let’s dive into a real example and see these mixed effects in action!
-
-## Settings and data
-
-In this section, we'll set up our working environment by loading the necessary libraries and importing the dataset. You'll likely already have this dataset available if you completed the previous linear models tutorial. If not, don't worry—you can easily download it using the link below:
+In this section, we'll set up our working environment by loading the necessary libraries and importing the dataset. You'll likely already have this dataset available if you completed the previous linear models tutorial. If not, you can download it here:
 
 ```{=html}
 {{< downloadthis ../../resources/Stats/Dataset.csv label="Dataset.csv" type="secondary" >}}
@@ -124,9 +118,9 @@ library(tidyverse)
 library(easystats)
 ```
 
-The `lme4` package is the go-to library for running Linear Mixed Models (LMM) in R. To make your life easier, there's also the `lmerTest` package, which enhances `lme4` by allowing you to extract p-values and providing extra functions to better understand your models. In my opinion, you should always use `lmerTest` alongside `lme4`—it just makes everything smoother!
+The `lme4` package is the go-to library for running Linear Mixed Models (LMM) in R. To make your life easier, there's also the `lmerTest` package, which enhances `lme4` by allowing you to extract p-values and providing extra functions to better understand your models. In our opinion, you should always use `lmerTest` alongside `lme4`, it just makes everything smoother!
 
-To run our Linear Mixed Effects Model, these are the key packages we'll use. On top of that, the `tidyverse` suite will help with data wrangling and visualization, while `easystats` will let us easily extract and summarize the important details from our models. Let’s get started!
+On top of these two packages, the `tidyverse` suite will help with data wrangling and visualization, while `easystats` will let us easily extract and summarize the important details from our models. Let’s get started!
 
 ### Read the data
 
@@ -141,9 +135,9 @@ df$StandardTrialN = standardize(df$TrialN) # create standardize trial column
 
 After importing the data, we've ensured that Id is treated as a factor rather than a numerical column and that we have a standardized column of TrialN.
 
-## Linear Model
+## The problem with simple linear models
 
-While we have already seen how to run a linear model, we will rerun it here as a comparison to the next steps. In case something is not clear about this `lm()`, please go back to the [**previous tutorial on linear models**](LinearModels.qmd)**.**
+While we have already seen how to run a linear model, we will rerun it here to directly compare it to a mixed-effect model.
 
 ```{r}
 #| label: Lm
@@ -153,7 +147,7 @@ mod_lm = lm(LookingTime ~ StandardTrialN*Event, data = df)
 summary(mod_lm)
 ```
 
-We won’t delve into the details of the model results in this tutorial, as we have already covered it in the previous one. However, we want to point out one thing about the data we run it on!!
+We won’t go too much into detail on the model results in this tutorial, as we have already covered it in the previous one. However, we want to point out one thing about the data we run it on!!
 
 ```{r}
 #| label: DataCodebook
@@ -162,43 +156,37 @@ We won’t delve into the details of the model results in this tutorial, as we h
 print_html(data_codebook(df))
 ```
 
-Wait a minute! Look at our data - we have an **Id** column! 👀 This column tells us which participant each trial belongs to. As each subject experienced all trial conditions, we have multiple data points per person. This is similar to the departments in the previous example... it's a grouping variable
+Wait a minute! Look at our data - we have an **Id** column! 👀 This column tells us which participant each trial belongs to. As each subject experienced all trial conditions, we have multiple data points per person. This is similar to the departments in the previous example... it's a grouping variable!
 
-**Wait..but then we should have taken it into consideration!!!**
+Instead, there was nothing about **Id** in our `lm()`...there is nothing in the formula about **Id**. **Wait... but then we should have taken it into consideration!!!** This is a problem for two reasons: First, there might be meaningful variability across participants (just as there was variability in salary across departments). Second, we are violating an assumption of linear regression: data points should be independent! In other words, each row in our dataframe should come from a different group. But here multiple rows come from the same participant! This is a BIG problem!
 
-Instead, there was nothing about **Id** in our `lm()`...there is nothing in the formula about **Id**....
+In our `lm()`, there was nothing about `Id`... the model is treating every row as if it were independent! That’s a problem for two reasons. First, participants often differ in meaningful ways (some have consistently longer looking times than others, just like departments differed in salary). Second, one of the assumptions of linear regression is that **residuals are independent**; with repeated measures, rows from the same participant tend to be correlated even after accounting for the predictors. If we ignore that grouping structure, the model can become overconfident (standard errors too small), and our conclusions can be misleading.
 
-Yes, we did not account for this grouping structure...let's fix that!! But how do we do so? Well, at this point it's obvious...with Mixed effects models!! Let's dive in..
+Let's fix that!! How do we do it? Well, at this point it's obvious... with Mixed effects models!!
 
-## Mixed Effects
+## Random Intercept
 
-### Random Intercept
+Even if there are two types of random effects, let's introduce them one by one, starting with **random intercepts**! What are they? Well, the name gives it away... they’re just intercepts, but with a twist! 🤔
 
-Alright, let’s start with **Random Intercepts**! What are they? Well, the name gives it away—they’re just intercepts…but with a twist! 🤔
+If you recall your knowledge of linear models, you’ll remember that each model has **one intercept**: the point where the model crosses the y-axis (when x=0).
 
-If you recall your knowledge of linear models, you’ll remember that each model has **one intercept**—the point where the model crosses the y-axis (when x=0).
-
-But what makes random intercepts special? They allow the model to have **different intercepts for each grouping variable**—in this case, the **Id**s. This means we’re letting the model assume that each subject may have a slightly different baseline performance.
+But what makes random intercepts special? They allow the model to have **different intercepts for each grouping variable** (in this case, the **ID**s). This means we’re letting the model assume that each subject may have a slightly different baseline looking time.
 
 Here’s the idea:
 
--   One person might naturally be a bit better.
+-   One person might naturally be a bit faster at looking at stimuli.
 
--   Someone else could be slightly worse.
+-   Someone else could be slightly slower.
 
--   And me? Well, let’s just say I’m starting from rock bottom.
-
-However, even though we’re starting from different baselines, **the rate of improvement over trials can still be consistent across subjects**.
-
-This approach helps us capture **variation in the starting performance**, acknowledging that people are inherently different but might still follow a similar overall pattern of improvement. It’s a simple yet powerful way to model individual differences!
+-   And us? Well, let’s just say we're starting from rock bottom.
 
 Now, let’s look at how to include this in our mixed model.
 
-#### Model
+### Run the model
 
-To run a **linear mixed-effects model**, we’ll use the `lmer` function from the **lme4** package. It functions very similarly to the `lm` function we used before: you pass a formula and a dataset, but with one important addition: specifying the **random intercept**.
+To run a **linear mixed-effects model**, we’ll use the `lmer` function from the **lme4** package. It works very similarly to the `lm` function we used before: you pass a formula and a dataset, but with one important addition: w e must specify the **random intercept**.
 
-The formula is nearly the same as a standard linear model, but we include `(1|subject_id)` to tell the model that each subject should have its own unique intercept. This accounts for variations in baseline performance across individuals.
+To do that, we simply add `(1|Id)` to the formula, to tell the model that each subject should have its own unique intercept. This accounts for variations in baseline looking time across individuals.
 
 ::: callout-caution
 When specifying random intercepts (like `(1|Group)`), your grouping variables must be factors! If a grouping variable is numeric, R will wrongly treat it as a continuous variable rather than discrete categories. Character variables are automatically fine, but numeric grouping variables must be explicitly converted using `factor()`.
@@ -212,7 +200,7 @@ mod_rintercept =lmer(LookingTime ~ StandardTrialN * Event+ (1|Id ), data= df,  n
 summary(mod_rintercept)
 ```
 
-Wow! Now the model is showing us something **new** compared to the simple linear model. We observe an **interaction between Event and StandardTrialN**. By letting the intercept vary for each subject, the model is able to capture nuances in the data that a standard linear model might miss.
+Wow! Now the model is showing us something **new** compared to the simple linear model. We observe an **interaction between Event and StandardTrialN**. By letting the intercept vary for each subject, the model is able to capture nuances in the data that a standard linear model had completely missed!
 
 To understand this interaction, let’s plot what the random intercept is doing.
 
@@ -237,13 +225,11 @@ ggplot(i_pred, aes(x= StandardTrialN, y= Predicted, color= Id, shape = Event))+
 
 As you can see here, each color represents a different subject, and we've divided the plot into two panels - one for each type of event - to make visualization simpler.
 
-You can clearly see that our model is capturing the different intercepts that subjects have!! Cool isn't it??.
+You can clearly see that our model is capturing the different intercepts that subjects have!! Cool, isn't it??
 
-Now, you might be thinking, *“This looks interesting, but my plot is going to be a mess with all these individual estimates!”* Well, don’t worry! While what we’ve plotted is how the data is modeled by our mixed-effects model, the random effects are actually used to make more accurate estimates—but the model still returns an overall estimate.
+Now, this looks fancy, but where are our fixed effects, the ones we care about? While what we’ve plotted is how the data is modeled by our mixed-effects model, the random effects are actually used to make more accurate estimates *for the* *fixed effects*. That's why our interaction is now significant.
 
-Think of it like this: the random effects allow the model to account for individual differences between subjects. But instead of just showing all the individual estimates in the plot, the model takes these individual estimates for each subject and returns the *average* of these estimates to give you a cleaner, more generalizable result.
-
-we can plot the actual estimate of the model:
+Instead of all these individual estimates we can plot their *average*:
 
 ```{r}
 #| label: PlotInterceptModelOverall
@@ -264,15 +250,15 @@ ggplot(i_pred, aes(x= StandardTrialN, y= Predicted))+
   facet_wrap(~Event)
 ```
 
-### Slope
+Pheew, that's a relief! Not only we can look at unique individual differences in looking time, but we also get our main effects - just as we did with our simple linear model - new and improved! The significant interaction between Condition and Trial Number is reflected in the plot: It seems that looking times decrease for both Complex and Simple stimuli, but they decrease more for *Simple* ones!
 
-Coool!!!!!!! So far, we’ve modeled a different intercept for each subject, which lets each subject have their own baseline level of performance. But here’s the catch: our model assumes that everyone improves over the trials in exactly the same way, with the same slope. That doesn’t sound quite right, does it? We know that some people may get better faster than others, or their learning might follow a different pattern.
+## Random Slope
 
-#### Model
+So far, we’ve modeled a different **intercept** for each subject, which lets each subject have their own baseline looking time. But here’s the catch: our model assumes that everyone changes over the trials in exactly the same way, with the same slope. But infants might differ in how long they look at the stimuli over time! Some of them might quickly get bored and look much less, while others might stay curious and keep looking at them.
 
-This is where we can model *random slopes* to capture these individual differences in learning rates. By adding `(0 + StandardTrialN | Id)`, we’re telling the model that while the intercept (starting point) is the same for everyone, the rate at which each subject improves (the slope) can vary.
+### Run the model
 
-This way, we’re allowing each subject to have their own slope in addition to their own intercept, making the model more flexible and reflective of real-world variations in learning!
+This is where **random slopes** come in handy: they capture variability in the slopes. By adding `(0 + StandardTrialN | Id)`, we’re telling the model that while the intercept (starting point) is the same for everyone, the rate at which each subject changes (the slope) can vary.
 
 ::: callout-caution
 Any variable used as a random slope (before the `|`) must also be included as a fixed effect in your model. The fixed effect estimates the overall effect, while the random slope captures how that effect varies across groups. Without the fixed effect, you're modeling deviations from zero instead of from an average, which rarely makes theoretical sense.
@@ -307,19 +293,19 @@ ggplot(s_pred, aes(x= StandardTrialN, y= Predicted, color= Id, shape = Event))+
     facet_wrap(~Event)
 ```
 
-As you can see here we have an unique intercept ( all the lines pass trough the same point where x = 0) but the slope of each line is different. And.....I don't have to tell you that what we are looking at dosen't really make sense.
+As you can see here we have an unique intercept ( all the lines pass trough the same point where x = 0) but the slope of each line is different. And..... I don't have to tell you that what we are looking at dosen't really make sense.
 
-### Intercept + Slope
+## Random Incercept & Slope
 
 That plot does look nuts, and it’s a clear signal that something is off. Why? Because by modeling only the random slopes while keeping the intercepts fixed, we’re essentially forcing all subjects to start from the same baseline. That’s clearly unrealistic for most real-world data.
 
 In real life, the intercept and slope often go hand-in-hand for each subject.
 
-#### Model
+### Run the model
 
 To make the model more realistic, we can model both the random intercept and the random slope together. We simply modify the random effects part of the formula to `(trial_number | subject_id)`.
 
-Now, we are telling the model to estimate both a random intercept (baseline performance) and a random slope (rate of improvement). This captures the full variability in how each subject learns over time!
+Now, we are telling the model to estimate both a random intercept (baseline looking time) and a random slope (rate of change). This captures the full variability in each participant's looking time over time!
 
 ```{r}
 #| label: InterceptSlopeModel
@@ -329,7 +315,7 @@ mod_rinterraction = lmer(LookingTime ~ StandardTrialN * Event+ (1 + StandardTria
 summary(mod_rinterraction)
 ```
 
-Now, let’s visualize how the model is modeling the data:
+Now, let’s visualize how the model is fitting the data:
 
 ```{r}
 #| label: PlotInterceptSlopeModel
@@ -350,13 +336,13 @@ ggplot(is_pred, aes(x= StandardTrialN, y= Predicted, color= Id, shape = Event))+
     facet_wrap(~Event)
 ```
 
-If you look closely, you'll see each subject has their own intercept and slope now. That means we're actually modeling the real differences between people—exactly what we wanted!
+If you look closely, you'll see each subject has their own intercept and slope now. That means we're actually capturing the real differences between infants - exactly what we wanted!
 
-## Summary of mixed models
+## A better look at the model's output
 
-Now that we've seen how to run mixed-effects models, it's time to focus on **interpreting the summary output**. While we’ve been building models, we haven’t delved into what the summary actually tells us or which parts of it deserve our attention. Let’s fix that!
+Now that we've seen how to *run* mixed-effects models, it's time to focus on how to ***interpret*** **the summary output**. While we’ve been building models, we haven’t spent too much time on what the `summary()` function actually tells us or which parts of it deserve our attention. Let’s fix that!
 
-To start, we’ll use our **final model** and inspect its summary. This will give us a chance to break it down step by step and understand the key information it provides. Here's how to check the summary:
+We’ll focus our **final model**:
 
 ```{r}
 #| label: SummaryMixed
@@ -365,33 +351,27 @@ To start, we’ll use our **final model** and inspect its summary. This will giv
 summary(mod_rinterraction)
 ```
 
-The **Random effects** section in the model summary shows how variability is accounted for by the random effects. The **Groups** column indicates the grouping factor (e.g., subject), while the **Name** column lists the random effects (e.g., intercept and slope). The **Variance** column represents the variability for each random effect—higher values indicate greater variation in how the effect behaves across groups. The **Std.Dev.** column is simply the standard deviation of the variance, showing the spread in the same units as the data.
+The **Random effects** section in the model summary shows how variability is accounted for by the random effects. The **Groups** column indicates the grouping factor (e.g., ID), while the **Name** column lists the random effects (e.g., intercept and slope). The **Variance** column represents the variability for each random effect. Here, higher values indicate greater variation in how the effect behaves across groups. The **Std.Dev.** column is simply the standard deviation of the variance, showing the spread in the same units as the data.
 
 The **Corr** column reflects the correlation between random effects, telling us whether different aspects of the data (e.g., intercepts and slopes) tend to move together. A negative correlation would suggest that higher intercepts (starting points) are associated with smaller slopes (slower learning rates), while a positive correlation would suggest the opposite.
 
 The **Residual** section shows the unexplained variability after accounting for the fixed and random effects.
 
-**The key takeaway here is that random effects capture the variability in the data that can’t be explained by the fixed effects alone.** If the variance for a random effect is low, it suggests the random effect isn’t adding much to the model and may be unnecessary. On the other hand, high variance indicates that the random effect is important for capturing group-level differences and improving the model’s accuracy.
+**The key takeaway here is that random effects capture variability in the data that can’t be explained by the fixed effects alone.**
+
+But how can we be sure the random effects are helping our model? One of the easiest ways is to check the variance explained by the random effects. If the variance for a random effect is low, it suggests the random effect isn’t adding much to the model and may be unnecessary. On the other hand, high variance indicates that the random effect is important for capturing group-level differences and improving the model’s accuracy.
+
+However, there is a better way to confidently adjudicate whether our fancy mixed-effect model with random intercept and slope is better: comparing models.
 
 ## Model comparison
 
-But how can we be sure the random effects are helping our model? One of the easiest ways is to check the variance explained by the random effects.
+There are many indices to compare model performance. One of the best indices is the Akaike Information Criterion (AIC). AIC gives a relative measure of how well a model fits the data, while penalizing the number of parameters in the model. Lower AIC values indicate better models, as they balance goodness-of-fit with model complexity.
 
-::::: {.info-box .info-box-large}
-::: info-box-title
-Why AIC?
+::: {.callout-important title="Why AIC?"}
+AIC is great because it balances how well your model fits the data with how many predictors you're using. If you just keep adding fixed or random effects, the fit will likely improve. Without any additional penalty, you'd end up overfitting: your model would fit the current data perfectly but fail on new data. AIC solves this problem by penalising models with more effects!
+
+The AIC score by itself doesn't mean much. You usually get wacky values like 24'783. However, it is super useful as a *relative* measure, for comparing different models against each other. When you do compare models, lower AIC values indicate better models.
 :::
-
-AIC is great because it balances how well your model fits the data with how many predictors you're using. It does this by penalizing models with more predictors—so you can't just keep adding variables to improve fit. Without this penalty, you'd end up overfitting: your model would fit the current data perfectly but fail on new data.
-
-AIC by itself doesn't mean much—it's only useful as a relative measure for comparing different models against each other. When you do compare models, lower AIC values indicate better models.
-:::::
-
-As we said, if the variance related to the random effects is too small, it probably isn’t contributing much to the model. If it’s high, it’s likely helping the model by capturing important variability in the data.
-
-The best way to make this kind of decision is to compare the performance of different models. One of the best indices for this is the Akaike Information Criterion (AIC). AIC gives a relative measure of how well a model fits the data, while penalizing the number of parameters in the model. Lower AIC values indicate better models, as they balance goodness-of-fit with model complexity.
-
-
 
 You can compare the AIC of different models using the following:
 
@@ -399,7 +379,7 @@ You can compare the AIC of different models using the following:
 #| label: AIC
 #| message: false
 #| warning: false
-compare_performance(mod_lm, mod_rintercept, mod_rslope, mod_rinterraction, metrics='AIC')
+compare_performance(mod_rintercept, mod_rinterraction, metrics='AIC')
 ```
 
 As you can see, the best model based on AIC is the one with both intercept and slope. This is a good way to check if and which random effect structure is necessary for our model.

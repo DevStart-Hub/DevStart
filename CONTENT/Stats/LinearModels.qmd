@@ -11,18 +11,20 @@ categories:
   - linear models
 ---
 
-Welcome to the first tutorial on data analysis!!! Today we are going to talk about one of the most flexible statistical methods: Linear models.
+Welcome to the first tutorial on data analysis!!!
 
-Let’s be clear, WE ARE NOT STATISTICIANS!!!!
+In previous tutorials, we formulated our research hypotheses, designed an experimental task, collected data, and pre-processed it. Here, we'll be working with a dataset containing (simulated) data from the same task.
 
-We’ll be discussing linear models in a very accessible and practical manner. Our explanations might not align with the rigorous definitions statisticians are accustomed to, and for that, we apologize in advance! However, our aim is to provide a stepping stone for you to grasp the concept of linear models and similar analyses. Let’s get started!
+In this tutorial, we will use a linear model to test one of our initial hypotheses, so we suggest to go check them out [here](/CONTENT/EyeTracking/Intro_eyetracking.qmd) if you haven't done so already. We want to test whether infants look longer at a Complex stimulus compared to a Simple stimulus. Given that infants see repeated presentations of the same stimuli, it might also be worth checking whether this effect changes over time! It might either get stronger or disappear...
 
-::: callout-note
-and only R [![](https://www.r-project.org/Rlogo.png){style="float:left ; margin-right:10px;margin-bottom:10px;" width="31" height="21"}](https://www.r-project.org/)
+We're going to begin with a very basic linear model, and in the upcoming tutorials, we'll gradually increase both the complexity and accuracy of our approach.
 
-In the tutorials regarding stats, we will use R (and R-Studio as the IDE). The concepts and procedures are the same in other programming languages (e.g., Python, Julia). However, we choose R for a simple reason. R is just better at most statistical things!!
+So, if you notice something that doesn't seem quite perfect at this stage, don't worry! It's all part of the plan. Our goal is to guide you step-by-step towards building the best model. Just remember, this process takes time!
 
-Deal with it!
+::: callout-warning
+WE ARE NOT STATISTICIANS!!!!
+
+We’ll be discussing linear models in a very accessible and practical manner. Even if explanations might not align with the rigorous definitions statisticians are accustomed to, we provide a stepping stone for you to grasp the concept of linear models and similar analyses. Let’s get started!
 :::
 
 # What is a linear model?
@@ -35,15 +37,19 @@ What's truly fascinating about linear models is their versatility. They start of
 
 Think of linear models as the foundation of a house. ![](/images/Stats/Lm/House.png){fig-align="right" style="float:left; margin-right:10px;margin-bottom:10px;" width="150"}
 
-You can start with a basic structure, but with some clever modifications (like mixed effect models, generalized linear models, quadratic models or additive models), you can build anything from a cozy cottage to a multi-story mansion.
+You can start with a basic structure, but with some clever modifications (like mixed effect models, generalized linear models or additive models), you can build anything from a cozy cottage to a multi-story mansion.
 
-In essence, linear models offer a perfect balance: they're accessible enough for beginners to grasp, yet powerful enough to satisfy the needs of advanced researchers. As we dive deeper into this topic, you'll see just how these seemingly simple tools can unlock complex insights in your data.
+Linear models offer a perfect balance: they're accessible enough for beginners to grasp, yet powerful enough to satisfy the needs of advanced researchers. As we dive deeper into this topic, you'll see just how these seemingly simple tools can unlock complex insights in your data.
 
 # Hands-on
 
-OK, enough chitchat - let's start with a practical example. We'll be working with a data set we created specifically for this tutorial. As mentioned, we're going to begin with a very basic model, and in the upcoming tutorials, we'll gradually increase both the complexity and accuracy of our approach.
+Enough with the theory! Let's get our hands dirty!
 
-So, if you notice something that doesn't seem quite perfect at this stage, don't worry! It's all part of the plan. Our goal is to guide you step-by-step towards building the best model. Just remember, this process takes time!
+::: callout-note
+and only R [![](https://www.r-project.org/Rlogo.png){style="float:left ; margin-right:10px;margin-bottom:10px;" width="31" height="21"}](https://www.r-project.org/)
+
+In the tutorials regarding stats, we will use R (and Positron as the IDE). The concepts and procedures are the same in other programming languages (e.g., Python, Julia). However, we choose R for a simple reason. R is just better at most statistical things!!
+:::
 
 ## Import data
 
@@ -59,28 +65,28 @@ df = read.csv("resources/Stats/Dataset.csv")
 head(df)
 ```
 
-You can see that the data is really simple! We have 4 columns:
+You can see that the data is really simple! We have 6 columns:
 
--   `Id` column that tell us form which participant the data was collected
+-   `Id` column that specifies the participant ID. You can see that each participant has multiple rows: that's because they performed multiple trials of the same task.
 
--   `Event` represent which condition we were in
+-   `Event` specifies each trial's condition. Trials either belong to the Simple or the Complex condition.
 
--   `TrialN` the sequential number of trials in the experiment
+-   `TrialN` indicates the sequential number of trials in the experiment.
 
--   `ReactionTime` how quickly participants reacted to the stimuli. We will ignore this variable for now
+-   `ReactionTime` how quickly participants reacted to the stimulus in each trial. We will ignore this variable for now.
 
--   `LookingTime`the variable of interest for today, the one that we want to model
+-   `LookingTime` is the variable of interest for today, the one that we want to model. It reports how long participants look at the stimulus on each trial.
 
--   `SES` represents socioeconomic status collected via questionnaire (high, medium, or low) for each participant - we'll also ignore this for now
+-   `SES` represents socioeconomic status collected via questionnaire (high, medium, or low) for each participant - we'll also ignore this for now.
 
 :::::: callout-important
 ## Long format
 
-One important information that we need to keep in mind is that to run `lm()` (and most models!!) in R we need the data in a long format and not a wide format.
+One important piece of information that we need to keep in mind is that to run `lm()` (and most models!!) in R we need the data in a long format and not a wide format.
 
-In long format, each row represents a single observation. Variables are organized in columns, with one column for the variable names and another for the values. This means that the column you want to model (in the example `LookingTime`) has 1 row for observation but the other columns usually have repeated entries ( e.g. `Id` , `TrialN`, `Event`)
+In long format, each row represents a single observation. Variables are organized in columns, with one column for the variable names and another for the values. This means that the column you want to model (in the example `LookingTime`) has 1 row for observation but the other columns usually have repeated entries ( e.g. `Id` , `TrialN`, `Event`).
 
-Wide format, on the other hand, has each row representing a subject or group, with multiple columns for different variables or time-points. While this can be visually appealing for humans, it's not optimal for our linear modeling needs.
+In wide format, on the other hand, each row represents a subject or group, with multiple columns for different variables or time-points. While this can be visually appealing for humans, it's not optimal for our linear modeling needs.
 
 Here a small comparison of the two formats:
 
@@ -155,15 +161,23 @@ If your data is currently in wide format, don't worry! R provides tools like the
 
 To run models in R we usually use formulas! Sounds complex doesn't it?!? Well it is not, let me guide you through it.
 
-In R, model formulas follow a specific structure. On the left side of the formula, we place our dependent variable - the outcome we collected and we're interested in studying. In this case, it's the `LookingTime` column. Next, we use the tilde symbol `~`. This tilde tells R that we want to predict the variable on the left using the variables on the right side of the formula. On the right side, we list the independent variables (predictors) we believe may influence our dependent variable. To test whether `TrialN` predicts LookingTime, we can use the formula:
+In R, model formulas follow a specific structure. On the left side of the formula, we place our dependent variable - the outcome we collected and we're interested in studying. In this case, it's `LookingTime`. Next, we use the tilde symbol `~`. This tilde tells R that we want to predict the variable on the left using the variables on the right side of the formula. On the right side, we list the independent variables (predictors) we believe may influence our dependent variable. Do you remember what our hypothesis was!?? What shall we put here?
 
--   `LookingTime ~ TrialN`. This basic structure allows us to examine a single predictor.
+Well, first off, we said that `LookingTime` might differ across conditions (Simple vs Complex, contained in `Event`):
 
-We can extend this model by adding another variable, such as `Event`, to see if it also predicts LookingTime:
+we can use the formula:
 
--   `LookingTime ~ TrialN + Event`. This formulation tells the model to assess whether either `TrialN` and `Event` predicts `LookingTime`, treating them as independent predictors.
+-   `LookingTime ~ Event`. This basic structure allows us to examine a single predictor.
 
-To examine the interaction between these variables, we use a slightly different syntax:
+We also said that looking time might change over trials. To test whether also `TrialN` predicts LookingTime, can extend this model by adding another variable:
+
+-   `LookingTime ~ Event + TrialN`. This formulation tells the model to assess whether either `TrialN` and `Event` predicts `LookingTime`, treating them as independent predictors.
+
+::: callout-note
+Adding `TrialN` also means we are controlling for it while estimate the effect of `Event`. In other words, the Simple–Complex difference is not allowed to “pick up” changes that are really just due to being earlier vs later in the experiment. This is what people mean when they say the model controls for a certain variable.
+:::
+
+We can also examine the interaction between these two variables in predicting `LookingTime`. This means that the effect of `TrialN` on `LookingTime` can be **different for Simple vs Complex**. So instead of assuming the two conditions follow the same trend over time, the interaction tests whether their trends are different. We use the following syntax:
 
 -   `LookingTime ~ TrialN : Event`. This instructs the model to evaluate whether the interaction between the two variables predicts `LookingTime`.
 
@@ -175,13 +189,11 @@ R offers a shorthand for this complete model using the `*` operator. The formula
 
 -   `LookingTime ~ TrialN * Event` is equivalent to the longer version above, testing both main effects and the interaction in a more concise format.
 
-These formulas are for simple linear models. Different types of models add small and different pieces to this basic structure. We will see in the next tutorial how to handle these "add-ons". Now that we have seen how to make a proper formula let's use it in our model!!
+These formulas are for simple linear models. Different types of models add small and different pieces to this basic structure. We will see in the next tutorial how to handle these. Now that we have seen how to make a proper formula let's use it in our model!!
 
 ## Run the model
 
-OK, now we have our amazing data! Let's run this Linear model.
-
-It's extremely simple. We will use the function `lm()` and we will pass our data `df` and the formula we just made together!!
+Running a linear model is extremely simple. We will use the function `lm()` and we will pass our dataframe `df` and the formula we just made together!!
 
 After fitting the model we extract the summary of it. This is how we will get all the information we need.
 
@@ -193,11 +205,13 @@ mod_lm = lm(LookingTime ~ TrialN*Event, data = df)
 summary(mod_lm)
 ```
 
-Woohoo! This was super simple!! 🎉 We can use the output of the model to understand whether the variables are predicting LookingTime. The magic number we're looking for is the p-value, hiding in the last column of the **Coefficients section**. If the p-value is below 0.05, we've got ourselves an effect! If it's above, sadly we don't. [**AND YES, EVEN IF IT'S 0.051!!!**]{.underline} Rules are rules in the p-value game!
+That's it!!! 🎉
 
-What can we spot here? First, our **Intercept** is significant (don't worry, we'll decode this mysterious value later!). Even more exciting, we've got a significant effect of **TrialN** – our continuous variable – (p = `r formatC(parameters::parameters(mod_lm)[2, 9], format = "f", digits = 4)`) and of **Event** (p = `r formatC(parameters::parameters(mod_lm)[3, 9], format = "f", digits = 5)`). However the interaction between **TrialN** and **Event** (p = `r formatC(parameters::parameters(mod_lm)[4, 9], format = "f", digits = 3)`) is playing hard to get.
+Now we can use the output of the model to understand whether the variables are predicting **Looking Time**. The magic number we're looking for is the p-value, hiding in the last column of the **Coefficients section**. If the p-value is below 0.05, we've got ourselves an effect! If it's above, sadly we don't. [**AND YES, EVEN IF IT'S 0.051!!!**]{.underline} Rules are rules in the p-value game!
 
-This is already pretty cool, right?!? But here's the deal - when looking at model outputs, people often get hypnotized by p-values. **However, there's MUCH more to unpack in a model summary!** The full story of our data is waiting to be discovered in the complete model output. Let's dive in together and crack this statistical puzzle!
+What can we spot here? First, our **Intercept** is significant (don't worry, we'll decode this mysterious value later!). Even more exciting, we've got a significant effect of **TrialN** (p = `r formatC(parameters::parameters(mod_lm)[2, 9], format = "f", digits = 4)`) and of **Event** (p = `r formatC(parameters::parameters(mod_lm)[3, 9], format = "f", digits = 5)`). However the interaction between **TrialN** and **Event** (p = `r formatC(parameters::parameters(mod_lm)[4, 9], format = "f", digits = 3)`) does not seem to be significant.
+
+This is already pretty cool, right?!? But here's the deal - when looking at model outputs, people often get hypnotized by p-values. **However, there's MUCH more to unpack in a model summary!** The full story of our data is waiting to be discovered in the complete model output. Let's dive in together!
 
 # Interpret our Model
 
@@ -207,7 +221,7 @@ Here what the summary is telling us!!
 
 <!-- -->
 
--   **Residuals**: This section shows the leftovers of our model - the differences between what we observed and what our model predicted. Think of residuals as the "Hmm, that's interesting" parts that our model couldn't explain. We want these to be as small as possible! 🔍
+-   **Residuals**: This section shows the leftovers of our model - the differences between what we observed and what our model predicted. Think of residuals as the bits that our model couldn't explain. We want these to be as small as possible! 🔍
 
 <!-- -->
 
@@ -229,7 +243,7 @@ Here what the summary is telling us!!
 
 -   **Model Fit**: The final act of our statistical show! Here we find:
 
-    -   **Residual standard error:** The average miss by our prediction line ( lower scores are better).
+    -   **Residual standard error:** The average miss by our prediction line (lower scores are better).
 
     -   **Multiple R-Squared:** The proportion of variance explained by our predictors. Ranges from 0 (no explanation) to 1 (perfect explanation).
 
@@ -251,7 +265,7 @@ The (Intercept) represents the reference levels where all our predictors (`Trial
 
 You are absolutely right! When a model encounters a categorical variable, it cleverly selects the first level of such variable as the reference level. If you take another look at our model summary, you can see that there's information for the **Simple Stimulus** level of the `Event` variable but nothing about the **Complex Stimulus** level. This is because the **Complex Stimulus** level has been selected by the model as the reference level and is thus represented in the intercept value! 💡
 
-So our intercept (1390.1) actually represents the predicted **LookingTime** when:
+So our intercept (1390.1) actually represents the predicted **Looking Time** when:
 
 1.  We're on the first trial (`TrialN` = 0)
 
@@ -260,7 +274,7 @@ So our intercept (1390.1) actually represents the predicted **LookingTime** when
 The Standard Error of the estimate (29.1) tells us the precision of the estimate.
 
 ::: callout-tip
-Since the intercept has a significant p-value, it means that the estimate for the **Simple** condition at trial 0 is actually significantly different from 0. In other words, our participants are definitely looking at something during the **Simple** condition in the first trial – their **LookingTime** isn't zero! This might seem obvious (of course they're looking!), but statistically confirming this baseline is actually meaningful.
+Since the intercept has a significant p-value, it means that the estimate for the **Simple** condition at trial 0 is actually significantly different from 0. In other words, our participants are definitely looking at something during the **Simple** condition in the first trial: their **LookingTime** isn't zero! This might seem obvious (of course they're looking!), but statistically confirming this baseline is actually meaningful.
 :::
 
 Ok, all this explanation is great...but it's much easier to visualize these Estimates!
@@ -326,7 +340,7 @@ ggplot() +
   ylim(0, 1600)
 ```
 
-As you can see, the intercept is pretty straightforward—it gives us the estimate when everything is set to 0, both for continuous and categorical variables. The intercept is the foundation of your model, where all the predictors are at their baseline value (in this case, **Simple** was cleverly selected as the reference or 0 level for the categorical variable).
+As you can see, the intercept is pretty straightforward: it gives us the estimate when everything is set to 0, both for continuous and categorical variables. The intercept is the foundation of your model, where all the predictors are at their baseline value (in this case, **Simple** was cleverly selected as the reference or 0 level for the categorical variable).
 
 ### Event
 
@@ -389,7 +403,7 @@ ggplot() +
 
 So, interpreting the coefficients for categorical variables wasn't too tricky, right? But what about continuous variables like `TrialN`?
 
-No worries, it's actually pretty straightforward! The coefficient for a continuous variable represents the slope, or the incline, of the line for that variable.
+No worries, it's actually pretty straightforward! The coefficient for a continuous variable represents the slope of the line for that variable.
 
 In simpler terms, it shows how much the outcome (in this case, `LookingTime`) changes for each unit increase in the continuous variable (`TrialN`). So, in our case the coefficient for `TrialN` is -7.5, this means that for each unit increase in `TrialN`, the LookingTime is expected to decrease by 7.5 units (assuming all other variables stay the same).
 
@@ -457,7 +471,7 @@ ggplot() +
 
 ### Interaction
 
-Alright, now we're getting to the final step! Let's talk about the interaction between `TrialN` and `Event`! Now, we're not just dealing with a single factor or continuous variable, but looking at how they interact with each other. Don't worry—if you understood the previous steps, this will be a breeze!
+Alright, now we're getting to the final step! Let's talk about the interaction between `TrialN` and `Event`! Now, we're not just dealing with a single factor or continuous variable, but looking at how they interact with each other. Don't worry - if you understood the previous steps, this will be a breeze!
 
 We'll take it step by step and look at the interaction in our model parameters. The interaction term between `TrialN` and `Event [Complex]` tells us how the relationship between `TrialN` and `LookingTime` changes when we switch from the reference Event (**Simple**) to the **Complex** condition.
 
@@ -553,7 +567,9 @@ This tells us that TrialN predicts Looking time similarly in both **Simple** and
 
 I hope that by now you got a decent understanding on how to interpret what a linear model is telling you!! Different kinds of models will add small pieces of information here and there, but the main information will still be there. Thus, if you got here, you are a step closer to becoming a stats genius!!! 🧠📊
 
-**But wait, we're not done yet!** Now it's time to check whether our model actually meets the assumptions of linear regression. Remember those plots we generated earlier? Let's make sure our statistical foundation is solid before we draw any final conclusions!
+::: callout-important
+Don’t you dare leave the tutorial just yet! We just threw you into the pool so you could start swimming, but we skipped a couple of important steps.Two of them are below (centering predictors and checking the model's assumptions) and more will follow in the next tutorials (accounting for the data structure with random effects, estimating contrasts, and more)
+:::
 
 # Centering Predictors
 
@@ -683,11 +699,7 @@ So there you have it - standardizing your predictors makes your model both more 
 
 # Model checks
 
-So now we have run our model and seen the summary... That's great but how can we know that our model actually is ok?? Linear models, like most statistical techniques require some data assumption to be run. These assumption need to be met otherwise even if our model could be showing amazing results it won't be valid.
-
-::: callout-warning
-As we mentioned at the beginning of our tutorial the model we have run in this tutorial is a very simple model that is not actually...correct!! We will see in the next tutorials how we should actually analyze this data and what we are missing here.
-:::
+We have run our model and we looked at the summary right away... We just couldn't resist! But before doing that, we should've actually checked if our model was actually ok. Linear models, like most statistical techniques require some data assumption to be run. These assumption need to be met otherwise even if our model could be showing amazing results, it won't be valid.
 
 What are these assumptions?? Well they depend a lot on the model you are running. We won't go into much details as there are very good website that explain them<sup>[1](https://bookdown.org/pingapang9/linear_models_bookdown/assumptions.html)</sup> ,<sup>[2](https://www.statology.org/linear-regression-assumptions/)</sup>, in this simple linear mode they are:
 
@@ -699,7 +711,7 @@ What are these assumptions?? Well they depend a lot on the model you are running
 
 4.  **Normality:** The residuals of the model are normally distributed.
 
-Again this is not a theoretical tutorial. So we won't go into details as which are the assumptions (please read some of the link provided tho!!) but we will show you how to actually check these assumptions.
+Again this is not a theoretical tutorial. So we won't go into details as which are the assumptions (please read some of the link provided though!!) but we will show you how to actually check these assumptions.
 
 There is a super easy and convenient way we usually check these assumptions. Using the [easystats](https://easystats.github.io/easystats/) library we can run the function [`check_model()`](https://easystats.github.io/performance/reference/check_model.html) to indeed check the model assumptions.
 
@@ -713,7 +725,7 @@ There is a super easy and convenient way we usually check these assumptions. Usi
 check_model(mod_lm)
 ```
 
-Perfect all done!! We have a plot of the model assumptions and we can check if they are met!! But what do these plot represent? Here below we created a table that mirrors each plot with it explanation in it. These are brief and simple explanations. If you want to understand more about the [`check_model()`](https://easystats.github.io/performance/reference/check_model.html) function we suggest you to read the documentation about it and also the [very nice vignette](https://easystats.github.io/performance/articles/check_model.html) that the package provides.
+As easy as that!! We have a plot of the model assumptions and we can check if they are met!! But what do these plots represent? Here below we created a table that includes each plot with a brief explanation. If you want to understand more about the [`check_model()`](https://easystats.github.io/performance/reference/check_model.html) function we suggest you to read the documentation about it and also the [very nice vignette](https://easystats.github.io/performance/articles/check_model.html) that the package provides.
 
 ```{r}
 #| label: TableChecks

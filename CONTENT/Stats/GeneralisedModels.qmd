@@ -12,7 +12,9 @@ categories:
 
 If you've been following our statistical journey, you're already familiar with our adventures in [**linear models**](LinearModels.qmd) and the exciting world of [**linear mixed-effect models**](LinearMixedModels.qmd)!!! Now it's time to level UP our statistical toolkit with something even MORE POWERFUL: **Generalised Linear Mixed-Effects Models (GLMMs)**!!! 🎉
 
-In this tutorial, we'll tackle those variables that just WON'T behave normally! Our focus will be on **Reaction Time**!!! Remember that eye-tracking dataset we've been playing with? It doesn't just have Looking Time—but also saccadic reaction times we've been ignoring! These reaction times indicate how quickly participants directed their gaze to the stimuli when they appeared on screen.
+In this tutorial, we'll tackle those variables that just WON'T behave normally! Our focus will be on **Reaction Time**. Remember the initial hypotheses for our study? (if not, you can find an in-depth description of the experimental paradigm in our [intro tutorial](Intro_eyetracking.qmd)) They were not only about Looking Time, but also saccadic reaction times! These reaction times indicate how quickly participants direct their gaze to the target stimuli when they appeared on screen.
+
+We took faster/shorter saccadic reaction times as an index of learning. Based on this, we predicted that participants would learn to predict the location of both the Complex and the Simple stimulus, which should result in a significant decrease in saccadic reaction times over trials.
 
 ::: callout-note
 ## Why distribution matters
@@ -109,11 +111,11 @@ Now, before even looking at the summary, let's check whether the model follows t
 check_model(mod_lm)
 ```
 
-This does not look too great. The linearity is not really flat...it seems U shaped. The homogeneity of variance as well! In addition we have influential observations (red outliers) and also the normality of residuals is not too great!!
+This does not look too great. The linearity is not really flat... It seems U shaped. The homogeneity of variance as well! In addition we have influential observations (red outliers) and also the normality of residuals is not too great!!
 
-However, the plot I want you to focus on actually is the first one, the posterior predictive check. Do you note anything weird?? As you can see, the model believes there are values below 200ms...but that as we saw earlier is IMPOSSIBLE!! No participant can respond that quickly in our dataset!
+However, the plot I want you to focus on actually is the first one, the posterior predictive check. Do you note anything weird?? As you can see, the model believes there are values below 200ms, but that as we saw earlier is IMPOSSIBLE!! No participant can respond that quickly in our dataset!
 
-All these indications and incoherences tell us that the model is fitting poorly!!! Our linear model is struggling to capture the true nature of reaction time data. The model is trying to force our non-normal data into a normal distribution, and it's clearly not working!
+All these indicators tell us that the model is fitting poorly!!! Our linear model is struggling to capture the true nature of reaction time data. The model is trying to force our non-normal data into a normal distribution, and it's clearly not working!
 
 ## Finding a better family
 
@@ -136,7 +138,7 @@ RTs = as.vector(na.omit(df$SaccadicRT))
 descdist(RTs, discrete = FALSE, boot = 500)
 ```
 
-The Cullen and Frey graph reveals which distribution best matches our data by plotting skewness against kurtosis. Looking at our reaction time data (red dot), we can immediately see it falls far from the normal distribution (asterisk) and instead sits near both the gamma (dashed line) and lognormal (dotted line) distributions, within the gray beta distribution area. The yellow circles represent bootstrap samples that help us assess uncertainty in our estimate. Since these bootstrap points tend to closely follow the gamma distribution line, we have strong evidence to select gamma as our distribution family! This explains why our linear model (which assumes normality) performed so poorly and gives us a clear direction for building a more appropriate model.
+The Cullen and Frey graph reveals which distribution best matches our data by plotting skewness against kurtosis. Looking at our reaction time data (red dot), we can immediately see it falls far from the normal distribution (asterisk) and instead sits near the gamma distribution (dashed line). The yellow circles represent bootstrapped samples that help us assess uncertainty in our estimate. Since these bootstrapped points tend to closely follow the gamma distribution line, we have strong evidence to select gamma as our distribution family! This explains why our linear model (which assumes normality) performed so poorly and gives us a clear direction for building a more appropriate model.
 
 ::: callout-caution
 Beware! this plot only shows 7 or 8 distributions, and many more exist! For example, do you know what a bernoulli or a binary distribution are? If not we advise you check out <https://distribution-explorer.github.io/index.html>
@@ -144,9 +146,9 @@ Beware! this plot only shows 7 or 8 distributions, and many more exist! For exam
 
 # Generalized Model
 
-Now that we know that our data is not normally distributed and we should try a Gamma distribution, we can update our mixed effect model, making it generalised! It is super simple!!!
+Now that we know that our data is not normally distributed and we should try a Gamma distribution, we can update our mixed effect model, making it generalised!
 
-All this means is that we specify a distribution different from a gaussian and instead of using `lmer()` we switch to `glmer()`
+We just need to tweak a couple things. First, instead of using `lmer()` we switch to `glmer()`. Then, we directly specify a distribution which is different from the default Gaussian:
 
 ```{r}
 #| label: GLMM
@@ -161,7 +163,7 @@ mod_gamma <- glmer(
 ```
 
 ::: callout-note
-You might have noticed we added link = "log" in our model: that's a link function! A link function puts your independent variables on the right scale for your data. For a Gamma model, we often use a **log link** because our outcome can only be **positive**. By taking the exponent of the independent variables and their beta coefficients, the predicted values are **always above zero**—perfect for modeling things like reaction times or any strictly positive measure.
+You might have noticed we added link = "log" in our model: that's a link function! A link function puts your independent variables on the right scale for your data. For a Gamma model, we often use a **log link** because our outcome can only be **positive**. By taking the exponent of the independent variables and their beta coefficients, the predicted values are **always above zero**, perfect for modeling things like reaction times or any strictly positive measure.
 :::
 
 Now that we have run the model, let's do our checks:
@@ -180,7 +182,7 @@ Look at our diagnostic plots now - there is improvement!!
 
 First and most importantly, our **posterior predictive check** is now properly aligned with reality. The model's predictions respect the natural lower boundary of our reaction time data and follow the actual distribution shape much more faithfully. The **influential observations** plot shows we've eliminated those problematic outliers that were throwing off our linear model. By using a distribution that naturally accommodates right-skewed data, points that seemed extreme before are now well within expectations.
 
-The homogeinity of variance and unifromity of residuals could definetly be better...but remember, it's probably impossible to find a model that fits your data perfectly!!! However, we can get much closer to reality by using what we **KNOW** about our data - like the fact that reaction times are skewed and never go below 200ms. This knowledge helped us choose the Gamma distribution with a log link, which naturally respects these constraints.
+The homogeneity of variance and uniformity of residuals could definitely be better... But remember, it's probably impossible to find a model that fits your data perfectly!!! However, we can get much closer to reality by using what we **KNOW** about our data - like the fact that reaction times are skewed and never go below 200ms. This knowledge helped us choose the Gamma distribution with a log link, which naturally respects these constraints.
 
 That's the real power of GLMMs!!! They let us work **WITH** our data's natural properties instead of trying to force everything into a normal distribution box where it doesn't belong!!!
 
