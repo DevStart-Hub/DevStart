@@ -17,7 +17,7 @@ categories:
 options(width = 150)
 ```
 
-Welcome back, stats adventurer! 👋 If you are here, it means you have already gone through our tutorial on: [Linear models](LinearModels.qmd), [Linear mixed effect models](LinearMixedModels.qmd). ![](/images/Stats/ModelEstimates/Padawan.png){style="margin-right:10px;margin-bottom:10px;" width="144"} Well done!! You are nearly there, my young stats padawan.
+Welcome back, stats adventurer! 👋 If you are here, it means you have already gone through our tutorial on: [Linear models](LinearModels.qmd), [Linear mixed effect models](LinearMixedModels.qmd). Well done!! You are nearly there, my young stats padawan. ![](/images/Stats/ModelEstimates/Padawan.png){style="margin-right:10px;margin-bottom:10px;" width="144"}
 
 You might think that once you’ve fit the model, you’re basically done: check the summary, look for stars, write the results. But there’s a catch: If we just look at `summary()`, we will know whether effects exist *(yes or no)*, but we still won't be able to *describe* them in detail.
 
@@ -40,15 +40,26 @@ That's the goal of this next tutorial. We will show how to **visualise and test*
 
 ## Setting things up
 
-::: {.callout-note title="Inbox" style="float:right; width:280px; margin:0 0px 20px 0;"}
-![](/images/Stats/ModelEstimates/reviewer2.jpg)
-:::
+:::: {.columns}
 
+::: {.column width="55%"}
 First let's set things up to re-run our model. We import relevant libraries, read the data, set categorical variables as factors, standardize the continuous variables, and finally run our model.
 
 **Wait a sec, we just got an email...**
 
 I guess we have to listen to Reviewer #2 this time. Let's include an additional interaction with SES (Socio-Economic Status) in our model. This variable is a factor with 3 levels: high, medium, and low. The serendipitous thing is that this complex model will be useful to fully understand how model's predictions and estimates work, even when things get more complicated.
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+::: {.callout-note title="Inbox"}
+![](/images/Stats/ModelEstimates/reviewer2.jpg)
+:::
+:::
+
+::::
 
 Here's our new model:
 
@@ -224,12 +235,11 @@ See?? We have all the comparison between the available level of SES. Ough, nothi
 #| label: PlotContrasts
 #| message: false
 #| warning: false
-#| fig-height: 4
-#| fig-width: 4
+#| fig-height: 5.5
+#| fig-width: 8
 plot(Contrast, Est_means)+
   theme_classic(base_size = 20)+
   theme(legend.position = 'bottom')
-
 ```
 
 ## Interactions
@@ -357,15 +367,16 @@ plot(Slopes)+
 Here we see that the slopes for both Conditions are negative (below zero) and that's statistically significant (confidence intervals don't cross the dashed zero line). This confirms that looking time reliably decreases as trials progress, regardless of whether it's a Complex or Simple event.
 
 # Wrapping Up
-Well, you did it! You've survived the wild jungle of model-based estimation! By breaking down the prediction process into customizable steps, you've gained complete control over how to extract and visualize the patterns in your eye-tracking data. 
+
+Well, you did it! You've survived the wild jungle of model-based estimation! By breaking down the prediction process into customizable steps, you've gained complete control over how to extract and visualize the patterns in your eye-tracking data.
 
 If you're feeling like this is too much... well, it is. It was overwhelming even to just write the tutorial. Be gentle with your progress and don't expect to know everything right away. Go through some of the steps again if need be. And reach out to us if somethings doesn't make sense!
 
 And most importantly: We hope it's clear that any question you have about your data can be answered! It's tricky or confusing at times, but you can follow this simple process:
 
-- think precsely at what your *question* is
-- think about what *model* would answer it
-- think about what *contrasts* will test your question directly
+-   think precsely at what your *question* is
+-   think about what *model* would answer it
+-   think about what *contrasts* will test your question directly
 
 Don't run models if your question is unclear, and don't run contrasts on models you are not sure about.
 
