@@ -1,22 +1,20 @@
 
 
-[![DOI](https://zenodo.org/badge/501816247.svg)](https://zenodo.org/doi/10.5281/zenodo.13361295)
-
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19037945.svg)](https://doi.org/10.5281/zenodo.19037945)
 
 > **⚠️ Warning**  
 > This repository began as a fork of the original [DevStart](https://github.com/TommasoGhilardi/DevStart) project.  
 > As the scope has grown, we’ve created a dedicated GitHub **organization** to host multiple related projects.  
 > Development will now continue **here**.  
-> Once we’re ready to deploy, we’ll redirect the old website to the new one and make this repo the official home of DevStart.
 
 
 
-# DEVSTART <a href="[https://dplyr.tidyverse.org](https://tommasoghilardi.github.io/DevStart/)"><img src='images/LOGO.png' width='200' align="right" /></a>
+# DEVSTART <a href="[devstart.org](https://devstart.org/)"><img src='images/LOGO.png' width='200' align="right" /></a>
 
 **Getting Started with Developmental Cognitive Science**
 
 
-This is the repository of the DEVSTART  : [DEVSTART](https://tommasoghilardi.github.io/DevStart/) website, a collaborative effort by:
+This is the repository of the DEVSTART  : [DEVSTART](https://devstart.org/) website, a collaborative effort by:
 This website comes from the shared effort of: [Francesco](https://www.ru.nl/en/people/poli-f), [Giulia](https://cbcd.bbk.ac.uk/people/students/giulia-serino) and [me](https://tommasoghilardi.github.io)
 
 
