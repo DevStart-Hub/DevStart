@@ -16,7 +16,7 @@
 <height>167</height>
 <width>144</width>
 </image>
-<generator>quarto-1.7.32</generator>
+<generator>quarto-1.5.47</generator>
 <lastBuildDate>Tue, 03 Nov 2026 00:00:00 GMT</lastBuildDate>
 <item>
   <title>ModelEstimates</title>
@@ -3087,12 +3087,6 @@ background-color: null;
 font-style: inherit;">mod_lm</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><a href="GeneralisedModels_files/figure-html/PlotCheck-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/PlotCheck-1.png" class="img-fluid figure-img" width="4200"></a></p>
-</figure>
-</div>
-</div>
 </div>
 <p>This does not look too great. The linearity is not really flat… It seems U shaped. The homogeneity of variance as well! In addition we have influential observations (red outliers) and also the normality of residuals is not too great!!</p>
 <p>However, the plot I want you to focus on actually is the first one, the posterior predictive check. Do you note anything weird?? As you can see, the model believes there are values below 200ms, but that as we saw earlier is IMPOSSIBLE!! No participant can respond that quickly in our dataset!</p>
@@ -3160,7 +3154,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="GeneralisedModels_files/figure-html/FitDistrPlus-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/FitDistrPlus-1.png" class="img-fluid figure-img" width="2100"></a></p>
+<figure class="figure"><p><a href="GeneralisedModels_files/figure-html/FitDistrPlus-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/FitDistrPlus-1.png" class="img-fluid figure-img" width="2100"></a></p>
 </figure>
 </div>
 </div>
@@ -3278,12 +3272,6 @@ background-color: null;
 font-style: inherit;">mod_gamma</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><a href="GeneralisedModels_files/figure-html/GLMM_check-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/GLMM_check-1.png" class="img-fluid figure-img" width="4200"></a></p>
-</figure>
-</div>
-</div>
 </div>
 <p>Look at our diagnostic plots now - there is improvement!!</p>
 <p>First and most importantly, our <strong>posterior predictive check</strong> is now properly aligned with reality. The model’s predictions respect the natural lower boundary of our reaction time data and follow the actual distribution shape much more faithfully. The <strong>influential observations</strong> plot shows we’ve eliminated those problematic outliers that were throwing off our linear model. By using a distribution that naturally accommodates right-skewed data, points that seemed extreme before are now well within expectations.</p>
@@ -3557,7 +3545,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="GeneralisedModels_files/figure-html/GLMPlot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/GLMPlot-1.png" class="img-fluid figure-img" width="1152"></a></p>
+<figure class="figure"><p><a href="GeneralisedModels_files/figure-html/GLMPlot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/GLMPlot-1.png" class="img-fluid figure-img" width="1152"></a></p>
 </figure>
 </div>
 </div>
@@ -3795,7 +3783,7 @@ background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="GeneralisedModels_files/figure-html/GLMMRandomPlot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/GLMMRandomPlot-1.png" class="img-fluid figure-img" width="1152"></a></p>
+<figure class="figure"><p><a href="GeneralisedModels_files/figure-html/GLMMRandomPlot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/GeneralisedModels_files/figure-html/GLMMRandomPlot-1.png" class="img-fluid figure-img" width="1152"></a></p>
 </figure>
 </div>
 </div>
@@ -4940,10 +4928,10 @@ font-style: inherit;">)</span></span></code></pre></div>
 </style>
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="gt_heading header">
+<tr class="header gt_heading">
 <th colspan="6" class="gt_heading gt_title gt_font_normal gt_bottom_border">df (400 rows and 7 variables, 7 shown)</th>
 </tr>
-<tr class="gt_col_headings even">
+<tr class="odd gt_col_headings">
 <th id="ID" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">ID</th>
 <th id="Name" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Name</th>
 <th id="Type" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Type</th>
@@ -6478,7 +6466,7 @@ Note
 </div>
 <section id="import-data" class="level2"><h2 class="anchored" data-anchor-id="import-data">Import data</h2>
 <p>You can download the data that we will use in this tutorial from here:</p>
-<p><button class="btn btn-secondary downloadthis  " id="dnldts40003"><i class="bi bi-download"></i> Dataset.csv </button></p>
+<p><button class="btn btn-secondary downloadthis  " id="dnldts57847"><i class="bi bi-download"></i> Dataset.csv </button></p>
 <p>Once downloaded we need to import it in our R session. Here we read our csv and we print a small preview of it.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
@@ -7039,36 +7027,30 @@ background-color: null;
 font-style: inherit;">mod_lm</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><a href="LinearModels_files/figure-html/PlotCheck-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/Stats/LinearModels_files/figure-html/PlotCheck-1.png" class="img-fluid figure-img" width="4200"></a></p>
-</figure>
-</div>
-</div>
 </div>
 <p>As easy as that!! We have a plot of the model assumptions and we can check if they are met!! But what do these plots represent? Here below we created a table that includes each plot with a brief explanation. If you want to understand more about the <a href="https://easystats.github.io/performance/reference/check_model.html"><code>check_model()</code></a> function we suggest you to read the documentation about it and also the <a href="https://easystats.github.io/performance/articles/check_model.html">very nice vignette</a> that the package provides.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="yovhzxfsme" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="typneirycu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#yovhzxfsme table {
+#typneirycu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yovhzxfsme thead, #yovhzxfsme tbody, #yovhzxfsme tfoot, #yovhzxfsme tr, #yovhzxfsme td, #yovhzxfsme th {
+#typneirycu thead, #typneirycu tbody, #typneirycu tfoot, #typneirycu tr, #typneirycu td, #typneirycu th {
   border-style: none;
 }
 
-#yovhzxfsme p {
+#typneirycu p {
   margin: 0;
   padding: 0;
 }
 
-#yovhzxfsme .gt_table {
+#typneirycu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -7094,12 +7076,12 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-left-color: #000000;
 }
 
-#yovhzxfsme .gt_caption {
+#typneirycu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yovhzxfsme .gt_title {
+#typneirycu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -7111,7 +7093,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-bottom-width: 0;
 }
 
-#yovhzxfsme .gt_subtitle {
+#typneirycu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -7123,7 +7105,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-top-width: 0;
 }
 
-#yovhzxfsme .gt_heading {
+#typneirycu .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -7135,13 +7117,13 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#yovhzxfsme .gt_bottom_border {
+#typneirycu .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yovhzxfsme .gt_col_headings {
+#typneirycu .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -7156,7 +7138,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#yovhzxfsme .gt_col_heading {
+#typneirycu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 12px;
@@ -7176,7 +7158,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   overflow-x: hidden;
 }
 
-#yovhzxfsme .gt_column_spanner_outer {
+#typneirycu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 12px;
@@ -7188,15 +7170,15 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 4px;
 }
 
-#yovhzxfsme .gt_column_spanner_outer:first-child {
+#typneirycu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yovhzxfsme .gt_column_spanner_outer:last-child {
+#typneirycu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yovhzxfsme .gt_column_spanner {
+#typneirycu .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 1px;
   border-bottom-color: #334422;
@@ -7208,11 +7190,11 @@ font-style: inherit;">)</span></span></code></pre></div>
   width: 100%;
 }
 
-#yovhzxfsme .gt_spanner_row {
+#typneirycu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yovhzxfsme .gt_group_heading {
+#typneirycu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7238,7 +7220,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   text-align: left;
 }
 
-#yovhzxfsme .gt_empty_group_heading {
+#typneirycu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -7253,15 +7235,15 @@ font-style: inherit;">)</span></span></code></pre></div>
   vertical-align: middle;
 }
 
-#yovhzxfsme .gt_from_md > :first-child {
+#typneirycu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yovhzxfsme .gt_from_md > :last-child {
+#typneirycu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yovhzxfsme .gt_row {
+#typneirycu .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -7280,7 +7262,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   overflow-x: hidden;
 }
 
-#yovhzxfsme .gt_stub {
+#typneirycu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -7293,7 +7275,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#yovhzxfsme .gt_stub_row_group {
+#typneirycu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -7307,15 +7289,15 @@ font-style: inherit;">)</span></span></code></pre></div>
   vertical-align: top;
 }
 
-#yovhzxfsme .gt_row_group_first td {
+#typneirycu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yovhzxfsme .gt_row_group_first th {
+#typneirycu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yovhzxfsme .gt_summary_row {
+#typneirycu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -7325,16 +7307,16 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#yovhzxfsme .gt_first_summary_row {
+#typneirycu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yovhzxfsme .gt_first_summary_row.thick {
+#typneirycu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yovhzxfsme .gt_last_summary_row {
+#typneirycu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7344,7 +7326,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#yovhzxfsme .gt_grand_summary_row {
+#typneirycu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -7354,7 +7336,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#yovhzxfsme .gt_first_grand_summary_row {
+#typneirycu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7364,7 +7346,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-top-color: #D3D3D3;
 }
 
-#yovhzxfsme .gt_last_grand_summary_row_top {
+#typneirycu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7374,11 +7356,11 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#yovhzxfsme .gt_striped {
+#typneirycu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yovhzxfsme .gt_table_body {
+#typneirycu .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -7387,7 +7369,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-bottom-color: #FFFFFF;
 }
 
-#yovhzxfsme .gt_footnotes {
+#typneirycu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -7401,7 +7383,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#yovhzxfsme .gt_footnote {
+#typneirycu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -7410,7 +7392,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#yovhzxfsme .gt_sourcenotes {
+#typneirycu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -7424,7 +7406,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#yovhzxfsme .gt_sourcenote {
+#typneirycu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -7432,72 +7414,72 @@ font-style: inherit;">)</span></span></code></pre></div>
   padding-right: 5px;
 }
 
-#yovhzxfsme .gt_left {
+#typneirycu .gt_left {
   text-align: left;
 }
 
-#yovhzxfsme .gt_center {
+#typneirycu .gt_center {
   text-align: center;
 }
 
-#yovhzxfsme .gt_right {
+#typneirycu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yovhzxfsme .gt_font_normal {
+#typneirycu .gt_font_normal {
   font-weight: normal;
 }
 
-#yovhzxfsme .gt_font_bold {
+#typneirycu .gt_font_bold {
   font-weight: bold;
 }
 
-#yovhzxfsme .gt_font_italic {
+#typneirycu .gt_font_italic {
   font-style: italic;
 }
 
-#yovhzxfsme .gt_super {
+#typneirycu .gt_super {
   font-size: 65%;
 }
 
-#yovhzxfsme .gt_footnote_marks {
+#typneirycu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yovhzxfsme .gt_asterisk {
+#typneirycu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yovhzxfsme .gt_indent_1 {
+#typneirycu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yovhzxfsme .gt_indent_2 {
+#typneirycu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yovhzxfsme .gt_indent_3 {
+#typneirycu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yovhzxfsme .gt_indent_4 {
+#typneirycu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yovhzxfsme .gt_indent_5 {
+#typneirycu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#yovhzxfsme .katex-display {
+#typneirycu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#yovhzxfsme div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#typneirycu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -7506,7 +7488,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 <col style="width: 50%">
 <col style="width: 50%">
 </colgroup>
-<thead><tr class="gt_heading header">
+<thead><tr class="header gt_heading">
 <th colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="text-align: center; font-family: 'Libre Franklin'; font-weight: 800;"><strong>Model Diagnostic Checks</strong></th>
 </tr></thead>
 <tbody class="gt_table_body">
@@ -7619,7 +7601,7 @@ Note
 <p>Before starting any type of analysis, let’s import the data and take a quick look at it.</p>
 <section id="import-data" class="level2"><h2 class="anchored" data-anchor-id="import-data">Import data</h2>
 <p>The data used in this tutorial comes from the pre-processing tutorial of pupil dilation. If you haven’t run that tutorial yet, it’s a good idea to check it out first to ensure your data is prepared and ready for analysis: <a href="../../CONTENT/EyeTracking/PupilPreprocessing.html">Pre-processing pupil data</a>. In case you did not save the result of the pre-processing you can download them from here :</p>
-<p><button class="btn btn-secondary downloadthis  " id="dnldts25787"><i class="bi bi-download"></i> Preprocessed_PupilData.csv </button></p>
+<p><button class="btn btn-secondary downloadthis  " id="dnldts39720"><i class="bi bi-download"></i> Preprocessed_PupilData.csv </button></p>
 <p>Now that you have the data, let’s import it along with the necessary libraries. We’ll also ensure that the <code>Event</code> and <code>Subjects</code> columns are properly set as factors (categorical for easier analysis. Here’s how:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;
@@ -9623,7 +9605,7 @@ Warning
   <link>https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/PupilPreprocessing.html</link>
   <description><![CDATA[ <p>Welcome to your first step into the world of pupillometry! In this tutorial, we’ll walk you through how to preprocess pupil data using a handy R package called <a href="http://samforbes.me/PupillometryR/index.html">PupillometryR</a>. This package makes it simple to clean and even analyze your pupil data with just a few lines of R code.</p>
 <p>To keep things straightforward, we’ll be working with a simulated dataset that you can download right here:</p>
-<p><button class="btn btn-secondary downloadthis  " id="dnldts19830"><i class="bi bi-download"></i> PupilData.zip </button></p>
+<p><button class="btn btn-secondary downloadthis  " id="dnldts16011"><i class="bi bi-download"></i> PupilData.zip </button></p>
 <p>Download and unzip this folder. This dataset is based on the experimental design we introduced earlier in our eye-tracking series. If you’re not familiar with it or need a quick refresher, we recommend checking out the “<a href="../../CONTENT/EyeTracking/Intro_eyetracking.html">Introduction to eye-tracking</a>” guide before diving in.</p>
 <p>This tutorial serves as a foundation for understanding how to preprocess pupil data. Once you’ve grasped the essentials, we encourage you to explore the full range of functions and features <a href="http://samforbes.me/PupillometryR">PupillometryR</a> has to offer.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -16036,7 +16018,7 @@ font-style: inherit;">=</span> ETracker(win)</span></code></pre></div>
 <section id="checking-position-in-real-time" class="level3">
 <h3 class="anchored" data-anchor-id="checking-position-in-real-time">Checking Position in Real-Time</h3>
 <p>Now for the magic—visualizing where your participant’s eyes are in the track box:</p>
-<div id="68f3e34a" class="cell" data-execution_count="2">
+<div id="22e2f457" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">ET_controller.show_status()</span></code></pre></div>
 </div>
 </section>
@@ -16081,7 +16063,7 @@ Simulation Mode
 <section id="launching-calibration" class="level3">
 <h3 class="anchored" data-anchor-id="launching-calibration">Launching Calibration</h3>
 <p>Here is the command to start the full procedure:</p>
-<div id="5cf2b9a5" class="cell" data-execution_count="3">
+<div id="48b057dd" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">ET_controller.calibrate(</span>
 <span id="cb3-2">    calibration_points<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -16910,7 +16892,7 @@ font-style: inherit;">'gaze'</span>)</span></code></pre></div>
 <li><p>Tobii reports data with its origin (0,0) in the lower left corner.</p></li>
 </ul>
 <p>This inconsistency is not a problem per se, but we need to take it into account when defining the AOIs. Let’s try to define the AOIs:</p>
-<div id="55fc3ed5" class="cell" data-execution_count="2">
+<div id="85865f92" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Screen resolution</span></span>
@@ -17006,7 +16988,7 @@ background-color: null;
 font-style: inherit;">=</span> [AOI1, AOI2]</span></code></pre></div>
 </div>
 <p>Nice!! This step is essential. We have created two AOIs. We will use them to define whether each fixation of our participant was within either of these two AOIs. Let’s get a better idea by just plotting these two AOIs and two random points <code>(600, 500)</code> and <code>(1400,1000)</code>.</p>
-<div id="a657466f" class="cell" data-execution_count="3">
+<div id="d30399e7" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
@@ -17241,7 +17223,7 @@ font-style: inherit;">"AOIs"</span>)</span>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="FromFixationsToData_files/figure-html/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/FromFixationsToData_files/figure-html/cell-4-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
+<p><a href="FromFixationsToData_files/figure-html/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/FromFixationsToData_files/figure-html/cell-4-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="660" height="387"></a></p>
 </figure>
 </div>
 </div>
@@ -17262,7 +17244,7 @@ font-style: inherit;">"AOIs"</span>)</span>
 </figure>
 </div>
 <p>So imagine we have a point: <code>point</code> and an area: <code>area</code>, we can check if the point falls inside the area by:</p>
-<div id="a15c17fb" class="cell" data-execution_count="4">
+<div id="a246904d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 1. Extract the rectangle boundaries</span></span>
@@ -17333,7 +17315,7 @@ More details
 </div>
 </div>
 </div>
-<div id="5348bef8" class="cell" data-execution_count="5">
+<div id="f1e7f57f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># We define a function that simply takes the a point and a list of areas.</span></span>
@@ -17438,7 +17420,7 @@ font-style: inherit;">1</span></span></code></pre></div>
 </div>
 <p>In this case, our attention is on the target window. We’re going to establish a time window that begins 750ms before the target appears and continues for 2000ms after its presentation. Indeed, both <strong>Saccadic latency</strong> and <strong>Lookign time</strong> occur within this time window, while we don’t really care about where the participant is looking during other phases of the task.</p>
 <p>Let’s start by finding the moment in which the target appeared:</p>
-<div id="06aa02de" class="cell" data-execution_count="6">
+<div id="4b93375d" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Define the events we are interested in</span></span>
@@ -17479,7 +17461,7 @@ font-style: inherit;">'Events'</span>]</span>
 <li><p><strong>Onset:</strong> The exact timestamp when the target appeared. We need this later to calculate <strong>Reaction Times</strong> (Fixation Start Time - Target Onset Time).</p></li>
 </ol>
 <p>Here is the code to do exactly that:</p>
-<div id="021f42f2" class="cell" data-execution_count="7">
+<div id="922a3844" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Find the fixations that we care about</span></span>
@@ -17577,7 +17559,7 @@ font-style: inherit;"># Save the Onset Time</span></span></code></pre></div>
 </figure>
 </div>
 <p>We can use this to our advantage! By filtering out these <code>NaN</code> values, we instantly remove all the irrelevant noise and create a clean dataset containing <strong>only</strong> the fixations that happened during the trials.</p>
-<div id="dde6b09d" class="cell" data-execution_count="8">
+<div id="e1232a0e" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># We can drop the NANs to have only the fixations that interest us!!!!</span></span>
@@ -17610,7 +17592,7 @@ Important
 <p>Just a heads up: our study design is pretty straightforward with only two stable Areas of Interest (AOIs). But if you’re dealing with multiple or moving AOIs, you’ve got options. You can add them to each row of the dataframe, depending on the event or trial. This way, you get more control over which area to inspect at any given moment of the study. It’s all about flexibility and precision!</p>
 </div>
 </div>
-<div id="06b1bbf1" class="cell" data-execution_count="9">
+<div id="a0132e33" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 1. Add the AOI definitions to every row</span></span>
@@ -17637,7 +17619,7 @@ background-color: null;
 font-style: inherit;">=</span> np.nan</span></code></pre></div>
 </div>
 <p>Now we iterate through every fixation. For each row, we grab the gaze coordinates (<code>xpos</code>, <code>ypos</code>) and the AOIs, then ask our function: <em>“Did this fixation land inside?”</em></p>
-<div id="490e3dd9" class="cell" data-execution_count="10">
+<div id="0b17dfa3" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># We run the function  for each row. We pass each xpos and ypos to the function</span></span>
@@ -17687,7 +17669,7 @@ font-style: inherit;">=</span> find_area_for_point(Point, Areas)</span></code></
 </div>
 <p>Perfect, we now have a dataframe that contains only the fixations of interest and tells us which AOI each fixation is in.</p>
 <p>The final step is to remove the “noise”—any fixation that returned <code>-1</code>. These are moments where the participant was looking at the screen, but not at either of our targets (e.g., looking at the background).</p>
-<div id="0ba7ba3e" class="cell" data-execution_count="11">
+<div id="7d1de307" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Filter out fixations that missed the targets (where result is -1)</span></span>
@@ -17708,13 +17690,16 @@ font-style: inherit;">1</span>]</span></code></pre></div>
 <h1>Saccadic latency</h1>
 <p>As mentioned at the start of this tutorial, one of the key metrics we want to extract is <strong>Saccadic Latency</strong>. Essentially, this tells us how quickly our participants fixated on the <em>correct</em> target location after it appeared.</p>
 <p>If we know where our participant was <em>supposed</em> to look, we can easily find their first correct fixation.</p>
-<p>In our specific paradigm, the stimuli were always presented in fixed locations:</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD In our specific paradigm, the stimuli were always presented in fixed locations:</p>
 <ul>
 <li><p><strong>Simple Stimulus:</strong> Always on the Left (AOI Index <code>0</code>).</p></li>
 <li><p><strong>Complex Stimulus:</strong> Always on the Right (AOI Index <code>1</code>).</p></li>
 </ul>
-<p>We can add this “ground truth” to our dataframe. Then, we simply compare it to where they <em>actually</em> looked (<code>Looked_AOI</code>). If the two match, it’s a correct fixation!</p>
-<div id="6073fe4b" class="cell" data-message="false" data-execution_count="12">
+</section>
+<section id="we-can-add-this-ground-truth-to-our-dataframe.-then-we-simply-compare-it-to-where-they-actually-looked-looked_aoi.-if-the-two-match-its-a-correct-fixation" class="level1">
+<h1>We can add this “ground truth” to our dataframe. Then, we simply compare it to where they <em>actually</em> looked (<code>Looked_AOI</code>). If the two match, it’s a correct fixation!</h1>
+<p>In our paradigm, the Simple stimulus was always presented on the left (the first AOI we defined) and the Complex stimulus was always presented on the right (the second AOI we defined). Thus we can add this information to our dataframe and then use it to filter out the wrong fixations: &gt;&gt;&gt;&gt;&gt;&gt;&gt; TommasoGhilardi/issue26</p>
+<div id="c51fb76a" class="cell" data-message="false" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 1. Define the Correct AOI for each condition</span></span>
@@ -17770,7 +17755,7 @@ background-color: null;
 font-style: inherit;"># We use .copy() to avoid SettingWithCopy warnings later</span></span></code></pre></div>
 </div>
 <p>Now comes the easy part. To find the latency (reaction time), we simply subtract the time the Target appeared (<code>Onset</code>) from the time the Fixation started (<code>startT</code>).</p>
-<div id="32f3f50d" class="cell" data-execution_count="13">
+<div id="19027812" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Calculate Latency: Fixation Start Time - Target Appearance Time</span></span>
@@ -17806,7 +17791,7 @@ Note
 <p>For <strong>Saccadic Latency</strong>, we care only about the <strong>first</strong> time they looked at the target. That is their reaction time.</p>
 <p>How do we isolate just that one specific row for every trial? We use the powerful <code>groupby</code> function in pandas.</p>
 <p><code>groupby</code> allows us to split our dataframe into small chunks (one chunk per Trial), find the minimum value in each chunk (the smallest Latency = the earliest fixation), and glue it all back together.</p>
-<div id="1cc52c09" class="cell" data-execution_count="14">
+<div id="9092ec1f" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Group the data by 'Events' (Condition) and 'TrialN' (Trial Number)</span></span>
@@ -17827,7 +17812,7 @@ font-style: inherit;">min</span>().reset_index()</span></code></pre></div>
 </div>
 <p><strong>Mission Accomplished!</strong> You now have a clean dataframe containing exactly one latency value per trial.</p>
 <p>Finally, let’s see what our data looks like! We can use the <code>seaborn</code> library to create a beautiful scatterplot showing how saccadic latency changes across the trials.</p>
-<div id="4c88f940" class="cell" data-execution_count="15">
+<div id="cbf987c4" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> seaborn <span class="im" style="color: #00769E;
@@ -17927,7 +17912,7 @@ font-style: inherit;"># Show the plot</span></span>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="FromFixationsToData_files/figure-html/cell-16-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/FromFixationsToData_files/figure-html/cell-16-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
+<p><a href="FromFixationsToData_files/figure-html/cell-16-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/FromFixationsToData_files/figure-html/cell-16-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="757" height="564"></a></p>
 </figure>
 </div>
 </div>
@@ -17939,7 +17924,7 @@ font-style: inherit;"># Show the plot</span></span>
 <p>While our paradigm was designed with saccadic latency in mind, we can also extract <strong>Looking Time</strong>. This measure tells us the total duration the participant spent looking at a specific Area of Interest (AOI) during each trial.</p>
 <p>We have already extracted all the necessary raw data; we just need to aggregate it.</p>
 <p>Again, we use <code>groupby</code>. We group our dataframe by <code>Events</code> (Condition), <code>TrialN</code> (Trial Number), and <code>Looked_AOI</code> (Location). Then, we <strong>sum</strong> the duration (<code>dur</code>) of all fixations in that group.</p>
-<div id="64060e94" class="cell" data-execution_count="16">
+<div id="2f85ad8f" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Calculate Total Looking Time per AOI, per Trial, per Event</span></span>
@@ -17966,7 +17951,7 @@ font-style: inherit;">sum</span>()</span></code></pre></div>
 </div>
 <p>Now we can visualize the results. For instance, we can compare the average looking time directed at the <strong>Simple</strong> stimulus versus the <strong>Complex</strong> stimulus.</p>
 <p>Since <code>sns.barplot</code> automatically calculates the mean and confidence intervals (error bars), it is perfect for seeing if there is a statistically significant difference in how long participants looked at the two types of images.</p>
-<div id="056b1d7c" class="cell" data-execution_count="17">
+<div id="0bd11c0c" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1">plt.figure(figsize<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
@@ -18043,7 +18028,7 @@ font-style: inherit;"># Show the plot</span></span>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="FromFixationsToData_files/figure-html/cell-18-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/FromFixationsToData_files/figure-html/cell-18-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
+<p><a href="FromFixationsToData_files/figure-html/cell-18-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="https://tommasoghilardi.github.io/DevStart/CONTENT/EyeTracking/FromFixationsToData_files/figure-html/cell-18-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="527" height="449"></a></p>
 </figure>
 </div>
 </div>
@@ -18917,7 +18902,7 @@ Note
 <section id="use-i2mc" class="level1">
 <h1>Use I2MC</h1>
 <p>Let’s start with importing the libraries that we will need</p>
-<div id="f935d07c" class="cell" data-execution_count="1">
+<div id="47fa521c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> I2MC                         <span class="co" style="color: #5E5E5E;
@@ -19443,7 +19428,7 @@ font-style: inherit;">return</span> df</span></code></pre></div>
 <section id="find-our-data" class="level3">
 <h3 class="anchored" data-anchor-id="find-our-data">Find our data</h3>
 <p>Nice!! we have our import function that we will use to read our data. Now, let’s find our data! To do this, we will use the glob library, which is a handy tool for finding files in Python. Before that let’s set our working directory. The working directory is the folder where we have all our scripts and data. We can set it using the <code>os</code> library:</p>
-<div id="456fd2d2" class="cell" data-execution_count="6">
+<div id="ca51f669" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> os</span>
@@ -19452,7 +19437,7 @@ background-color: null;
 font-style: inherit;">r'&lt;&lt;&lt; YOUR PATH &gt;&gt;&gt;&gt;'</span>)</span></code></pre></div>
 </div>
 <p>This is my directory, you will have something different, you need to change it to where your data are. Once you are done with that we can use glob to find our data files. In the code below, we are telling Python to look for files with a <em>.h5</em> extension in a specific folder on our computer:</p>
-<div id="5e406c45" class="cell" data-execution_count="7">
+<div id="4b976930" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> pathlib <span class="im" style="color: #00769E;
@@ -19477,7 +19462,7 @@ font-style: inherit;">'DATA/RAW/**/*.h5'</span>))</span></code></pre></div>
 <h3 class="anchored" data-anchor-id="define-the-output-folder">Define the output folder</h3>
 <p>Before processing the files, we need a dedicated place to save the results. We will create a folder called <code>i2mc_output</code> inside our existing <code>DATA</code> directory.</p>
 <p>Using Python’s <code>pathlib</code>, we can define and create this directory safely in just two lines of code:</p>
-<div id="d612f696" class="cell" data-execution_count="8">
+<div id="7f243ac3" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> pathlib <span class="im" style="color: #00769E;
@@ -19791,7 +19776,7 @@ font-style: inherit;"># Min duration (ms) for a valid fixation</span></span></co
 <li><p><strong>Run</strong> I2MC to detect fixations.</p></li>
 <li><p><strong>Save</strong> the results (CSV) and the visualization (PNG).</p></li>
 </ol>
-<div id="dedcee17" class="cell" data-execution_count="10">
+<div id="aa7c115e" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#%% Run I2MC</span></span>
@@ -22142,7 +22127,7 @@ Stimuli!
 <section id="preparation" class="level2">
 <h2 class="anchored" data-anchor-id="preparation">Preparation:</h2>
 <p>First things first, let’s import the relevant libraries and define the path to where our stimuli are. PsychoPy has a lot of different modules that allow us to interface with different types of stimuli and systems. For this tutorial we need the following:</p>
-<div id="561a7200" class="cell" data-execution_count="1">
+<div id="8460e36c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Import some libraries from PsychoPy and others</span></span>
@@ -22164,7 +22149,7 @@ font-style: inherit;">import</span> core, event, visual,sound</span></code></pre
 <section id="stimuli-1" class="level2">
 <h2 class="anchored" data-anchor-id="stimuli-1">Stimuli:</h2>
 <p>The next step is to create the window. The window is what we will show the stimuli in; it is the canvas on which to draw objects. For now, we will create a small window of 960*540 pixels. In this way, we will able to see the stimuli and still interact with the rest of our PC interface. In a real experiment, we would probably set the window dimension to the entirety of the display (fullscr=True) and maybe on a secondary screen (screen = 1).</p>
-<div id="0192a0a3" class="cell" data-execution_count="2">
+<div id="77ed0766" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Winsize</span></span>
@@ -22265,19 +22250,11 @@ font-style: inherit;">Desktop'</span></span></code></pre></div></li>
 <li><p>Alternatively, use a raw string by prefixing the path with <code>r</code>, which tells Python to treat backslashes as literal characters:</p>
 <div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">r'C:</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">\</span><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">Users</span><span class="ch" style="color: #20794D;
+font-style: inherit;">r'C:\Users</span><span class="ch" style="color: #20794D;
 background-color: null;
 font-style: inherit;">\t</span><span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">omma</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">\</span><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">Desktop'</span></span></code></pre></div></li>
+font-style: inherit;">omma\Desktop'</span></span></code></pre></div></li>
 </ul>
 </div>
 <div id="tabset-1-2" class="tab-pane" aria-labelledby="tabset-1-2-tab">
@@ -22291,7 +22268,7 @@ font-style: inherit;">'/Users/tomma/Desktop'</span></span></code></pre></div>
 <section id="modern-solution" class="level3">
 <h3 class="anchored" data-anchor-id="modern-solution">Modern Solution</h3>
 <p>Python 3.4+ includes the <code>pathlib</code> module which provides a more intuitive, object-oriented approach to working with file paths that works across all operating systems. Once you create a Path object, the most powerful feature of pathlib is the ability to use the forward slash / operator to join paths together. This makes constructing file paths much more intuitive and readable:</p>
-<div id="2972a028" class="cell" data-execution_count="3">
+<div id="dd3fb003" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> pathlib <span class="im" style="color: #00769E;
@@ -22342,7 +22319,7 @@ font-style: inherit;">str</span>(full_path)</span></code></pre></div>
 </section>
 </div>
 </div>
-<div id="e275d918" class="cell" data-execution_count="4">
+<div id="72da4732" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#%% Load and prepare stimuli</span></span>
@@ -22352,31 +22329,7 @@ background-color: null;
 font-style: inherit;"># Setting the directory of our experiment</span></span>
 <span id="cb7-4">os.chdir(<span class="vs" style="color: #20794D;
 background-color: null;
-font-style: inherit;">r'C:</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">\</span><span class="vs" style="color: #20794D;
-background-color: null;
-font-style: inherit;">Users</span><span class="ch" style="color: #20794D;
-background-color: null;
-font-style: inherit;">\t</span><span class="vs" style="color: #20794D;
-background-color: null;
-font-style: inherit;">omma</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">\</span><span class="vs" style="color: #20794D;
-background-color: null;
-font-style: inherit;">OneDrive - Birkbeck, University of London</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">\</span><span class="vs" style="color: #20794D;
-background-color: null;
-font-style: inherit;">TomassoGhilardi</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">\</span><span class="vs" style="color: #20794D;
-background-color: null;
-font-style: inherit;">PersonalProj</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">\B</span><span class="vs" style="color: #20794D;
-background-color: null;
-font-style: inherit;">CCCD'</span>)</span>
+font-style: inherit;">r'C:\Users\tomma\OneDrive - Birkbeck, University of London\TomassoGhilardi\PersonalProj\BCCCD'</span>)</span>
 <span id="cb7-5"></span>
 <span id="cb7-6"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -22558,18 +22511,18 @@ font-style: inherit;">1</span> ]</span></code></pre></div>
 <h2 class="anchored" data-anchor-id="show-a-visual-stimulus">Show a visual stimulus:</h2>
 <p>Now we want to show a stimulus in the center of our window. To do so, we will have to use the function “draw”. As the name suggests this function draws the stimulus that we want on the window that we have created.</p>
 <p>Let’s start with displaying the fixation cross in the center.</p>
-<div id="c7bb2a4e" class="cell" data-execution_count="5">
+<div id="15416d63" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Draw the fixation</span></span>
 <span id="cb8-2">fixation.draw()</span></code></pre></div>
 </div>
 <p>Do you see the fixation cross?????? Probably not!! This is because we have drawn the fixation cross but we have not refreshed the window. Psychopy allows you to draw as many stimuli as you want on a window but the changes are only shown when you “refresh” the window. To do so we need to use the “flip” function.</p>
-<div id="77409fd3" class="cell" data-execution_count="6">
+<div id="b2963713" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">win.flip()</span></code></pre></div>
 </div>
 <p>Perfect!!!! The fixation cross is there. Before each flip, we need to draw our objects. Otherwise, we will only see the basic window with nothing in it. Let’s try!!! flip the window now.</p>
-<div id="c0b159b8" class="cell" data-execution_count="7">
+<div id="a396528c" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Flipping the window (refreshing)</span></span>
@@ -22577,7 +22530,7 @@ font-style: inherit;"># Flipping the window (refreshing)</span></span>
 </div>
 <p>The fixation is gone again! Exactly as predicted. Flipping the window allows us to draw and show something new in each frame. This means that the speed limit of our presentation is the actual frame rate of our display. <em>If we have a 60Hz display we can present an image 60 times in a second.</em></p>
 <p>So if we want to present our fixation for an entire second we would have to draw and flip it 60 times (our display has a refresh rate of 60Hz)! Let’s try:</p>
-<div id="2bfd91ad" class="cell" data-execution_count="8">
+<div id="c73a0023" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -22597,7 +22550,7 @@ font-style: inherit;"># we re-flip at the end to clean the window</span></span><
 </div>
 <p>Now we have shown the fixation for 1 second and then it disappeared. Nice!! However, you probably have already figured out that what we have done was unnecessary. If we want to present a static stimulus for 1s we could have just drawn it, flipped the window, and then waited for 1s. But now you have an idea of how to show animated stimuli or even videos!!! <strong>AMAZING!!!</strong>.</p>
 <p>Now let’s try to show the fixation for 1s by just waiting.</p>
-<div id="8ff54043" class="cell" data-execution_count="9">
+<div id="4f564ea4" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1">fixation.draw()</span>
 <span id="cb12-2">win.flip()</span>
 <span id="cb12-3">core.wait(<span class="dv" style="color: #AD0000;
@@ -22613,7 +22566,7 @@ font-style: inherit;"># we re-flip at the end to clean the window</span></span><
 <section id="play-a-sound" class="level2">
 <h2 class="anchored" data-anchor-id="play-a-sound">Play a sound:</h2>
 <p>We have seen how to show a stimulus let’s now play the sound that we have imported. This is extremely simple, we can just <code>play()</code> it:</p>
-<div id="a850ea2b" class="cell" data-execution_count="10">
+<div id="8e6e1fc5" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">presentation_sound.play()</span>
 <span id="cb13-2">core.wait(<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -22644,7 +22597,7 @@ Warning
 <li><p>we present the reward or the non-reward depending on the cue for 2s.</p></li>
 </ul>
 <p>In the end, we also close the window.</p>
-<div id="d3744a65" class="cell" data-execution_count="11">
+<div id="5e6e46f7" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">###### 1st Trial ######</span></span>
@@ -22746,14 +22699,14 @@ font-style: inherit;"># let's close the window at the end of the trial</span></s
 <section id="isi" class="level2">
 <h2 class="anchored" data-anchor-id="isi">ISI</h2>
 <p>We’ve now completed a trial, but having trials run back-to-back is often not ideal. Typically, we insert a brief pause between trials—this is called the Inter-Stimulus Interval (ISI).One common way to implement an ISI is to use a simple wait function, for example:</p>
-<div id="afb66183" class="cell" data-execution_count="12">
+<div id="e2a0de95" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">core.wait(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>)</span></code></pre></div>
 </div>
 <p>This is straightforward, but in some cases you might want more control over the timing. For example, if you need to account for any slight delays during a trial, you can use a clock to measure elapsed time.</p>
 <p>To implement this ISI, we’ll create a PsychoPy <code>core.Clock()</code>. Once initiated, this clock starts keeping track of time, letting us know how much time has elapsed. After kicking off the clock, we can do some other tasks, then wait for the remaining time to reach our 1-second ISI.</p>
-<div id="6e7f318f" class="cell" data-execution_count="13">
+<div id="29c51d66" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">### ISI</span></span>
@@ -22782,7 +22735,7 @@ font-style: inherit;">0</span>:</span>
 <p>Fantastic, we’ve nearly have our study! However, studies often don’t run to completion, especially when we’re working with infants and children. More often than not, we need to halt the study prematurely. This could be due to the participant becoming fatigued or distracted, or perhaps we need to tweak some settings.</p>
 <p>How can we accomplish this? Of course, we could just shut down Python and let the experiment crash… but surely, there’s a more elegant solution… And indeed, there is! In fact, there are numerous methods to achieve this, and we’re going to demonstrate one of the most straightforward and flexible ones to you.</p>
 <p>We can use the&nbsp;<code>event.getKeys()</code>&nbsp;function to ask Psychopy to report any key that has been pressed during our trial. In our case, we will check if the&nbsp;ESC&nbsp;key has been pressed and if it has, we will simply close the window and stop the study.</p>
-<div id="d93234ab" class="cell" data-execution_count="14">
+<div id="fd637726" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">### Check for closing experiment</span></span>
@@ -22826,7 +22779,7 @@ Important
 <h2 class="anchored" data-anchor-id="create-an-entire-experiment">Create an entire experiment</h2>
 <p>In an experiment, we want more than 1 trial. Let’s then create an experiment with 10 trials. We just need to repeat what we have done above multiple times. However, we need to randomize the type of trials, otherwise, it would be too easy to learn. To do so, we will create a list of <code>0</code> and <code>1</code>. where <code>0</code> would identify a rewarding trial and <code>1</code> would index a non-rewarding trial.</p>
 <p>To properly utilize this list of <code>0</code> and <code>1</code>, we will need to create other lists of our stimuli. This will make it easier to call the right stimuli depending on the trial. We can do so by:</p>
-<div id="feb87d94" class="cell" data-execution_count="15">
+<div id="4bcd508f" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Create list of trials in which 0 means winning and 1 means losing</span></span>
@@ -22885,7 +22838,7 @@ Caution
 <p>If you are testing this script on your laptop and do not want to lose the ability to interact with it until the experiment is finished, keep the same window size and position as the previous lines of code.</p>
 </div>
 </div>
-<div id="48297cac" class="cell" data-execution_count="16">
+<div id="01297471" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Import some libraries from PsychoPy and others</span></span>
@@ -24087,7 +24040,7 @@ Important
   <category>R</category>
   <category>Python</category>
   <guid>https://tommasoghilardi.github.io/DevStart/CONTENT/GettingStarted/DevStartSetupGuide.html</guid>
-  <pubDate>Tue, 13 Jan 2026 18:29:04 GMT</pubDate>
+  <pubDate>Wed, 08 Jul 2026 15:34:48 GMT</pubDate>
 </item>
 </channel>
 </rss>

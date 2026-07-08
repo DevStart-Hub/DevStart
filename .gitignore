@@ -16,3 +16,5 @@ _freeze/
 # But keep docs/site_libs tracked
 !docs/site_libs/
 /.quarto/
+
+/.luarc.json

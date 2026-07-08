@@ -59,8 +59,8 @@ website:
     logo: "images/LOGO.png"
 
     tools:
-      - icon: twitter
-        href: https://x.com/DevSciStart
+      - text: '{{< fa brands github >}}'
+        href: https://bsky.app/profile/devstart.org
       - icon: github
         menu:
           - text: Source Code
@@ -98,7 +98,7 @@ website:
           - CONTENT/Stats/LinearMixedModels.qmd
           - CONTENT/Stats/ModelEstimates.qmd
           - CONTENT/Stats/GeneralisedModels.qmd
-      - section: "Workshops"
+      - text: "Workshops"
         href: https://devstart.org/Workshops/
 
 
@@ -147,10 +147,9 @@ format:
     lightbox: true
     
     theme:
-      light: bookup.scss
-      # dark:  bookup_dark.scss
+      light:   bookup.scss
+      dark:    bookup_dark.scss
 
-    mainfont: 'Arial'
 
     
     # Code variables

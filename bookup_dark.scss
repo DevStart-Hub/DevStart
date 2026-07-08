@@ -1,131 +1,1473 @@
 /*-- scss:defaults --*/
+/* ══════════════════════════════════════════════════════════════
+   DevStart — Modernized Quarto Theme
+   Matches the devstart.org landing page design system
+   ══════════════════════════════════════════════════════════════ */
 
-$font-family-sans-serif: "Roboto", "Segoe UI", "Helvetica Neue", Helvetica, sans-serif;
-$font-family-monospace: "Fira Mono", "Menlo", "Andale Mono", monospace;
+// ── Import Google Fonts (Outfit + Source Serif 4 + JetBrains Mono) ──
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+// ── Bootstrap brand colors ──
+$primary:   #008080 !default;   // teal
+$secondary: #963697 !default;   // purple
+$success:   #2d8f5e !default;
+$info:      #2d6bcf !default;
+$warning:   #d47023 !default;
+$danger:    #c44569 !default;
+
+// ── Body / surfaces ──
+$body-bg:    #fafcfc !default;
+$body-color: #1a2634 !default;
+
+// ── Fonts ──
+$font-family-sans-serif: 'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif !default;
+$font-family-serif:      'Source Serif 4', Georgia, serif !default;
+$font-family-monospace:  'JetBrains Mono', 'Fira Mono', Menlo, monospace !default;
+
+// ── Type scale ──
 $font-size-root: 16px;
-$h1-font-size: 2.2em;
-$h2-font-size: 1.75em;
-$h3-font-size: 1.5em;
-$h4-font-size: 1.25em;
+$font-weight-base: 400;
+$line-height-base: 1.65;
 
-$body-bg: #1c1f2b;
-$body-color: #cad2dd;
-$footer-bg: #1c1f2b;
-$footer-fg: #cad2dd;
-$toc-color: #008080;
+$h1-font-size: 2.4rem;
+$h2-font-size: 1.85rem;
+$h3-font-size: 1.45rem;
+$h4-font-size: 1.2rem;
+$h5-font-size: 1.05rem;
+$headings-font-weight: 700;
+$headings-line-height: 1.25;
+$headings-letter-spacing: -0.02em;
 
+// ── Borders / radii ──
+$border-radius:    10px;
+$border-radius-sm: 6px;
+$border-radius-lg: 16px;
+
+// ── Layout grid ──
+$grid-sidebar-width:       320px;
+$grid-body-width:          950px;
+$grid-margin-width:        300px;
+$grid-column-gutter-width: 1.5rem;
+
+/*------------------------------------------------------------*/
+/* CSS custom properties (light + dark)                       */
+/*------------------------------------------------------------*/
+:root {
+  /* Brand palette */
+
+  --purple:        #963697;
+  --purple-light:  #c17fc2;
+
+  --blue:   #2d6bcf;
+  --orange: #d47023;
+  --green:  #2d8f5e;
+  --rose:   #c44569;
+
+  /* Surfaces */
+
+  /* Shadows */
+
+  /* Bootstrap link bridges */
+  --bs-body-font-family: 'Outfit', system-ui, sans-serif;
+  --bs-body-font-weight: 400;
+  --bs-link-color-rgb: 0, 128, 128;
+  --bs-link-hover-color-rgb: 0, 179, 179;
+
+  /* Sidebar */
+  --sidebar-input-border: #e2e8f0;
+  --sidebar-form-bg:      transparent;
+
+  /* TOC */
+  --toc-border-color:      #edf2f7;
+
+  /* Code */
+  --hl-code-comments: #718096;
+
+  /* Header / footer */
+  --header-footer-border: #e2e8f0;
+
+  /* Tables */
+  --table-tr-border: #edf2f7;
+  --table-out-borders: #e2e8f0;
+  --table-tr-hover: rgba(0, 128, 128, 0.06);
+
+  /* Figures */
+  --figure-img-border: 1px solid #e2e8f0;
+  --figure-img-shadow: var(--shadow-md);
+
+  /* Cards */
+
+  /* Callouts (soft modern tints) */
+
+  /* Dark mode values */
+  --bg:           #111616;
+  --bg-alt:       #181f1f;
+  --text:         #f8fafc;
+  --text-mid:     #cbd5e1;
+  --text-muted:   #8a9c9c;
+  --border:       #263333;
+  --border-light: #1d2727;
+  --teal:        #2dd4bf;
+  --teal-light:  #5eead4;
+  --teal-dark:   #14b8a6;
+  --teal-mist:   rgba(45, 212, 191, 0.12);
+  --accent-purple:      #c084fc;
+  --accent-purple-mist: rgba(192, 132, 252, 0.12);
+  --purple-mist:        rgba(150, 54, 151, 0.15);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.4), 0 8px 24px rgba(0,0,0,0.5);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.5), 0 16px 40px rgba(0,0,0,0.6);
+  --sidebar-fg:           #cbd5e1;
+  --sidebar-bg-docked:    #181f1f;
+  --sidebar-border:       #1d2727;
+  --sidebar-active-color: #2dd4bf;
+  --sidebar-part-color:   #c084fc;
+  --bs-code-color: #c084fc;
+  --bs-code-bg:    rgba(192, 132, 252, 0.10);
+  --listing-card-border:       #263333;
+  --listing-card-shadow:       rgba(0, 0, 0, 0.4);
+  --listing-card-shadow-hover: rgba(0, 0, 0, 0.6);
+  --callout-color:           #f8fafc;
+  --callout-note-bg:         rgba(45, 107, 207, 0.12);
+  --callout-note-title:      #93b8f0;
+  --callout-tip-bg:          rgba(13, 122, 76, 0.18);
+  --callout-tip-title:       #34d399;
+  --callout-warning-bg:      rgba(154, 103, 0, 0.18);
+  --callout-warning-title:   #fbbf24;
+  --callout-caution-bg:      rgba(154, 103, 0, 0.18);
+  --callout-caution-title:   #fbbf24;
+  --callout-important-bg:    rgba(196, 69, 105, 0.15);
+  --callout-important-title: #f4789a;
+}
 
 /*-- scss:rules --*/
-
-:root {
-    --bs-body-font-weight: 300;
-    --link-color: #c1ff42;
-
-    --toc-active-color: #c1ff42;
-    --toc-border-color: #555;
-
-    --sidebar-fg: #ccd1e2;
-    --sidebar-bg-docked: #2d3143;
-    --sidebar-border: transparent;
-    --sidebar-active-link-color: #c1ff42;
-    --sidebar-part-color: #ccd1e2;
-    --sidebar-input-border: #5d6173;
-
-    --figure-img-border: 1px solid #5d6173;
-    --figure-img-shadow: none;
-
-    --code-block-color: #9dbed8;
-    --code-block-bg: #2d3143;
-    --code-color: #9dbed8;
-    --code-bg: #2d3143;
-
-    --hl-code-comments: #8e8d8c;
-
-    --header-footer-border: #2d3143;
-
-    --table-tr-border: #50616e;
-    --table-out-borders: #AAA;
-    --table-tr-hover: #242838;
-
-    --reader-toggle-bg: #2d3143;
-    --reader-toggle-border: #5d6173;
-
-    --callout-color: #000;
-    --callout-warning-bg: #ffe99f;
-    --callout-warning-title: #af8300;
-    --callout-note-bg: #b4d3ff;
-    --callout-note-title: #2f65b8;
-    --callout-important-bg: #f8bcc0;
-    --callout-important-title: #900;
-    --callout-caution-bg: #ffdabd;
-    --callout-caution-title: #be7200;
-    --callout-tip-bg: #bafcde;
-    --callout-tip-title: #050;
-
-    --listing-card-border: #5d6173;
-    --listing-card-shadow: rgba(255, 255, 255, 0.04);
-    --listing-card-shadow-hover: rgba(255, 255, 255, 0.08);
-
-    /* Font styles from Light Theme */
-    --toc-font-family: "Roboto", sans-serif;
-}
-
-.table,
-.dataTable {
-    --bs-table-accent-bg: #35394b;
-    --bs-table-striped-bg: #2d3143;
-}
-
+/* ══════════════════════════════════════════════════════════════
+   GLOBAL
+   ══════════════════════════════════════════════════════════════ */
 body {
-    color-scheme: dark;
+  font-family: var(--bs-body-font-family);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  font-weight: 400;
+  line-height: 1.65;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Sidebar */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--bs-body-font-family);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+h1 { margin-top: 3rem;   margin-bottom: 1.25rem; clear: both; }
+h2 { margin-top: 2.8rem; margin-bottom: 1rem;    clear: both; }
+h3 { margin-top: 2.2rem; margin-bottom: 0.85rem; }
+h4, h5, h6 { margin-top: 1.8rem; margin-bottom: 0.75rem; }
+
+strong, b { font-weight: 600 !important; }
+
+a {
+  color: var(--teal);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+a:hover { color: var(--teal-light); }
+
+::selection {
+  background: var(--accent-purple-mist);
+  color: inherit;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MODERN SCROLLBAR
+   ══════════════════════════════════════════════════════════════ */
+::-webkit-scrollbar { height: 8px; width: 8px; }
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.04);
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(109, 40, 217, 0.3);
+  border-radius: 100px;
+  transition: background 0.2s;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent-purple); }
+
+/* ══════════════════════════════════════════════════════════════
+   BUTTONS — modern, rounded, soft shadow, hover lift
+   ══════════════════════════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.72rem 1.4rem;
+  border-radius: 9px;
+  font-family: var(--bs-body-font-family);
+  font-size: 0.92rem;
+  font-weight: 600;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 128, 128, 0.2);
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background: var(--teal-dark);
+  border-color: var(--teal-dark);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 128, 128, 0.25);
+}
+
+.btn-secondary {
+  background: var(--purple);
+  border-color: var(--purple);
+  color: #fff;
+  box-shadow: 0 1px 3px rgba(150, 54, 151, 0.2);
+}
+.btn-secondary:hover {
+  background: #7a2c7b;
+  border-color: #7a2c7b;
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(150, 54, 151, 0.25);
+}
+
+.btn-outline-primary,
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+}
+.btn-outline-primary:hover,
+.btn-ghost:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+  background: transparent;
+  transform: translateY(-1px);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SIDEBAR & NAVIGATION — floating card style
+   ══════════════════════════════════════════════════════════════ */
+
+/* Make the sidebar container look like a floating card */
+#quarto-sidebar.sidebar,
+#quarto-sidebar {
+  background: var(--bg-alt) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem 1.1rem !important;
+  margin: 1rem 0.5rem 1rem 1rem;
+  height: fit-content;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  position: sticky;
+  top: 1rem;
+
+  /* Cute modern purple scrollbar — Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(109, 40, 217, 0.35) transparent;
+}
+
+/* Cute modern purple scrollbar — WebKit (Chrome, Safari, Edge) */
+#quarto-sidebar::-webkit-scrollbar,
+#quarto-sidebar.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+#quarto-sidebar::-webkit-scrollbar-track,
+#quarto-sidebar.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 8px 0;
+}
+#quarto-sidebar::-webkit-scrollbar-thumb,
+#quarto-sidebar.sidebar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg,
+    rgba(109, 40, 217, 0.35) 0%,
+    rgba(150, 54, 151, 0.45) 100%);
+  border-radius: 100px;
+  transition: background 0.2s ease;
+}
+#quarto-sidebar::-webkit-scrollbar-thumb:hover,
+#quarto-sidebar.sidebar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg,
+    var(--accent-purple) 0%,
+    var(--purple) 100%);
+}
+
+/* Purple scrollbar — dark mode tuned */
+#quarto-sidebar,
+#quarto-sidebar {
+  scrollbar-color: rgba(192, 132, 252, 0.35) transparent;
+}
+#quarto-sidebar::-webkit-scrollbar-thumb,
+#quarto-sidebar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg,
+    rgba(192, 132, 252, 0.35) 0%,
+    rgba(192, 132, 252, 0.55) 100%);
+}
+#quarto-sidebar::-webkit-scrollbar-thumb:hover,
+#quarto-sidebar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg,
+    #c084fc 0%,
+    #a855f7 100%);
+}
+
+/* Kill Quarto's default right border on the sidebar column */
+.sidebar.sidebar-navigation:not(.rollup) {
+  border-right: none !important;
+}
+
 #quarto-sidebar,
 #quarto-content .sidebar-navigation {
-    .sidebar-item-container {
-        a {
-            color: var(--sidebar-fg); 
-            transition: color 0.3s; 
-        }
+  .sidebar-item-container {
+    margin-bottom: 0.7em;
 
-        a.active,
-        a:hover {
-            font-family: var(--toc-font-family);
-            color: var(--sidebar-active-color);
-            border-left: 3px solid var(--sidebar-active-color);
-            padding-left: 15px;
-        }
+    a {
+      color: var(--sidebar-fg);
+      transition: all 0.2s ease;
+      border-radius: 6px;
+      padding: 4px 10px;
     }
-} .sidebar-logo {
-  max-height: 10px !important;  /* Adjust this value to your preference */
-  width: auto !important;
+
+    a:hover {
+      color: var(--sidebar-active-color);
+      background: var(--teal-mist);
+    }
+
+    a.active {
+      color: var(--sidebar-active-color);
+      background: var(--teal-mist);
+      border-left: 3px solid var(--sidebar-active-color);
+      padding-left: 12px;
+      font-weight: 600;
+    }
+
+    .sidebar-item { font-weight: 600; }
+  }
 }
 
-/* Page Headings in TOC on Right Side */
-#quarto-margin-sidebar,
-#quarto-content .margin-sidebar,
-#quarto-sidebar #TOC {
-    ul {
-        li a {
-            font-family: var(--toc-font-family);
-            color: var(--sidebar-fg);
-            transition: color 0.3s;
-        }
-
-        li a.active,
-        li a:hover {
-            color: var(--sidebar-active-color);
-            border-left: 3px solid var(--sidebar-active-color);
-            padding-left: 15px;
-        }
-    }
-}
-
-
-/* Style the section headers bold */
 #quarto-sidebar .sidebar-item.sidebar-item-section > .sidebar-item-container > a {
-    font-weight: bold;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.sidebar-logo {
+  max-width: 12em;
+  padding-bottom: 0.75em;
+}
+
+.sidebar-navigation .quarto-navigation-tool {
+  font-size: 1.1em;
+  color: var(--text-mid);
+  transition: color 0.2s;
+}
+.sidebar-navigation .quarto-navigation-tool:hover { color: var(--teal); }
+
+/* ══════════════════════════════════════════════════════════════
+   TABLE OF CONTENTS — modernized
+   ══════════════════════════════════════════════════════════════ */
+
+/* Pre-init fallback: show nested ULs until Quarto JS attaches */
+nav[role="doc-toc"]:not(.toc-active) ul.collapse {
+  display: block;
+}
+
+/* Kill the default left border/glow on the TOC container */
+nav[role="doc-toc"],
+#quarto-margin-sidebar nav[role="doc-toc"],
+.sidebar.margin-sidebar nav[role="doc-toc"] {
+  border-left: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* Kill borders/padding on TOC ULs so the pill wraps the text, not the column */
+nav[role="doc-toc"] ul,
+nav[role="doc-toc"] ul ul,
+nav[role="doc-toc"] ul ul ul {
+  border-left: none !important;
+  list-style: none;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* Nested items: indent via margin on the <li>, not padding on the <ul> */
+nav[role="doc-toc"] > ul > li > ul > li { margin-left: 0.9rem; }
+nav[role="doc-toc"] > ul > li > ul > li > ul > li { margin-left: 0.9rem; }
+
+/* TOC title "On this page" */
+nav[role="doc-toc"] > h2,
+#toc-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-muted);
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* TOC links — inline-block so the background wraps only the text */
+nav[role="doc-toc"] .nav-link {
+  display: inline-block;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  padding: 4px 10px;
+  margin: 0;
+  border-radius: 6px;
+  transition: color 0.2s ease, background 0.2s ease;
+  text-decoration: none;
+  border: none !important;
+}
+
+nav[role="doc-toc"] .nav-link:hover {
+  color: var(--teal);
+  background: transparent;
+}
+
+/* Active — soft pill wrapping just the text */
+nav[role="doc-toc"] .nav-link.active {
+  color: var(--teal) !important;
+  background: var(--teal-mist) !important;
+  font-weight: 600;
+  border: none !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CODE — inline only (let your YAML highlight-style handle blocks)
+   ══════════════════════════════════════════════════════════════ */
+code:not(.sourceCode) {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.88em;
+  color: var(--bs-code-color);
+  background: var(--bs-code-bg);
+  padding: 0.15em 0.4em;
+  border-radius: 5px;
+}
+
+/* Just round the corners of code blocks — don't touch background/colors */
+div.sourceCode {
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+}
+pre.sourceCode { border-radius: 10px; }
+
+/* Cell outputs — neutral so they work with any highlight-style */
+.cell-output.cell-output-stdout,
+.cell-output.cell-output-display {
+  background-color: var(--bg-alt) !important;
+  border-left: 3px solid var(--border) !important;
+  border-bottom: 2px solid var(--border) !important;
+  padding: 0.7em 0.9em;
+  border-radius: 0 0 0.4rem 0.4rem;
+  color: var(--text-mid);
+}
+
+.cell-output.cell-output-error {
+  border-left: 3px solid var(--rose) !important;
+  border-bottom: 2px solid var(--rose) !important;
+  background-color: rgba(196, 69, 105, 0.05);
+  border-radius: 0 0 0.4rem 0.4rem;
+}
+
+.cell-output.cell-output-stderr.cell-output-warning {
+  border-left: 3px solid var(--orange) !important;
+  border-bottom: 2px solid var(--orange) !important;
+  background-color: rgba(212, 112, 35, 0.05);
+  border-radius: 0 0 0.4rem 0.4rem;
+}
+
+.cell-output.cell-output-stderr:not(.cell-output-warning) {
+  border-left: 3px solid var(--teal-light) !important;
+  border-bottom: 2px solid var(--teal-light) !important;
+  background-color: rgba(0, 179, 179, 0.05);
+  border-radius: 0 0 0.4rem 0.4rem;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CALLOUTS — modern soft tinted look
+   ══════════════════════════════════════════════════════════════ */
+.callout {
+  border: 1px solid var(--border-light) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+.callout.callout-style-default > .callout-header {
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  padding: 0.65rem 1rem;
+}
+
+.callout-note    { border-left: 4px solid var(--blue) !important; }
+.callout-tip     { border-left: 4px solid var(--green) !important; }
+.callout-warning { border-left: 4px solid var(--orange) !important; }
+.callout-caution { border-left: 4px solid var(--orange) !important; }
+.callout-important { border-left: 4px solid var(--rose) !important; }
+
+/* ══════════════════════════════════════════════════════════════
+   TABLES
+   ══════════════════════════════════════════════════════════════ */
+table {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-sm);
+}
+
+table thead {
+  background: var(--teal-mist);
+  color: var(--text);
+}
+
+table thead th {
+  font-weight: 600;
+  border-bottom: 2px solid var(--teal-light) !important;
+  padding: 0.75rem 1rem !important;
+}
+
+table tbody tr {
+  border-bottom: 1px solid var(--table-tr-border);
+  transition: background 0.15s ease;
+}
+table tbody tr:hover { background: var(--table-tr-hover); }
+table tbody td { padding: 0.65rem 1rem !important; }
+
+/* ══════════════════════════════════════════════════════════════
+   FIGURES & IMAGES
+   ══════════════════════════════════════════════════════════════ */
+figure img,
+.figure img,
+p > img {
+  border-radius: 10px;
+  border: var(--figure-img-border);
+  box-shadow: var(--shadow-md);
+}
+
+figcaption {
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  margin-top: 0.6rem;
+  font-style: italic;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CUSTOM CARD COMPONENTS (kept compatible with your existing markup)
+   ══════════════════════════════════════════════════════════════ */
+.custom-card {
+  background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  margin: 8px 0;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.custom-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.custom-card-header {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.65rem 0.9rem;
+  border-radius: 12px 12px 0 0;
+  font-weight: 600;
+}
+
+.card-body  { padding: 0.85rem 0.9rem; }
+.card-title { margin: 0 0 0.3rem; font-weight: 600; }
+.card-text  { margin: 0.25rem 0 0; }
+
+/* Quarto listing cards */
+.quarto-grid-item.card,
+.quarto-post.card {
+  border: 1px solid var(--listing-card-border) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 2px var(--listing-card-shadow), 0 4px 12px var(--listing-card-shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  background: var(--bg-alt);
+}
+.quarto-grid-item.card:hover,
+.quarto-post.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px var(--listing-card-shadow-hover), 0 16px 32px var(--listing-card-shadow-hover);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TABS (your tabset_cool variant)
+   ══════════════════════════════════════════════════════════════ */
+.tabset_cool .tabbed-pane .nav-tabs .nav-link {
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  font-weight: 600 !important;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  color: var(--text-mid);
+  transition: all 0.2s ease;
+}
+
+.tabset_cool .tabbed-pane .nav-tabs .nav-link:hover {
+  background: var(--teal-mist);
+  color: var(--teal);
+}
+
+.tabset_cool .tabbed-pane .nav-tabs .nav-link.active {
+  background: var(--teal);
+  color: #fff;
+  border-color: var(--teal);
+  box-shadow: 0 2px 8px rgba(0, 128, 128, 0.2);
+}
+
+.tabset_cool .tabbed-pane .nav-tabs {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  gap: 8px;
+}
+
+.tabset_cool .tabbed-pane .nav-tabs .nav-item { margin-bottom: 0; }
+.tabset_cool .tabbed-pane .tab-content { display: flex; }
+
+/* ══════════════════════════════════════════════════════════════
+   PROFILE CARDS
+   ══════════════════════════════════════════════════════════════ */
+.profile-container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin: 24px auto;
+  max-width: 100%;
+  align-items: stretch;
+}
+
+.profile-card {
+  background: var(--bg-alt);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  height: 100%;
+}
+
+.profile-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.profile-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--teal-light);
+  box-shadow: var(--shadow-lg);
+}
+
+.profile-icon {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--teal-mist);
+}
+
+.profile-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 22px 0 8px;
+  white-space: normal;
+  text-align: center;
+  color: var(--text);
+}
+
+.profile-position {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+  width: 100%;
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .profile-container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+  .profile-container { grid-template-columns: minmax(0, 1fr); }
+  .profile-name { word-break: break-word; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   INFO BOX (modernized)
+   ══════════════════════════════════════════════════════════════ */
+.info-box {
+  background: linear-gradient(135deg, var(--teal-mist) 0%, rgba(255,255,255,0.6) 100%);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--teal);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  margin: 0.75rem 1rem 0.75rem 0;
+  width: 260px;
+  max-width: 35%;
+  float: right;
+  clear: right;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-mid);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  z-index: 1;
+}
+
+.info-box p:last-child { margin-bottom: 0; }
+
+.info-box-title {
+  font-weight: 700;
+  font-size: 0.88rem;
+  margin-bottom: 0.3rem;
+  color: var(--text);
+  letter-spacing: -0.005em;
+}
+
+.info-box-small  { width: 200px; max-width: 25%; }
+.info-box-medium { width: 300px; max-width: 40%; }
+.info-box-large  { width: 400px; max-width: 50%; }
+
+.clear-floats,
+.info-box + h1,
+.info-box + h2 { clear: both !important; }
+
+@media (max-width: 1024px) { .info-box { max-width: 45%; } }
+@media (max-width: 900px)  { .info-box { max-width: 60%; } }
+@media (max-width: 768px) {
+  .info-box {
+    float: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem 0;
+  }
+}
+
+p, ul, ol, blockquote, pre { clear: none; }
+
+/* ══════════════════════════════════════════════════════════════
+   HIDE KEYWORDS SECTION (kept from your original)
+   ══════════════════════════════════════════════════════════════ */
+body main > header div.keywords { display: none; }
+
+
+/* ══════════════════════════════════════════════════════════════
+   FIXES — high-specificity overrides for Quarto defaults
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Sidebar items: force teal-mist highlight on hover/active ── */
+#quarto-sidebar .sidebar-item-container a.sidebar-item-text,
+#quarto-sidebar .sidebar-item-container a {
+  display: block;
+  padding: 6px 12px !important;
+  border-radius: 7px;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+  color: var(--sidebar-fg);
+  text-decoration: none;
+}
+#quarto-sidebar .sidebar-item-container a:hover {
+  background: var(--teal-mist) !important;
+  color: var(--sidebar-active-color) !important;
+}
+#quarto-sidebar .sidebar-item-container a.active,
+#quarto-sidebar .sidebar-item-container .active > a,
+#quarto-sidebar .sidebar-link.active {
+  background: var(--teal-mist) !important;
+  color: var(--sidebar-active-color) !important;
+  border-left: 3px solid var(--sidebar-active-color) !important;
+  padding-left: 9px !important;
+  font-weight: 600;
+}
+
+/* Section headers ("Getting started", "Eye-tracking", etc.) */
+#quarto-sidebar .sidebar-item.sidebar-item-section > .sidebar-item-container > a,
+#quarto-sidebar .sidebar-item-section > .sidebar-item-container > .sidebar-item-text {
+  font-weight: 700 !important;
+  color: var(--text) !important;
+  font-size: 0.96rem;
+}
+
+/* ── Callout headers: force readable title contrast ── */
+.callout.callout-style-default > .callout-header,
+div.callout > .callout-header {
+  font-weight: 700 !important;
+  padding: 0.65rem 1rem !important;
+}
+.callout-note > .callout-header {
+  background: var(--callout-note-bg) !important;
+  color: var(--callout-note-title) !important;
+}
+.callout-note .callout-title-container,
+.callout-note .callout-title { color: var(--callout-note-title) !important; }
+
+.callout-tip > .callout-header {
+  background: var(--callout-tip-bg) !important;
+  color: var(--callout-tip-title) !important;
+}
+.callout-tip .callout-title-container,
+.callout-tip .callout-title { color: var(--callout-tip-title) !important; }
+
+.callout-warning > .callout-header {
+  background: var(--callout-warning-bg) !important;
+  color: var(--callout-warning-title) !important;
+}
+.callout-warning .callout-title-container,
+.callout-warning .callout-title { color: var(--callout-warning-title) !important; }
+
+.callout-caution > .callout-header {
+  background: var(--callout-caution-bg, var(--callout-warning-bg)) !important;
+  color: var(--callout-caution-title, var(--callout-warning-title)) !important;
+}
+.callout-caution .callout-title-container,
+.callout-caution .callout-title { color: var(--callout-caution-title, var(--callout-warning-title)) !important; }
+
+.callout-important > .callout-header {
+  background: var(--callout-important-bg) !important;
+  color: var(--callout-important-title) !important;
+}
+.callout-important .callout-title-container,
+.callout-important .callout-title { color: var(--callout-important-title) !important; }
+
+/* Callout body text — readable in both modes */
+.callout .callout-body,
+.callout .callout-body-container,
+.callout .callout-body p {
+  color: var(--text) !important;
+  background: var(--bg-alt) !important;
+}
+
+/* ── Cell outputs: ALWAYS light gray bg + dark gray text (both modes) ── */
+.cell-output.cell-output-stdout,
+.cell-output.cell-output-stdout pre,
+.cell-output.cell-output-stdout code,
+.cell-output.cell-output-display,
+.cell-output.cell-output-display pre,
+.cell-output.cell-output-display code {
+  background-color: #f3f4f6 !important;
+  color: #374151 !important;
+  border-left: 3px solid #d1d5db !important;
+  border-bottom: 2px solid #d1d5db !important;
+  border-radius: 0 0 0.4rem 0.4rem;
+}
+.cell-output.cell-output-stdout pre,
+.cell-output.cell-output-display pre {
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0.7em 0.9em !important;
+  margin: 0 !important;
+  box-shadow: none !important;
 }
 
 
+/* ── Sidebar section headers — uppercase muted gray (like HTML preview) ── */
+#quarto-sidebar .sidebar-item.sidebar-item-section > .sidebar-item-container > a,
+#quarto-sidebar .sidebar-item-section > .sidebar-item-container > .sidebar-item-text,
+#quarto-sidebar .sidebar-item-section > .sidebar-item-container > a {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.09em !important;
+  color: var(--text-muted) !important;
+  background: transparent !important;
+  border-left: none !important;
+  padding: 0.6rem 12px 0.4rem !important;
+  margin-top: 0.5rem;
+}
+#quarto-sidebar .sidebar-item.sidebar-item-section > .sidebar-item-container > a:hover {
+  color: var(--teal) !important;
+  background: transparent !important;
+}
+
+/* Don't apply the active pill background to section headers */
+#quarto-sidebar .sidebar-item-section > .sidebar-item-container > a.active {
+  background: transparent !important;
+  border-left: none !important;
+  padding-left: 12px !important;
+}
+
+/* ── Breadcrumbs — modern, visible separator ── */
+.quarto-page-breadcrumbs,
+nav[aria-label="breadcrumb"],
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  padding: 0;
+  background: transparent;
+  list-style: none;
+}
+
+.quarto-page-breadcrumbs a,
+.breadcrumb a,
+nav[aria-label="breadcrumb"] a {
+  color: var(--teal);
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+.quarto-page-breadcrumbs a:hover,
+.breadcrumb a:hover {
+  background: var(--teal-mist);
+  color: var(--teal-dark);
+}
+
+/* Active / current crumb */
+.breadcrumb-item.active,
+.quarto-page-breadcrumbs .active {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* The separator — kill Bootstrap's default and use a modern chevron */
+.breadcrumb-item + .breadcrumb-item::before,
+.quarto-page-breadcrumbs li + li::before {
+  content: "›" !important;
+  color: var(--text-muted) !important;
+  font-size: 1.1rem;
+  font-weight: 400;
+  padding: 0 0.15rem;
+  opacity: 0.7;
+  display: inline-block;
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   TIGHTEN SPACING — overrides earlier loose values
+   ══════════════════════════════════════════════════════════════ */
+
+/* Body line-height — back to comfortable, not airy */
+body {
+  line-height: 1.5 !important;
+}
+
+/* Headings — much tighter top margins */
+h1 { margin-top: 1.8rem !important; margin-bottom: 0.8rem !important; }
+h2 { margin-top: 1.6rem !important; margin-bottom: 0.7rem !important; }
+h3 { margin-top: 1.3rem !important; margin-bottom: 0.55rem !important; }
+h4, h5, h6 { margin-top: 1.1rem !important; margin-bottom: 0.5rem !important; }
+
+/* Sidebar items — compact */
+#quarto-sidebar .sidebar-item-container {
+  margin-bottom: 0.15rem !important;
+}
+#quarto-sidebar .sidebar-item-container a.sidebar-item-text,
+#quarto-sidebar .sidebar-item-container a {
+  padding: 4px 10px !important;
+  font-size: 0.9rem;
+  line-height: 1.35 !important;
+}
+#quarto-sidebar .sidebar-item-container a.active,
+#quarto-sidebar .sidebar-item-container .active > a,
+#quarto-sidebar .sidebar-link.active {
+  padding-left: 7px !important;
+}
+
+/* Sidebar section headers — tighter */
+#quarto-sidebar .sidebar-item.sidebar-item-section > .sidebar-item-container > a,
+#quarto-sidebar .sidebar-item-section > .sidebar-item-container > .sidebar-item-text {
+  padding: 0.45rem 10px 0.25rem !important;
+  margin-top: 0.4rem !important;
+}
+
+/* Sidebar card — slightly less internal padding */
+#quarto-sidebar.sidebar,
+#quarto-sidebar {
+  padding: 1.1rem 0.85rem !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FIX double border on cell-output
+   ══════════════════════════════════════════════════════════════ */
+
+/* Outer container gets the border + background */
+.cell-output.cell-output-stdout,
+.cell-output.cell-output-display {
+  background-color: #f3f4f6 !important;
+  color: #374151 !important;
+  border-left: 3px solid #d1d5db !important;
+  border-bottom: 2px solid #d1d5db !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-radius: 0 0 0.4rem 0.4rem;
+}
+
+/* Inner pre/code — strip ALL borders/backgrounds, inherit from parent */
+.cell-output.cell-output-stdout pre,
+.cell-output.cell-output-stdout code,
+.cell-output.cell-output-display pre,
+.cell-output.cell-output-display code {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #374151 !important;
+  border: none !important;
+  border-left: none !important;
+  border-bottom: none !important;
+  border-radius: 0 !important;
+  padding: 0.7em 0.9em !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   DARK / LIGHT THEME TOGGLE — floating pill, bottom-right
+   ══════════════════════════════════════════════════════════════ */
+
+.quarto-color-scheme-toggle {
+  position: fixed !important;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 1000;
+  width: 46px;
+  height: 46px;
+  background: var(--bg-alt) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 50% !important;
+  box-shadow: var(--shadow-md);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.quarto-color-scheme-toggle:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--teal) !important;
+}
+
+/* Hide Quarto's default Bootstrap toggle icon AND any text */
+.quarto-color-scheme-toggle a,
+.quarto-color-scheme-toggle .quarto-color-scheme-toggle-link {
+  display: block !important;
+  width: 100%;
+  height: 100%;
+  font-size: 0 !important;
+  color: transparent !important;
+  text-decoration: none;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  position: relative;
+}
+.quarto-color-scheme-toggle a i,
+.quarto-color-scheme-toggle .bi,
+.quarto-color-scheme-toggle i.bi {
+  display: none !important;
+}
+
+/* Inject the icon as a background on the toggle itself */
+.quarto-color-scheme-toggle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 22px;
+  height: 22px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+/* LIGHT mode → moon icon (click to go dark) */
+.quarto-color-scheme-toggle::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/></svg>");
+}
+
+/* DARK mode → sun icon (click to go light) */
+.quarto-dark .quarto-color-scheme-toggle::before,
+[data-theme="dark"] .quarto-color-scheme-toggle::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fbbf24' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='4'/><path d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41'/></svg>");
+}
+
+.quarto-color-scheme-toggle:hover::before {
+  transform: rotate(-15deg) scale(1.1);
+}
+
+/* Hide leftover empty wrappers in the sidebar */
+.sidebar-tools-main:empty,
+.sidebar-tools-collapse:empty { display: none; }
+
+
+/* In dark.scss the page is always dark, so default to sun icon */
+.quarto-color-scheme-toggle::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fbbf24' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='4'/><path d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41'/></svg>") !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   CELL OUTPUT — errors, warnings, messages
+   Same light gray bg + dark gray text in BOTH modes
+   Only the left border color differs by type
+   ══════════════════════════════════════════════════════════════ */
+
+.cell-output.cell-output-error,
+.cell-output.cell-output-stderr {
+  background-color: #f3f4f6 !important;
+  color: #374151 !important;
+  border-bottom: 2px solid #d1d5db !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-radius: 0 0 0.4rem 0.4rem;
+}
+
+/* Strip inner pre/code styling so they inherit the light gray */
+.cell-output.cell-output-error pre,
+.cell-output.cell-output-error code,
+.cell-output.cell-output-stderr pre,
+.cell-output.cell-output-stderr code {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #374151 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0.7em 0.9em !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Type-specific left borders */
+.cell-output.cell-output-error {
+  border-left: 3px solid #c44569 !important;  /* rose / red */
+}
+.cell-output.cell-output-stderr.cell-output-warning {
+  border-left: 3px solid #d47023 !important;  /* orange */
+}
+.cell-output.cell-output-stderr:not(.cell-output-warning) {
+  border-left: 3px solid #00b3b3 !important;  /* teal — messages */
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   SEARCH DROPDOWN — readable in dark mode
+   ══════════════════════════════════════════════════════════════ */
+
+/* "X matching documents" header */
+.aa-Panel .search-result-header,
+.aa-Panel .aa-SourceHeader,
+.aa-Panel .aa-SourceHeaderTitle,
+.search-result-header {
+  background: var(--bg-alt) !important;
+  color: var(--text) !important;
+  font-weight: 600 !important;
+  border-bottom: 1px solid var(--border-light) !important;
+  padding: 0.6rem 0.9rem !important;
+}
+
+/* Search panel container */
+.aa-Panel {
+  background: var(--bg-alt) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--shadow-lg) !important;
+  color: var(--text) !important;
+}
+
+/* Individual result items */
+.aa-Panel .aa-Item,
+.aa-Panel .search-item {
+  color: var(--text) !important;
+  background: transparent !important;
+}
+.aa-Panel .aa-Item .search-item-title,
+.aa-Panel .search-item-title {
+  color: var(--text) !important;
+  font-weight: 600;
+}
+.aa-Panel .aa-Item .search-item-context,
+.aa-Panel .search-item-context,
+.aa-Panel .aa-Item p {
+  color: var(--text-mid) !important;
+}
+
+/* Active / hovered result */
+.aa-Panel .aa-Item[aria-selected="true"],
+.aa-Panel .aa-Item:hover {
+  background: var(--teal-mist) !important;
+}
+.aa-Panel .aa-Item[aria-selected="true"] .search-item-title,
+.aa-Panel .aa-Item[aria-selected="true"] *,
+.aa-Panel .aa-Item:hover .search-item-title {
+  color: var(--teal) !important;
+}
+
+/* "X more matches in this document" footer */
+.search-result-doc-section,
+.aa-Panel .search-more {
+  color: var(--text-muted) !important;
+  background: var(--bg) !important;
+}
+
+/* Highlighted search term — keep teal-mist with readable text */
+.aa-Panel mark,
+.aa-Panel .search-match {
+  background: var(--teal-mist) !important;
+  color: var(--teal) !important;
+  font-weight: 600;
+  padding: 0 2px;
+  border-radius: 3px;
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   SIDEBAR REFINEMENT — softer scrollbar, deeper shadow
+   ══════════════════════════════════════════════════════════════ */
+
+#quarto-sidebar.sidebar,
+#quarto-sidebar {
+  /* Deeper shadow for dark mode — uses black at higher opacity */
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.4),
+    0 8px 24px rgba(0, 0, 0, 0.5),
+    0 24px 48px rgba(0, 0, 0, 0.4) !important;
+
+  padding-right: 6px !important;
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(192, 132, 252, 0.3) transparent;
+}
+
+#quarto-sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+#quarto-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 14px 0;
+}
+#quarto-sidebar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg,
+    rgba(192, 132, 252, 0.25) 0%,
+    rgba(192, 132, 252, 0.4) 100%);
+  border-radius: 100px;
+  transition: background 0.3s ease;
+}
+#quarto-sidebar:hover::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg,
+    rgba(192, 132, 252, 0.5) 0%,
+    rgba(192, 132, 252, 0.7) 100%);
+}
+#quarto-sidebar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #c084fc 0%, #a855f7 100%);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   INLINE CODE — transparent background, just colored text
+   ══════════════════════════════════════════════════════════════ */
+code:not(.sourceCode):not(pre code) {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #c084fc !important;
+  padding: 0 0.15em !important;
+  font-weight: 500;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   HEADER / FOOTER / NAVBAR — respect theme
+   ══════════════════════════════════════════════════════════════ */
+
+/* Top navbar */
+.navbar,
+.quarto-navbar,
+header.quarto-header,
+nav.navbar,
+#quarto-header {
+  background: var(--bg-alt) !important;
+  border-bottom: 1px solid var(--border-light) !important;
+  color: var(--text) !important;
+}
+
+.navbar-brand,
+.navbar .navbar-brand,
+.navbar-title,
+.navbar a,
+.navbar .nav-link,
+.navbar-nav .nav-link {
+  color: var(--text) !important;
+}
+.navbar a:hover,
+.navbar .nav-link:hover {
+  color: var(--teal) !important;
+}
+
+/* Mobile navbar (the bar with hamburger + title + search shown above) */
+.quarto-secondary-nav,
+.quarto-secondary-nav-title,
+.quarto-secondary-nav .quarto-btn-toggle,
+nav.quarto-secondary-nav {
+  background: var(--bg-alt) !important;
+  color: var(--text) !important;
+  border-bottom: 1px solid var(--border-light) !important;
+}
+.quarto-secondary-nav a,
+.quarto-secondary-nav .quarto-secondary-nav-title {
+  color: var(--text) !important;
+}
+.quarto-secondary-nav button,
+.quarto-secondary-nav .quarto-btn-toggle {
+  color: var(--text) !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Footer */
+.nav-footer,
+.nav-footer-center,
+.nav-footer-left,
+.nav-footer-right,
+footer.footer,
+#quarto-footer {
+  background: var(--bg-alt) !important;
+  color: var(--text-mid) !important;
+  border-top: 1px solid var(--border-light) !important;
+}
+.nav-footer a,
+footer.footer a {
+  color: var(--teal) !important;
+}
+
+/* "Back to top" button */
+.back-to-top,
+#quarto-back-to-top {
+  background: var(--bg-alt) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-md);
+}
+.back-to-top:hover,
+#quarto-back-to-top:hover {
+  color: var(--teal) !important;
+  border-color: var(--teal) !important;
+}
+
+/* Page navigation (prev / next arrows at bottom of doc) */
+.page-navigation,
+.quarto-title-banner,
+.page-link {
+  background: transparent !important;
+  color: var(--text) !important;
+}
+.page-navigation a,
+.page-link {
+  color: var(--text-mid) !important;
+}
+.page-navigation a:hover {
+  color: var(--teal) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MOBILE SIDEBAR — proper drawer behavior
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 991px) {
+  /* When sidebar is shown on mobile, fix it to viewport instead of inline */
+  #quarto-sidebar.show,
+  #quarto-sidebar.collapse.show,
+  body.quarto-sidebar-expanded #quarto-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 85% !important;
+    max-width: 320px !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    margin: 0 !important;
+    border-radius: 0 14px 14px 0 !important;
+    z-index: 2000 !important;
+    overflow-y: auto !important;
+    box-shadow:
+      0 0 0 100vmax rgba(0, 0, 0, 0.5),
+      0 0 40px rgba(0, 0, 0, 0.3) !important;
+    /* the 100vmax shadow trick creates a backdrop overlay over the page */
+  }
+
+  /* Ensure body doesn't scroll behind the open drawer */
+  body.quarto-sidebar-expanded {
+    overflow: hidden;
+  }
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   SIDEBAR FLOATING SPACE — keep gap top AND bottom while scrolling
+   ══════════════════════════════════════════════════════════════ */
+@media (min-width: 992px) {
+  #quarto-sidebar.sidebar,
+  #quarto-sidebar {
+    position: sticky !important;
+    top: 1.25rem !important;
+    /* Subtract 2 × the top gap so an equal gap is reserved at the bottom */
+    max-height: calc(100vh - 2.5rem) !important;
+    height: auto !important;
+    margin-top: 1.25rem !important;
+    margin-bottom: 1.25rem !important;
+    align-self: start;  /* don't stretch to fill grid row */
+  }
+}
+
+
+/* Dark mode: stronger teal glow on active TOC pill (since teal-mist is very faint) */
+nav[role="doc-toc"] .nav-link.active,
+nav[role="doc-toc"] a.active {
+  box-shadow:
+    0 1px 2px rgba(45, 212, 191, 0.15),
+    0 4px 14px rgba(45, 212, 191, 0.18) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   FIX TOC SCROLLSPY — give headings scroll-margin so the
+   IntersectionObserver fires correctly when sections enter the viewport
+   NOTE: do NOT set scroll-behavior: smooth — it breaks scrollspy updates
+   ══════════════════════════════════════════════════════════════ */
+
+main h1, main h2, main h3, main h4, main h5, main h6,
+#quarto-document-content h1,
+#quarto-document-content h2,
+#quarto-document-content h3,
+#quarto-document-content h4,
+#quarto-document-content h5,
+#quarto-document-content h6 {
+  scroll-margin-top: 80px;
+}
