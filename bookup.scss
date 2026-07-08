@@ -1031,49 +1031,47 @@ h4, h5, h6 { margin-top: 1.1rem !important; margin-bottom: 0.5rem !important; }
   position: fixed !important;
   bottom: 1.25rem;
   right: 1.25rem;
-  z-index: 1000;
+  z-index: 9999;
   width: 46px;
   height: 46px;
   background: var(--bg-alt) !important;
   border: 1px solid var(--border) !important;
   border-radius: 50% !important;
   box-shadow: var(--shadow-md);
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   padding: 0 !important;
   margin: 0 !important;
+  overflow: hidden;
 }
 
-.quarto-color-scheme-toggle:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--teal) !important;
-}
-
-/* Hide Quarto's default Bootstrap toggle icon AND any text */
+/* Make the ACTUAL Quarto clickable link cover the full circle */
 .quarto-color-scheme-toggle a,
 .quarto-color-scheme-toggle .quarto-color-scheme-toggle-link {
+  position: absolute !important;
+  inset: 0 !important;
   display: block !important;
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 2 !important;
   font-size: 0 !important;
+  line-height: 0 !important;
   color: transparent !important;
-  text-decoration: none;
+  text-decoration: none !important;
+  background: transparent !important;
   border: none !important;
   padding: 0 !important;
   margin: 0 !important;
-  position: relative;
 }
+
+/* Hide Quarto's default Bootstrap toggle icon AND any text */
 .quarto-color-scheme-toggle a i,
 .quarto-color-scheme-toggle .bi,
 .quarto-color-scheme-toggle i.bi {
   display: none !important;
 }
 
-/* Inject the icon as a background on the toggle itself */
+/* Draw the custom icon on the visible button, but never block clicks */
 .quarto-color-scheme-toggle::before {
   content: "";
   position: absolute;
@@ -1081,11 +1079,12 @@ h4, h5, h6 { margin-top: 1.1rem !important; margin-bottom: 0.5rem !important; }
   margin: auto;
   width: 22px;
   height: 22px;
+  z-index: 1;
+  pointer-events: none;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   transition: transform 0.3s ease;
-  pointer-events: none;
 }
 
 /* LIGHT mode → moon icon (click to go dark) */
@@ -1097,6 +1096,12 @@ h4, h5, h6 { margin-top: 1.1rem !important; margin-bottom: 0.5rem !important; }
 .quarto-dark .quarto-color-scheme-toggle::before,
 [data-theme="dark"] .quarto-color-scheme-toggle::before {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fbbf24' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='4'/><path d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41'/></svg>");
+}
+
+.quarto-color-scheme-toggle:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--teal) !important;
 }
 
 .quarto-color-scheme-toggle:hover::before {
